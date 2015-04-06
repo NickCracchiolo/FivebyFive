@@ -1393,9 +1393,12 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
     func answeredCorrect() -> SKNode {
         let node = SKNode()
         
-        let nextButton = SKSpriteNode(imageNamed: "RedSquare.png")
+        let nextButton = SKLabelNode(text: "Next Level")
         nextButton.position = CGPointMake(self.frame.size.width/2, self.frame.size.height/5)
         nextButton.zPosition = 10
+        nextButton.fontName = Game_Over_Font
+        nextButton.fontColor = fontClr
+        nextButton.fontSize = 60
         nextButton.name = "nextButton"
         node.addChild(nextButton)
         
@@ -1415,7 +1418,6 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
         saveData()
         setup()
     }
-    
     
     func newGame() {
         //Save data and add collected money
