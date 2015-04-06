@@ -66,6 +66,16 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
                 if node.name == "Leader Button" {
                     showLeader()
                 }
+                if node.name == "Buy Button" {
+                    for product in list {
+                        var prodID = product.productIdentifier
+                        if(prodID == "fbf.iap.add_money") {
+                            p = product
+                            gameVC.buyProduct()
+                            break;
+                        }
+                    }
+                }
             }
             if node.name == "New Game Button" {
                 touch_enabled = true
@@ -569,7 +579,31 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
         title3.zPosition = 30
         titleNode.addChild(title3)
         
+        let purchaseBtn = SKSpriteNode(imageNamed: "PurchaseButton.png")
+        purchaseBtn.position = CGPointMake(self.frame.size.width/2, self.frame.size.height/5)
+        purchaseBtn.zPosition = 30
+        purchaseBtn.name = "Buy Button"
+        titleNode.addChild(purchaseBtn)
+        
+        let purchaseLabel = SKLabelNode(text: "Touch to add 100")
+        purchaseLabel.position = CGPointMake(self.frame.size.width/2, self.frame.size.height/7.3)
+        purchaseLabel.fontName = Game_Font
+        purchaseLabel.fontSize = 25
+        purchaseLabel.fontColor = blackColor
+        purchaseLabel.zPosition = 30
+        titleNode.addChild(purchaseLabel)
+        
+        let purchaseLabel2 = SKLabelNode(text: "coins for $0.99")
+        purchaseLabel2.position = CGPointMake(self.frame.size.width/2, self.frame.size.height/8.5)
+        purchaseLabel2.fontName = Game_Font
+        purchaseLabel2.fontSize = 25
+        purchaseLabel2.fontColor = blackColor
+        purchaseLabel2.zPosition = 30
+        titleNode.addChild(purchaseLabel2)
+        
         self.addChild(titleNode)
+        
+        //gameVC.displayPopUp()
     }
     func tutorialSetup() {
         let width = self.frame.size.width

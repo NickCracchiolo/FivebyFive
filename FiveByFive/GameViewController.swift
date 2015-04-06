@@ -10,6 +10,7 @@ import UIKit
 import SpriteKit
 import GameKit
 import iAd
+import StoreKit
 
 extension SKNode {
     class func unarchiveFromFile(file : NSString) -> SKNode? {
@@ -29,11 +30,24 @@ extension SKNode {
 var bannerView = ADBannerView()
 var gameCenterEnabled = false
 var leaderBoardID = NSString()
+var p = SKProduct()
+var productID = "<YOUR PRODUCT ID GOES HERE>"
+var list = [SKProduct]()
 
-class GameViewController: UIViewController, ADBannerViewDelegate, GKGameCenterControllerDelegate {
+class GameViewController: UIViewController, ADBannerViewDelegate, GKGameCenterControllerDelegate, SKProductsRequestDelegate,SKPaymentTransactionObserver {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if(SKPaymentQueue.canMakePayments()) {
+            println("IAP is enabled, loading")
+            var productID:NSSet = NSSet(objects: "fbf.iap.add_money")
+            var request: SKProductsRequest = SKProductsRequest(productIdentifiers: productID)
+            request.delegate = self
+            request.start()
+        } else {
+            println("please enable IAPS")
+        }
         
         let frme = CGRectMake(0, self.view.frame.size.height-50, 320, 50)
         bannerView = ADBannerView(frame: frme)
@@ -141,5 +155,108 @@ class GameViewController: UIViewController, ADBannerViewDelegate, GKGameCenterCo
             
             
         }
+    }
+    
+    //StoreKit
+    func buyProduct() {
+        println("buy " + p.productIdentifier)
+        var pay = SKPayment(product: p)
+        SKPaymentQueue.defaultQueue().addTransactionObserver(self)
+        SKPaymentQueue.defaultQueue().addPayment(pay as SKPayment)
+    }
+    
+    //3
+    func productsRequest(request: SKProductsRequest!, didReceiveResponse response: SKProductsResponse!) {
+        println("product request")
+        var myProduct = response.products
+        
+        for product in myProduct {
+            println("product added")
+            println(product.productIdentifier)
+            println(product.localizedTitle)
+            println(product.localizedDescription)
+            println(product.price)
+            
+            list.append(product as SKProduct)
+        }
+    }
+    
+    // 4
+    func paymentQueueRestoreCompletedTransactionsFinished(queue: SKPaymentQueue!) {
+        println("transactions restored")
+        
+        var purchasedItemIDS = []
+        for transaction in queue.transactions {
+            var t: SKPaymentTransaction = transaction as SKPaymentTransaction
+            
+            let prodID = t.payment.productIdentifier as String
+            
+            switch prodID {
+            case "fbf,iap,add_money":
+                println("remove ads")
+                money+=100
+                saveData()
+            default:
+                println("IAP not setup")
+            }
+            
+        }
+    }
+    
+    // 5
+    func paymentQueue(queue: SKPaymentQueue!, updatedTransactions transactions: [AnyObject]!) {
+        println("add paymnet")
+        
+        for transaction:AnyObject in transactions {
+            var trans = transaction as SKPaymentTransaction
+            println(trans.error)
+            
+            switch trans.transactionState {
+                
+            case .Purchased:
+                println("buy, ok unlock iap here")
+                println(p.productIdentifier)
+                
+                let prodID = p.productIdentifier as String
+                switch prodID {
+                case "fbf.iap.add_money":
+                    println("remove ads")
+                    money+=100
+                    saveData()
+                default:
+                    println("IAP not setup")
+                }
+                
+                queue.finishTransaction(trans)
+                break;
+            case .Deferred:
+                let alertController = UIAlertController(title: "Uh Oh", message:
+                    "Go get your parents to make this payment", preferredStyle: UIAlertControllerStyle.Alert)
+                alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+                
+                self.presentViewController(alertController, animated: true, completion: nil)
+                break;
+            case .Failed:
+                println("buy error")
+                queue.finishTransaction(trans)
+                break;
+            default:
+                println("default")
+                break;
+                
+            }
+        }
+    }
+    
+    // 6
+    func finishTransaction(trans:SKPaymentTransaction)
+    {
+        println("finish trans")
+    }
+    
+    //7
+    func paymentQueue(queue: SKPaymentQueue!, removedTransactions transactions: [AnyObject]!)
+    {
+        println("remove trans");
     }
 }

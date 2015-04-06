@@ -35,6 +35,8 @@
 		565B9C2B1AD10A4A0059D250 /* Impact_Label.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 565B9C2A1AD10A4A0059D250 /* Impact_Label.ttf */; };
 		565B9C2D1AD115ED0059D250 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 565B9C2C1AD115ED0059D250 /* GameKit.framework */; };
 		565B9C301AD1E6230059D250 /* tutArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 565B9C2F1AD1E6230059D250 /* tutArrow.png */; };
+		565B9C321AD206550059D250 /* PurchaseButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 565B9C311AD206550059D250 /* PurchaseButton.png */; };
+		565B9C341AD209FD0059D250 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 565B9C331AD209FD0059D250 /* StoreKit.framework */; };
 		56AE45551AC8A9C10061F9B7 /* BlueOne.png in Resources */ = {isa = PBXBuildFile; fileRef = 56AE45541AC8A9C10061F9B7 /* BlueOne.png */; };
 		56B172B91AC1D55F004575DD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B172B81AC1D55F004575DD /* AppDelegate.swift */; };
 		56B172BB1AC1D55F004575DD /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 56B172BA1AC1D55F004575DD /* GameScene.sks */; };
@@ -92,6 +94,8 @@
 		565B9C2A1AD10A4A0059D250 /* Impact_Label.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Impact_Label.ttf; sourceTree = "<group>"; };
 		565B9C2C1AD115ED0059D250 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		565B9C2F1AD1E6230059D250 /* tutArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tutArrow.png; sourceTree = "<group>"; };
+		565B9C311AD206550059D250 /* PurchaseButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PurchaseButton.png; sourceTree = "<group>"; };
+		565B9C331AD209FD0059D250 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		56AE45541AC8A9C10061F9B7 /* BlueOne.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BlueOne.png; sourceTree = "<group>"; };
 		56B172B31AC1D55F004575DD /* FiveByFive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FiveByFive.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		56B172B71AC1D55F004575DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -120,6 +124,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				565B9C2D1AD115ED0059D250 /* GameKit.framework in Frameworks */,
+				565B9C341AD209FD0059D250 /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -200,7 +205,6 @@
 		56B172AA1AC1D55F004575DD = {
 			isa = PBXGroup;
 			children = (
-				565B9C2C1AD115ED0059D250 /* GameKit.framework */,
 				56B172B51AC1D55F004575DD /* FiveByFive */,
 				56B172CF1AC1D55F004575DD /* FiveByFiveTests */,
 				56B172B41AC1D55F004575DD /* Products */,
@@ -236,6 +240,8 @@
 		56B172B61AC1D55F004575DD /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				565B9C331AD209FD0059D250 /* StoreKit.framework */,
+				565B9C2C1AD115ED0059D250 /* GameKit.framework */,
 				565B9C2A1AD10A4A0059D250 /* Impact_Label.ttf */,
 				565B9C1D1AD0BCD10059D250 /* Impact_Label_Reversed.ttf */,
 				56B172B71AC1D55F004575DD /* Info.plist */,
@@ -263,6 +269,7 @@
 		56B172DC1AC1D856004575DD /* Sprites */ = {
 			isa = PBXGroup;
 			children = (
+				565B9C311AD206550059D250 /* PurchaseButton.png */,
 				565B9C2E1AD1E60A0059D250 /* Tutorial */,
 				565B9C281AD0F6080059D250 /* BombSquare.png */,
 				565B9C011ACF706A0059D250 /* PurchaseRow.png */,
@@ -354,6 +361,9 @@
 							com.apple.GameCenter = {
 								enabled = 1;
 							};
+							com.apple.InAppPurchase = {
+								enabled = 1;
+							};
 						};
 					};
 					56B172CB1AC1D55F004575DD = {
@@ -422,6 +432,7 @@
 				565B9C061ACF88820059D250 /* GreenTwo.png in Resources */,
 				565B9BF71ACDE2340059D250 /* YellowTwo.png in Resources */,
 				56B172EB1AC1D864004575DD /* RedThree.png in Resources */,
+				565B9C321AD206550059D250 /* PurchaseButton.png in Resources */,
 				565B9C1A1AD0BA570059D250 /* AppIcon180.png in Resources */,
 				565B9C021ACF706A0059D250 /* PurchaseRow.png in Resources */,
 			);
