@@ -40,51 +40,52 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
     }
     
     override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
-        let touch = touches.anyObject() as UITouch
-        let location = touch.locationInNode(self)
-        let node = self.nodeAtPoint(location)
         for touch:AnyObject in touches {
-            if touch_enabled == true {
-                flip(node)
-                purchase(node)
-                if node.name == "Next Button" {
-                    tutNode.removeAllChildren()
-                    tutNode.removeFromParent()
-                    tut_Point++
-                    tutorialSetup()
-                }
-                if node.name == "nextButton" {
-                    nextLevel()
-                }
-
-                if node.name == "Play Button" {
-                    titleNode.removeFromParent()
-                   if tutorial == 0 {
-                        setup()
+            let location = (touch as UITouch).locationInNode(self)
+            if let node = self.nodeAtPoint(location).name {
+            
+                if touch_enabled == true {
+                    flip(node)
+                    purchase(node)
+                    if node == "Next Button" {
+                        tutNode.removeAllChildren()
+                        tutNode.removeFromParent()
+                        tut_Point++
                         tutorialSetup()
-                        saveData()
-                    } else {
-                        setup()
                     }
-                }
-                if node.name == "Leader Button" {
-                    showLeader()
-                }
-                if node.name == "Buy Button" {
-                    for product in list {
-                        var prodID = product.productIdentifier
-                        if(prodID == "fbf.iap.add_money") {
-                            p = product
-                            gameVC.buyProduct()
-                            break;
+                    if node == "nextButton" {
+                        nextLevel()
+                    }
+
+                    if node == "Play Button" {
+                        titleNode.removeFromParent()
+                       if tutorial == 0 {
+                            setup()
+                            tutorialSetup()
+                            saveData()
+                        } else {
+                            setup()
+                        }
+                    }
+                    if node == "Leader Button" {
+                        showLeader()
+                    }
+                    if node == "Buy Button" {
+                        for product in list {
+                            var prodID = product.productIdentifier
+                            if(prodID == "fbf.iap.add_money") {
+                                p = product
+                                gameVC.buyProduct()
+                                break;
+                            }
                         }
                     }
                 }
-            }
-            if node.name == "New Game Button" {
-                touch_enabled = true
-                gameVC.reportScore("leaderboard.highest_level")
-                newGame()
+                if node == "New Game Button" {
+                    touch_enabled = true
+                    gameVC.reportScore("leaderboard.highest_level")
+                    newGame()
+                }
             }
         }
     }
@@ -98,80 +99,80 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
         vc?.presentViewController(gc, animated: true, completion: nil)
     }
     
-    func flip(node:SKNode) {
-        if node.name == "Tile0" {
+    func flip(node:NSString) {
+        if node == "Tile0" {
             textChange(tile_list[0].0, text: tile_list[0].1)
             checkForBomb(&tile_list[0].3,num: tile_list[0].2,node: tile_list[0].0)
-        } else if node.name == "Tile1" {
+        } else if node == "Tile1" {
             textChange(tile_list[1].0, text: tile_list[1].1)
             checkForBomb(&tile_list[1].3,num: tile_list[1].2,node: tile_list[1].0)
-        } else if node.name == "Tile2" {
+        } else if node == "Tile2" {
             textChange(tile_list[2].0, text: tile_list[2].1)
             checkForBomb(&tile_list[2].3,num: tile_list[2].2,node: tile_list[2].0)
-        } else if node.name == "Tile3" {
+        } else if node == "Tile3" {
             textChange(tile_list[3].0, text: tile_list[3].1)
             checkForBomb(&tile_list[3].3,num: tile_list[3].2,node: tile_list[3].0)
-        } else if node.name == "Tile4" {
+        } else if node == "Tile4" {
             textChange(tile_list[4].0, text: tile_list[4].1)
             checkForBomb(&tile_list[4].3,num: tile_list[4].2,node: tile_list[4].0)
-        } else if node.name == "Tile5" {
+        } else if node == "Tile5" {
             textChange(tile_list[5].0, text: tile_list[5].1)
             checkForBomb(&tile_list[5].3,num: tile_list[5].2,node: tile_list[5].0)
-        } else if node.name == "Tile6" {
+        } else if node == "Tile6" {
             textChange(tile_list[6].0, text: tile_list[6].1)
             checkForBomb(&tile_list[6].3,num: tile_list[6].2,node: tile_list[6].0)
-        } else if node.name == "Tile7" {
+        } else if node == "Tile7" {
             textChange(tile_list[7].0, text: tile_list[7].1)
             checkForBomb(&tile_list[7].3,num: tile_list[7].2,node: tile_list[7].0)
-        } else if node.name == "Tile8" {
+        } else if node == "Tile8" {
             textChange(tile_list[8].0, text: tile_list[8].1)
             checkForBomb(&tile_list[8].3,num: tile_list[8].2,node: tile_list[8].0)
-        } else if node.name == "Tile9" {
+        } else if node == "Tile9" {
             textChange(tile_list[9].0, text: tile_list[9].1)
             checkForBomb(&tile_list[9].3,num: tile_list[9].2,node: tile_list[9].0)
-        } else if node.name == "Tile10" {
+        } else if node == "Tile10" {
             textChange(tile_list[10].0, text: tile_list[10].1)
             checkForBomb(&tile_list[10].3,num: tile_list[10].2,node: tile_list[10].0)
-        } else if node.name == "Tile11" {
+        } else if node == "Tile11" {
             textChange(tile_list[11].0, text: tile_list[11].1)
             checkForBomb(&tile_list[11].3,num: tile_list[11].2,node: tile_list[11].0)
-        } else if node.name == "Tile12" {
+        } else if node == "Tile12" {
             textChange(tile_list[12].0, text: tile_list[12].1)
             checkForBomb(&tile_list[12].3,num: tile_list[12].2,node: tile_list[12].0)
-        } else if node.name == "Tile13" {
+        } else if node == "Tile13" {
             textChange(tile_list[13].0, text: tile_list[13].1)
             checkForBomb(&tile_list[13].3,num: tile_list[13].2,node: tile_list[13].0)
-        } else if node.name == "Tile14" {
+        } else if node == "Tile14" {
             textChange(tile_list[14].0, text: tile_list[14].1)
             checkForBomb(&tile_list[14].3,num: tile_list[14].2,node: tile_list[14].0)
-        } else if node.name == "Tile15" {
+        } else if node == "Tile15" {
             textChange(tile_list[15].0, text: tile_list[15].1)
             checkForBomb(&tile_list[15].3,num: tile_list[15].2,node: tile_list[15].0)
-        } else if node.name == "Tile16" {
+        } else if node == "Tile16" {
             textChange(tile_list[16].0, text: tile_list[16].1)
             checkForBomb(&tile_list[16].3,num: tile_list[16].2,node: tile_list[16].0)
-        } else if node.name == "Tile17" {
+        } else if node == "Tile17" {
             textChange(tile_list[17].0, text: tile_list[17].1)
             checkForBomb(&tile_list[17].3,num: tile_list[17].2,node: tile_list[17].0)
-        } else if node.name == "Tile18" {
+        } else if node == "Tile18" {
             textChange(tile_list[18].0, text: tile_list[18].1)
             checkForBomb(&tile_list[18].3,num: tile_list[18].2,node: tile_list[18].0)
-        } else if node.name == "Tile19" {
+        } else if node == "Tile19" {
             textChange(tile_list[19].0, text: tile_list[19].1)
             checkForBomb(&tile_list[19].3,num: tile_list[19].2,node: tile_list[19].0)
-        } else if node.name == "Tile20" {
+        } else if node == "Tile20" {
             textChange(tile_list[20].0, text: tile_list[20].1)
             checkForBomb(&tile_list[20].3,num: tile_list[20].2,node: tile_list[20].0)
-        } else if node.name == "Tile21" {
+        } else if node == "Tile21" {
             textChange(tile_list[21].0, text: tile_list[21].1)
             checkForBomb(&tile_list[21].3,num: tile_list[21].2,node: tile_list[21].0)
-        } else if node.name == "Tile22" {
+        } else if node == "Tile22" {
             textChange(tile_list[22].0, text: tile_list[22].1)
             checkForBomb(&tile_list[22].3,num: tile_list[22].2,node: tile_list[22].0)
-        } else if node.name == "Tile23" {
+        } else if node == "Tile23" {
             textChange(tile_list[23].0, text: tile_list[23].1)
             checkForBomb(&tile_list[23].3,num: tile_list[23].2,node: tile_list[23].0)
-        } else if node.name == "Tile24" {
+        } else if node == "Tile24" {
             textChange(tile_list[24].0, text: tile_list[24].1)
             checkForBomb(&tile_list[24].3,num: tile_list[24].2,node: tile_list[24].0)
         }
@@ -406,9 +407,9 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
         let changeText = SKAction.setTexture(text)
         node.runAction(changeText)
     }
-    func purchase(node:SKNode) {
+    func purchase(node:NSString) {
         if money >= 25 {
-            if node.name == "Col1Unlock" {
+            if node == "Col1Unlock" {
                 money -= 25
                 hudNode.removeFromParent()
                 hudNode = HUD()
@@ -421,7 +422,7 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
                 let num_list = [tile_list[0].2,tile_list[5].2,tile_list[10].2,tile_list[15].2,tile_list[20].2]
                 var bool_list = [tile_list[0].3,tile_list[5].3,tile_list[10].3,tile_list[15].3,tile_list[20].3]
                 checkPurchase(num_list, bools:&bool_list)
-            } else if node.name == "Col2Unlock" {
+            } else if node == "Col2Unlock" {
                 money -= 25
                 hudNode.removeFromParent()
                 hudNode = HUD()
@@ -434,7 +435,7 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
                 let num_list = [tile_list[1].2,tile_list[6].2,tile_list[11].2,tile_list[16].2,tile_list[21].2]
                 var bool_list = [tile_list[1].3,tile_list[6].3,tile_list[11].3,tile_list[16].3,tile_list[21].3]
                 checkPurchase(num_list,bools:&bool_list)
-            } else if node.name == "Col3Unlock" {
+            } else if node == "Col3Unlock" {
                 money -= 25
                 hudNode.removeFromParent()
                 hudNode = HUD()
@@ -447,7 +448,7 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
                 let num_list = [tile_list[2].2,tile_list[7].2,tile_list[12].2,tile_list[17].2,tile_list[22].2]
                 var bool_list = [tile_list[2].3,tile_list[7].3,tile_list[12].3,tile_list[17].3,tile_list[22].3]
                 checkPurchase(num_list,bools:&bool_list)
-            } else if node.name == "Col4Unlock" {
+            } else if node == "Col4Unlock" {
                 money -= 25
                 hudNode.removeFromParent()
                 hudNode = HUD()
@@ -460,7 +461,7 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
                 let num_list = [tile_list[3].2,tile_list[8].2,tile_list[13].2,tile_list[18].2,tile_list[23].2]
                 var bool_list = [tile_list[3].3,tile_list[8].3,tile_list[13].3,tile_list[18].3,tile_list[23].3]
                 checkPurchase(num_list,bools:&bool_list)
-            } else if node.name == "Col5Unlock" {
+            } else if node == "Col5Unlock" {
                 money -= 25
                 hudNode.removeFromParent()
                 hudNode = HUD()
@@ -473,7 +474,7 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
                 let num_list = [tile_list[4].2,tile_list[9].2,tile_list[14].2,tile_list[19].2,tile_list[24].2]
                 var bool_list = [tile_list[4].3,tile_list[9].3,tile_list[14].3,tile_list[19].3,tile_list[24].3]
                 checkPurchase(num_list,bools:&bool_list)
-            } else if node.name == "Row1Unlock" {
+            } else if node == "Row1Unlock" {
                 money -= 25
                 hudNode.removeFromParent()
                 hudNode = HUD()
@@ -486,7 +487,7 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
                 let num_list = [tile_list[0].2,tile_list[1].2,tile_list[2].2,tile_list[3].2,tile_list[4].2]
                 var bool_list = [tile_list[0].3,tile_list[1].3,tile_list[2].3,tile_list[3].3,tile_list[4].3]
                 checkPurchase(num_list,bools:&bool_list)
-            } else if node.name == "Row2Unlock" {
+            } else if node == "Row2Unlock" {
                 money -= 25
                 hudNode.removeFromParent()
                 hudNode = HUD()
@@ -499,7 +500,7 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
                 let num_list = [tile_list[5].2,tile_list[6].2,tile_list[7].2,tile_list[8].2,tile_list[9].2]
                 var bool_list = [tile_list[5].3,tile_list[6].3,tile_list[7].3,tile_list[8].3,tile_list[9].3]
                 checkPurchase(num_list,bools:&bool_list)
-            } else if node.name == "Row3Unlock" {
+            } else if node == "Row3Unlock" {
                 money -= 25
                 hudNode.removeFromParent()
                 hudNode = HUD()
@@ -512,7 +513,7 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
                 let num_list = [tile_list[10].2,tile_list[11].2,tile_list[12].2,tile_list[13].2,tile_list[14].2]
                 var bool_list = [tile_list[10].3,tile_list[11].3,tile_list[12].3,tile_list[13].3,tile_list[14].3]
                 checkPurchase(num_list,bools:&bool_list)
-            } else if node.name == "Row4Unlock" {
+            } else if node == "Row4Unlock" {
                 money -= 25
                 hudNode.removeFromParent()
                 hudNode = HUD()
@@ -525,7 +526,7 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
                 let num_list = [tile_list[15].2,tile_list[16].2,tile_list[17].2,tile_list[18].2,tile_list[19].2]
                 var bool_list = [tile_list[15].3,tile_list[16].3,tile_list[17].3,tile_list[18].3,tile_list[19].3]
                 checkPurchase(num_list,bools:&bool_list)
-            } else if node.name == "Row5Unlock" {
+            } else if node == "Row5Unlock" {
                 money -= 25
                 hudNode.removeFromParent()
                 hudNode = HUD()
