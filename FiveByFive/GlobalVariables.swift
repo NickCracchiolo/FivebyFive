@@ -26,15 +26,18 @@ let titleClr = SKColor(red: 225/255, green: 205/255, blue: 58/255, alpha: 1.0)
 let fontClr = SKColor(red: 225/255, green: 225/255, blue: 225/255, alpha: 1.0)
 let blackColor = SKColor(red: 0, green: 0, blue: 0, alpha: 1.0)
 
+//FONT SIZE
+let DispFontSize:CGFloat = 30
+
 //NSUSERDEFAULT
 let defaults = NSUserDefaults.standardUserDefaults()
 var money: NSInteger = 0
 var highestLevel: NSInteger = 1
-var tutorial:Bool = true
+var tutorial:NSInteger = 0
 
 
 func getData() {
-    tutorial = defaults.boolForKey("tutorial")
+    tutorial = defaults.integerForKey("tutorial")
     money = defaults.integerForKey("money")
     highestLevel = defaults.integerForKey("level")
 }
@@ -42,6 +45,6 @@ func getData() {
 func saveData() {
     defaults.setInteger(money, forKey: "money")
     defaults.setInteger(highestLevel, forKey: "level")
-    defaults.setBool(tutorial, forKey: "tutorial")
+    defaults.setInteger(tutorial, forKey: "tutorial")
     defaults.synchronize()
 }

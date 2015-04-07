@@ -27,11 +27,10 @@ extension SKNode {
         }
     }
 }
-var bannerView = ADBannerView()
+var adView = ADBannerView()
 var gameCenterEnabled = false
 var leaderBoardID = NSString()
 var p = SKProduct()
-var productID = "<YOUR PRODUCT ID GOES HERE>"
 var list = [SKProduct]()
 
 class GameViewController: UIViewController, ADBannerViewDelegate, GKGameCenterControllerDelegate, SKProductsRequestDelegate,SKPaymentTransactionObserver {
@@ -50,21 +49,21 @@ class GameViewController: UIViewController, ADBannerViewDelegate, GKGameCenterCo
         }
         
         let frme = CGRectMake(0, self.view.frame.size.height-50, 320, 50)
-        bannerView = ADBannerView(frame: frme)
+        adView = ADBannerView(frame: frme)
         var frame:CGRect = CGRectZero
-        frame.size = bannerView.frame.size;
-        frame.origin = CGPointMake(0.0, self.view.frame.size.height-bannerView.frame.size.height);
-        bannerView.frame = frame
-        bannerView.delegate = self
-        self.view.addSubview(bannerView)
+        frame.size = adView.frame.size;
+        frame.origin = CGPointMake(0.0, self.view.frame.size.height-adView.frame.size.height);
+        adView.frame = frame
+        adView.delegate = self
+        self.view.addSubview(adView)
         
         self.authenticateLocalPlayer()
 
         if let scene = GameScene.unarchiveFromFile("GameScene") as? GameScene {
             // Configure the view.
             let skView = self.view as SKView
-            skView.showsFPS = true
-            skView.showsNodeCount = true
+            skView.showsFPS = false
+            skView.showsNodeCount = false
             
             /* Sprite Kit applies additional optimizations to improve rendering performance */
             skView.ignoresSiblingOrder = true
@@ -97,13 +96,16 @@ class GameViewController: UIViewController, ADBannerViewDelegate, GKGameCenterCo
         return true
     }
     func bannerViewDidLoadAd(banner: ADBannerView!) {
-        bannerView.hidden = false;
+        adView.hidden = false;
     }
     func bannerViewActionShouldBegin(banner: ADBannerView!, willLeaveApplication willLeave: Bool) -> Bool {
         return true
     }
     func bannerViewActionDidFinish(banner: ADBannerView!) {
         
+    }
+    func bannerView(banner: ADBannerView!, didFailToReceiveAdWithError error: NSError!) {
+        adView.hidden = true
     }
     
     //ADD GAME CENTER AND iAD AND IN APP PURCHASES

@@ -27,8 +27,11 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
         self.backgroundColor = backColor
+        print(tutorial)
+        print("\n")
         getData()
-        
+        print(tutorial)
+        print("\n")
         startScreen()
     }
     
@@ -56,9 +59,10 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
 
                 if node.name == "Play Button" {
                     titleNode.removeFromParent()
-                   if tutorial == true {
+                   if tutorial == 0 {
                         setup()
                         tutorialSetup()
+                        saveData()
                     } else {
                         setup()
                     }
@@ -96,79 +100,79 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
     
     func flip(node:SKNode) {
         if node.name == "Tile0" {
-            tile_list[0].0.texture = tile_list[0].1
+            textChange(tile_list[0].0, text: tile_list[0].1)
             checkForBomb(&tile_list[0].3,num: tile_list[0].2,node: tile_list[0].0)
         } else if node.name == "Tile1" {
-            tile_list[1].0.texture = tile_list[1].1
+            textChange(tile_list[1].0, text: tile_list[1].1)
             checkForBomb(&tile_list[1].3,num: tile_list[1].2,node: tile_list[1].0)
         } else if node.name == "Tile2" {
-            tile_list[2].0.texture = tile_list[2].1
+            textChange(tile_list[2].0, text: tile_list[2].1)
             checkForBomb(&tile_list[2].3,num: tile_list[2].2,node: tile_list[2].0)
         } else if node.name == "Tile3" {
-            tile_list[3].0.texture = tile_list[3].1
+            textChange(tile_list[3].0, text: tile_list[3].1)
             checkForBomb(&tile_list[3].3,num: tile_list[3].2,node: tile_list[3].0)
         } else if node.name == "Tile4" {
-            tile_list[4].0.texture = tile_list[4].1
+            textChange(tile_list[4].0, text: tile_list[4].1)
             checkForBomb(&tile_list[4].3,num: tile_list[4].2,node: tile_list[4].0)
         } else if node.name == "Tile5" {
-            tile_list[5].0.texture = tile_list[5].1
+            textChange(tile_list[5].0, text: tile_list[5].1)
             checkForBomb(&tile_list[5].3,num: tile_list[5].2,node: tile_list[5].0)
         } else if node.name == "Tile6" {
-            tile_list[6].0.texture = tile_list[6].1
+            textChange(tile_list[6].0, text: tile_list[6].1)
             checkForBomb(&tile_list[6].3,num: tile_list[6].2,node: tile_list[6].0)
         } else if node.name == "Tile7" {
-            tile_list[7].0.texture = tile_list[7].1
+            textChange(tile_list[7].0, text: tile_list[7].1)
             checkForBomb(&tile_list[7].3,num: tile_list[7].2,node: tile_list[7].0)
         } else if node.name == "Tile8" {
-            tile_list[8].0.texture = tile_list[8].1
+            textChange(tile_list[8].0, text: tile_list[8].1)
             checkForBomb(&tile_list[8].3,num: tile_list[8].2,node: tile_list[8].0)
         } else if node.name == "Tile9" {
-            tile_list[9].0.texture = tile_list[9].1
+            textChange(tile_list[9].0, text: tile_list[9].1)
             checkForBomb(&tile_list[9].3,num: tile_list[9].2,node: tile_list[9].0)
         } else if node.name == "Tile10" {
-            tile_list[10].0.texture = tile_list[10].1
+            textChange(tile_list[10].0, text: tile_list[10].1)
             checkForBomb(&tile_list[10].3,num: tile_list[10].2,node: tile_list[10].0)
         } else if node.name == "Tile11" {
-            tile_list[11].0.texture = tile_list[11].1
+            textChange(tile_list[11].0, text: tile_list[11].1)
             checkForBomb(&tile_list[11].3,num: tile_list[11].2,node: tile_list[11].0)
         } else if node.name == "Tile12" {
-            tile_list[12].0.texture = tile_list[12].1
+            textChange(tile_list[12].0, text: tile_list[12].1)
             checkForBomb(&tile_list[12].3,num: tile_list[12].2,node: tile_list[12].0)
         } else if node.name == "Tile13" {
-            tile_list[13].0.texture = tile_list[13].1
+            textChange(tile_list[13].0, text: tile_list[13].1)
             checkForBomb(&tile_list[13].3,num: tile_list[13].2,node: tile_list[13].0)
         } else if node.name == "Tile14" {
-            tile_list[14].0.texture = tile_list[14].1
+            textChange(tile_list[14].0, text: tile_list[14].1)
             checkForBomb(&tile_list[14].3,num: tile_list[14].2,node: tile_list[14].0)
         } else if node.name == "Tile15" {
-            tile_list[15].0.texture = tile_list[15].1
+            textChange(tile_list[15].0, text: tile_list[15].1)
             checkForBomb(&tile_list[15].3,num: tile_list[15].2,node: tile_list[15].0)
         } else if node.name == "Tile16" {
-            tile_list[16].0.texture = tile_list[16].1
+            textChange(tile_list[16].0, text: tile_list[16].1)
             checkForBomb(&tile_list[16].3,num: tile_list[16].2,node: tile_list[16].0)
         } else if node.name == "Tile17" {
-            tile_list[17].0.texture = tile_list[17].1
+            textChange(tile_list[17].0, text: tile_list[17].1)
             checkForBomb(&tile_list[17].3,num: tile_list[17].2,node: tile_list[17].0)
         } else if node.name == "Tile18" {
-            tile_list[18].0.texture = tile_list[18].1
+            textChange(tile_list[18].0, text: tile_list[18].1)
             checkForBomb(&tile_list[18].3,num: tile_list[18].2,node: tile_list[18].0)
         } else if node.name == "Tile19" {
-            tile_list[19].0.texture = tile_list[19].1
+            textChange(tile_list[19].0, text: tile_list[19].1)
             checkForBomb(&tile_list[19].3,num: tile_list[19].2,node: tile_list[19].0)
         } else if node.name == "Tile20" {
-            tile_list[20].0.texture = tile_list[20].1
+            textChange(tile_list[20].0, text: tile_list[20].1)
             checkForBomb(&tile_list[20].3,num: tile_list[20].2,node: tile_list[20].0)
         } else if node.name == "Tile21" {
-            tile_list[21].0.texture = tile_list[21].1
+            textChange(tile_list[21].0, text: tile_list[21].1)
             checkForBomb(&tile_list[21].3,num: tile_list[21].2,node: tile_list[21].0)
         } else if node.name == "Tile22" {
-            tile_list[22].0.texture = tile_list[22].1
+            textChange(tile_list[22].0, text: tile_list[22].1)
             checkForBomb(&tile_list[22].3,num: tile_list[22].2,node: tile_list[22].0)
         } else if node.name == "Tile23" {
-            tile_list[23].0.texture = tile_list[23].1
+            textChange(tile_list[23].0, text: tile_list[23].1)
             checkForBomb(&tile_list[23].3,num: tile_list[23].2,node: tile_list[23].0)
         } else if node.name == "Tile24" {
-            tile_list[24].0.texture = tile_list[24].1
+            textChange(tile_list[24].0, text: tile_list[24].1)
             checkForBomb(&tile_list[24].3,num: tile_list[24].2,node: tile_list[24].0)
         }
     }
@@ -398,7 +402,10 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
         node24.runAction(node24Action)
         node25.runAction(node25Action)
     }
-    
+    func textChange(node:SKNode,text:SKTexture) {
+        let changeText = SKAction.setTexture(text)
+        node.runAction(changeText)
+    }
     func purchase(node:SKNode) {
         if money >= 25 {
             if node.name == "Col1Unlock" {
@@ -406,11 +413,11 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
                 hudNode.removeFromParent()
                 hudNode = HUD()
                 self.addChild(hudNode)
-                tile_list[0].0.texture = tile_list[0].1
-                tile_list[5].0.texture = tile_list[5].1
-                tile_list[10].0.texture = tile_list[10].1
-                tile_list[15].0.texture = tile_list[15].1
-                tile_list[20].0.texture = tile_list[20].1
+                textChange(tile_list[0].0, text: tile_list[0].1)
+                textChange(tile_list[5].0, text: tile_list[5].1)
+                textChange(tile_list[10].0, text: tile_list[10].1)
+                textChange(tile_list[15].0, text: tile_list[15].1)
+                textChange(tile_list[10].0, text: tile_list[10].1)
                 let num_list = [tile_list[0].2,tile_list[5].2,tile_list[10].2,tile_list[15].2,tile_list[20].2]
                 var bool_list = [tile_list[0].3,tile_list[5].3,tile_list[10].3,tile_list[15].3,tile_list[20].3]
                 checkPurchase(num_list, bools:&bool_list)
@@ -419,11 +426,11 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
                 hudNode.removeFromParent()
                 hudNode = HUD()
                 self.addChild(hudNode)
-                tile_list[1].0.texture = tile_list[1].1
-                tile_list[6].0.texture = tile_list[6].1
-                tile_list[11].0.texture = tile_list[11].1
-                tile_list[16].0.texture = tile_list[16].1
-                tile_list[21].0.texture = tile_list[21].1
+                textChange(tile_list[1].0, text: tile_list[1].1)
+                textChange(tile_list[6].0, text: tile_list[6].1)
+                textChange(tile_list[11].0, text: tile_list[11].1)
+                textChange(tile_list[16].0, text: tile_list[16].1)
+                textChange(tile_list[21].0, text: tile_list[21].1)
                 let num_list = [tile_list[1].2,tile_list[6].2,tile_list[11].2,tile_list[16].2,tile_list[21].2]
                 var bool_list = [tile_list[1].3,tile_list[6].3,tile_list[11].3,tile_list[16].3,tile_list[21].3]
                 checkPurchase(num_list,bools:&bool_list)
@@ -432,11 +439,11 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
                 hudNode.removeFromParent()
                 hudNode = HUD()
                 self.addChild(hudNode)
-                tile_list[2].0.texture = tile_list[2].1
-                tile_list[7].0.texture = tile_list[7].1
-                tile_list[12].0.texture = tile_list[12].1
-                tile_list[17].0.texture = tile_list[17].1
-                tile_list[22].0.texture = tile_list[22].1
+                textChange(tile_list[2].0, text: tile_list[2].1)
+                textChange(tile_list[7].0, text: tile_list[7].1)
+                textChange(tile_list[12].0, text: tile_list[12].1)
+                textChange(tile_list[17].0, text: tile_list[17].1)
+                textChange(tile_list[22].0, text: tile_list[22].1)
                 let num_list = [tile_list[2].2,tile_list[7].2,tile_list[12].2,tile_list[17].2,tile_list[22].2]
                 var bool_list = [tile_list[2].3,tile_list[7].3,tile_list[12].3,tile_list[17].3,tile_list[22].3]
                 checkPurchase(num_list,bools:&bool_list)
@@ -445,11 +452,11 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
                 hudNode.removeFromParent()
                 hudNode = HUD()
                 self.addChild(hudNode)
-                tile_list[3].0.texture = tile_list[3].1
-                tile_list[8].0.texture = tile_list[8].1
-                tile_list[13].0.texture = tile_list[13].1
-                tile_list[18].0.texture = tile_list[18].1
-                tile_list[23].0.texture = tile_list[23].1
+                textChange(tile_list[3].0, text: tile_list[3].1)
+                textChange(tile_list[8].0, text: tile_list[8].1)
+                textChange(tile_list[13].0, text: tile_list[13].1)
+                textChange(tile_list[18].0, text: tile_list[18].1)
+                textChange(tile_list[23].0, text: tile_list[23].1)
                 let num_list = [tile_list[3].2,tile_list[8].2,tile_list[13].2,tile_list[18].2,tile_list[23].2]
                 var bool_list = [tile_list[3].3,tile_list[8].3,tile_list[13].3,tile_list[18].3,tile_list[23].3]
                 checkPurchase(num_list,bools:&bool_list)
@@ -458,11 +465,11 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
                 hudNode.removeFromParent()
                 hudNode = HUD()
                 self.addChild(hudNode)
-                tile_list[4].0.texture = tile_list[4].1
-                tile_list[9].0.texture = tile_list[9].1
-                tile_list[14].0.texture = tile_list[14].1
-                tile_list[19].0.texture = tile_list[19].1
-                tile_list[24].0.texture = tile_list[24].1
+                textChange(tile_list[4].0, text: tile_list[4].1)
+                textChange(tile_list[9].0, text: tile_list[9].1)
+                textChange(tile_list[14].0, text: tile_list[14].1)
+                textChange(tile_list[19].0, text: tile_list[19].1)
+                textChange(tile_list[24].0, text: tile_list[24].1)
                 let num_list = [tile_list[4].2,tile_list[9].2,tile_list[14].2,tile_list[19].2,tile_list[24].2]
                 var bool_list = [tile_list[4].3,tile_list[9].3,tile_list[14].3,tile_list[19].3,tile_list[24].3]
                 checkPurchase(num_list,bools:&bool_list)
@@ -471,11 +478,11 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
                 hudNode.removeFromParent()
                 hudNode = HUD()
                 self.addChild(hudNode)
-                tile_list[0].0.texture = tile_list[0].1
-                tile_list[1].0.texture = tile_list[1].1
-                tile_list[2].0.texture = tile_list[2].1
-                tile_list[3].0.texture = tile_list[3].1
-                tile_list[4].0.texture = tile_list[4].1
+                textChange(tile_list[0].0, text: tile_list[0].1)
+                textChange(tile_list[1].0, text: tile_list[1].1)
+                textChange(tile_list[2].0, text: tile_list[2].1)
+                textChange(tile_list[3].0, text: tile_list[3].1)
+                textChange(tile_list[4].0, text: tile_list[4].1)
                 let num_list = [tile_list[0].2,tile_list[1].2,tile_list[2].2,tile_list[3].2,tile_list[4].2]
                 var bool_list = [tile_list[0].3,tile_list[1].3,tile_list[2].3,tile_list[3].3,tile_list[4].3]
                 checkPurchase(num_list,bools:&bool_list)
@@ -484,11 +491,11 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
                 hudNode.removeFromParent()
                 hudNode = HUD()
                 self.addChild(hudNode)
-                tile_list[5].0.texture = tile_list[5].1
-                tile_list[6].0.texture = tile_list[6].1
-                tile_list[7].0.texture = tile_list[7].1
-                tile_list[8].0.texture = tile_list[8].1
-                tile_list[9].0.texture = tile_list[9].1
+                textChange(tile_list[5].0, text: tile_list[5].1)
+                textChange(tile_list[6].0, text: tile_list[6].1)
+                textChange(tile_list[7].0, text: tile_list[7].1)
+                textChange(tile_list[8].0, text: tile_list[8].1)
+                textChange(tile_list[9].0, text: tile_list[9].1)
                 let num_list = [tile_list[5].2,tile_list[6].2,tile_list[7].2,tile_list[8].2,tile_list[9].2]
                 var bool_list = [tile_list[5].3,tile_list[6].3,tile_list[7].3,tile_list[8].3,tile_list[9].3]
                 checkPurchase(num_list,bools:&bool_list)
@@ -497,11 +504,11 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
                 hudNode.removeFromParent()
                 hudNode = HUD()
                 self.addChild(hudNode)
-                tile_list[10].0.texture = tile_list[10].1
-                tile_list[11].0.texture = tile_list[11].1
-                tile_list[12].0.texture = tile_list[12].1
-                tile_list[13].0.texture = tile_list[13].1
-                tile_list[14].0.texture = tile_list[14].1
+                textChange(tile_list[10].0, text: tile_list[10].1)
+                textChange(tile_list[11].0, text: tile_list[11].1)
+                textChange(tile_list[12].0, text: tile_list[12].1)
+                textChange(tile_list[13].0, text: tile_list[13].1)
+                textChange(tile_list[14].0, text: tile_list[14].1)
                 let num_list = [tile_list[10].2,tile_list[11].2,tile_list[12].2,tile_list[13].2,tile_list[14].2]
                 var bool_list = [tile_list[10].3,tile_list[11].3,tile_list[12].3,tile_list[13].3,tile_list[14].3]
                 checkPurchase(num_list,bools:&bool_list)
@@ -510,11 +517,11 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
                 hudNode.removeFromParent()
                 hudNode = HUD()
                 self.addChild(hudNode)
-                tile_list[15].0.texture = tile_list[15].1
-                tile_list[16].0.texture = tile_list[16].1
-                tile_list[17].0.texture = tile_list[17].1
-                tile_list[18].0.texture = tile_list[18].1
-                tile_list[19].0.texture = tile_list[19].1
+                textChange(tile_list[15].0, text: tile_list[15].1)
+                textChange(tile_list[16].0, text: tile_list[16].1)
+                textChange(tile_list[17].0, text: tile_list[17].1)
+                textChange(tile_list[18].0, text: tile_list[18].1)
+                textChange(tile_list[19].0, text: tile_list[19].1)
                 let num_list = [tile_list[15].2,tile_list[16].2,tile_list[17].2,tile_list[18].2,tile_list[19].2]
                 var bool_list = [tile_list[15].3,tile_list[16].3,tile_list[17].3,tile_list[18].3,tile_list[19].3]
                 checkPurchase(num_list,bools:&bool_list)
@@ -523,11 +530,11 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
                 hudNode.removeFromParent()
                 hudNode = HUD()
                 self.addChild(hudNode)
-                tile_list[20].0.texture = tile_list[20].1
-                tile_list[21].0.texture = tile_list[21].1
-                tile_list[22].0.texture = tile_list[22].1
-                tile_list[23].0.texture = tile_list[23].1
-                tile_list[24].0.texture = tile_list[24].1
+                textChange(tile_list[20].0, text: tile_list[20].1)
+                textChange(tile_list[21].0, text: tile_list[21].1)
+                textChange(tile_list[22].0, text: tile_list[22].1)
+                textChange(tile_list[23].0, text: tile_list[23].1)
+                textChange(tile_list[24].0, text: tile_list[24].1)
                 let num_list = [tile_list[20].2,tile_list[21].2,tile_list[22].2,tile_list[23].2,tile_list[24].2]
                 var bool_list = [tile_list[20].3,tile_list[21].3,tile_list[22].3,tile_list[23].3,tile_list[24].3]
                 checkPurchase(num_list,bools:&bool_list)
@@ -587,7 +594,7 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
         
         let purchaseLabel = SKLabelNode(text: "Touch to add 100")
         purchaseLabel.position = CGPointMake(self.frame.size.width/2, self.frame.size.height/7.3)
-        purchaseLabel.fontName = Game_Font
+        purchaseLabel.fontName = Title_Font
         purchaseLabel.fontSize = 25
         purchaseLabel.fontColor = blackColor
         purchaseLabel.zPosition = 30
@@ -595,15 +602,13 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
         
         let purchaseLabel2 = SKLabelNode(text: "coins for $0.99")
         purchaseLabel2.position = CGPointMake(self.frame.size.width/2, self.frame.size.height/8.5)
-        purchaseLabel2.fontName = Game_Font
+        purchaseLabel2.fontName = Title_Font
         purchaseLabel2.fontSize = 25
         purchaseLabel2.fontColor = blackColor
         purchaseLabel2.zPosition = 30
         titleNode.addChild(purchaseLabel2)
         
         self.addChild(titleNode)
-        
-        //gameVC.displayPopUp()
     }
     func tutorialSetup() {
         let width = self.frame.size.width
@@ -645,7 +650,7 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
             tutNode.addChild(desc3)
             
             let nextButton = SKLabelNode(text: "Next")
-            nextButton.position = CGPointMake(width*0.6, height*0.1)
+            nextButton.position = CGPointMake(width*0.6, height*0.13)
             nextButton.fontName = Game_Over_Font
             nextButton.fontSize = 40
             nextButton.fontColor = blackColor
@@ -692,7 +697,7 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
             tutNode.addChild(desc3)
             
             let nextButton = SKLabelNode(text: "Next")
-            nextButton.position = CGPointMake(width*0.6, height*0.1)
+            nextButton.position = CGPointMake(width*0.6, height*0.13)
             nextButton.fontName = Game_Over_Font
             nextButton.fontSize = 40
             nextButton.fontColor = blackColor
@@ -748,7 +753,7 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
             tutNode.addChild(desc4)
             
             let nextButton = SKLabelNode(text: "Next")
-            nextButton.position = CGPointMake(width*0.6, height*0.1)
+            nextButton.position = CGPointMake(width*0.6, height*0.13)
             nextButton.fontName = Game_Over_Font
             nextButton.fontSize = 40
             desc1.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Left
@@ -766,8 +771,12 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
             self.runAction(tut2)
         } else if tut_Point == 2 {
             self.runAction(tut3)
-            tutorial = false
+            tutorial = 1
+            money+=50
             saveData()
+            hudNode.removeFromParent()
+            hudNode = HUD()
+            self.addChild(hudNode)
         }
     }
     func GameOverScreen() {
@@ -1026,12 +1035,12 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
         let colY:CGFloat = 0.76
         let colX:CGFloat = 0.40
         let rowY:CGFloat = 0.38
-        let rowX:CGFloat = 0.345
+        let rowX:CGFloat = 0.34
         let node = SKNode()
         
         let col1 = SKLabelNode(text: String(column_list[0]))
         col1.position = CGPointMake(self.frame.size.width*colX, self.frame.size.height*colY)
-        col1.fontSize = 25
+        col1.fontSize = DispFontSize
         col1.fontName = Game_Font
         col1.fontColor = SKColor(red: 0, green: 0, blue: 0, alpha: 1.0)
         col1.zPosition = 5
@@ -1039,7 +1048,7 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
         
         let col2 = SKLabelNode(text: String(column_list[1]))
         col2.position = CGPointMake(self.frame.size.width*(colX + 0.055), self.frame.size.height*colY)
-        col2.fontSize = 25
+        col2.fontSize = DispFontSize
         col2.fontName = Game_Font
         col2.fontColor = SKColor(red: 0, green: 0, blue: 0, alpha: 1.0)
         col2.zPosition = 5
@@ -1047,7 +1056,7 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
         
         let col3 = SKLabelNode(text: String(column_list[2]))
         col3.position = CGPointMake(self.frame.size.width*(colX + 0.105), self.frame.size.height*colY)
-        col3.fontSize = 25
+        col3.fontSize = DispFontSize
         col3.fontName = Game_Font
         col3.fontColor = SKColor(red: 0, green: 0, blue: 0, alpha: 1.0)
         col3.zPosition = 5
@@ -1055,7 +1064,7 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
         
         let col4 = SKLabelNode(text: String(column_list[3]))
         col4.position = CGPointMake(self.frame.size.width*(colX + 0.16), self.frame.size.height*colY)
-        col4.fontSize = 25
+        col4.fontSize = DispFontSize
         col4.fontName = Game_Font
         col4.fontColor = SKColor(red: 0, green: 0, blue: 0, alpha: 1.0)
         col4.zPosition = 5
@@ -1063,7 +1072,7 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
         
         let col5 = SKLabelNode(text: String(column_list[4]))
         col5.position = CGPointMake(self.frame.size.width*(colX + 0.215), self.frame.size.height*colY)
-        col5.fontSize = 25
+        col5.fontSize = DispFontSize
         col5.fontName = Game_Font
         col5.fontColor = SKColor(red: 0, green: 0, blue: 0, alpha: 1.0)
         col5.zPosition = 5
@@ -1071,7 +1080,7 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
         
         let row1 = SKLabelNode(text: String(row_list[0]))
         row1.position = CGPointMake(self.frame.size.width*rowX, self.frame.size.height*(rowY + 0.29))
-        row1.fontSize = 25
+        row1.fontSize = DispFontSize
         row1.fontName = Game_Font
         row1.fontColor = SKColor(red: 0, green: 0, blue: 0, alpha: 1.0)
         row1.zPosition = 5
@@ -1079,7 +1088,7 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
         
         let row2 = SKLabelNode(text: String(row_list[1]))
         row2.position = CGPointMake(self.frame.size.width*rowX, self.frame.size.height*(rowY + 0.215))
-        row2.fontSize = 25
+        row2.fontSize = DispFontSize
         row2.fontName = Game_Font
         row2.fontColor = SKColor(red: 0, green: 0, blue: 0, alpha: 1.0)
         row2.zPosition = 5
@@ -1087,7 +1096,7 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
         
         let row3 = SKLabelNode(text: String(row_list[2]))
         row3.position = CGPointMake(self.frame.size.width*rowX, self.frame.size.height*(rowY + 0.15))
-        row3.fontSize = 25
+        row3.fontSize = DispFontSize
         row3.fontName = Game_Font
         row3.fontColor = SKColor(red: 0, green: 0, blue: 0, alpha: 1.0)
         row3.zPosition = 5
@@ -1095,7 +1104,7 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
         
         let row4 = SKLabelNode(text: String(row_list[3]))
         row4.position = CGPointMake(self.frame.size.width*rowX, self.frame.size.height*(rowY + 0.075))
-        row4.fontSize = 25
+        row4.fontSize = DispFontSize
         row4.fontName = Game_Font
         row4.fontColor = SKColor(red: 0, green: 0, blue: 0, alpha: 1.0)
         row4.zPosition = 5
@@ -1103,7 +1112,7 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
         
         let row5 = SKLabelNode(text: String(row_list[4]))
         row5.position = CGPointMake(self.frame.size.width*rowX, self.frame.size.height*rowY)
-        row5.fontSize = 25
+        row5.fontSize = DispFontSize
         row5.fontName = Game_Font
         row5.fontColor = SKColor(red: 0, green: 0, blue: 0, alpha: 1.0)
         row5.zPosition = 5
@@ -1121,7 +1130,7 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
         
         let col1 = SKLabelNode(text: String(column_list[0]))
         col1.position = CGPointMake(self.frame.size.width*colX, self.frame.size.height*colY)
-        col1.fontSize = 25
+        col1.fontSize = DispFontSize
         col1.fontName = Game_Font
         col1.fontColor = SKColor(red: 1, green: 0, blue: 0, alpha: 1.0)
         col1.zPosition = 5
@@ -1129,7 +1138,7 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
         
         let col2 = SKLabelNode(text: String(column_list[1]))
         col2.position = CGPointMake(self.frame.size.width*(colX+0.055), self.frame.size.height*colY)
-        col2.fontSize = 25
+        col2.fontSize = DispFontSize
         col2.fontName = Game_Font
         col2.fontColor = SKColor(red: 1, green: 0, blue: 0, alpha: 1.0)
         col2.zPosition = 5
@@ -1137,7 +1146,7 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
         
         let col3 = SKLabelNode(text: String(column_list[2]))
         col3.position = CGPointMake(self.frame.size.width*(colX+0.105), self.frame.size.height*colY)
-        col3.fontSize = 25
+        col3.fontSize = DispFontSize
         col3.fontName = Game_Font
         col3.fontColor = SKColor(red: 1, green: 0, blue: 0, alpha: 1.0)
         col3.zPosition = 5
@@ -1145,7 +1154,7 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
         
         let col4 = SKLabelNode(text: String(column_list[3]))
         col4.position = CGPointMake(self.frame.size.width*(colX+0.16), self.frame.size.height*colY)
-        col4.fontSize = 25
+        col4.fontSize = DispFontSize
         col4.fontName = Game_Font
         col4.fontColor = SKColor(red: 1, green: 0, blue: 0, alpha: 1.0)
         col4.zPosition = 5
@@ -1153,7 +1162,7 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
         
         let col5 = SKLabelNode(text: String(column_list[4]))
         col5.position = CGPointMake(self.frame.size.width*(colX+0.215), self.frame.size.height*colY)
-        col5.fontSize = 25
+        col5.fontSize = DispFontSize
         col5.fontName = Game_Font
         col5.fontColor = SKColor(red: 1, green: 0, blue: 0, alpha: 1.0)
         col5.zPosition = 5
@@ -1161,7 +1170,7 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
         
         let row1 = SKLabelNode(text: String(row_list[0]))
         row1.position = CGPointMake(self.frame.size.width*rowX, self.frame.size.height*(rowY+0.29))
-        row1.fontSize = 25
+        row1.fontSize = DispFontSize
         row1.fontName = Game_Font
         row1.fontColor = SKColor(red: 1, green: 0, blue: 0, alpha: 1.0)
         row1.zPosition = 5
@@ -1169,7 +1178,7 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
         
         let row2 = SKLabelNode(text: String(row_list[1]))
         row2.position = CGPointMake(self.frame.size.width*rowX, self.frame.size.height*(rowY+0.215))
-        row2.fontSize = 25
+        row2.fontSize = DispFontSize
         row2.fontName = Game_Font
         row2.fontColor = SKColor(red: 1, green: 0, blue: 0, alpha: 1.0)
         row2.zPosition = 5
@@ -1177,7 +1186,7 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
         
         let row3 = SKLabelNode(text: String(row_list[2]))
         row3.position = CGPointMake(self.frame.size.width*rowX, self.frame.size.height*(rowY+0.15))
-        row3.fontSize = 25
+        row3.fontSize = DispFontSize
         row3.fontName = Game_Font
         row3.fontColor = SKColor(red: 1, green: 0, blue: 0, alpha: 1.0)
         row3.zPosition = 5
@@ -1185,7 +1194,7 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
         
         let row4 = SKLabelNode(text: String(row_list[3]))
         row4.position = CGPointMake(self.frame.size.width*rowX, self.frame.size.height*(rowY+0.075))
-        row4.fontSize = 25
+        row4.fontSize = DispFontSize
         row4.fontName = Game_Font
         row4.fontColor = SKColor(red: 1, green: 0, blue: 0, alpha: 1.0)
         row4.zPosition = 5
@@ -1193,7 +1202,7 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
         
         let row5 = SKLabelNode(text: String(row_list[4]))
         row5.position = CGPointMake(self.frame.size.width*rowX, self.frame.size.height*rowY)
-        row5.fontSize = 25
+        row5.fontSize = DispFontSize
         row5.fontName = Game_Font
         row5.fontColor = SKColor(red: 1, green: 0, blue: 0, alpha: 1.0)
         row5.zPosition = 5
@@ -1340,16 +1349,16 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
         let three_val = zero_val + diff*3
         
         if rand < zero_val {
-            back_text = SKTexture(imageNamed: "RedSquare.png")
+            back_text = SKTexture(imageNamed: "bomb.png")
             number = 0
         } else if rand >= zero_val && rand < one_val {
-            back_text = SKTexture(imageNamed: "TransOne.png")
+            back_text = SKTexture(imageNamed: "GreenOne.png")
             number = 1
         } else if rand >= one_val && rand < two_val {
-            back_text = SKTexture(imageNamed: "TransTwo.png")
+            back_text = SKTexture(imageNamed: "GreenTwo.png")
             number = 2
         } else if rand >= two_val && rand < three_val {
-            back_text = SKTexture(imageNamed: "TransThree.png")
+            back_text = SKTexture(imageNamed: "GreenThree.png")
             number = 3
         }
         return (back_text,number)
@@ -1406,6 +1415,9 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
     }
 
     func nextLevel() {
+        if Game_Level > highestLevel {
+            highestLevel = Game_Level
+        }
         Game_Level++
         self.removeAllChildren()
         labelNode.removeAllChildren()
@@ -1465,6 +1477,7 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
         self.addChild(disBombs)
         self.addChild(disUnlocks)
     }
+    
     func gameCenterViewControllerDidFinish(gameCenterViewController: GKGameCenterViewController!)
     {
         gameCenterViewController.dismissViewControllerAnimated(true, completion: nil)
