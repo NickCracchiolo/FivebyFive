@@ -46,6 +46,8 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
             
                 if touch_enabled == true {
                     flip(node)
+                    print("flipped")
+                    print("\n")
                     purchase(node)
                     if node == "Next Button" {
                         tutNode.removeAllChildren()
@@ -186,10 +188,18 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
         anim_node.zPosition = 3
         self.addChild(anim_node)
         
-        let flyAction = SKAction.moveToY(self.frame.size.height, duration: 1.0)
-        let deleteAction = SKAction.removeFromParent()
+        let flyAction = SKAction.moveToY(self.frame.size.height, duration: 0.5)
+        let delete = SKAction.removeFromParent()
+        let deleteAction = SKAction.runBlock({
+            anim_node.removeAllActions()
+            anim_node.removeFromParent()
+            print("anim deleted")
+            print("\n")
+        })
         let seq = SKAction.sequence([flyAction,deleteAction])
         anim_node.runAction(seq)
+        print("action ran")
+        print("\n")
     }
     
     func bombAnim(node:SKSpriteNode) {
@@ -404,29 +414,32 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
         node25.runAction(node25Action)
     }
     func textChange(node:SKNode,text:SKTexture) {
-        let changeText = SKAction.setTexture(text)
-        node.runAction(changeText)
+        let pos = node.position
+        let back_text = text
+        node.removeFromParent()
+        
+        let back_square = SKSpriteNode(texture: back_text)
+        back_square.position = pos
+        back_square.zPosition = grid_zPosition
+        self.addChild(back_square)
     }
     func purchase(node:NSString) {
         if money >= 25 {
             if node == "Col1Unlock" {
                 money -= 25
-                hudNode.removeFromParent()
-                hudNode = HUD()
-                self.addChild(hudNode)
                 textChange(tile_list[0].0, text: tile_list[0].1)
                 textChange(tile_list[5].0, text: tile_list[5].1)
                 textChange(tile_list[10].0, text: tile_list[10].1)
                 textChange(tile_list[15].0, text: tile_list[15].1)
-                textChange(tile_list[10].0, text: tile_list[10].1)
+                textChange(tile_list[20].0, text: tile_list[20].1)
                 let num_list = [tile_list[0].2,tile_list[5].2,tile_list[10].2,tile_list[15].2,tile_list[20].2]
                 var bool_list = [tile_list[0].3,tile_list[5].3,tile_list[10].3,tile_list[15].3,tile_list[20].3]
                 checkPurchase(num_list, bools:&bool_list)
-            } else if node == "Col2Unlock" {
-                money -= 25
                 hudNode.removeFromParent()
                 hudNode = HUD()
                 self.addChild(hudNode)
+            } else if node == "Col2Unlock" {
+                money -= 25
                 textChange(tile_list[1].0, text: tile_list[1].1)
                 textChange(tile_list[6].0, text: tile_list[6].1)
                 textChange(tile_list[11].0, text: tile_list[11].1)
@@ -435,11 +448,11 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
                 let num_list = [tile_list[1].2,tile_list[6].2,tile_list[11].2,tile_list[16].2,tile_list[21].2]
                 var bool_list = [tile_list[1].3,tile_list[6].3,tile_list[11].3,tile_list[16].3,tile_list[21].3]
                 checkPurchase(num_list,bools:&bool_list)
-            } else if node == "Col3Unlock" {
-                money -= 25
                 hudNode.removeFromParent()
                 hudNode = HUD()
                 self.addChild(hudNode)
+            } else if node == "Col3Unlock" {
+                money -= 25
                 textChange(tile_list[2].0, text: tile_list[2].1)
                 textChange(tile_list[7].0, text: tile_list[7].1)
                 textChange(tile_list[12].0, text: tile_list[12].1)
@@ -448,11 +461,11 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
                 let num_list = [tile_list[2].2,tile_list[7].2,tile_list[12].2,tile_list[17].2,tile_list[22].2]
                 var bool_list = [tile_list[2].3,tile_list[7].3,tile_list[12].3,tile_list[17].3,tile_list[22].3]
                 checkPurchase(num_list,bools:&bool_list)
-            } else if node == "Col4Unlock" {
-                money -= 25
                 hudNode.removeFromParent()
                 hudNode = HUD()
                 self.addChild(hudNode)
+            } else if node == "Col4Unlock" {
+                money -= 25
                 textChange(tile_list[3].0, text: tile_list[3].1)
                 textChange(tile_list[8].0, text: tile_list[8].1)
                 textChange(tile_list[13].0, text: tile_list[13].1)
@@ -461,11 +474,11 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
                 let num_list = [tile_list[3].2,tile_list[8].2,tile_list[13].2,tile_list[18].2,tile_list[23].2]
                 var bool_list = [tile_list[3].3,tile_list[8].3,tile_list[13].3,tile_list[18].3,tile_list[23].3]
                 checkPurchase(num_list,bools:&bool_list)
-            } else if node == "Col5Unlock" {
-                money -= 25
                 hudNode.removeFromParent()
                 hudNode = HUD()
                 self.addChild(hudNode)
+            } else if node == "Col5Unlock" {
+                money -= 25
                 textChange(tile_list[4].0, text: tile_list[4].1)
                 textChange(tile_list[9].0, text: tile_list[9].1)
                 textChange(tile_list[14].0, text: tile_list[14].1)
@@ -474,11 +487,11 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
                 let num_list = [tile_list[4].2,tile_list[9].2,tile_list[14].2,tile_list[19].2,tile_list[24].2]
                 var bool_list = [tile_list[4].3,tile_list[9].3,tile_list[14].3,tile_list[19].3,tile_list[24].3]
                 checkPurchase(num_list,bools:&bool_list)
-            } else if node == "Row1Unlock" {
-                money -= 25
                 hudNode.removeFromParent()
                 hudNode = HUD()
                 self.addChild(hudNode)
+            } else if node == "Row1Unlock" {
+                money -= 25
                 textChange(tile_list[0].0, text: tile_list[0].1)
                 textChange(tile_list[1].0, text: tile_list[1].1)
                 textChange(tile_list[2].0, text: tile_list[2].1)
@@ -487,11 +500,11 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
                 let num_list = [tile_list[0].2,tile_list[1].2,tile_list[2].2,tile_list[3].2,tile_list[4].2]
                 var bool_list = [tile_list[0].3,tile_list[1].3,tile_list[2].3,tile_list[3].3,tile_list[4].3]
                 checkPurchase(num_list,bools:&bool_list)
-            } else if node == "Row2Unlock" {
-                money -= 25
                 hudNode.removeFromParent()
                 hudNode = HUD()
                 self.addChild(hudNode)
+            } else if node == "Row2Unlock" {
+                money -= 25
                 textChange(tile_list[5].0, text: tile_list[5].1)
                 textChange(tile_list[6].0, text: tile_list[6].1)
                 textChange(tile_list[7].0, text: tile_list[7].1)
@@ -500,11 +513,11 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
                 let num_list = [tile_list[5].2,tile_list[6].2,tile_list[7].2,tile_list[8].2,tile_list[9].2]
                 var bool_list = [tile_list[5].3,tile_list[6].3,tile_list[7].3,tile_list[8].3,tile_list[9].3]
                 checkPurchase(num_list,bools:&bool_list)
-            } else if node == "Row3Unlock" {
-                money -= 25
                 hudNode.removeFromParent()
                 hudNode = HUD()
                 self.addChild(hudNode)
+            } else if node == "Row3Unlock" {
+                money -= 25
                 textChange(tile_list[10].0, text: tile_list[10].1)
                 textChange(tile_list[11].0, text: tile_list[11].1)
                 textChange(tile_list[12].0, text: tile_list[12].1)
@@ -513,11 +526,11 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
                 let num_list = [tile_list[10].2,tile_list[11].2,tile_list[12].2,tile_list[13].2,tile_list[14].2]
                 var bool_list = [tile_list[10].3,tile_list[11].3,tile_list[12].3,tile_list[13].3,tile_list[14].3]
                 checkPurchase(num_list,bools:&bool_list)
-            } else if node == "Row4Unlock" {
-                money -= 25
                 hudNode.removeFromParent()
                 hudNode = HUD()
                 self.addChild(hudNode)
+            } else if node == "Row4Unlock" {
+                money -= 25
                 textChange(tile_list[15].0, text: tile_list[15].1)
                 textChange(tile_list[16].0, text: tile_list[16].1)
                 textChange(tile_list[17].0, text: tile_list[17].1)
@@ -526,11 +539,11 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
                 let num_list = [tile_list[15].2,tile_list[16].2,tile_list[17].2,tile_list[18].2,tile_list[19].2]
                 var bool_list = [tile_list[15].3,tile_list[16].3,tile_list[17].3,tile_list[18].3,tile_list[19].3]
                 checkPurchase(num_list,bools:&bool_list)
-            } else if node == "Row5Unlock" {
-                money -= 25
                 hudNode.removeFromParent()
                 hudNode = HUD()
                 self.addChild(hudNode)
+            } else if node == "Row5Unlock" {
+                money -= 25
                 textChange(tile_list[20].0, text: tile_list[20].1)
                 textChange(tile_list[21].0, text: tile_list[21].1)
                 textChange(tile_list[22].0, text: tile_list[22].1)
@@ -539,6 +552,9 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
                 let num_list = [tile_list[20].2,tile_list[21].2,tile_list[22].2,tile_list[23].2,tile_list[24].2]
                 var bool_list = [tile_list[20].3,tile_list[21].3,tile_list[22].3,tile_list[23].3,tile_list[24].3]
                 checkPurchase(num_list,bools:&bool_list)
+                hudNode.removeFromParent()
+                hudNode = HUD()
+                self.addChild(hudNode)
             }
             
         }
@@ -897,7 +913,8 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
                 let name = ("Tile"+String(counter))
                 let square = createSquare(x, y: y,in_name:name)
                 let back = BackTexture(Game_Level)
-                let tile_tuple = (square,back.0,back.1,false)
+                let backtext:SKTexture = back.0
+                let tile_tuple = (square,backtext,back.1,false)
                 tile_list.append(tile_tuple)
                 gridNode.addChild(square)
                 numbers_list.append(back.1)
@@ -906,6 +923,262 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
         }
         return gridNode
     }
+    
+//    func createGrid() -> SKNode {
+//        let gridNode = SKNode()
+//        
+//        let node0 = SKSpriteNode(texture: YellowSquare)
+//        let node0_backtext = BackTexture(Game_Level)
+//        node0.name = "Tile0"
+//        node0.position = CGPointMake(0, 220)
+//        node0.zPosition = grid_zPosition
+//        let node0_tuple = (node0,node0_backtext.0,node0_backtext.1,false)
+//        tile_list.append(node0_tuple)
+//        gridNode.addChild(node0)
+//        numbers_list.append(node0_backtext.1)
+//        
+//        let node1 = SKSpriteNode(texture: YellowSquare)
+//        let node1_backtext = BackTexture(Game_Level)
+//        node1.name = "Tile1"
+//        node1.position = CGPointMake(55, 220)
+//        node1.zPosition = grid_zPosition
+//        let node1_tuple = (node1,node1_backtext.0,node1_backtext.1,false)
+//        tile_list.append(node1_tuple)
+//        gridNode.addChild(node1)
+//        numbers_list.append(node1_backtext.1)
+//        
+//        let node2 = SKSpriteNode(texture: YellowSquare)
+//        let node2_backtext = BackTexture(Game_Level)
+//        node2.name = "Tile2"
+//        node2.position = CGPointMake(110, 220)
+//        node2.zPosition = grid_zPosition
+//        let node2_tuple = (node2,node2_backtext.0,node2_backtext.1,false)
+//        tile_list.append(node2_tuple)
+//        gridNode.addChild(node2)
+//        numbers_list.append(node2_backtext.1)
+//        
+//        let node3 = SKSpriteNode(texture: YellowSquare)
+//        let node3_backtext = BackTexture(Game_Level)
+//        node3.name = "Tile3"
+//        node3.position = CGPointMake(165, 220)
+//        node3.zPosition = grid_zPosition
+//        let node3_tuple = (node3,node3_backtext.0,node3_backtext.1,false)
+//        tile_list.append(node3_tuple)
+//        gridNode.addChild(node3)
+//        numbers_list.append(node3_backtext.1)
+//        
+//        let node4 = SKSpriteNode(texture: YellowSquare)
+//        let node4_backtext = BackTexture(Game_Level)
+//        node4.name = "Tile4"
+//        node4.position = CGPointMake(220, 220)
+//        node4.zPosition = grid_zPosition
+//        let node4_tuple = (node4,node4_backtext.0,node4_backtext.1,false)
+//        tile_list.append(node4_tuple)
+//        gridNode.addChild(node4)
+//        numbers_list.append(node4_backtext.1)
+//        
+//        let node5 = SKSpriteNode(texture: YellowSquare)
+//        let node5_backtext = BackTexture(Game_Level)
+//        node5.name = "Tile5"
+//        node5.position = CGPointMake(0, 165)
+//        node5.zPosition = grid_zPosition
+//        let node5_tuple = (node5,node5_backtext.0,node5_backtext.1,false)
+//        tile_list.append(node5_tuple)
+//        gridNode.addChild(node5)
+//        numbers_list.append(node5_backtext.1)
+//        
+//        let node6 = SKSpriteNode(texture: YellowSquare)
+//        let node6_backtext = BackTexture(Game_Level)
+//        node6.name = "Tile6"
+//        node6.position = CGPointMake(55, 165)
+//        node6.zPosition = grid_zPosition
+//        let node6_tuple = (node6,node6_backtext.0,node6_backtext.1,false)
+//        tile_list.append(node6_tuple)
+//        gridNode.addChild(node6)
+//        numbers_list.append(node6_backtext.1)
+//        
+//        let node7 = SKSpriteNode(texture: YellowSquare)
+//        let node7_backtext = BackTexture(Game_Level)
+//        node7.name = "Tile7"
+//        node7.position = CGPointMake(110, 165)
+//        node7.zPosition = grid_zPosition
+//        let node7_tuple = (node7,node7_backtext.0,node7_backtext.1,false)
+//        tile_list.append(node7_tuple)
+//        gridNode.addChild(node7)
+//        numbers_list.append(node7_backtext.1)
+//        
+//        let node8 = SKSpriteNode(texture: YellowSquare)
+//        let node8_backtext = BackTexture(Game_Level)
+//        node8.name = "Tile8"
+//        node8.position = CGPointMake(165, 165)
+//        node8.zPosition = grid_zPosition
+//        let node8_tuple = (node8,node8_backtext.0,node8_backtext.1,false)
+//        tile_list.append(node8_tuple)
+//        gridNode.addChild(node8)
+//        numbers_list.append(node8_backtext.1)
+//        
+//        let node9 = SKSpriteNode(texture: YellowSquare)
+//        let node9_backtext = BackTexture(Game_Level)
+//        node9.name = "Tile9"
+//        node9.position = CGPointMake(220, 165)
+//        node9.zPosition = grid_zPosition
+//        let node9_tuple = (node9,node9_backtext.0,node9_backtext.1,false)
+//        tile_list.append(node9_tuple)
+//        gridNode.addChild(node9)
+//        numbers_list.append(node9_backtext.1)
+//        
+//        let node10 = SKSpriteNode(texture: YellowSquare)
+//        let node10_backtext = BackTexture(Game_Level)
+//        node10.name = "Tile10"
+//        node10.position = CGPointMake(0, 110)
+//        node10.zPosition = grid_zPosition
+//        let node10_tuple = (node10,node10_backtext.0,node10_backtext.1,false)
+//        tile_list.append(node10_tuple)
+//        gridNode.addChild(node10)
+//        numbers_list.append(node10_backtext.1)
+//        
+//        let node11 = SKSpriteNode(texture: YellowSquare)
+//        let node11_backtext = BackTexture(Game_Level)
+//        node11.name = "Tile11"
+//        node11.position = CGPointMake(55, 110)
+//        node11.zPosition = grid_zPosition
+//        let node11_tuple = (node11,node11_backtext.0,node11_backtext.1,false)
+//        tile_list.append(node11_tuple)
+//        gridNode.addChild(node11)
+//        numbers_list.append(node11_backtext.1)
+//        
+//        let node12 = SKSpriteNode(texture: YellowSquare)
+//        let node12_backtext = BackTexture(Game_Level)
+//        node12.name = "Tile12"
+//        node12.position = CGPointMake(110, 110)
+//        node12.zPosition = grid_zPosition
+//        let node12_tuple = (node12,node12_backtext.0,node12_backtext.1,false)
+//        tile_list.append(node12_tuple)
+//        gridNode.addChild(node12)
+//        numbers_list.append(node12_backtext.1)
+//        
+//        let node13 = SKSpriteNode(texture: YellowSquare)
+//        let node13_backtext = BackTexture(Game_Level)
+//        node13.name = "Tile13"
+//        node13.position = CGPointMake(165, 110)
+//        node13.zPosition = grid_zPosition
+//        let node13_tuple = (node13,node13_backtext.0,node13_backtext.1,false)
+//        tile_list.append(node13_tuple)
+//        gridNode.addChild(node13)
+//        numbers_list.append(node13_backtext.1)
+//        
+//        let node14 = SKSpriteNode(texture: YellowSquare)
+//        let node14_backtext = BackTexture(Game_Level)
+//        node14.name = "Tile14"
+//        node14.position = CGPointMake(220, 110)
+//        node14.zPosition = grid_zPosition
+//        let node14_tuple = (node14,node14_backtext.0,node14_backtext.1,false)
+//        tile_list.append(node14_tuple)
+//        gridNode.addChild(node14)
+//        numbers_list.append(node14_backtext.1)
+//        
+//        let node15 = SKSpriteNode(texture: YellowSquare)
+//        let node15_backtext = BackTexture(Game_Level)
+//        node15.name = "Tile15"
+//        node15.position = CGPointMake(0, 55)
+//        node15.zPosition = grid_zPosition
+//        let node15_tuple = (node15,node15_backtext.0,node15_backtext.1,false)
+//        tile_list.append(node15_tuple)
+//        gridNode.addChild(node15)
+//        numbers_list.append(node15_backtext.1)
+//        
+//        let node16 = SKSpriteNode(texture: YellowSquare)
+//        let node16_backtext = BackTexture(Game_Level)
+//        node16.name = "Tile16"
+//        node16.position = CGPointMake(55, 55)
+//        node16.zPosition = grid_zPosition
+//        let node16_tuple = (node16,node16_backtext.0,node16_backtext.1,false)
+//        tile_list.append(node16_tuple)
+//        gridNode.addChild(node16)
+//        numbers_list.append(node16_backtext.1)
+//        
+//        let node17 = SKSpriteNode(texture: YellowSquare)
+//        let node17_backtext = BackTexture(Game_Level)
+//        node17.name = "Tile17"
+//        node17.position = CGPointMake(110, 55)
+//        node17.zPosition = grid_zPosition
+//        let node17_tuple = (node17,node17_backtext.0,node17_backtext.1,false)
+//        tile_list.append(node17_tuple)
+//        gridNode.addChild(node17)
+//        numbers_list.append(node17_backtext.1)
+//        
+//        let node18 = SKSpriteNode(texture: YellowSquare)
+//        let node18_backtext = BackTexture(Game_Level)
+//        node18.name = "Tile18"
+//        node18.position = CGPointMake(165, 55)
+//        node18.zPosition = grid_zPosition
+//        let node18_tuple = (node18,node18_backtext.0,node18_backtext.1,false)
+//        tile_list.append(node18_tuple)
+//        gridNode.addChild(node18)
+//        numbers_list.append(node18_backtext.1)
+//        
+//        let node19 = SKSpriteNode(texture: YellowSquare)
+//        let node19_backtext = BackTexture(Game_Level)
+//        node19.name = "Tile19"
+//        node19.position = CGPointMake(220, 55)
+//        node19.zPosition = grid_zPosition
+//        let node19_tuple = (node19,node19_backtext.0,node19_backtext.1,false)
+//        tile_list.append(node19_tuple)
+//        gridNode.addChild(node19)
+//        numbers_list.append(node19_backtext.1)
+//        
+//        let node20 = SKSpriteNode(texture: YellowSquare)
+//        let node20_backtext = BackTexture(Game_Level)
+//        node20.name = "Tile20"
+//        node20.position = CGPointMake(0, 0)
+//        node20.zPosition = grid_zPosition
+//        let node20_tuple = (node20,node20_backtext.0,node20_backtext.1,false)
+//        tile_list.append(node20_tuple)
+//        gridNode.addChild(node20)
+//        numbers_list.append(node20_backtext.1)
+//        
+//        let node21 = SKSpriteNode(texture: YellowSquare)
+//        let node21_backtext = BackTexture(Game_Level)
+//        node21.name = "Tile21"
+//        node21.position = CGPointMake(55, 0)
+//        node21.zPosition = grid_zPosition
+//        let node21_tuple = (node21,node21_backtext.0,node21_backtext.1,false)
+//        tile_list.append(node21_tuple)
+//        gridNode.addChild(node21)
+//        numbers_list.append(node21_backtext.1)
+//        
+//        let node22 = SKSpriteNode(texture: YellowSquare)
+//        let node22_backtext = BackTexture(Game_Level)
+//        node22.name = "Tile22"
+//        node22.position = CGPointMake(110, 0)
+//        node22.zPosition = grid_zPosition
+//        let node22_tuple = (node22,node22_backtext.0,node22_backtext.1,false)
+//        tile_list.append(node22_tuple)
+//        gridNode.addChild(node22)
+//        numbers_list.append(node22_backtext.1)
+//        
+//        let node23 = SKSpriteNode(texture: YellowSquare)
+//        let node23_backtext = BackTexture(Game_Level)
+//        node23.name = "Tile23"
+//        node23.position = CGPointMake(165, 0)
+//        node23.zPosition = grid_zPosition
+//        let node23_tuple = (node23,node23_backtext.0,node23_backtext.1,false)
+//        tile_list.append(node23_tuple)
+//        gridNode.addChild(node23)
+//        numbers_list.append(node23_backtext.1)
+//        
+//        let node24 = SKSpriteNode(texture: YellowSquare)
+//        let node24_backtext = BackTexture(Game_Level)
+//        node24.name = "Tile24"
+//        node24.position = CGPointMake(220, 0)
+//        node24.zPosition = grid_zPosition
+//        let node24_tuple = (node24,node24_backtext.0,node24_backtext.1,false)
+//        tile_list.append(node24_tuple)
+//        gridNode.addChild(node24)
+//        numbers_list.append(node24_backtext.1)
+//        
+//        return gridNode
+//    }
     
     func calculateTotTiles(input_list: [Int]) -> Int {
         var count:Int = 0
@@ -1341,7 +1614,7 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
     func BackTexture(level:Int) -> (SKTexture,Int) {
         var back_text = SKTexture()
         var rand = Int(arc4random_uniform(101))
-        var number = 0
+        var number:Int = 0
         
         let zero_val = 10 + 2*level
         let diff = (100 - zero_val)/3
@@ -1350,16 +1623,16 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
         let three_val = zero_val + diff*3
         
         if rand < zero_val {
-            back_text = SKTexture(imageNamed: "bomb.png")
+            back_text = bombText
             number = 0
         } else if rand >= zero_val && rand < one_val {
-            back_text = SKTexture(imageNamed: "GreenOne.png")
+            back_text = oneText
             number = 1
         } else if rand >= one_val && rand < two_val {
-            back_text = SKTexture(imageNamed: "GreenTwo.png")
+            back_text = twoText
             number = 2
         } else if rand >= two_val && rand < three_val {
-            back_text = SKTexture(imageNamed: "GreenThree.png")
+            back_text = threeText
             number = 3
         }
         return (back_text,number)
