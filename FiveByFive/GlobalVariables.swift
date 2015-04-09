@@ -30,13 +30,6 @@ let blackColor = SKColor(red: 0, green: 0, blue: 0, alpha: 1.0)
 //FONT SIZE
 let DispFontSize:CGFloat = 30
 
-//Texture
-let YellowSquare:SKTexture = SKTexture(imageNamed: "YellowSquare.png")
-let bombText:SKTexture = SKTexture(imageNamed: "bomb.png")
-let oneText:SKTexture = SKTexture(imageNamed: "GreenOne.png")
-let twoText:SKTexture = SKTexture(imageNamed: "GreenTwo.png")
-let threeText:SKTexture = SKTexture(imageNamed: "GreenThree.png")
-
 //NSUSERDEFAULT
 let defaults = NSUserDefaults.standardUserDefaults()
 var money: NSInteger = 0

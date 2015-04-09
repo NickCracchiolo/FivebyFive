@@ -7,10 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		56246FB31AD38A6200548069 /* GreenOne.png in Resources */ = {isa = PBXBuildFile; fileRef = 56246FB01AD38A6200548069 /* GreenOne.png */; };
-		56246FB41AD38A6200548069 /* GreenThree.png in Resources */ = {isa = PBXBuildFile; fileRef = 56246FB11AD38A6200548069 /* GreenThree.png */; };
-		56246FB51AD38A6200548069 /* GreenTwo.png in Resources */ = {isa = PBXBuildFile; fileRef = 56246FB21AD38A6200548069 /* GreenTwo.png */; };
 		56246FB71AD38A7500548069 /* bomb.png in Resources */ = {isa = PBXBuildFile; fileRef = 56246FB61AD38A7500548069 /* bomb.png */; };
+		5645B6B51AD6168800BBA989 /* GreenOne.png in Resources */ = {isa = PBXBuildFile; fileRef = 5645B6AC1AD6168800BBA989 /* GreenOne.png */; };
+		5645B6B61AD6168800BBA989 /* GreenOnex2.png in Resources */ = {isa = PBXBuildFile; fileRef = 5645B6AD1AD6168800BBA989 /* GreenOnex2.png */; };
+		5645B6B71AD6168800BBA989 /* GreenOnex3.png in Resources */ = {isa = PBXBuildFile; fileRef = 5645B6AE1AD6168800BBA989 /* GreenOnex3.png */; };
+		5645B6B81AD6168800BBA989 /* GreenThree.png in Resources */ = {isa = PBXBuildFile; fileRef = 5645B6AF1AD6168800BBA989 /* GreenThree.png */; };
+		5645B6B91AD6168800BBA989 /* GreenThreex2.png in Resources */ = {isa = PBXBuildFile; fileRef = 5645B6B01AD6168800BBA989 /* GreenThreex2.png */; };
+		5645B6BA1AD6168800BBA989 /* GreenThreex3.png in Resources */ = {isa = PBXBuildFile; fileRef = 5645B6B11AD6168800BBA989 /* GreenThreex3.png */; };
+		5645B6BB1AD6168800BBA989 /* GreenTwo.png in Resources */ = {isa = PBXBuildFile; fileRef = 5645B6B21AD6168800BBA989 /* GreenTwo.png */; };
+		5645B6BC1AD6168800BBA989 /* GreenTwox2.png in Resources */ = {isa = PBXBuildFile; fileRef = 5645B6B31AD6168800BBA989 /* GreenTwox2.png */; };
+		5645B6BD1AD6168800BBA989 /* GreenTwox3.png in Resources */ = {isa = PBXBuildFile; fileRef = 5645B6B41AD6168800BBA989 /* GreenTwox3.png */; };
 		565B9BEC1ACC75900059D250 /* GlobalVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565B9BEB1ACC75900059D250 /* GlobalVariables.swift */; };
 		565B9BF11ACDDB280059D250 /* YellowSquare.png in Resources */ = {isa = PBXBuildFile; fileRef = 565B9BF01ACDDB280059D250 /* YellowSquare.png */; };
 		565B9BF31ACDE22A0059D250 /* YellowOne.png in Resources */ = {isa = PBXBuildFile; fileRef = 565B9BF21ACDE22A0059D250 /* YellowOne.png */; };
@@ -66,10 +72,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		56246FB01AD38A6200548069 /* GreenOne.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GreenOne.png; sourceTree = "<group>"; };
-		56246FB11AD38A6200548069 /* GreenThree.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GreenThree.png; sourceTree = "<group>"; };
-		56246FB21AD38A6200548069 /* GreenTwo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GreenTwo.png; sourceTree = "<group>"; };
 		56246FB61AD38A7500548069 /* bomb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bomb.png; sourceTree = "<group>"; };
+		5645B6AC1AD6168800BBA989 /* GreenOne.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GreenOne.png; sourceTree = "<group>"; };
+		5645B6AD1AD6168800BBA989 /* GreenOnex2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GreenOnex2.png; sourceTree = "<group>"; };
+		5645B6AE1AD6168800BBA989 /* GreenOnex3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GreenOnex3.png; sourceTree = "<group>"; };
+		5645B6AF1AD6168800BBA989 /* GreenThree.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GreenThree.png; sourceTree = "<group>"; };
+		5645B6B01AD6168800BBA989 /* GreenThreex2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GreenThreex2.png; sourceTree = "<group>"; };
+		5645B6B11AD6168800BBA989 /* GreenThreex3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GreenThreex3.png; sourceTree = "<group>"; };
+		5645B6B21AD6168800BBA989 /* GreenTwo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GreenTwo.png; sourceTree = "<group>"; };
+		5645B6B31AD6168800BBA989 /* GreenTwox2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GreenTwox2.png; sourceTree = "<group>"; };
+		5645B6B41AD6168800BBA989 /* GreenTwox3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GreenTwox3.png; sourceTree = "<group>"; };
 		565B9BEB1ACC75900059D250 /* GlobalVariables.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalVariables.swift; sourceTree = "<group>"; };
 		565B9BF01ACDDB280059D250 /* YellowSquare.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = YellowSquare.png; sourceTree = "<group>"; };
 		565B9BF21ACDE22A0059D250 /* YellowOne.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = YellowOne.png; sourceTree = "<group>"; };
@@ -150,14 +162,20 @@
 			name = Yellow;
 			sourceTree = "<group>";
 		};
-		565B9BFC1ACF6A030059D250 /* Green */ = {
+		565B9BFC1ACF6A030059D250 /* GreenThree */ = {
 			isa = PBXGroup;
 			children = (
-				56246FB01AD38A6200548069 /* GreenOne.png */,
-				56246FB11AD38A6200548069 /* GreenThree.png */,
-				56246FB21AD38A6200548069 /* GreenTwo.png */,
+				5645B6AC1AD6168800BBA989 /* GreenOne.png */,
+				5645B6AD1AD6168800BBA989 /* GreenOnex2.png */,
+				5645B6AE1AD6168800BBA989 /* GreenOnex3.png */,
+				5645B6AF1AD6168800BBA989 /* GreenThree.png */,
+				5645B6B01AD6168800BBA989 /* GreenThreex2.png */,
+				5645B6B11AD6168800BBA989 /* GreenThreex3.png */,
+				5645B6B21AD6168800BBA989 /* GreenTwo.png */,
+				5645B6B31AD6168800BBA989 /* GreenTwox2.png */,
+				5645B6B41AD6168800BBA989 /* GreenTwox3.png */,
 			);
-			name = Green;
+			name = GreenThree;
 			sourceTree = "<group>";
 		};
 		565B9C071AD0B53B0059D250 /* Buttons */ = {
@@ -276,7 +294,7 @@
 				565B9C211AD0E8660059D250 /* Transparent */,
 				565B9C0C1AD0BA450059D250 /* AppIcons */,
 				565B9C071AD0B53B0059D250 /* Buttons */,
-				565B9BFC1ACF6A030059D250 /* Green */,
+				565B9BFC1ACF6A030059D250 /* GreenThree */,
 				565B9BEF1ACDDB040059D250 /* Yellow */,
 				56B172EE1AC1D86C004575DD /* Red */,
 				56B172ED1AC1D868004575DD /* Blue */,
@@ -398,12 +416,13 @@
 			files = (
 				56B172E81AC1D864004575DD /* BlueTwo.png in Resources */,
 				56B172E61AC1D864004575DD /* BlueSquare.png in Resources */,
-				56246FB31AD38A6200548069 /* GreenOne.png in Resources */,
 				565B9C291AD0F6080059D250 /* BombSquare.png in Resources */,
 				565B9BFB1ACF13890059D250 /* YellowThree.png in Resources */,
 				56B172C41AC1D55F004575DD /* Images.xcassets in Resources */,
 				56B172E71AC1D864004575DD /* BlueThree.png in Resources */,
+				5645B6BB1AD6168800BBA989 /* GreenTwo.png in Resources */,
 				565B9C191AD0BA570059D250 /* AppIcon120.png in Resources */,
+				5645B6BD1AD6168800BBA989 /* GreenTwox3.png in Resources */,
 				565B9C0A1AD0B5490059D250 /* LeaderButton.png in Resources */,
 				56B172E91AC1D864004575DD /* RedOne.png in Resources */,
 				56B172EA1AC1D864004575DD /* RedSquare.png in Resources */,
@@ -412,16 +431,19 @@
 				565B9C261AD0E87A0059D250 /* TransThree.png in Resources */,
 				565B9C301AD1E6230059D250 /* tutArrow.png in Resources */,
 				565B9C141AD0BA570059D250 /* AppIcon29.png in Resources */,
-				56246FB41AD38A6200548069 /* GreenThree.png in Resources */,
 				56AE45551AC8A9C10061F9B7 /* BlueOne.png in Resources */,
+				5645B6B61AD6168800BBA989 /* GreenOnex2.png in Resources */,
 				565B9C271AD0E87A0059D250 /* TransTwo.png in Resources */,
+				5645B6B91AD6168800BBA989 /* GreenThreex2.png in Resources */,
+				5645B6B81AD6168800BBA989 /* GreenThree.png in Resources */,
 				565B9C181AD0BA570059D250 /* AppIcon114.png in Resources */,
 				565B9C161AD0BA570059D250 /* AppIcon58.png in Resources */,
 				565B9C151AD0BA570059D250 /* AppIcon57.png in Resources */,
 				56B172C21AC1D55F004575DD /* Main.storyboard in Resources */,
 				565B9C1E1AD0BCD10059D250 /* Impact_Label_Reversed.ttf in Resources */,
-				56246FB51AD38A6200548069 /* GreenTwo.png in Resources */,
+				5645B6B71AD6168800BBA989 /* GreenOnex3.png in Resources */,
 				56B172EC1AC1D864004575DD /* RedTwo.png in Resources */,
+				5645B6B51AD6168800BBA989 /* GreenOne.png in Resources */,
 				565B9C171AD0BA570059D250 /* AppIcon80.png in Resources */,
 				565B9C0B1AD0B5490059D250 /* PlayButton.png in Resources */,
 				565B9C251AD0E87A0059D250 /* TransOne.png in Resources */,
@@ -431,6 +453,8 @@
 				565B9BF31ACDE22A0059D250 /* YellowOne.png in Resources */,
 				565B9BF71ACDE2340059D250 /* YellowTwo.png in Resources */,
 				56B172EB1AC1D864004575DD /* RedThree.png in Resources */,
+				5645B6BC1AD6168800BBA989 /* GreenTwox2.png in Resources */,
+				5645B6BA1AD6168800BBA989 /* GreenThreex3.png in Resources */,
 				565B9C321AD206550059D250 /* PurchaseButton.png in Resources */,
 				565B9C1A1AD0BA570059D250 /* AppIcon180.png in Resources */,
 				565B9C021ACF706A0059D250 /* PurchaseRow.png in Resources */,

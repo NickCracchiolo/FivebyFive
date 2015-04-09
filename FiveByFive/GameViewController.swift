@@ -14,12 +14,12 @@ import StoreKit
 
 extension SKNode {
     class func unarchiveFromFile(file : NSString) -> SKNode? {
-        if let path = NSBundle.mainBundle().pathForResource(file, ofType: "sks") {
+        if let path = NSBundle.mainBundle().pathForResource(file as String, ofType: "sks") {
             var sceneData = NSData(contentsOfFile: path, options: .DataReadingMappedIfSafe, error: nil)!
             var archiver = NSKeyedUnarchiver(forReadingWithData: sceneData)
             
             archiver.setClass(self.classForKeyedUnarchiver(), forClassName: "SKScene")
-            let scene = archiver.decodeObjectForKey(NSKeyedArchiveRootObjectKey) as GameScene
+            let scene = archiver.decodeObjectForKey(NSKeyedArchiveRootObjectKey) as! GameScene
             archiver.finishDecoding()
             return scene
         } else {
@@ -41,7 +41,7 @@ class GameViewController: UIViewController, ADBannerViewDelegate, GKGameCenterCo
         if(SKPaymentQueue.canMakePayments()) {
             println("IAP is enabled, loading")
             var productID:NSSet = NSSet(objects: "fbf.iap.add_money")
-            var request: SKProductsRequest = SKProductsRequest(productIdentifiers: productID)
+            var request: SKProductsRequest = SKProductsRequest(productIdentifiers: productID as Set<NSObject>)
             request.delegate = self
             request.start()
         } else {
@@ -61,7 +61,7 @@ class GameViewController: UIViewController, ADBannerViewDelegate, GKGameCenterCo
 
         if let scene = GameScene.unarchiveFromFile("GameScene") as? GameScene {
             // Configure the view.
-            let skView = self.view as SKView
+            let skView = self.view as! SKView
             skView.showsFPS = false
             skView.showsNodeCount = false
             
@@ -145,11 +145,11 @@ class GameViewController: UIViewController, ADBannerViewDelegate, GKGameCenterCo
     func reportScore(identifier:NSString) {
         if GKLocalPlayer.localPlayer().authenticated == true{
             var highScore = defaults.integerForKey("level")
-            var scoreReporter = GKScore(leaderboardIdentifier: identifier)
+            var scoreReporter = GKScore(leaderboardIdentifier: identifier as String)
             scoreReporter.value = Int64(highScore)
             var scoreArray: [GKScore] = [scoreReporter]
             println("report score \(scoreReporter)")
-            GKScore.reportScores(scoreArray, {(error : NSError!) -> Void in
+            GKScore.reportScores(scoreArray, withCompletionHandler: {(error : NSError!) -> Void in
                 if error != nil {
                     NSLog(error.localizedDescription)
                 }
@@ -179,7 +179,7 @@ class GameViewController: UIViewController, ADBannerViewDelegate, GKGameCenterCo
             println(product.localizedDescription)
             println(product.price)
             
-            list.append(product as SKProduct)
+            list.append(product as! SKProduct)
         }
     }
     
@@ -189,7 +189,7 @@ class GameViewController: UIViewController, ADBannerViewDelegate, GKGameCenterCo
         
         var purchasedItemIDS = []
         for transaction in queue.transactions {
-            var t: SKPaymentTransaction = transaction as SKPaymentTransaction
+            var t: SKPaymentTransaction = transaction as! SKPaymentTransaction
             
             let prodID = t.payment.productIdentifier as String
             
@@ -210,7 +210,7 @@ class GameViewController: UIViewController, ADBannerViewDelegate, GKGameCenterCo
         println("add paymnet")
         
         for transaction:AnyObject in transactions {
-            var trans = transaction as SKPaymentTransaction
+            var trans = transaction as! SKPaymentTransaction
             println(trans.error)
             
             switch trans.transactionState {
