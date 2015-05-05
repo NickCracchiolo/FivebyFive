@@ -31,6 +31,7 @@ var numbers_list = [Int]()
 var boolList = [Bool]()
 var topTiles = [SKSpriteNode]()
 var backTiles = [SKSpriteNode]()
+
 //UIImage
 let oneText_UI = UIImage(named: "GreenOne.png")!
 let twoText_UI = UIImage(named: "GreenTwo.png")!
@@ -1227,7 +1228,7 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
         var rand = Int(arc4random_uniform(101))
         var number:Int = 0
         
-        let zero_val = 10 + 2*level
+        let zero_val = 8 + level
         let diff = (100 - zero_val)/5
         let one_val = zero_val + diff
         let two_val = zero_val + diff*2
