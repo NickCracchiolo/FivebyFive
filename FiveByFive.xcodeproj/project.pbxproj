@@ -26,7 +26,6 @@
 		565B9C0A1AD0B5490059D250 /* LeaderButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 565B9C081AD0B5490059D250 /* LeaderButton.png */; };
 		565B9C0B1AD0B5490059D250 /* PlayButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 565B9C091AD0B5490059D250 /* PlayButton.png */; };
 		565B9C141AD0BA570059D250 /* AppIcon29.png in Resources */ = {isa = PBXBuildFile; fileRef = 565B9C0D1AD0BA570059D250 /* AppIcon29.png */; };
-		565B9C151AD0BA570059D250 /* AppIcon57.png in Resources */ = {isa = PBXBuildFile; fileRef = 565B9C0E1AD0BA570059D250 /* AppIcon57.png */; };
 		565B9C161AD0BA570059D250 /* AppIcon58.png in Resources */ = {isa = PBXBuildFile; fileRef = 565B9C0F1AD0BA570059D250 /* AppIcon58.png */; };
 		565B9C171AD0BA570059D250 /* AppIcon80.png in Resources */ = {isa = PBXBuildFile; fileRef = 565B9C101AD0BA570059D250 /* AppIcon80.png */; };
 		565B9C181AD0BA570059D250 /* AppIcon114.png in Resources */ = {isa = PBXBuildFile; fileRef = 565B9C111AD0BA570059D250 /* AppIcon114.png */; };
@@ -43,7 +42,8 @@
 		565B9C2D1AD115ED0059D250 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 565B9C2C1AD115ED0059D250 /* GameKit.framework */; };
 		565B9C301AD1E6230059D250 /* tutArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 565B9C2F1AD1E6230059D250 /* tutArrow.png */; };
 		565B9C321AD206550059D250 /* PurchaseButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 565B9C311AD206550059D250 /* PurchaseButton.png */; };
-		565B9C341AD209FD0059D250 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 565B9C331AD209FD0059D250 /* StoreKit.framework */; };
+		56949E161AD7A246001784B3 /* AppIcon57.png in Resources */ = {isa = PBXBuildFile; fileRef = 56949E151AD7A246001784B3 /* AppIcon57.png */; };
+		56949E7C1ADB1B19001784B3 /* FiveByFive WatchKit App.app in Resources */ = {isa = PBXBuildFile; fileRef = 56949E7B1ADB1B19001784B3 /* FiveByFive WatchKit App.app */; };
 		56AE45551AC8A9C10061F9B7 /* BlueOne.png in Resources */ = {isa = PBXBuildFile; fileRef = 56AE45541AC8A9C10061F9B7 /* BlueOne.png */; };
 		56B172B91AC1D55F004575DD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B172B81AC1D55F004575DD /* AppDelegate.swift */; };
 		56B172BB1AC1D55F004575DD /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 56B172BA1AC1D55F004575DD /* GameScene.sks */; };
@@ -59,9 +59,26 @@
 		56B172EA1AC1D864004575DD /* RedSquare.png in Resources */ = {isa = PBXBuildFile; fileRef = 56B172E21AC1D864004575DD /* RedSquare.png */; };
 		56B172EB1AC1D864004575DD /* RedThree.png in Resources */ = {isa = PBXBuildFile; fileRef = 56B172E31AC1D864004575DD /* RedThree.png */; };
 		56B172EC1AC1D864004575DD /* RedTwo.png in Resources */ = {isa = PBXBuildFile; fileRef = 56B172E41AC1D864004575DD /* RedTwo.png */; };
+		56DD3FCB1AF29DA800CC2C80 /* GreenFive.png in Resources */ = {isa = PBXBuildFile; fileRef = 56DD3FC51AF29DA800CC2C80 /* GreenFive.png */; };
+		56DD3FCC1AF29DA800CC2C80 /* GreenFivex2.png in Resources */ = {isa = PBXBuildFile; fileRef = 56DD3FC61AF29DA800CC2C80 /* GreenFivex2.png */; };
+		56DD3FCD1AF29DA800CC2C80 /* GreenFivex3.png in Resources */ = {isa = PBXBuildFile; fileRef = 56DD3FC71AF29DA800CC2C80 /* GreenFivex3.png */; };
+		56DD3FCE1AF29DA800CC2C80 /* GreenFour.png in Resources */ = {isa = PBXBuildFile; fileRef = 56DD3FC81AF29DA800CC2C80 /* GreenFour.png */; };
+		56DD3FCF1AF29DA800CC2C80 /* GreenFourx2.png in Resources */ = {isa = PBXBuildFile; fileRef = 56DD3FC91AF29DA800CC2C80 /* GreenFourx2.png */; };
+		56DD3FD01AF29DA800CC2C80 /* GreenFourx3.png in Resources */ = {isa = PBXBuildFile; fileRef = 56DD3FCA1AF29DA800CC2C80 /* GreenFourx3.png */; };
+		56DD3FD41AF2AA6A00CC2C80 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56DD3FD31AF2AA6A00CC2C80 /* Social.framework */; };
+		56EBDE291AF8462900E7FDE1 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56EBDE281AF8462900E7FDE1 /* Security.framework */; };
+		56EBDE311AF853B300E7FDE1 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56EBDE2F1AF8526300E7FDE1 /* SystemConfiguration.framework */; };
+		56EBDE341AF8551F00E7FDE1 /* libFlurry_6.3.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 56EBDE331AF8551F00E7FDE1 /* libFlurry_6.3.0.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		56949E7D1ADB1B19001784B3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 56B172AB1AC1D55F004575DD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 56949E7A1ADB1B19001784B3;
+			remoteInfo = "FiveByFive WatchKit App";
+		};
 		56B172CD1AC1D55F004575DD /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 56B172AB1AC1D55F004575DD /* Project object */;
@@ -91,7 +108,6 @@
 		565B9C081AD0B5490059D250 /* LeaderButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LeaderButton.png; sourceTree = "<group>"; };
 		565B9C091AD0B5490059D250 /* PlayButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PlayButton.png; sourceTree = "<group>"; };
 		565B9C0D1AD0BA570059D250 /* AppIcon29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppIcon29.png; sourceTree = "<group>"; };
-		565B9C0E1AD0BA570059D250 /* AppIcon57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppIcon57.png; sourceTree = "<group>"; };
 		565B9C0F1AD0BA570059D250 /* AppIcon58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppIcon58.png; sourceTree = "<group>"; };
 		565B9C101AD0BA570059D250 /* AppIcon80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppIcon80.png; sourceTree = "<group>"; };
 		565B9C111AD0BA570059D250 /* AppIcon114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppIcon114.png; sourceTree = "<group>"; };
@@ -109,6 +125,9 @@
 		565B9C2F1AD1E6230059D250 /* tutArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tutArrow.png; sourceTree = "<group>"; };
 		565B9C311AD206550059D250 /* PurchaseButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PurchaseButton.png; sourceTree = "<group>"; };
 		565B9C331AD209FD0059D250 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		56949E151AD7A246001784B3 /* AppIcon57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppIcon57.png; sourceTree = "<group>"; };
+		56949E711ADB1B18001784B3 /* FiveByFive WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "FiveByFive WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		56949E7B1ADB1B19001784B3 /* FiveByFive WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "FiveByFive WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		56AE45541AC8A9C10061F9B7 /* BlueOne.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BlueOne.png; sourceTree = "<group>"; };
 		56B172B31AC1D55F004575DD /* FiveByFive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FiveByFive.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		56B172B71AC1D55F004575DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -128,15 +147,37 @@
 		56B172E21AC1D864004575DD /* RedSquare.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RedSquare.png; sourceTree = "<group>"; };
 		56B172E31AC1D864004575DD /* RedThree.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RedThree.png; sourceTree = "<group>"; };
 		56B172E41AC1D864004575DD /* RedTwo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RedTwo.png; sourceTree = "<group>"; };
+		56DD3FC51AF29DA800CC2C80 /* GreenFive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GreenFive.png; sourceTree = "<group>"; };
+		56DD3FC61AF29DA800CC2C80 /* GreenFivex2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GreenFivex2.png; sourceTree = "<group>"; };
+		56DD3FC71AF29DA800CC2C80 /* GreenFivex3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GreenFivex3.png; sourceTree = "<group>"; };
+		56DD3FC81AF29DA800CC2C80 /* GreenFour.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GreenFour.png; sourceTree = "<group>"; };
+		56DD3FC91AF29DA800CC2C80 /* GreenFourx2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GreenFourx2.png; sourceTree = "<group>"; };
+		56DD3FCA1AF29DA800CC2C80 /* GreenFourx3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GreenFourx3.png; sourceTree = "<group>"; };
+		56DD3FD31AF2AA6A00CC2C80 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		56EBDE281AF8462900E7FDE1 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		56EBDE2D1AF8481000E7FDE1 /* FivebyFive-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FivebyFive-Bridging-Header.h"; sourceTree = "<group>"; };
+		56EBDE2F1AF8526300E7FDE1 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		56EBDE321AF8551F00E7FDE1 /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
+		56EBDE331AF8551F00E7FDE1 /* libFlurry_6.3.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry_6.3.0.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		56949E6E1ADB1B18001784B3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		56B172B01AC1D55F004575DD /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				56EBDE311AF853B300E7FDE1 /* SystemConfiguration.framework in Frameworks */,
+				56EBDE341AF8551F00E7FDE1 /* libFlurry_6.3.0.a in Frameworks */,
+				56EBDE291AF8462900E7FDE1 /* Security.framework in Frameworks */,
+				56DD3FD41AF2AA6A00CC2C80 /* Social.framework in Frameworks */,
 				565B9C2D1AD115ED0059D250 /* GameKit.framework in Frameworks */,
-				565B9C341AD209FD0059D250 /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -165,6 +206,12 @@
 		565B9BFC1ACF6A030059D250 /* GreenThree */ = {
 			isa = PBXGroup;
 			children = (
+				56DD3FC51AF29DA800CC2C80 /* GreenFive.png */,
+				56DD3FC61AF29DA800CC2C80 /* GreenFivex2.png */,
+				56DD3FC71AF29DA800CC2C80 /* GreenFivex3.png */,
+				56DD3FC81AF29DA800CC2C80 /* GreenFour.png */,
+				56DD3FC91AF29DA800CC2C80 /* GreenFourx2.png */,
+				56DD3FCA1AF29DA800CC2C80 /* GreenFourx3.png */,
 				5645B6AC1AD6168800BBA989 /* GreenOne.png */,
 				5645B6AD1AD6168800BBA989 /* GreenOnex2.png */,
 				5645B6AE1AD6168800BBA989 /* GreenOnex3.png */,
@@ -190,9 +237,9 @@
 		565B9C0C1AD0BA450059D250 /* AppIcons */ = {
 			isa = PBXGroup;
 			children = (
+				56949E151AD7A246001784B3 /* AppIcon57.png */,
 				565B9C1B1AD0BBF50059D250 /* AppIcon87.png */,
 				565B9C0D1AD0BA570059D250 /* AppIcon29.png */,
-				565B9C0E1AD0BA570059D250 /* AppIcon57.png */,
 				565B9C0F1AD0BA570059D250 /* AppIcon58.png */,
 				565B9C101AD0BA570059D250 /* AppIcon80.png */,
 				565B9C111AD0BA570059D250 /* AppIcon114.png */,
@@ -234,6 +281,8 @@
 			children = (
 				56B172B31AC1D55F004575DD /* FiveByFive.app */,
 				56B172CC1AC1D55F004575DD /* FiveByFiveTests.xctest */,
+				56949E711ADB1B18001784B3 /* FiveByFive WatchKit Extension.appex */,
+				56949E7B1ADB1B19001784B3 /* FiveByFive WatchKit App.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -241,12 +290,15 @@
 		56B172B51AC1D55F004575DD /* FiveByFive */ = {
 			isa = PBXGroup;
 			children = (
+				56EBDE321AF8551F00E7FDE1 /* Flurry.h */,
+				56EBDE331AF8551F00E7FDE1 /* libFlurry_6.3.0.a */,
 				56B172DC1AC1D856004575DD /* Sprites */,
 				56B172B81AC1D55F004575DD /* AppDelegate.swift */,
 				56B172BE1AC1D55F004575DD /* GameViewController.swift */,
 				565B9BEB1ACC75900059D250 /* GlobalVariables.swift */,
 				56B172BC1AC1D55F004575DD /* GameScene.swift */,
 				56B172BA1AC1D55F004575DD /* GameScene.sks */,
+				56EBDE2D1AF8481000E7FDE1 /* FivebyFive-Bridging-Header.h */,
 				56B172C01AC1D55F004575DD /* Main.storyboard */,
 				56B172C31AC1D55F004575DD /* Images.xcassets */,
 				56B172B61AC1D55F004575DD /* Supporting Files */,
@@ -257,6 +309,9 @@
 		56B172B61AC1D55F004575DD /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				56EBDE2F1AF8526300E7FDE1 /* SystemConfiguration.framework */,
+				56EBDE281AF8462900E7FDE1 /* Security.framework */,
+				56DD3FD31AF2AA6A00CC2C80 /* Social.framework */,
 				565B9C331AD209FD0059D250 /* StoreKit.framework */,
 				565B9C2C1AD115ED0059D250 /* GameKit.framework */,
 				565B9C2A1AD10A4A0059D250 /* Impact_Label.ttf */,
@@ -327,6 +382,39 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		56949E701ADB1B18001784B3 /* FiveByFive WatchKit Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 56949E8D1ADB1B19001784B3 /* Build configuration list for PBXNativeTarget "FiveByFive WatchKit Extension" */;
+			buildPhases = (
+				56949E6D1ADB1B18001784B3 /* Sources */,
+				56949E6E1ADB1B18001784B3 /* Frameworks */,
+				56949E6F1ADB1B18001784B3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				56949E7E1ADB1B19001784B3 /* PBXTargetDependency */,
+			);
+			name = "FiveByFive WatchKit Extension";
+			productName = "FiveByFive WatchKit Extension";
+			productReference = 56949E711ADB1B18001784B3 /* FiveByFive WatchKit Extension.appex */;
+			productType = "com.apple.product-type.watchkit-extension";
+		};
+		56949E7A1ADB1B19001784B3 /* FiveByFive WatchKit App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 56949E8A1ADB1B19001784B3 /* Build configuration list for PBXNativeTarget "FiveByFive WatchKit App" */;
+			buildPhases = (
+				56949E791ADB1B19001784B3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "FiveByFive WatchKit App";
+			productName = "FiveByFive WatchKit App";
+			productReference = 56949E7B1ADB1B19001784B3 /* FiveByFive WatchKit App.app */;
+			productType = "com.apple.product-type.application.watchapp";
+		};
 		56B172B21AC1D55F004575DD /* FiveByFive */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 56B172D61AC1D55F004575DD /* Build configuration list for PBXNativeTarget "FiveByFive" */;
@@ -372,6 +460,13 @@
 				LastUpgradeCheck = 0620;
 				ORGANIZATIONNAME = "Nick Cracchiolo";
 				TargetAttributes = {
+					56949E701ADB1B18001784B3 = {
+						CreatedOnToolsVersion = 6.3;
+						DevelopmentTeam = 77TV63F6JF;
+					};
+					56949E7A1ADB1B19001784B3 = {
+						CreatedOnToolsVersion = 6.3;
+					};
 					56B172B21AC1D55F004575DD = {
 						CreatedOnToolsVersion = 6.2;
 						DevelopmentTeam = 77TV63F6JF;
@@ -405,11 +500,28 @@
 			targets = (
 				56B172B21AC1D55F004575DD /* FiveByFive */,
 				56B172CB1AC1D55F004575DD /* FiveByFiveTests */,
+				56949E701ADB1B18001784B3 /* FiveByFive WatchKit Extension */,
+				56949E7A1ADB1B19001784B3 /* FiveByFive WatchKit App */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		56949E6F1ADB1B18001784B3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				56949E7C1ADB1B19001784B3 /* FiveByFive WatchKit App.app in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		56949E791ADB1B19001784B3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		56B172B11AC1D55F004575DD /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -433,21 +545,26 @@
 				565B9C141AD0BA570059D250 /* AppIcon29.png in Resources */,
 				56AE45551AC8A9C10061F9B7 /* BlueOne.png in Resources */,
 				5645B6B61AD6168800BBA989 /* GreenOnex2.png in Resources */,
+				56DD3FCF1AF29DA800CC2C80 /* GreenFourx2.png in Resources */,
 				565B9C271AD0E87A0059D250 /* TransTwo.png in Resources */,
 				5645B6B91AD6168800BBA989 /* GreenThreex2.png in Resources */,
 				5645B6B81AD6168800BBA989 /* GreenThree.png in Resources */,
+				56DD3FCC1AF29DA800CC2C80 /* GreenFivex2.png in Resources */,
 				565B9C181AD0BA570059D250 /* AppIcon114.png in Resources */,
+				56DD3FCD1AF29DA800CC2C80 /* GreenFivex3.png in Resources */,
 				565B9C161AD0BA570059D250 /* AppIcon58.png in Resources */,
-				565B9C151AD0BA570059D250 /* AppIcon57.png in Resources */,
 				56B172C21AC1D55F004575DD /* Main.storyboard in Resources */,
 				565B9C1E1AD0BCD10059D250 /* Impact_Label_Reversed.ttf in Resources */,
+				56949E161AD7A246001784B3 /* AppIcon57.png in Resources */,
 				5645B6B71AD6168800BBA989 /* GreenOnex3.png in Resources */,
 				56B172EC1AC1D864004575DD /* RedTwo.png in Resources */,
+				56DD3FCB1AF29DA800CC2C80 /* GreenFive.png in Resources */,
 				5645B6B51AD6168800BBA989 /* GreenOne.png in Resources */,
 				565B9C171AD0BA570059D250 /* AppIcon80.png in Resources */,
 				565B9C0B1AD0B5490059D250 /* PlayButton.png in Resources */,
 				565B9C251AD0E87A0059D250 /* TransOne.png in Resources */,
 				565B9C2B1AD10A4A0059D250 /* Impact_Label.ttf in Resources */,
+				56DD3FCE1AF29DA800CC2C80 /* GreenFour.png in Resources */,
 				565B9BF11ACDDB280059D250 /* YellowSquare.png in Resources */,
 				565B9C201AD0D6DE0059D250 /* YellowSquareAnim.png in Resources */,
 				565B9BF31ACDE22A0059D250 /* YellowOne.png in Resources */,
@@ -455,6 +572,7 @@
 				56B172EB1AC1D864004575DD /* RedThree.png in Resources */,
 				5645B6BC1AD6168800BBA989 /* GreenTwox2.png in Resources */,
 				5645B6BA1AD6168800BBA989 /* GreenThreex3.png in Resources */,
+				56DD3FD01AF29DA800CC2C80 /* GreenFourx3.png in Resources */,
 				565B9C321AD206550059D250 /* PurchaseButton.png in Resources */,
 				565B9C1A1AD0BA570059D250 /* AppIcon180.png in Resources */,
 				565B9C021ACF706A0059D250 /* PurchaseRow.png in Resources */,
@@ -488,6 +606,13 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		56949E6D1ADB1B18001784B3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		56B172AF1AC1D55F004575DD /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -510,6 +635,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		56949E7E1ADB1B19001784B3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 56949E7A1ADB1B19001784B3 /* FiveByFive WatchKit App */;
+			targetProxy = 56949E7D1ADB1B19001784B3 /* PBXContainerItemProxy */;
+		};
 		56B172CE1AC1D55F004575DD /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 56B172B21AC1D55F004575DD /* FiveByFive */;
@@ -529,6 +659,76 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		56949E8B1ADB1B19001784B3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				IBSC_MODULE = FiveByFive_WatchKit_Extension;
+				INFOPLIST_FILE = "FiveByFive WatchKit App/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
+			};
+			name = Debug;
+		};
+		56949E8C1ADB1B19001784B3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_NO_COMMON_BLOCKS = YES;
+				IBSC_MODULE = FiveByFive_WatchKit_Extension;
+				INFOPLIST_FILE = "FiveByFive WatchKit App/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
+			};
+			name = Release;
+		};
+		56949E8E1ADB1B19001784B3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "FiveByFive WatchKit Extension/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		56949E8F1ADB1B19001784B3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "FiveByFive WatchKit Extension/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 		56B172D41AC1D55F004575DD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -615,12 +815,19 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-2";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEFINES_MODULE = YES;
 				INFOPLIST_FILE = FiveByFive/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/FiveByFive",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "5920bf72-8f14-4be6-8cb0-f0f6f8c08214";
+				SWIFT_OBJC_BRIDGING_HEADER = "./FiveByFive/FivebyFive-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 1;
+				VALID_ARCHS = "arm64 armv7 armv7s armv6";
 			};
 			name = Debug;
 		};
@@ -631,12 +838,19 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-2";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEFINES_MODULE = YES;
 				INFOPLIST_FILE = FiveByFive/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/FiveByFive",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "5920bf72-8f14-4be6-8cb0-f0f6f8c08214";
+				SWIFT_OBJC_BRIDGING_HEADER = "./FiveByFive/FivebyFive-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 1;
+				VALID_ARCHS = "arm64 armv7 armv7s armv6";
 			};
 			name = Release;
 		};
@@ -677,6 +891,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		56949E8A1ADB1B19001784B3 /* Build configuration list for PBXNativeTarget "FiveByFive WatchKit App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				56949E8B1ADB1B19001784B3 /* Debug */,
+				56949E8C1ADB1B19001784B3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		56949E8D1ADB1B19001784B3 /* Build configuration list for PBXNativeTarget "FiveByFive WatchKit Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				56949E8E1ADB1B19001784B3 /* Debug */,
+				56949E8F1ADB1B19001784B3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		56B172AE1AC1D55F004575DD /* Build configuration list for PBXProject "FiveByFive" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

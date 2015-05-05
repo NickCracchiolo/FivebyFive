@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>FiveByFive WatchKit App.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 		<key>FiveByFive.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -12,6 +17,11 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>56949E7A1ADB1B19001784B3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>56B172B21AC1D55F004575DD</key>
 		<dict>
 			<key>primary</key>

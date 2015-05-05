@@ -33,7 +33,7 @@ var leaderBoardID = NSString()
 var p = SKProduct()
 var list = [SKProduct]()
 
-class GameViewController: UIViewController, ADBannerViewDelegate, GKGameCenterControllerDelegate, SKProductsRequestDelegate,SKPaymentTransactionObserver {
+class GameViewController: UIViewController, ADBannerViewDelegate, GKGameCenterControllerDelegate, SKProductsRequestDelegate,SKPaymentTransactionObserver{
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -166,8 +166,6 @@ class GameViewController: UIViewController, ADBannerViewDelegate, GKGameCenterCo
         SKPaymentQueue.defaultQueue().addTransactionObserver(self)
         SKPaymentQueue.defaultQueue().addPayment(pay as SKPayment)
     }
-    
-    //3
     func productsRequest(request: SKProductsRequest!, didReceiveResponse response: SKProductsResponse!) {
         println("product request")
         var myProduct = response.products
@@ -182,8 +180,6 @@ class GameViewController: UIViewController, ADBannerViewDelegate, GKGameCenterCo
             list.append(product as! SKProduct)
         }
     }
-    
-    // 4
     func paymentQueueRestoreCompletedTransactionsFinished(queue: SKPaymentQueue!) {
         println("transactions restored")
         
@@ -204,8 +200,6 @@ class GameViewController: UIViewController, ADBannerViewDelegate, GKGameCenterCo
             
         }
     }
-    
-    // 5
     func paymentQueue(queue: SKPaymentQueue!, updatedTransactions transactions: [AnyObject]!) {
         println("add paymnet")
         
@@ -249,14 +243,10 @@ class GameViewController: UIViewController, ADBannerViewDelegate, GKGameCenterCo
             }
         }
     }
-    
-    // 6
     func finishTransaction(trans:SKPaymentTransaction)
     {
         println("finish trans")
     }
-    
-    //7
     func paymentQueue(queue: SKPaymentQueue!, removedTransactions transactions: [AnyObject]!)
     {
         println("remove trans");

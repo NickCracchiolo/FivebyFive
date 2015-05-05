@@ -35,6 +35,8 @@ var backTiles = [SKSpriteNode]()
 let oneText_UI = UIImage(named: "GreenOne.png")!
 let twoText_UI = UIImage(named: "GreenTwo.png")!
 let threeText_UI = UIImage(named: "GreenThree.png")!
+let fourText_UI = UIImage(named: "GreenFour.png")!
+let fiveText_UI = UIImage(named: "GreenFive.png")!
 let bombText_UI = UIImage(named: "bomb.png")!
 let yellow_UI = UIImage(named: "YellowSquare.png")!
 let bomb_anim_UI = UIImage(named: "BombSquare.png")!
@@ -46,6 +48,9 @@ let bomb_anim_text:SKTexture = SKTexture(image:bomb_anim_UI)
 let oneText:SKTexture = SKTexture(image: oneText_UI)
 let twoText:SKTexture = SKTexture(image: twoText_UI)
 let threeText:SKTexture = SKTexture(image: threeText_UI)
+let fourText:SKTexture = SKTexture(image: fourText_UI)
+let fiveText:SKTexture = SKTexture(image: fiveText_UI)
+
 
 class GameScene: SKScene, GKGameCenterControllerDelegate {
     override func didMoveToView(view: SKView) {
@@ -69,267 +74,53 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
             if let node = self.nodeAtPoint(location).name {
             
                 if touch_enabled == true {
-                    if node == "Tile0" {
-                        textChange(0)
-                        checkForBomb(&boolList[0],num: numbers_list[0],node: backTiles[0])
-                    }
-                    if node == "Tile1" {
-                        textChange(1)
-                        checkForBomb(&boolList[1],num: numbers_list[1],node: backTiles[1])
-                    }
-                    if node == "Tile2" {
-                        textChange(2)
-                        checkForBomb(&boolList[2],num: numbers_list[2],node: backTiles[2])
-                    }
-                    if node == "Tile3" {
-                        textChange(3)
-                        checkForBomb(&boolList[3],num: numbers_list[3],node: backTiles[3])
-                    }
-                    if node == "Tile4" {
-                        textChange(4)
-                        checkForBomb(&boolList[4],num: numbers_list[4],node: backTiles[4])
-                    }
-                    if node == "Tile5" {
-                        textChange(5)
-                        checkForBomb(&boolList[5],num: numbers_list[5],node: backTiles[5])
-                    }
-                    if node == "Tile6" {
-                        textChange(6)
-                        checkForBomb(&boolList[6],num: numbers_list[6],node: backTiles[6])
-                    }
-                    if node == "Tile7" {
-                        textChange(7)
-                        checkForBomb(&boolList[7],num: numbers_list[7],node: backTiles[7])
-                    }
-                    if node == "Tile8" {
-                        textChange(8)
-                        checkForBomb(&boolList[8],num: numbers_list[8],node: backTiles[8])
-                    }
-                    if node == "Tile9" {
-                        textChange(9)
-                        checkForBomb(&boolList[9],num: numbers_list[9],node: backTiles[9])
-                    }
-                    if node == "Tile10" {
-                        textChange(10)
-                        checkForBomb(&boolList[10],num: numbers_list[10],node: backTiles[10])
-                    }
-                    if node == "Tile11" {
-                        textChange(11)
-                        checkForBomb(&boolList[11],num: numbers_list[11],node: backTiles[11])
-                    }
-                    if node == "Tile12" {
-                        textChange(12)
-                        checkForBomb(&boolList[12],num: numbers_list[12],node: backTiles[12])
-                    }
-                    if node == "Tile13" {
-                        textChange(13)
-                        checkForBomb(&boolList[13],num: numbers_list[13],node: backTiles[13])
-                    }
-                    if node == "Tile14" {
-                        textChange(14)
-                        checkForBomb(&boolList[14],num: numbers_list[14],node: backTiles[14])
-                    }
-                    if node == "Tile15" {
-                        textChange(15)
-                        checkForBomb(&boolList[15],num: numbers_list[15],node: backTiles[15])
-                    }
-                    if node == "Tile16" {
-                        textChange(16)
-                        checkForBomb(&boolList[16],num: numbers_list[16],node: backTiles[16])
-                    }
-                    if node == "Tile17" {
-                        textChange(17)
-                        checkForBomb(&boolList[17],num: numbers_list[17],node: backTiles[17])
-                    }
-                    if node == "Tile18" {
-                        textChange(18)
-                        checkForBomb(&boolList[18],num: numbers_list[18],node: backTiles[18])
-                    }
-                    if node == "Tile19" {
-                        textChange(19)
-                        checkForBomb(&boolList[19],num: numbers_list[19],node: backTiles[19])
-                    }
-                    if node == "Tile20" {
-                        textChange(20)
-                        checkForBomb(&boolList[20],num: numbers_list[20],node: backTiles[20])
-                    }
-                    if node == "Tile21" {
-                        textChange(21)
-                        checkForBomb(&boolList[21],num: numbers_list[21],node: backTiles[21])
-                    }
-                    if node == "Tile22" {
-                        textChange(22)
-                        checkForBomb(&boolList[22],num: numbers_list[22],node: backTiles[22])
-                    }
-                    if node == "Tile23" {
-                        textChange(23)
-                        checkForBomb(&boolList[23],num: numbers_list[23],node: backTiles[23])
-                    }
-                    if node == "Tile24" {
-                        textChange(24)
-                        checkForBomb(&boolList[24],num: numbers_list[24],node: backTiles[24])
-                    }
-
-                    if node == "Col1Unlock" {
-                        if money >= 25 {
-                            money -= 25
-                            textChange(0)
-                            textChange(5)
-                            textChange(10)
-                            textChange(15)
-                            textChange(20)
-                            let num_list = [numbers_list[0],numbers_list[5],numbers_list[10],numbers_list[15],numbers_list[20]]
-                            var bool_list = [boolList[0],boolList[5],boolList[10],boolList[15],boolList[20]]
-                            checkPurchase(num_list, bools:&bool_list)
-                            hudNode.removeFromParent()
-                            hudNode = HUD()
-                            self.addChild(hudNode)
+                    for var i = 0; i < 24; i++ {
+                        let name = "Tile" + String(i)
+                        if node == name {
+                            textChange(i)
+                            checkForBomb(&boolList[i],num: numbers_list[i],node: backTiles[i])
                         }
                     }
-                    if node == "Col2Unlock" {
-                        if money >= 25 {
-                            money -= 25
-                            textChange(1)
-                            textChange(6)
-                            textChange(11)
-                            textChange(16)
-                            textChange(21)
-                            let num_list = [numbers_list[1],numbers_list[6],numbers_list[11],numbers_list[16],numbers_list[21]]
-                            var bool_list = [boolList[1],boolList[6],boolList[11],boolList[16],boolList[21]]
-                            checkPurchase(num_list,bools:&bool_list)
-                            hudNode.removeFromParent()
-                            hudNode = HUD()
-                            self.addChild(hudNode)
+                    for var i = 0; i < 5; i++ {
+                        let nameVal = i+1
+                        let name = "Col" + String(nameVal) + "Unlock"
+                        if node == name {
+                            if money >= 25 {
+                                money -= 25
+                                textChange(i)
+                                textChange(i+5)
+                                textChange(i+10)
+                                textChange(i+15)
+                                textChange(i+20)
+                                let num_list = [numbers_list[i],numbers_list[i+5],numbers_list[i+10],numbers_list[i+15],numbers_list[i+20]]
+                                var bool_list = [boolList[i+0],boolList[i+5],boolList[i+10],boolList[i+15],boolList[i+20]]
+                                checkPurchase(num_list, bools:&bool_list)
+                                hudNode.removeFromParent()
+                                hudNode = HUD()
+                                self.addChild(hudNode)
+                            }
                         }
                     }
-                    if node == "Col3Unlock" {
-                        if money >= 25 {
-                            money -= 25
-                            textChange(2)
-                            textChange(7)
-                            textChange(12)
-                            textChange(17)
-                            textChange(22)
-                            let num_list = [numbers_list[2],numbers_list[7],numbers_list[12],numbers_list[17],numbers_list[22]]
-                            var bool_list = [boolList[2],boolList[7],boolList[12],boolList[17],boolList[22]]
-                            checkPurchase(num_list,bools:&bool_list)
-                            hudNode.removeFromParent()
-                            hudNode = HUD()
-                            self.addChild(hudNode)
+                    for var i = 0; i < 5; i++ {
+                        let nameVal = i+1
+                        let name = "Row" + String(nameVal) + "Unlock"
+                        if node == name {
+                            if money >= 25 {
+                                money -= 25
+                                let inc = i*5
+                                textChange(inc)
+                                textChange(inc+1)
+                                textChange(inc+2)
+                                textChange(inc+3)
+                                textChange(inc+4)
+                                let num_list = [numbers_list[inc],numbers_list[inc+1],numbers_list[inc+2],numbers_list[inc+3],numbers_list[inc+4]]
+                                var bool_list = [boolList[inc],boolList[inc+1],boolList[inc+2],boolList[inc+3],boolList[inc+4]]
+                                checkPurchase(num_list, bools:&bool_list)
+                                hudNode.removeFromParent()
+                                hudNode = HUD()
+                                self.addChild(hudNode)
+                            }
                         }
-                    }
-                    if node == "Col4Unlock" {
-                        if money >= 25 {
-                            money -= 25
-                            textChange(3)
-                            textChange(8)
-                            textChange(13)
-                            textChange(18)
-                            textChange(23)
-                            let num_list = [numbers_list[3],numbers_list[8],numbers_list[13],numbers_list[18],numbers_list[23]]
-                            var bool_list = [boolList[3],boolList[8],boolList[13],boolList[18],boolList[23]]
-                            checkPurchase(num_list,bools:&bool_list)
-                            hudNode.removeFromParent()
-                            hudNode = HUD()
-                            self.addChild(hudNode)
-                        }
-                    }
-                    if node == "Col5Unlock" {
-                        if money >= 25 {
-                            money -= 25
-                            textChange(4)
-                            textChange(9)
-                            textChange(14)
-                            textChange(19)
-                            textChange(24)
-                            let num_list = [numbers_list[4],numbers_list[9],numbers_list[14],numbers_list[19],numbers_list[24]]
-                            var bool_list = [boolList[4],boolList[9],boolList[14],boolList[19],boolList[24]]
-                            checkPurchase(num_list,bools:&bool_list)
-                            hudNode.removeFromParent()
-                            hudNode = HUD()
-                            self.addChild(hudNode)
-                        }
-                    }
-                    if node == "Row1Unlock" {
-                        if money >= 25 {
-                            money -= 25
-                            textChange(0)
-                            textChange(1)
-                            textChange(2)
-                            textChange(3)
-                            textChange(4)
-                            let num_list = [numbers_list[0],numbers_list[1],numbers_list[2],numbers_list[3],numbers_list[4]]
-                            var bool_list = [boolList[0],boolList[1],boolList[2],boolList[3],boolList[4]]
-                            checkPurchase(num_list,bools:&bool_list)
-                            hudNode.removeFromParent()
-                            hudNode = HUD()
-                            self.addChild(hudNode)
-                        }
-                    }
-                    if node == "Row2Unlock" {
-                        if money >= 25 {
-                            money -= 25
-                            textChange(5)
-                            textChange(6)
-                            textChange(7)
-                            textChange(8)
-                            textChange(9)
-                            let num_list = [numbers_list[5],numbers_list[6],numbers_list[7],numbers_list[8],numbers_list[9]]
-                            var bool_list = [boolList[5],boolList[6],boolList[7],boolList[8],boolList[9]]
-                            checkPurchase(num_list,bools:&bool_list)
-                            hudNode.removeFromParent()
-                            hudNode = HUD()
-                            self.addChild(hudNode)
-                        }
-                    }
-                    if node == "Row3Unlock" {
-                        if money >= 25 {
-                            money -= 25
-                            textChange(10)
-                            textChange(11)
-                            textChange(12)
-                            textChange(13)
-                            textChange(14)
-                            let num_list = [numbers_list[10],numbers_list[11],numbers_list[12],numbers_list[13],numbers_list[14]]
-                            var bool_list = [boolList[10],boolList[11],boolList[12],boolList[13],boolList[14]]
-                            checkPurchase(num_list,bools:&bool_list)
-                            hudNode.removeFromParent()
-                            hudNode = HUD()
-                            self.addChild(hudNode)
-                        }
-                    }
-                    if node == "Row4Unlock" {
-                        if money >= 25 {
-                            money -= 25
-                            textChange(15)
-                            textChange(16)
-                            textChange(17)
-                            textChange(18)
-                            textChange(19)
-                            let num_list = [numbers_list[15],numbers_list[16],numbers_list[17],numbers_list[18],numbers_list[19]]
-                            var bool_list = [boolList[15],boolList[16],boolList[17],boolList[18],boolList[19]]
-                            checkPurchase(num_list,bools:&bool_list)
-                            hudNode.removeFromParent()
-                            hudNode = HUD()
-                            self.addChild(hudNode)
-                        }
-                    }
-                    if node == "Row5Unlock" {
-                        if money >= 25 {
-                            money -= 25
-                            textChange(20)
-                            textChange(21)
-                            textChange(22)
-                            textChange(23)
-                            textChange(24)
-                            let num_list = [numbers_list[20],numbers_list[21],numbers_list[22],numbers_list[23],numbers_list[24]]
-                            var bool_list = [boolList[20],boolList[21],boolList[22],boolList[23],boolList[24]]
-                            checkPurchase(num_list,bools:&bool_list)
-                            hudNode.removeFromParent()
-                            hudNode = HUD()
-                            self.addChild(hudNode)
-                        }
-                        
                     }
                     if node == "Next Button" {
                         tutNode.removeAllChildren()
@@ -343,7 +134,8 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
 
                     if node == "Play Button" {
                         titleNode.removeFromParent()
-                       if tutorial == 0 {
+                        Flurry.logEvent("User Playing", withParameters:nil, timed: true)
+                        if tutorial == 0 {
                             setup()
                             tutorialSetup()
                             saveData()
@@ -383,85 +175,6 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
         
         gc.leaderboardIdentifier = "leaderboard.highest_level"
         vc?.presentViewController(gc, animated: true, completion: nil)
-    }
-    
-    func flip(node:NSString) {
-        if node == "Tile0" {
-            textChange(0)
-            checkForBomb(&boolList[0],num: numbers_list[0],node: backTiles[0])
-        } else if node == "Tile1" {
-            textChange(1)
-            checkForBomb(&boolList[1],num: numbers_list[1],node: backTiles[1])
-        } else if node == "Tile2" {
-            textChange(2)
-            checkForBomb(&boolList[2],num: numbers_list[2],node: backTiles[2])
-        } else if node == "Tile3" {
-            textChange(3)
-            checkForBomb(&boolList[3],num: numbers_list[3],node: backTiles[3])
-        } else if node == "Tile4" {
-            textChange(4)
-            checkForBomb(&boolList[4],num: numbers_list[4],node: backTiles[4])
-        } else if node == "Tile5" {
-            textChange(5)
-            checkForBomb(&boolList[5],num: numbers_list[5],node: backTiles[5])
-        } else if node == "Tile6" {
-            textChange(6)
-            checkForBomb(&boolList[6],num: numbers_list[6],node: backTiles[6])
-        } else if node == "Tile7" {
-            textChange(7)
-            checkForBomb(&boolList[7],num: numbers_list[7],node: backTiles[7])
-        } else if node == "Tile8" {
-            textChange(8)
-            checkForBomb(&boolList[8],num: numbers_list[8],node: backTiles[8])
-        } else if node == "Tile9" {
-            textChange(9)
-            checkForBomb(&boolList[9],num: numbers_list[9],node: backTiles[9])
-        } else if node == "Tile10" {
-            textChange(10)
-            checkForBomb(&boolList[10],num: numbers_list[10],node: backTiles[10])
-        } else if node == "Tile11" {
-            textChange(11)
-            checkForBomb(&boolList[11],num: numbers_list[11],node: backTiles[11])
-        } else if node == "Tile12" {
-            textChange(12)
-            checkForBomb(&boolList[12],num: numbers_list[12],node: backTiles[12])
-        } else if node == "Tile13" {
-            textChange(13)
-            checkForBomb(&boolList[13],num: numbers_list[13],node: backTiles[13])
-        } else if node == "Tile14" {
-            textChange(14)
-            checkForBomb(&boolList[14],num: numbers_list[14],node: backTiles[14])
-        } else if node == "Tile15" {
-            textChange(15)
-            checkForBomb(&boolList[15],num: numbers_list[15],node: backTiles[15])
-        } else if node == "Tile16" {
-            textChange(16)
-            checkForBomb(&boolList[16],num: numbers_list[16],node: backTiles[16])
-        } else if node == "Tile17" {
-            textChange(17)
-            checkForBomb(&boolList[17],num: numbers_list[17],node: backTiles[17])
-        } else if node == "Tile18" {
-            textChange(18)
-            checkForBomb(&boolList[18],num: numbers_list[18],node: backTiles[18])
-        } else if node == "Tile19" {
-            textChange(19)
-            checkForBomb(&boolList[19],num: numbers_list[19],node: backTiles[19])
-        } else if node == "Tile20" {
-            textChange(20)
-            checkForBomb(&boolList[20],num: numbers_list[20],node: backTiles[20])
-        } else if node == "Tile21" {
-            textChange(21)
-            checkForBomb(&boolList[21],num: numbers_list[21],node: backTiles[21])
-        } else if node == "Tile22" {
-            textChange(22)
-            checkForBomb(&boolList[22],num: numbers_list[22],node: backTiles[22])
-        } else if node == "Tile23" {
-            textChange(23)
-            checkForBomb(&boolList[23],num: numbers_list[23],node: backTiles[23])
-        } else if node == "Tile24" {
-            textChange(24)
-            checkForBomb(&boolList[24],num: numbers_list[24],node: backTiles[24])
-        }
     }
     
     func flipAnim(node:SKSpriteNode) {
@@ -715,7 +428,7 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
         titleNode.addChild(playButton)
         
         let leaderButton = SKSpriteNode(imageNamed: "LeaderButton.png")
-        leaderButton.position = CGPointMake(self.frame.size.width/2, self.frame.size.height/2.85)
+        leaderButton.position = CGPointMake(self.frame.size.width/2, self.frame.size.height/2.8)
         leaderButton.zPosition = 30
         leaderButton.xScale = 0.6
         leaderButton.yScale = 0.6
@@ -1061,10 +774,12 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
                 var number:Int = 0
                 
                 let zero_val = 10 + 2*Game_Level
-                let diff = (100 - zero_val)/3
+                let diff = (100 - zero_val)/5
                 let one_val = zero_val + diff
                 let two_val = zero_val + diff*2
                 let three_val = zero_val + diff*3
+                let four_val = zero_val + diff*4
+                let five_val = zero_val + diff*5
                 
                 if rand < zero_val {
                     back_text = bombText
@@ -1078,6 +793,12 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
                 } else if rand >= two_val && rand < three_val {
                     back_text = threeText
                     number = 3
+                } else if rand >= three_val && rand < four_val {
+                    back_text = fourText
+                    number = 4
+                } else if rand >= four_val && rand < five_val {
+                    back_text = fiveText
+                    number = 5
                 } else if back_text == nil {
                     back_text = bombText
                     number = 0
@@ -1507,10 +1228,12 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
         var number:Int = 0
         
         let zero_val = 10 + 2*level
-        let diff = (100 - zero_val)/3
+        let diff = (100 - zero_val)/5
         let one_val = zero_val + diff
         let two_val = zero_val + diff*2
         let three_val = zero_val + diff*3
+        let four_val = zero_val + diff*4
+        let five_val = zero_val + diff*5
         
         if rand < zero_val {
             back_text = bombText
@@ -1524,7 +1247,15 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
         } else if rand >= two_val && rand < three_val {
             back_text = threeText
             number = 3
+        } else if rand >= three_val && rand < four_val {
+            back_text = fourText
+            number = 4
+        } else if rand >= four_val && rand < five_val {
+            back_text = fiveText
+            number = 5
         }
+
+
         return (back_text,number)
     }
     
@@ -1606,6 +1337,7 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
         counter = 0
         Game_Level = 1
         current_coins = 0
+        Flurry.endTimedEvent("User Playing", withParameters:nil)
         startScreen()
     }
     
