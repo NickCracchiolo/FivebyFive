@@ -8,6 +8,7 @@
 
 import SpriteKit
 import GameKit
+import StoreKit
 
 //Integers
 var total_tiles = Int()
@@ -17,7 +18,8 @@ var current_coins = 0
 var tut_Point = 0
 
 //View Controller Variable
-var gameVC = GameViewController()
+let gameVC = GameViewController()
+let startController = StartViewController()
 
 //NODES
 var hudNode = SKNode()
@@ -25,12 +27,14 @@ let tutNode = SKNode()
 let titleNode = SKNode()
 let gameOverNode = SKNode()
 let labelNode = SKNode()
+let overlayNode = SKNode()
 
 //Lists
 var numbers_list = [Int]()
 var boolList = [Bool]()
 var topTiles = [SKSpriteNode]()
 var backTiles = [SKSpriteNode]()
+
 
 //UIImage
 let oneText_UI = UIImage(named: "GreenOne.png")!
@@ -53,33 +57,75 @@ let fourText:SKTexture = SKTexture(image: fourText_UI)
 let fiveText:SKTexture = SKTexture(image: fiveText_UI)
 
 
-class GameScene: SKScene, GKGameCenterControllerDelegate {
+class GameScene: SKScene {
+    weak var gViewController : GameViewController?
+    var HUD_ON = false
+    var pull_overlay_gesture = UIScreenEdgePanGestureRecognizer()
+    var push_overlay_gesture = UIScreenEdgePanGestureRecognizer()
+    var draggingNode = SKSpriteNode()
+    var draggedParent = SKNode()
+    var draggingNode_number = 0
+    var HUD_list = [Int]()
+    var gridPositions = [CGPoint]()
+    var clear:Bool = false
+    var touch_enabled = true
+    
+    
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
         self.backgroundColor = backColor
-        print(tutorial)
-        print("\n")
+        //Flurry add Playing Game event
+        Flurry.logEvent("User Playing", timed: true)
         getData()
-        print(tutorial)
-        print("\n")
-        startScreen()
+        
+        
+        inAppPurchases.defaultHelper.setViewController(gameVC)
+        inAppPurchases.defaultHelper.getProducts()
+        
+        if tutorial == 0 {
+            tut_Point = 0
+            setup()
+            tutorialSetup()
+        } else{
+            setup()
+        }
+        pull_overlay_gesture = UIScreenEdgePanGestureRecognizer(target: self,
+            action: "pullUpHUD:")
+        pull_overlay_gesture.edges = .Right
+        self.view!.addGestureRecognizer(pull_overlay_gesture)
+        
+        push_overlay_gesture = UIScreenEdgePanGestureRecognizer(target: self,
+            action: "removeHUD:")
+        push_overlay_gesture.edges = .Left
+        self.view!.addGestureRecognizer(push_overlay_gesture)
+        for var i = 0; i < 25; i++ {
+            HUD_list.append(0)
+        }
     }
     
     override func update(currentTime: CFTimeInterval) {
         /* Called before each frame is rendered */
+        if purchase_failed == true {
+            counter = 0
+            touch_enabled = false
+            GameOverScreen()
+            purchase_failed = false
+        }
     }
 
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         for touch:AnyObject in touches {
             let location = (touch as! UITouch).locationInNode(self)
+            let touched_node = self.nodeAtPoint(location)
             if let node = self.nodeAtPoint(location).name {
             
-                if touch_enabled == true {
-                    for var i = 0; i < 24; i++ {
+                if self.touch_enabled == true && HUD_ON == false {
+                    for var i = 0; i < 25; i++ {
                         let name = "Tile" + String(i)
                         if node == name {
                             textChange(i)
                             checkForBomb(&boolList[i],num: numbers_list[i],node: backTiles[i])
+                            break
                         }
                     }
                     for var i = 0; i < 5; i++ {
@@ -99,7 +145,9 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
                                 hudNode.removeFromParent()
                                 hudNode = HUD()
                                 self.addChild(hudNode)
+                                Flurry.logEvent("Unlocked Row or Column")
                             }
+                            break
                         }
                     }
                     for var i = 0; i < 5; i++ {
@@ -120,7 +168,9 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
                                 hudNode.removeFromParent()
                                 hudNode = HUD()
                                 self.addChild(hudNode)
+                                Flurry.logEvent("Unlocked Row or Column")
                             }
+                            break
                         }
                     }
                     if node == "Next Button" {
@@ -132,52 +182,320 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
                     if node == "nextButton" {
                         nextLevel()
                     }
-
-                    if node == "Play Button" {
-                        titleNode.removeFromParent()
-                        Flurry.logEvent("User Playing", withParameters:nil, timed: true)
-                        if tutorial == 0 {
-                            setup()
-                            tutorialSetup()
-                            saveData()
-                        } else {
-                            setup()
+                } else if HUD_ON == true {
+                    if touched_node.name == "Clear Button" {
+                        draggedParent.removeAllChildren()
+                        self.clear = true
+                        for var i = 0; i < 25; i++ {
+                            HUD_list[i] = 0
                         }
                     }
-                    if node == "Leader Button" {
-                        showLeader()
+                    if touched_node.name == "bomb_draggable" {
+                        let new_bomb = SKSpriteNode(texture: bombText)
+                        new_bomb.position = CGPointMake(self.frame.size.width/2-150, self.frame.size.height*0.25)
+                        new_bomb.zPosition = OVERLAY_OBJZ
+                        new_bomb.name = "new_bomb"
+                        new_bomb.xScale = 0.75
+                        new_bomb.yScale = 0.75
+                        draggedParent.addChild(new_bomb)
+                        draggingNode = new_bomb
+                        draggingNode_number = 6
                     }
-                    if node == "Buy Button" {
-                        for product in list {
-                            var prodID = product.productIdentifier
-                            if(prodID == "fbf.iap.add_money") {
-                                p = product
-                                gameVC.buyProduct()
-                                break;
-                            }
-                        }
+                    if touched_node.name == "one_draggable" {
+                        let new_one = SKSpriteNode(imageNamed: "One.png")
+                        new_one.position = CGPointMake(self.frame.size.width/2-90, self.frame.size.height*0.25)
+                        new_one.zPosition = OVERLAY_OBJZ
+                        new_one.name = "new_one"
+                        new_one.xScale = 0.75
+                        new_one.yScale = 0.75
+                        draggedParent.addChild(new_one)
+                        draggingNode = new_one
+                        draggingNode_number = 1
                     }
-                }
-                else {
+                    if touched_node.name == "two_draggable" {
+                        let new_two = SKSpriteNode(imageNamed: "Two.png")
+                        new_two.position = CGPointMake(self.frame.size.width/2-30, self.frame.size.height*0.25)
+                        new_two.zPosition = OVERLAY_OBJZ
+                        new_two.name = "new_two"
+                        new_two.xScale = 0.75
+                        new_two.yScale = 0.75
+                        draggedParent.addChild(new_two)
+                        draggingNode = new_two
+                        draggingNode_number = 2
+                    }
+                    if touched_node.name == "three_draggable" {
+                        let new_three = SKSpriteNode(imageNamed: "Three.png")
+                        new_three.position = CGPointMake(self.frame.size.width/2+30, self.frame.size.height*0.25)
+                        new_three.zPosition = OVERLAY_OBJZ
+                        new_three.name = "new_three"
+                        new_three.xScale = 0.75
+                        new_three.yScale = 0.75
+                        draggedParent.addChild(new_three)
+                        draggingNode = new_three
+                        draggingNode_number = 3
+                    }
+                    if touched_node.name == "four_draggable" {
+                        let new_four = SKSpriteNode(imageNamed: "Four.png")
+                        new_four.position = CGPointMake(self.frame.size.width/2+90, self.frame.size.height*0.25)
+                        new_four.zPosition = OVERLAY_OBJZ
+                        new_four.name = "new_four"
+                        new_four.xScale = 0.75
+                        new_four.yScale = 0.75
+                        draggedParent.addChild(new_four)
+                        draggingNode = new_four
+                        draggingNode_number = 4
+                    }
+                    if touched_node.name == "five_draggable" {
+                        let new_five = SKSpriteNode(imageNamed: "Five.png")
+                        new_five.position = CGPointMake(self.frame.size.width/2+150, self.frame.size.height*0.25)
+                        new_five.zPosition = OVERLAY_OBJZ
+                        new_five.name = "new_five"
+                        new_five.xScale = 0.75
+                        new_five.yScale = 0.75
+                        draggedParent.addChild(new_five)
+                        draggingNode = new_five
+                        draggingNode_number = 5
+                    }
+                    
+                } else {
                     if node == "New Game Button" {
                         touch_enabled = true
-                        gameVC.reportScore("leaderboard.highest_level")
+                        reportScore("leaderboard.highest_level")
                         newGame()
                     }
                 }
             }
         }
     }
-    func showLeader() {
-        var vc = self.view?.window?.rootViewController
-        var gc = GKGameCenterViewController()
-        gc.gameCenterDelegate = self
-        gc.viewState = GKGameCenterViewControllerState.Leaderboards
-        
-        gc.leaderboardIdentifier = "leaderboard.highest_level"
-        vc?.presentViewController(gc, animated: true, completion: nil)
+    func reportScore(identifier:NSString) {
+        if GKLocalPlayer.localPlayer().authenticated == true{
+            var highScore = defaults.integerForKey("level")
+            var scoreReporter = GKScore(leaderboardIdentifier: identifier as String)
+            scoreReporter.value = Int64(highScore)
+            var scoreArray: [GKScore] = [scoreReporter]
+            println("report score \(scoreReporter)")
+            GKScore.reportScores(scoreArray, withCompletionHandler: {(error : NSError!) -> Void in
+                if error != nil {
+                    print("error")
+                    NSLog(error.localizedDescription)
+                }
+            })
+        }
     }
-    
+    override func touchesMoved(touches: Set<NSObject>, withEvent event: UIEvent) {
+        let touch = touches.first as! UITouch
+        let position_in_scene = touch.locationInNode(self)
+        let previous_position = touch.previousLocationInNode(self)
+        if HUD_ON == true {
+            var nodeX = draggingNode.position.x + (position_in_scene.x - previous_position.x)
+            var nodeY = draggingNode.position.y + (position_in_scene.y - previous_position.y)
+            
+            nodeX = max(nodeX, draggingNode.size.width/2)
+            nodeX = min(nodeX, self.frame.size.width - draggingNode.size.width/2)
+            nodeY = max(nodeY, draggingNode.size.height/2)
+            nodeY = min(nodeY, self.frame.size.height - draggingNode.size.height/2)
+            draggingNode.position = CGPointMake(nodeX, nodeY)
+        }
+        
+    }
+    override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
+        //Save to grid
+        if HUD_ON == true {
+            let drag_position:CGPoint = draggingNode.position
+            var min_dist = calcDistance(gridPositions[0].x, y1: gridPositions[0].y, x2: drag_position.x, y2: drag_position.y)
+            var min_index = 0
+            
+            for var i = 0; i < 25; i++ {
+                var dist = calcDistance(gridPositions[i].x, y1: gridPositions[i].y, x2: drag_position.x, y2: drag_position.y)
+            
+                
+                if dist < min_dist {
+                    min_dist = dist
+                    min_index = i
+                }
+
+            }
+            
+            if drag_position.x > self.frame.size.width/2.5 - 27.5 && drag_position.x < self.frame.size.width/2.5+272.5 {
+                if drag_position.y < self.frame.size.height/2.5 + 272.5 && drag_position.y > self.frame.size.height/2.5 - 27.5 {
+                    draggingNode.position = CGPointMake(gridPositions[min_index].x,gridPositions[min_index].y)
+                    if self.clear == false {
+                        HUD_list[min_index] = draggingNode_number
+                    }
+                } else {
+                    draggingNode.position = CGPointMake(-100,-100)
+                }
+            } else {
+                draggingNode.position = CGPointMake(-100,-100)
+            }
+        }
+    }
+    func calcDistance(x1: CGFloat, y1:CGFloat, x2:CGFloat, y2:CGFloat) -> CGFloat {
+        let x:CGFloat = x2 - x1
+        let y: CGFloat = y2 - y1
+        let dist = sqrt((x*x) + (y*y))
+        return dist
+    }
+    func pullUpHUD(sender: UIScreenEdgePanGestureRecognizer) {
+        if HUD_ON == false {
+            let overlay = SKShapeNode(rect: CGRectMake(0, 0, self.frame.size.width, self.frame.size.height))
+            overlay.fillColor = SKColor.blackColor()
+            overlay.alpha = 0.3
+            overlay.strokeColor = SKColor.blackColor()
+            overlay.position = CGPointMake(self.frame.size.width/2, 0)
+            overlay.zPosition = OVERLAYZ
+            overlayNode.addChild(overlay)
+            
+            let bomb_draggable = SKSpriteNode(texture: bombText)
+            bomb_draggable.position = CGPointMake(self.frame.size.width/2, self.frame.size.height*0.25)
+            bomb_draggable.zPosition = OVERLAY_OBJZ
+            bomb_draggable.name = "bomb_draggable"
+            bomb_draggable.xScale = 0.75
+            bomb_draggable.yScale = 0.75
+            overlayNode.addChild(bomb_draggable)
+            
+            let one_draggable = SKSpriteNode(imageNamed: "One.png")
+            one_draggable.position = CGPointMake(self.frame.size.width/2, self.frame.size.height*0.25)
+            one_draggable.zPosition = OVERLAY_OBJZ
+            one_draggable.name = "one_draggable"
+            one_draggable.xScale = 0.75
+            one_draggable.yScale = 0.75
+            overlayNode.addChild(one_draggable)
+            
+            let two_draggable = SKSpriteNode(imageNamed: "Two.png")
+            two_draggable.position = CGPointMake(self.frame.size.width/2, self.frame.size.height*0.25)
+            two_draggable.zPosition = OVERLAY_OBJZ
+            two_draggable.name = "two_draggable"
+            two_draggable.xScale = 0.75
+            two_draggable.yScale = 0.75
+            overlayNode.addChild(two_draggable)
+            
+            let three_draggable = SKSpriteNode(imageNamed: "Three.png")
+            three_draggable.position = CGPointMake(self.frame.size.width/2, self.frame.size.height*0.25)
+            three_draggable.zPosition = OVERLAY_OBJZ
+            three_draggable.name = "three_draggable"
+            three_draggable.xScale = 0.75
+            three_draggable.yScale = 0.75
+            overlayNode.addChild(three_draggable)
+            
+            let four_draggable = SKSpriteNode(imageNamed: "Four.png")
+            four_draggable.position = CGPointMake(self.frame.size.width/2, self.frame.size.height*0.25)
+            four_draggable.zPosition = OVERLAY_OBJZ
+            four_draggable.name = "four_draggable"
+            four_draggable.xScale = 0.75
+            four_draggable.yScale = 0.75
+            overlayNode.addChild(four_draggable)
+            
+            let five_draggable = SKSpriteNode(imageNamed: "Five.png")
+            five_draggable.position = CGPointMake(self.frame.size.width/2, self.frame.size.height*0.25)
+            five_draggable.zPosition = OVERLAY_OBJZ
+            five_draggable.name = "five_draggable"
+            five_draggable.xScale = 0.75
+            five_draggable.yScale = 0.75
+            overlayNode.addChild(five_draggable)
+            
+            let clear_btn = SKLabelNode(text: "Clear")
+            clear_btn.name = "Clear Button"
+            clear_btn.fontColor = SKColor.whiteColor()
+            clear_btn.fontSize = 25
+            clear_btn.fontName = Game_Over_Font
+            clear_btn.zPosition = OVERLAY_OBJZ
+            clear_btn.position = CGPointMake(self.frame.size.width/2, self.frame.size.height*0.25)
+            overlayNode.addChild(clear_btn)
+            
+            let dragOverlay = SKAction.moveToX(0, duration: 1.0)
+            let dragBomb = SKAction.moveToX(self.frame.size.width/2-150, duration: 1.0)
+            let dragOne = SKAction.moveToX(self.frame.size.width/2-90, duration: 1.0)
+            let dragTwo = SKAction.moveToX(self.frame.size.width/2-30, duration: 1.0)
+            let dragThree = SKAction.moveToX(self.frame.size.width/2+30, duration: 1.0)
+            let dragFour = SKAction.moveToX(self.frame.size.width/2+90, duration: 1.0)
+            let dragFive = SKAction.moveToX(self.frame.size.width/2+150, duration: 1.0)
+            let dragClearBtn = SKAction.moveToY(self.frame.size.height*0.18, duration: 1.0)
+            
+            let dragHUD = SKAction.runBlock({
+                overlay.runAction(dragOverlay)
+                bomb_draggable.runAction(dragBomb)
+                one_draggable.runAction(dragOne)
+                two_draggable.runAction(dragTwo)
+                three_draggable.runAction(dragThree)
+                four_draggable.runAction(dragFour)
+                five_draggable.runAction(dragFive)
+                clear_btn.runAction(dragClearBtn)
+            })
+            self.addChild(overlayNode)
+            self.runAction(dragHUD)
+            
+            var counter = 0
+            for var y = 0; y < 5; y++ {
+                for var x = 0; x < 5; x++ {
+                    if HUD_list[counter] == 1 {
+                        let new_one = SKSpriteNode(imageNamed: "One.png")
+                        new_one.position = CGPointMake(self.frame.size.width/2.5 + CGFloat(55*x), self.frame.size.height/2.5 + CGFloat(55*(4-y)))
+                        new_one.zPosition = OVERLAY_OBJZ
+                        new_one.name = "new_one"
+                        new_one.xScale = 0.75
+                        new_one.yScale = 0.75
+                        overlayNode.addChild(new_one)
+                        
+                    } else if HUD_list[counter] == 2 {
+                        let new_two = SKSpriteNode(imageNamed: "Two.png")
+                        new_two.position = CGPointMake(self.frame.size.width/2.5 + CGFloat(55*x), self.frame.size.height/2.5 + CGFloat(55*(4-y)))
+                        new_two.zPosition = OVERLAY_OBJZ
+                        new_two.name = "new_two"
+                        new_two.xScale = 0.75
+                        new_two.yScale = 0.75
+                        overlayNode.addChild(new_two)
+                        
+                    } else if HUD_list[counter] == 3 {
+                        let new_three = SKSpriteNode(imageNamed: "Three.png")
+                        new_three.position = CGPointMake(self.frame.size.width/2.5 + CGFloat(55*x), self.frame.size.height/2.5 + CGFloat(55*(4-y)))
+                        new_three.zPosition = OVERLAY_OBJZ
+                        new_three.name = "new_three"
+                        new_three.xScale = 0.75
+                        new_three.yScale = 0.75
+                        overlayNode.addChild(new_three)
+                        
+                    } else if HUD_list[counter] == 4 {
+                        let new_four = SKSpriteNode(imageNamed: "Four.png")
+                        new_four.position = CGPointMake(self.frame.size.width/2.5 + CGFloat(55*x), self.frame.size.height/2.5 + CGFloat(55*(4-y)))
+                        new_four.zPosition = OVERLAY_OBJZ
+                        new_four.name = "new_four"
+                        new_four.xScale = 0.75
+                        new_four.yScale = 0.75
+                        overlayNode.addChild(new_four)
+                    } else if HUD_list[counter] == 5 {
+                        let new_five = SKSpriteNode(imageNamed: "Five.png")
+                        new_five.position = CGPointMake(self.frame.size.width/2.5 + CGFloat(55*x), self.frame.size.height/2.5 + CGFloat(55*(4-y)))
+                        new_five.zPosition = OVERLAY_OBJZ
+                        new_five.name = "new_five"
+                        new_five.xScale = 0.75
+                        new_five.yScale = 0.75
+                        overlayNode.addChild(new_five)
+                    } else if HUD_list[counter] == 6 {
+                        let new_bomb = SKSpriteNode(texture: bombText)
+                        new_bomb.position = CGPointMake(self.frame.size.width/2.5 + CGFloat(55*x), self.frame.size.height/2.5 + CGFloat(55*(4-y)))
+                        new_bomb.zPosition = OVERLAY_OBJZ
+                        new_bomb.name = "new_bomb"
+                        new_bomb.xScale = 0.75
+                        new_bomb.yScale = 0.75
+                        overlayNode.addChild(new_bomb)
+                    } 
+                    counter++
+                }
+            }
+            HUD_ON = true
+        }
+    }
+    func removeHUD(sender: UIScreenEdgePanGestureRecognizer) {
+        if HUD_ON == true {
+            overlayNode.removeAllChildren()
+            overlayNode.removeAllActions()
+            overlayNode.removeFromParent()
+            draggedParent.removeAllChildren()
+            HUD_ON = false
+            self.clear = false
+        }
+    }
     func flipAnim(node:SKSpriteNode) {
         let xPos = self.frame.size.width/2.5 + node.position.x
         let yPos = self.frame.size.height/2.5 + node.position.y
@@ -191,13 +509,9 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
         let deleteAction = SKAction.runBlock({
             anim_node.removeAllActions()
             anim_node.removeFromParent()
-            print("anim deleted")
-            print("\n")
         })
         let seq = SKAction.sequence([flyAction,deleteAction])
         anim_node.runAction(seq)
-        print("action ran")
-        print("\n")
     }
     
     func bombAnim(node:SKSpriteNode) {
@@ -417,73 +731,6 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
         backTiles[num].hidden = false
     }
     
-    func startScreen() {
-        self.removeAllChildren()
-        
-        let playButton = SKSpriteNode(imageNamed: "PlayButton.png")
-        playButton.position = CGPointMake(self.frame.size.width/2, self.frame.size.height/1.85)
-        playButton.zPosition = 30
-        playButton.xScale = 0.5
-        playButton.yScale = 0.5
-        playButton.name = "Play Button"
-        titleNode.addChild(playButton)
-        
-        let leaderButton = SKSpriteNode(imageNamed: "LeaderButton.png")
-        leaderButton.position = CGPointMake(self.frame.size.width/2, self.frame.size.height/2.8)
-        leaderButton.zPosition = 30
-        leaderButton.xScale = 0.6
-        leaderButton.yScale = 0.6
-        leaderButton.name = "Leader Button"
-        titleNode.addChild(leaderButton)
-        
-        let title1 = SKLabelNode(text: "Five")
-        title1.position = CGPointMake(self.frame.size.width/2, self.frame.size.height*0.86)
-        title1.fontName = Title_Font
-        title1.fontSize = 80
-        title1.fontColor = titleClr
-        title1.zPosition = 30
-        titleNode.addChild(title1)
-        
-        let title2 = SKLabelNode(text: "by")
-        title2.position = CGPointMake(self.frame.size.width/2, self.frame.size.height*0.78)
-        title2.fontName = Title_Font
-        title2.fontSize = 80
-        title2.fontColor = titleClr
-        title2.zPosition = 30
-        titleNode.addChild(title2)
-        
-        let title3 = SKLabelNode(text: "Five")
-        title3.position = CGPointMake(self.frame.size.width/2, self.frame.size.height*0.7)
-        title3.fontName = Title_Font
-        title3.fontSize = 80
-        title3.fontColor = titleClr
-        title3.zPosition = 30
-        titleNode.addChild(title3)
-        
-        let purchaseBtn = SKSpriteNode(imageNamed: "PurchaseButton.png")
-        purchaseBtn.position = CGPointMake(self.frame.size.width/2, self.frame.size.height/5)
-        purchaseBtn.zPosition = 30
-        purchaseBtn.name = "Buy Button"
-        titleNode.addChild(purchaseBtn)
-        
-        let purchaseLabel = SKLabelNode(text: "Touch to add 100")
-        purchaseLabel.position = CGPointMake(self.frame.size.width/2, self.frame.size.height/7.3)
-        purchaseLabel.fontName = Title_Font
-        purchaseLabel.fontSize = 25
-        purchaseLabel.fontColor = blackColor
-        purchaseLabel.zPosition = 30
-        titleNode.addChild(purchaseLabel)
-        
-        let purchaseLabel2 = SKLabelNode(text: "coins for $0.99")
-        purchaseLabel2.position = CGPointMake(self.frame.size.width/2, self.frame.size.height/8.5)
-        purchaseLabel2.fontName = Title_Font
-        purchaseLabel2.fontSize = 25
-        purchaseLabel2.fontColor = blackColor
-        purchaseLabel2.zPosition = 30
-        titleNode.addChild(purchaseLabel2)
-        
-        self.addChild(titleNode)
-    }
     func tutorialSetup() {
         let width = self.frame.size.width
         let height = self.frame.size.height
@@ -639,14 +886,104 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
             self.addChild(tutNode)
         })
         
+        let tut4 = SKAction.runBlock({
+            let arrow = SKSpriteNode(imageNamed: "swipeArrow.png")
+            arrow.position = CGPointMake(width*0.6, height*0.2)
+            arrow.zPosition = tutorial_zPosition
+            arrow.xScale = 0.75
+            arrow.yScale = 0.75
+            tutNode.addChild(arrow)
+            
+            let desc1 = SKLabelNode(text: "Swipe from the right ")
+            desc1.fontName = Game_Font
+            desc1.fontColor = blackColor
+            desc1.fontSize = 20
+            desc1.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Left
+            desc1.position = CGPointMake(width*0.42, height*0.26)
+            desc1.zPosition = tutorial_zPosition
+            tutNode.addChild(desc1)
+            
+            let desc2 = SKLabelNode(text: "to pull up the HUD ")
+            desc2.fontName = Game_Font
+            desc2.fontColor = blackColor
+            desc2.fontSize = 20
+            desc2.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Left
+            desc2.position = CGPointMake(width*0.42, height*0.24)
+            desc2.zPosition = tutorial_zPosition
+            tutNode.addChild(desc2)
+            
+            let desc3 = SKLabelNode(text: "to plan out your grid")
+            desc3.fontName = Game_Font
+            desc3.fontColor = blackColor
+            desc3.fontSize = 20
+            desc3.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Left
+            desc3.position = CGPointMake(width*0.42, height*0.22)
+            desc3.zPosition = tutorial_zPosition
+            tutNode.addChild(desc3)
+            
+            let nextButton = SKLabelNode(text: "Next")
+            nextButton.position = CGPointMake(width*0.6, height*0.13)
+            nextButton.fontName = Game_Over_Font
+            nextButton.fontSize = 40
+            desc1.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Left
+            nextButton.fontColor = blackColor
+            nextButton.zPosition = tutorial_zPosition
+            nextButton.name = "Next Button"
+            tutNode.addChild(nextButton)
+            
+            self.addChild(tutNode)
+        })
+        
+        let tut5 = SKAction.runBlock({
+            let arrow = SKSpriteNode(imageNamed: "swipeArrowLeft.png")
+            arrow.position = CGPointMake(width*0.3, height*0.2)
+            arrow.zPosition = tutorial_zPosition
+            arrow.xScale = 0.75
+            arrow.yScale = 0.75
+            tutNode.addChild(arrow)
+            
+            let desc1 = SKLabelNode(text: "Swipe from the left ")
+            desc1.fontName = Game_Font
+            desc1.fontColor = blackColor
+            desc1.fontSize = 20
+            desc1.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Left
+            desc1.position = CGPointMake(width*0.42, height*0.26)
+            desc1.zPosition = tutorial_zPosition
+            tutNode.addChild(desc1)
+            
+            let desc2 = SKLabelNode(text: "to dismiss the HUD ")
+            desc2.fontName = Game_Font
+            desc2.fontColor = blackColor
+            desc2.fontSize = 20
+            desc2.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Left
+            desc2.position = CGPointMake(width*0.42, height*0.24)
+            desc2.zPosition = tutorial_zPosition
+            tutNode.addChild(desc2)
+            
+            let nextButton = SKLabelNode(text: "Next")
+            nextButton.position = CGPointMake(width*0.6, height*0.13)
+            nextButton.fontName = Game_Over_Font
+            nextButton.fontSize = 40
+            desc1.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Left
+            nextButton.fontColor = blackColor
+            nextButton.zPosition = tutorial_zPosition
+            nextButton.name = "Next Button"
+            tutNode.addChild(nextButton)
+            
+            self.addChild(tutNode)
+        })
+        
         if tut_Point == 0 {
             self.runAction(tut1)
         } else if tut_Point == 1 {
             self.runAction(tut2)
         } else if tut_Point == 2 {
             self.runAction(tut3)
+        } else if tut_Point == 3 {
+            self.runAction(tut4)
+        } else if tut_Point == 4 {
+            self.runAction(tut5)
             tutorial = 1
-            money+=50
             saveData()
             hudNode.removeFromParent()
             hudNode = HUD()
@@ -654,13 +991,7 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
         }
     }
     func GameOverScreen() {
-        let GameOverLabel = SKLabelNode(text: "Game Over")
-        GameOverLabel.position = CGPointMake(self.frame.size.width/2, self.frame.size.height*0.75)
-        GameOverLabel.zPosition = 50
-        GameOverLabel.fontName = Game_Over_Font
-        GameOverLabel.fontColor = fontClr
-        GameOverLabel.fontSize = 60
-        gameOverNode.addChild(GameOverLabel)
+        showBoard()
         
         let newGameButton = SKLabelNode(text: "Play Again?")
         newGameButton.position = CGPointMake(self.frame.size.width/2, self.frame.size.height*0.2)
@@ -774,7 +1105,7 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
                 var rand = Int(arc4random_uniform(101))
                 var number:Int = 0
                 
-                let zero_val = 10 + 2*Game_Level
+                let zero_val = 8 + Game_Level
                 let diff = (100 - zero_val)/5
                 let one_val = zero_val + diff
                 let two_val = zero_val + diff*2
@@ -812,12 +1143,13 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
                 back_square.zPosition = grid_zPosition
                 back_square.hidden = true
                 back_square.name = back_name
-                    
+                
+                let grid_pos = CGPointMake(square.position.x + self.frame.size.width/2.5, square.position.y + self.frame.size.height/2.5)
+                gridPositions.append(grid_pos)
                 topTiles.append(square)
                 backTiles.append(back_square)
                 numbers_list.append(number)
                 boolList.append(false)
-                
                 gridNode.addChild(square)
                 gridNode.addChild(back_square)
                 
@@ -1222,52 +1554,54 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
         return node
     }
     
-    //Improve upon Algorithm to add increase difficuty for Levels
-    func BackTexture(level:Int) -> (SKTexture,Int) {
-        var back_text = SKTexture()
-        var rand = Int(arc4random_uniform(101))
-        var number:Int = 0
-        
-        let zero_val = 8 + level
-        let diff = (100 - zero_val)/5
-        let one_val = zero_val + diff
-        let two_val = zero_val + diff*2
-        let three_val = zero_val + diff*3
-        let four_val = zero_val + diff*4
-        let five_val = zero_val + diff*5
-        
-        if rand < zero_val {
-            back_text = bombText
-            number = 0
-        } else if rand >= zero_val && rand < one_val {
-            back_text = oneText
-            number = 1
-        } else if rand >= one_val && rand < two_val {
-            back_text = twoText
-            number = 2
-        } else if rand >= two_val && rand < three_val {
-            back_text = threeText
-            number = 3
-        } else if rand >= three_val && rand < four_val {
-            back_text = fourText
-            number = 4
-        } else if rand >= four_val && rand < five_val {
-            back_text = fiveText
-            number = 5
-        }
-
-
-        return (back_text,number)
-    }
-    
     func checkForBomb(inout selected:Bool,num:Int,node:SKSpriteNode) {
         if selected ==  false {
             if num == 0 {
-                counter = 0
+                if sounds_on == 0 {
+                    let soundsAction = SKAction.playSoundFileNamed("explosion.wav", waitForCompletion: false)
+                    self.runAction(soundsAction)
+                }
                 bombAnim(node)
-                touch_enabled = false
-                GameOverScreen()
-            } else {
+                let alertController = UIAlertController(title: "Free Coins", message:
+                    "Want a Second Chance for $0.99?", preferredStyle: UIAlertControllerStyle.ActionSheet)
+                
+                var dismissAction = UIAlertAction(title: "No Thanks.", style: UIAlertActionStyle.Default) {
+                    UIAlertAction in
+                    counter = 0
+                    self.touch_enabled = false
+                    Flurry.logEvent("Second Chance Notification Dismissed")
+                    self.GameOverScreen()
+                }
+                var stopAskingAction = UIAlertAction(title: "Don't Ask Again", style: UIAlertActionStyle.Default) {
+                    UIAlertAction in
+                    save_life = 1
+                    saveData()
+                    counter = 0
+                    self.touch_enabled = false
+                    self.GameOverScreen()
+                    Flurry.logEvent("Removed Second Chance Notification")
+                }
+                var purchaseAction = UIAlertAction(title: "Yes Please!", style: UIAlertActionStyle.Default) {
+                    UIAlertAction in
+                    inAppPurchases.defaultHelper.saveLife()
+                    
+                }
+                alertController.addAction(purchaseAction)
+                alertController.addAction(dismissAction)
+                alertController.addAction(stopAskingAction)
+                if save_life == 0 {
+                    self.view?.window?.rootViewController?.presentViewController(alertController, animated: true, completion: nil)
+
+                } else if save_life == 1 {
+                    counter = 0
+                    touch_enabled = false
+                    GameOverScreen()
+                }
+            } else if num != 0 {
+                if sounds_on == 0 {
+                    let soundsAction = SKAction.playSoundFileNamed("woosh.wav", waitForCompletion: false)
+                    self.runAction(soundsAction)
+                }
                 flipAnim(node)
                 counter++
                 checkCounter()
@@ -1315,15 +1649,27 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
             highestLevel = Game_Level
         }
         Game_Level++
+        updateAchievements()
         self.removeAllChildren()
         labelNode.removeAllChildren()
         labelNode.removeFromParent()
         resetLists()
         total_tiles = 0
         counter = 0
-        current_coins = Int(pow(Float(2), Float(Game_Level)-1))
+        current_coins += 5
         saveData()
         setup()
+    }
+    func showBoard() {
+        for var i = 0; i < 25; i++ {
+            textChange(i)
+            if numbers_list[i] != 0 {
+                if boolList[i] == false {
+                    boolList[i] = true
+                }
+            }
+
+        }
     }
     
     func newGame() {
@@ -1339,11 +1685,13 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
         Game_Level = 1
         current_coins = 0
         Flurry.endTimedEvent("User Playing", withParameters:nil)
-        startScreen()
+        Flurry.logEvent("Level Made In Session", withParameters:["Level":Game_Level])
+        self.gViewController?.navigationController?.popViewControllerAnimated(true)
     }
     
     func setup() {
         getData()
+        self.addChild(draggedParent)
         if numbers_list.count != 0 {
             numbers_list = []
         }
@@ -1383,13 +1731,52 @@ class GameScene: SKScene, GKGameCenterControllerDelegate {
         boolList = []
         topTiles = []
         backTiles = []
+        for var i = 0; i < 25; i++ {
+            HUD_list[i] = 0
+        }
+        gridPositions = []
     }
-    
-    func gameCenterViewControllerDidFinish(gameCenterViewController: GKGameCenterViewController!)
-    {
-        gameCenterViewController.dismissViewControllerAnimated(true, completion: nil)
+    func reportAchievement(achiev_identifier:String, percent:Double) {
+        let achievement:GKAchievement = GKAchievement(identifier: achiev_identifier)
+        achievement.percentComplete = percent
+        achievement.showsCompletionBanner = true
         
+        let achievements:NSArray = [achievement]
+        GKAchievement.reportAchievements([achievement], withCompletionHandler: { (error : NSError!) -> Void in
+            if error != nil {
+                print("error")
+                NSLog(error.localizedDescription)
+            }
+            print("Achievement Reported")
+        })
     }
     
-    
+    func updateAchievements() {
+        print("Achievements")
+        if Game_Level <= 1 {
+            let progress_percent:Double  = Double((Game_Level * 100)/1)
+            let achievement_identifier:String = "fbf.achiev.level1"
+            reportAchievement(achievement_identifier, percent: progress_percent)
+        } else if Game_Level < 6 {
+            let progress_percent:Double = Double((Game_Level * 100)/5)
+            let achievement_identifier:String = "fbf.achiev.level5"
+            reportAchievement(achievement_identifier, percent: progress_percent)
+        } else if Game_Level < 11  {
+            let progress_percent:Double = Double((Game_Level * 100)/10)
+            let achievement_identifier:String = "fbf.achiev.level10"
+            reportAchievement(achievement_identifier, percent: progress_percent)
+        } else if Game_Level < 16 {
+            let progress_percent:Double = Double((Game_Level * 100)/15)
+            let achievement_identifier:String = "fbf.achiev.level15"
+            reportAchievement(achievement_identifier, percent: progress_percent)
+        } else if Game_Level < 21 {
+            let progress_percent:Double = Double((Game_Level * 100)/20)
+            let achievement_identifier:String = "fbf.achiev.level20"
+            reportAchievement(achievement_identifier, percent: progress_percent)
+        } else if Game_Level < 26 {
+            let progress_percent:Double = Double((Game_Level * 100)/25)
+            let achievement_identifier:String = "fbf.achiev.level25"
+            reportAchievement(achievement_identifier, percent: progress_percent)
+        }
+    }
 }

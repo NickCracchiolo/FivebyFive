@@ -1,9 +1,35 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BV1-FR-VrT">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="bgQ-gh-HmA">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="Impact_Label.ttf">
+            <string>ImpactLabel</string>
+            <string>ImpactLabel</string>
+            <string>ImpactLabel</string>
+            <string>ImpactLabel</string>
+            <string>ImpactLabel</string>
+            <string>ImpactLabel</string>
+            <string>ImpactLabel</string>
+        </mutableArray>
+        <mutableArray key="Impact_Label_Reversed.ttf">
+            <string>ImpactLabelReversed</string>
+            <string>ImpactLabelReversed</string>
+            <string>ImpactLabelReversed</string>
+            <string>ImpactLabelReversed</string>
+            <string>ImpactLabelReversed</string>
+            <string>ImpactLabelReversed</string>
+            <string>ImpactLabelReversed</string>
+            <string>ImpactLabelReversed</string>
+            <string>ImpactLabelReversed</string>
+            <string>ImpactLabelReversed</string>
+            <string>ImpactLabelReversed</string>
+            <string>ImpactLabelReversed</string>
+            <string>ImpactLabelReversed</string>
+        </mutableArray>
+    </customFonts>
     <scenes>
         <!--Game View Controller-->
         <scene sceneID="tXr-a1-R10">
@@ -14,14 +40,577 @@
                         <viewControllerLayoutGuide type="bottom" id="khH-OB-KpY"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="3se-qz-xqx" customClass="SKView">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" id="vqa-gE-XID"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="863" y="223"/>
+            <point key="canvasLocation" x="488" y="264.12"/>
+        </scene>
+        <!--StoreViewController-->
+        <scene sceneID="CyS-xZ-QvD">
+            <objects>
+                <viewController title="StoreViewController" id="X8G-Rr-kjN" customClass="StoreViewController" customModule="FiveByFive" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ugm-3v-Qhk"/>
+                        <viewControllerLayoutGuide type="bottom" id="u6B-Zg-KHB"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="c2q-xE-wjc">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wRz-HQ-OYX">
+                                <rect key="frame" x="5" y="8" width="22" height="22"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="22" id="AiP-aN-Zd1"/>
+                                    <constraint firstAttribute="width" constant="22" id="e1q-aL-S5Q"/>
+                                </constraints>
+                                <state key="normal" image="BackButton.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="BackButton:" destination="X8G-Rr-kjN" eventType="touchUpInside" id="mNg-Mo-b7O"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FaD-Zw-skS">
+                                <rect key="frame" x="66" y="156" width="60" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="fRb-5M-KEm"/>
+                                    <constraint firstAttribute="width" constant="60" id="qhg-mG-kNX"/>
+                                </constraints>
+                                <state key="normal" image="StoreFree.png">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="FreeCoinsBtn:" destination="X8G-Rr-kjN" eventType="touchDown" id="cS0-mV-zmM"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bsn-Az-EHS">
+                                <rect key="frame" x="206" y="156" width="60" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="lPw-3Z-Bwe"/>
+                                    <constraint firstAttribute="width" constant="60" id="vU4-qb-nrf"/>
+                                </constraints>
+                                <state key="normal" image="Store100.png">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="CoinsBtnOne:" destination="X8G-Rr-kjN" eventType="touchDown" id="1Lf-OC-CKc"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WRT-zg-Cil">
+                                <rect key="frame" x="66" y="289" width="60" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="oeI-P6-sRs"/>
+                                    <constraint firstAttribute="width" constant="60" id="qPx-Fi-yAc"/>
+                                </constraints>
+                                <state key="normal" image="Store500.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="CoinsBtnFive:" destination="X8G-Rr-kjN" eventType="touchDown" id="rPs-CQ-oW0"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VZS-NH-ynn">
+                                <rect key="frame" x="206" y="289" width="60" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="hoo-4L-DhE"/>
+                                    <constraint firstAttribute="width" constant="60" id="oE0-FG-Exj"/>
+                                </constraints>
+                                <state key="normal" image="Store1000.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="CoinsBtnThousand:" destination="X8G-Rr-kjN" eventType="touchDown" id="iK5-4q-qeV"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Store" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uHT-Q7-NPg">
+                                <rect key="frame" x="99" y="44" width="122" height="56"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="56" id="KBf-9y-euA"/>
+                                    <constraint firstAttribute="width" constant="122" id="MTf-rM-v4C"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="ImpactLabel" family="Impact Label" pointSize="40"/>
+                                <color key="textColor" red="1" green="0.80392156862745101" blue="0.22745098039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Coins:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RTG-Oz-yB2">
+                                <rect key="frame" x="111" y="108" width="65" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="6Qw-sd-WN0"/>
+                                    <constraint firstAttribute="width" constant="65" id="hdp-hi-i4m"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="ImpactLabelReversed" family="Impact Label Reversed" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g1l-sc-MXn">
+                                <rect key="frame" x="172" y="108" width="58" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="58" id="9wO-Ko-Fdh"/>
+                                    <constraint firstAttribute="height" constant="21" id="adg-GR-Oha"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="ImpactLabelReversed" family="Impact Label Reversed" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bB9-nV-qfv">
+                                <rect key="frame" x="130" y="406" width="60" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="2GF-tD-tuZ"/>
+                                    <constraint firstAttribute="width" constant="60" id="2XM-UU-Ttr"/>
+                                </constraints>
+                                <state key="normal" image="StoreRemoveAds.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="RemoveAds:" destination="X8G-Rr-kjN" eventType="touchDown" id="MnO-27-HPA"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$5.00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JOD-eX-I2t">
+                                <rect key="frame" x="128" y="469" width="65" height="23"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="65" id="DUb-rW-jMZ"/>
+                                    <constraint firstAttribute="height" constant="23" id="bdU-Wq-ecE"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="ImpactLabelReversed" family="Impact Label Reversed" pointSize="20"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$4.00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pgz-eY-nYI">
+                                <rect key="frame" x="64" y="357" width="65" height="23"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="65" id="UXz-I7-ESj"/>
+                                    <constraint firstAttribute="height" constant="23" id="pYP-nL-Q2V"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="ImpactLabelReversed" family="Impact Label Reversed" pointSize="20"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Free Daily" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GpR-Jb-XAe">
+                                <rect key="frame" x="36" y="222" width="120" height="23"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="23" id="1e5-ZY-tbj"/>
+                                    <constraint firstAttribute="width" constant="120" id="4cj-Av-HFc"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="ImpactLabelReversed" family="Impact Label Reversed" pointSize="20"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$7.00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nn0-xP-IG1">
+                                <rect key="frame" x="204" y="357" width="65" height="23"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="65" id="S64-ku-sIX"/>
+                                    <constraint firstAttribute="height" constant="23" id="s22-z2-Noa"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="ImpactLabelReversed" family="Impact Label Reversed" pointSize="20"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$1.00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k5T-M4-40v">
+                                <rect key="frame" x="204" y="222" width="65" height="23"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="65" id="2g1-12-0pv"/>
+                                    <constraint firstAttribute="height" constant="23" id="RTY-hx-0UN"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="ImpactLabelReversed" family="Impact Label Reversed" pointSize="20"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.23921568627450979" green="0.32549019607843138" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstAttribute="centerY" secondItem="wRz-HQ-OYX" secondAttribute="centerY" constant="265" id="2aY-2p-kDG"/>
+                            <constraint firstAttribute="centerY" secondItem="bB9-nV-qfv" secondAttribute="centerY" constant="-152" id="3KM-Kk-d7l"/>
+                            <constraint firstAttribute="centerY" secondItem="WRT-zg-Cil" secondAttribute="centerY" constant="-35" id="6Cm-pe-Jyf"/>
+                            <constraint firstAttribute="centerX" secondItem="Pgz-eY-nYI" secondAttribute="centerX" constant="63.5" id="Bxn-Nh-M4H"/>
+                            <constraint firstAttribute="centerY" secondItem="uHT-Q7-NPg" secondAttribute="centerY" constant="212" id="HcP-je-HY7"/>
+                            <constraint firstAttribute="centerY" secondItem="VZS-NH-ynn" secondAttribute="centerY" constant="-35" id="JxL-Uk-WPp"/>
+                            <constraint firstAttribute="centerX" secondItem="Bsn-Az-EHS" secondAttribute="centerX" constant="-76" id="P96-Sw-aTQ"/>
+                            <constraint firstAttribute="centerY" secondItem="Pgz-eY-nYI" secondAttribute="centerY" constant="-84.5" id="PK4-Hn-Jh5"/>
+                            <constraint firstAttribute="centerX" secondItem="VZS-NH-ynn" secondAttribute="centerX" constant="-76" id="QYt-hm-QCd"/>
+                            <constraint firstAttribute="centerX" secondItem="g1l-sc-MXn" secondAttribute="centerX" constant="-41" id="R1y-cm-gwr"/>
+                            <constraint firstAttribute="centerX" secondItem="JOD-eX-I2t" secondAttribute="centerX" constant="-0.5" id="RKT-YS-6S8"/>
+                            <constraint firstAttribute="centerX" secondItem="FaD-Zw-skS" secondAttribute="centerX" constant="64" id="SsM-Rs-mSI"/>
+                            <constraint firstAttribute="centerY" secondItem="JOD-eX-I2t" secondAttribute="centerY" constant="-196.5" id="TLp-9J-Kjn"/>
+                            <constraint firstAttribute="centerY" secondItem="g1l-sc-MXn" secondAttribute="centerY" constant="165.5" id="Tlt-JH-oDD"/>
+                            <constraint firstAttribute="centerX" secondItem="k5T-M4-40v" secondAttribute="centerX" constant="-76.5" id="UZa-xI-0w1"/>
+                            <constraint firstAttribute="centerX" secondItem="RTG-Oz-yB2" secondAttribute="centerX" constant="16.5" id="WBm-x9-dpc"/>
+                            <constraint firstAttribute="centerX" secondItem="bB9-nV-qfv" secondAttribute="centerX" id="WU4-wK-Fhh"/>
+                            <constraint firstItem="uHT-Q7-NPg" firstAttribute="top" secondItem="ugm-3v-Qhk" secondAttribute="bottom" constant="44" id="Xkh-tS-HUS"/>
+                            <constraint firstAttribute="centerX" secondItem="uHT-Q7-NPg" secondAttribute="centerX" id="ZYm-4f-kCm"/>
+                            <constraint firstAttribute="centerX" secondItem="nn0-xP-IG1" secondAttribute="centerX" constant="-76.5" id="dj2-Cf-jA9"/>
+                            <constraint firstAttribute="centerY" secondItem="GpR-Jb-XAe" secondAttribute="centerY" constant="50.5" id="e5p-yw-QXV"/>
+                            <constraint firstAttribute="centerY" secondItem="Bsn-Az-EHS" secondAttribute="centerY" constant="98" id="erY-0G-OmW"/>
+                            <constraint firstAttribute="centerX" secondItem="wRz-HQ-OYX" secondAttribute="centerX" constant="144" id="euQ-hE-u1M"/>
+                            <constraint firstAttribute="centerY" secondItem="RTG-Oz-yB2" secondAttribute="centerY" constant="165.5" id="gi8-Ab-gcd"/>
+                            <constraint firstAttribute="centerY" secondItem="k5T-M4-40v" secondAttribute="centerY" constant="50.5" id="gxd-dB-u8s"/>
+                            <constraint firstAttribute="centerX" secondItem="GpR-Jb-XAe" secondAttribute="centerX" constant="64" id="i99-x2-1vv"/>
+                            <constraint firstAttribute="centerX" secondItem="WRT-zg-Cil" secondAttribute="centerX" constant="64" id="nQF-kh-NBr"/>
+                            <constraint firstAttribute="centerY" secondItem="nn0-xP-IG1" secondAttribute="centerY" constant="-84.5" id="uZj-5Z-KAD"/>
+                            <constraint firstAttribute="centerY" secondItem="FaD-Zw-skS" secondAttribute="centerY" constant="98" id="vws-rq-4R7"/>
+                        </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="GBU-ua-VHj" appends="YES" id="5IG-od-l3A"/>
+                        </connections>
+                    </view>
+                    <navigationItem key="navigationItem" id="Y7A-w3-KcE"/>
+                    <connections>
+                        <outlet property="BackGesture" destination="GBU-ua-VHj" id="HCX-C3-eZ9"/>
+                        <outlet property="FreeButton" destination="FaD-Zw-skS" id="HWG-vR-gPa"/>
+                        <outlet property="MoneyLabel" destination="g1l-sc-MXn" id="yCM-T0-qpj"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bDe-5n-0Tc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <screenEdgePanGestureRecognizer minimumNumberOfTouches="1" id="GBU-ua-VHj"/>
+            </objects>
+            <point key="canvasLocation" x="488" y="911"/>
+        </scene>
+        <!--SettingsViewController-->
+        <scene sceneID="Coq-Fb-Aeh">
+            <objects>
+                <viewController title="SettingsViewController" id="AhN-se-qRa" customClass="SettingsViewController" customModule="FiveByFive" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="G25-B3-rHZ"/>
+                        <viewControllerLayoutGuide type="bottom" id="Ua2-PP-ldS"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="tAN-2O-H0F">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notifications" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aa3-fs-bUW">
+                                <rect key="frame" x="53" y="177" width="158" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="158" id="m9g-ab-MOR"/>
+                                    <constraint firstAttribute="height" constant="50" id="yiD-rq-mfE"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="ImpactLabelReversed" family="Impact Label Reversed" pointSize="20"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xpA-2a-BcC">
+                                <rect key="frame" x="233" y="251" width="0.0" height="0.0"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sounds" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h5b-c9-IYe">
+                                <rect key="frame" x="138" y="235" width="73" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="ejV-32-Qcc"/>
+                                    <constraint firstAttribute="width" constant="73" id="mMj-8X-ydD"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="ImpactLabelReversed" family="Impact Label Reversed" pointSize="20"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reset Tutorial" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vme-Mq-dOf">
+                                <rect key="frame" x="40" y="119" width="171" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="171" id="QD1-wY-eHT"/>
+                                    <constraint firstAttribute="height" constant="50" id="edV-6g-Arg"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="ImpactLabelReversed" family="Impact Label Reversed" pointSize="20"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QJx-1h-pH9">
+                                <rect key="frame" x="6" y="14" width="22" height="22"/>
+                                <state key="normal">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="BackBtn:" destination="AhN-se-qRa" eventType="touchDown" id="9NJ-81-mTi"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Settings" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HzE-ye-Qa1">
+                                <rect key="frame" x="64" y="47" width="193" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="193" id="9sF-9g-YTf"/>
+                                    <constraint firstAttribute="height" constant="50" id="unU-2U-kLH"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="ImpactLabel" family="Impact Label" pointSize="40"/>
+                                <color key="textColor" red="1" green="0.80392156862745101" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="iZm-Kr-X7f">
+                                <rect key="frame" x="225" y="128" width="51" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="49" id="9XE-Uc-zCS"/>
+                                    <constraint firstAttribute="height" constant="31" id="MhM-bX-6xr"/>
+                                </constraints>
+                            </switch>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UwW-px-w05">
+                                <rect key="frame" x="225" y="186" width="51" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="31" id="B2t-cd-yKm"/>
+                                    <constraint firstAttribute="width" constant="49" id="PIX-3L-FI0"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="NotSwitchAction:" destination="AhN-se-qRa" eventType="touchDown" id="QdU-bh-dvn"/>
+                                </connections>
+                            </switch>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="paE-Yg-Ajw">
+                                <rect key="frame" x="225" y="244" width="51" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="49" id="MjA-fd-y7r"/>
+                                    <constraint firstAttribute="height" constant="31" id="Tp3-Mv-WI1"/>
+                                </constraints>
+                            </switch>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UTJ-uH-uq8">
+                                <rect key="frame" x="225" y="302" width="51" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="49" id="2Ah-hD-9ra"/>
+                                    <constraint firstAttribute="height" constant="31" id="snv-3t-kE3"/>
+                                </constraints>
+                            </switch>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ACl-Ev-mPz">
+                                <rect key="frame" x="6" y="8" width="22" height="22"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="22" id="2ay-re-iHu"/>
+                                    <constraint firstAttribute="width" constant="22" id="cJk-BR-GFJ"/>
+                                </constraints>
+                                <state key="normal" image="BackButton.png"/>
+                                <connections>
+                                    <action selector="BackBtn:" destination="AhN-se-qRa" eventType="touchDown" id="xVg-0h-B2H"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xEu-h4-Opi">
+                                <rect key="frame" x="110" y="360" width="100" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="B9f-ed-ZgD"/>
+                                    <constraint firstAttribute="height" constant="100" id="Etl-bZ-NjG"/>
+                                </constraints>
+                                <state key="normal" image="SLBAppIconx3.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="SLBButton:" destination="AhN-se-qRa" eventType="touchDown" id="Ns8-WV-ATL"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Check out my other game," lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xf7-tE-xNR">
+                                <rect key="frame" x="36" y="468" width="248" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="248" id="7ld-hx-0fd"/>
+                                    <constraint firstAttribute="height" constant="21" id="goI-ti-pJf"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="ImpactLabelReversed" family="Impact Label Reversed" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stoplight Buggies" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DUL-Nu-QRE">
+                                <rect key="frame" x="56" y="489" width="209" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="209" id="aEL-d7-8ij"/>
+                                    <constraint firstAttribute="height" constant="21" id="g7A-Tb-ZMW"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="ImpactLabelReversed" family="Impact Label Reversed" pointSize="20"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Second Chance Alerts" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gFe-SL-UQ7">
+                                <rect key="frame" x="29" y="293" width="192" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="192" id="aqF-bB-GyD"/>
+                                    <constraint firstAttribute="height" constant="50" id="oAE-1F-WhT"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="ImpactLabelReversed" family="Impact Label Reversed" pointSize="15"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.23921568627450979" green="0.32549019607843138" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstAttribute="centerY" secondItem="UwW-px-w05" secondAttribute="centerY" constant="82.5" id="12c-OE-KP5"/>
+                            <constraint firstAttribute="centerX" secondItem="Aa3-fs-bUW" secondAttribute="centerX" constant="28" id="4Zl-CA-uJw"/>
+                            <constraint firstAttribute="centerX" secondItem="paE-Yg-Ajw" secondAttribute="centerX" constant="-89.5" id="5Ub-vc-pZz"/>
+                            <constraint firstAttribute="centerX" secondItem="Xf7-tE-xNR" secondAttribute="centerX" id="7mE-mE-4uE"/>
+                            <constraint firstAttribute="centerY" secondItem="vme-Mq-dOf" secondAttribute="centerY" constant="140" id="8cL-dC-53T"/>
+                            <constraint firstAttribute="centerY" secondItem="DUL-Nu-QRE" secondAttribute="centerY" constant="-215.5" id="CQQ-4Q-A1c"/>
+                            <constraint firstAttribute="centerX" secondItem="UwW-px-w05" secondAttribute="centerX" constant="-89.5" id="DYx-hD-WzP"/>
+                            <constraint firstItem="HzE-ye-Qa1" firstAttribute="top" secondItem="G25-B3-rHZ" secondAttribute="bottom" constant="47" id="Nse-vp-fhz"/>
+                            <constraint firstAttribute="centerY" secondItem="Xf7-tE-xNR" secondAttribute="centerY" constant="-194.5" id="O4h-np-ANS"/>
+                            <constraint firstAttribute="centerY" secondItem="gFe-SL-UQ7" secondAttribute="centerY" constant="-34" id="OGo-aY-2iA"/>
+                            <constraint firstAttribute="centerX" secondItem="ACl-Ev-mPz" secondAttribute="centerX" constant="143" id="Pg2-Ss-HBc"/>
+                            <constraint firstAttribute="centerY" secondItem="paE-Yg-Ajw" secondAttribute="centerY" constant="24.5" id="QbG-N1-e94"/>
+                            <constraint firstAttribute="centerX" secondItem="HzE-ye-Qa1" secondAttribute="centerX" constant="-0.5" id="R3k-lO-WWS"/>
+                            <constraint firstAttribute="centerX" secondItem="UTJ-uH-uq8" secondAttribute="centerX" constant="-89.5" id="UXh-Nk-LfE"/>
+                            <constraint firstAttribute="centerX" secondItem="h5b-c9-IYe" secondAttribute="centerX" constant="-14.5" id="UzR-0z-TDr"/>
+                            <constraint firstAttribute="centerX" secondItem="gFe-SL-UQ7" secondAttribute="centerX" constant="35" id="WpA-yo-JIl"/>
+                            <constraint firstAttribute="centerY" secondItem="HzE-ye-Qa1" secondAttribute="centerY" constant="212" id="bog-cU-MD0"/>
+                            <constraint firstAttribute="centerX" secondItem="vme-Mq-dOf" secondAttribute="centerX" constant="34.5" id="cGi-rz-Chl"/>
+                            <constraint firstAttribute="centerY" secondItem="Aa3-fs-bUW" secondAttribute="centerY" constant="82" id="dah-Dl-BPe"/>
+                            <constraint firstAttribute="centerX" secondItem="DUL-Nu-QRE" secondAttribute="centerX" constant="-0.5" id="dgJ-Gq-tBW"/>
+                            <constraint firstAttribute="centerX" secondItem="xEu-h4-Opi" secondAttribute="centerX" id="ex6-TL-elD"/>
+                            <constraint firstAttribute="centerX" secondItem="iZm-Kr-X7f" secondAttribute="centerX" constant="-89.5" id="hu1-4E-5jj"/>
+                            <constraint firstAttribute="centerY" secondItem="xEu-h4-Opi" secondAttribute="centerY" constant="-126" id="iqF-Dw-v4h"/>
+                            <constraint firstAttribute="centerY" secondItem="ACl-Ev-mPz" secondAttribute="centerY" constant="265" id="joe-AF-Cm8"/>
+                            <constraint firstAttribute="centerY" secondItem="h5b-c9-IYe" secondAttribute="centerY" constant="24" id="n3c-V7-N1Y"/>
+                            <constraint firstAttribute="centerY" secondItem="UTJ-uH-uq8" secondAttribute="centerY" constant="-33.5" id="n3s-Pj-jLf"/>
+                            <constraint firstAttribute="centerY" secondItem="iZm-Kr-X7f" secondAttribute="centerY" constant="140.5" id="u4q-ir-HfG"/>
+                        </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="XLN-6h-5kv" appends="YES" id="HtD-Kv-0su"/>
+                        </connections>
+                    </view>
+                    <navigationItem key="navigationItem" id="VCE-2M-e4v"/>
+                    <connections>
+                        <outlet property="BackGesture" destination="XLN-6h-5kv" id="n8u-ZX-sCP"/>
+                        <outlet property="NotSwitchObject" destination="UwW-px-w05" id="VX7-FQ-tbX"/>
+                        <outlet property="ResetSwitchObject" destination="iZm-Kr-X7f" id="wWH-lk-h69"/>
+                        <outlet property="SaveLifeOutlet" destination="UTJ-uH-uq8" id="Oit-ou-hE5"/>
+                        <outlet property="SoundsSwitchOutlet" destination="paE-Yg-Ajw" id="eSq-JG-PvC"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mJx-f3-1d9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <screenEdgePanGestureRecognizer minimumNumberOfTouches="1" id="XLN-6h-5kv">
+                    <connections>
+                        <action selector="BackGesture:" destination="AhN-se-qRa" id="Vyd-YN-Wsj"/>
+                    </connections>
+                </screenEdgePanGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="488" y="1626"/>
+        </scene>
+        <!--StartViewController-->
+        <scene sceneID="o3A-Zv-ssy">
+            <objects>
+                <viewController storyboardIdentifier="StartViewController" title="StartViewController" id="vFk-6I-MaZ" customClass="StartViewController" customModule="FiveByFive" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="7hm-O5-tz9"/>
+                        <viewControllerLayoutGuide type="bottom" id="bTb-M3-FR1"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Ogb-bz-q9N">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Five by FIve" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="97p-oo-KXE">
+                                <rect key="frame" x="14" y="55" width="292" height="53"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="53" id="E75-b3-ale"/>
+                                    <constraint firstAttribute="width" constant="292" id="QW9-Yk-gEc"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="ImpactLabel" family="Impact Label" pointSize="40"/>
+                                <color key="textColor" red="1" green="0.80392156862745101" blue="0.22745098039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1oy-5A-Mle">
+                                <rect key="frame" x="69" y="155" width="182" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="LYk-LA-wra"/>
+                                    <constraint firstAttribute="width" constant="182" id="Z95-hv-pfm"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="ImpactLabel" family="Impact Label" pointSize="30"/>
+                                <state key="normal" title="Play Game">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="BV1-FR-VrT" kind="push" id="7EL-Xx-xNU"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1on-jj-vaQ">
+                                <rect key="frame" x="53" y="235" width="215" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="E9t-Cd-af2"/>
+                                    <constraint firstAttribute="width" constant="215" id="zsC-jf-Gw7"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="ImpactLabel" family="Impact Label" pointSize="30"/>
+                                <state key="normal" title="Leaderboards">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="showLeaderboard:" destination="vFk-6I-MaZ" eventType="touchDown" id="xNE-QH-4WA"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Fd-wS-4Ex">
+                                <rect key="frame" x="70" y="315" width="180" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="JZz-DS-Q4U"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="ImpactLabel" family="Impact Label" pointSize="30"/>
+                                <state key="normal" title="Get Coins!">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="X8G-Rr-kjN" kind="push" id="ECT-0f-A4a"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tef-dW-q9l">
+                                <rect key="frame" x="87" y="395" width="147" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="SQT-in-mXu"/>
+                                    <constraint firstAttribute="width" constant="147" id="o1w-xc-Ceo"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="ImpactLabel" family="Impact Label" pointSize="30"/>
+                                <state key="normal" title="Settings">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="AhN-se-qRa" kind="push" id="fR4-xH-Iko"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.23921568627450979" green="0.32549019607843138" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="1Fd-wS-4Ex" firstAttribute="centerX" secondItem="1on-jj-vaQ" secondAttribute="centerX" id="6f0-WL-fFH"/>
+                            <constraint firstItem="1Fd-wS-4Ex" firstAttribute="centerX" secondItem="tef-dW-q9l" secondAttribute="centerX" id="Qx2-MT-QkE"/>
+                            <constraint firstItem="1oy-5A-Mle" firstAttribute="centerX" secondItem="1on-jj-vaQ" secondAttribute="centerX" id="SBQ-C1-jva"/>
+                            <constraint firstAttribute="centerX" secondItem="97p-oo-KXE" secondAttribute="centerX" id="ZYP-qH-Wr2"/>
+                            <constraint firstAttribute="centerY" secondItem="97p-oo-KXE" secondAttribute="centerY" constant="202.5" id="d8z-0i-K6y"/>
+                            <constraint firstItem="tef-dW-q9l" firstAttribute="centerX" secondItem="Ogb-bz-q9N" secondAttribute="centerX" id="f6v-8o-xNi"/>
+                            <constraint firstItem="bTb-M3-FR1" firstAttribute="top" secondItem="tef-dW-q9l" secondAttribute="bottom" constant="143" id="ijP-a7-Gso"/>
+                            <constraint firstItem="1on-jj-vaQ" firstAttribute="top" secondItem="1oy-5A-Mle" secondAttribute="bottom" constant="50" id="jD6-tG-JFg"/>
+                            <constraint firstItem="tef-dW-q9l" firstAttribute="top" secondItem="1Fd-wS-4Ex" secondAttribute="bottom" constant="50" id="lI6-nF-diu"/>
+                            <constraint firstItem="1Fd-wS-4Ex" firstAttribute="top" secondItem="1on-jj-vaQ" secondAttribute="bottom" constant="50" id="usO-XT-xzM"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="Vlh-so-V64"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rfB-qJ-bGU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="63" y="911"/>
+        </scene>
+        <!--StartNavController-->
+        <scene sceneID="rv6-Gw-3Bf">
+            <objects>
+                <navigationController storyboardIdentifier="StartNavController" title="StartNavController" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="bgQ-gh-HmA" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Elc-Hs-oZr">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="vFk-6I-MaZ" kind="relationship" relationship="rootViewController" id="lsv-rV-gu0"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ICH-7O-Cuf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-357" y="911"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="BackButton.png" width="200" height="200"/>
+        <image name="SLBAppIconx3.png" width="180" height="180"/>
+        <image name="Store100.png" width="150" height="150"/>
+        <image name="Store1000.png" width="150" height="150"/>
+        <image name="Store500.png" width="150" height="150"/>
+        <image name="StoreFree.png" width="150" height="150"/>
+        <image name="StoreRemoveAds.png" width="150" height="150"/>
+    </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
 </document>
