@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="bgQ-gh-HmA">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="bgQ-gh-HmA">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="Impact_Label.ttf">
@@ -15,6 +15,7 @@
             <string>ImpactLabel</string>
         </mutableArray>
         <mutableArray key="Impact_Label_Reversed.ttf">
+            <string>ImpactLabelReversed</string>
             <string>ImpactLabelReversed</string>
             <string>ImpactLabelReversed</string>
             <string>ImpactLabelReversed</string>
@@ -159,7 +160,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bB9-nV-qfv">
-                                <rect key="frame" x="130" y="406" width="60" height="60"/>
+                                <rect key="frame" x="66" y="406" width="60" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="2GF-tD-tuZ"/>
                                     <constraint firstAttribute="width" constant="60" id="2XM-UU-Ttr"/>
@@ -172,7 +173,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$5.00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JOD-eX-I2t">
-                                <rect key="frame" x="128" y="469" width="65" height="23"/>
+                                <rect key="frame" x="64" y="474" width="65" height="23"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="65" id="DUb-rW-jMZ"/>
                                     <constraint firstAttribute="height" constant="23" id="bdU-Wq-ecE"/>
@@ -221,6 +222,20 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="ULs-jm-lcx">
+                                <rect key="frame" x="184" y="421" width="105" height="51"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="51" id="M3w-ix-ydZ"/>
+                                    <constraint firstAttribute="width" constant="105" id="XgO-eK-8FP"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="ImpactLabelReversed" family="Impact Label Reversed" pointSize="17"/>
+                                <state key="normal" title="Restore Ad Purchase" backgroundImage="YellowSquare.png">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="RestoreBtn:" destination="X8G-Rr-kjN" eventType="touchDown" id="7Zd-1F-5JA"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.23921568627450979" green="0.32549019607843138" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <gestureRecognizers/>
@@ -228,6 +243,7 @@
                             <constraint firstAttribute="centerY" secondItem="wRz-HQ-OYX" secondAttribute="centerY" constant="265" id="2aY-2p-kDG"/>
                             <constraint firstAttribute="centerY" secondItem="bB9-nV-qfv" secondAttribute="centerY" constant="-152" id="3KM-Kk-d7l"/>
                             <constraint firstAttribute="centerY" secondItem="WRT-zg-Cil" secondAttribute="centerY" constant="-35" id="6Cm-pe-Jyf"/>
+                            <constraint firstAttribute="centerY" secondItem="ULs-jm-lcx" secondAttribute="centerY" constant="-162.5" id="9uh-hj-xc0"/>
                             <constraint firstAttribute="centerX" secondItem="Pgz-eY-nYI" secondAttribute="centerX" constant="63.5" id="Bxn-Nh-M4H"/>
                             <constraint firstAttribute="centerY" secondItem="uHT-Q7-NPg" secondAttribute="centerY" constant="212" id="HcP-je-HY7"/>
                             <constraint firstAttribute="centerY" secondItem="VZS-NH-ynn" secondAttribute="centerY" constant="-35" id="JxL-Uk-WPp"/>
@@ -235,13 +251,13 @@
                             <constraint firstAttribute="centerY" secondItem="Pgz-eY-nYI" secondAttribute="centerY" constant="-84.5" id="PK4-Hn-Jh5"/>
                             <constraint firstAttribute="centerX" secondItem="VZS-NH-ynn" secondAttribute="centerX" constant="-76" id="QYt-hm-QCd"/>
                             <constraint firstAttribute="centerX" secondItem="g1l-sc-MXn" secondAttribute="centerX" constant="-41" id="R1y-cm-gwr"/>
-                            <constraint firstAttribute="centerX" secondItem="JOD-eX-I2t" secondAttribute="centerX" constant="-0.5" id="RKT-YS-6S8"/>
+                            <constraint firstAttribute="centerX" secondItem="JOD-eX-I2t" secondAttribute="centerX" constant="63.5" id="RKT-YS-6S8"/>
                             <constraint firstAttribute="centerX" secondItem="FaD-Zw-skS" secondAttribute="centerX" constant="64" id="SsM-Rs-mSI"/>
-                            <constraint firstAttribute="centerY" secondItem="JOD-eX-I2t" secondAttribute="centerY" constant="-196.5" id="TLp-9J-Kjn"/>
+                            <constraint firstAttribute="centerY" secondItem="JOD-eX-I2t" secondAttribute="centerY" constant="-201.5" id="TLp-9J-Kjn"/>
                             <constraint firstAttribute="centerY" secondItem="g1l-sc-MXn" secondAttribute="centerY" constant="165.5" id="Tlt-JH-oDD"/>
                             <constraint firstAttribute="centerX" secondItem="k5T-M4-40v" secondAttribute="centerX" constant="-76.5" id="UZa-xI-0w1"/>
                             <constraint firstAttribute="centerX" secondItem="RTG-Oz-yB2" secondAttribute="centerX" constant="16.5" id="WBm-x9-dpc"/>
-                            <constraint firstAttribute="centerX" secondItem="bB9-nV-qfv" secondAttribute="centerX" id="WU4-wK-Fhh"/>
+                            <constraint firstAttribute="centerX" secondItem="bB9-nV-qfv" secondAttribute="centerX" constant="64" id="WU4-wK-Fhh"/>
                             <constraint firstItem="uHT-Q7-NPg" firstAttribute="top" secondItem="ugm-3v-Qhk" secondAttribute="bottom" constant="44" id="Xkh-tS-HUS"/>
                             <constraint firstAttribute="centerX" secondItem="uHT-Q7-NPg" secondAttribute="centerX" id="ZYm-4f-kCm"/>
                             <constraint firstAttribute="centerX" secondItem="nn0-xP-IG1" secondAttribute="centerX" constant="-76.5" id="dj2-Cf-jA9"/>
@@ -251,6 +267,7 @@
                             <constraint firstAttribute="centerY" secondItem="RTG-Oz-yB2" secondAttribute="centerY" constant="165.5" id="gi8-Ab-gcd"/>
                             <constraint firstAttribute="centerY" secondItem="k5T-M4-40v" secondAttribute="centerY" constant="50.5" id="gxd-dB-u8s"/>
                             <constraint firstAttribute="centerX" secondItem="GpR-Jb-XAe" secondAttribute="centerX" constant="64" id="i99-x2-1vv"/>
+                            <constraint firstAttribute="centerX" secondItem="ULs-jm-lcx" secondAttribute="centerX" constant="-76.5" id="iid-Hh-j0K"/>
                             <constraint firstAttribute="centerX" secondItem="WRT-zg-Cil" secondAttribute="centerX" constant="64" id="nQF-kh-NBr"/>
                             <constraint firstAttribute="centerY" secondItem="nn0-xP-IG1" secondAttribute="centerY" constant="-84.5" id="uZj-5Z-KAD"/>
                             <constraint firstAttribute="centerY" secondItem="FaD-Zw-skS" secondAttribute="centerY" constant="98" id="vws-rq-4R7"/>
@@ -607,6 +624,7 @@
         <image name="Store500.png" width="150" height="150"/>
         <image name="StoreFree.png" width="150" height="150"/>
         <image name="StoreRemoveAds.png" width="150" height="150"/>
+        <image name="YellowSquare.png" width="50" height="50"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

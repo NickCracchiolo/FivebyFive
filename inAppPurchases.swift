@@ -96,6 +96,10 @@ class inAppPurchases: NSObject,SKProductsRequestDelegate, SKPaymentTransactionOb
             }
         }
     }
+    func RestorePurchase() {
+        SKPaymentQueue.defaultQueue().addTransactionObserver(self)
+        SKPaymentQueue.defaultQueue().restoreCompletedTransactions()
+    }
 
     func buyProduct(prod:SKProduct) {
         //println("buy " + prod.productIdentifier)
@@ -129,8 +133,7 @@ class inAppPurchases: NSObject,SKProductsRequestDelegate, SKPaymentTransactionOb
             switch prodID {
             case "fbf.iap.remove_ads":
                 println("remove ads")
-                adsOn = 1
-                saveData()
+                defaults.setInteger(1, forKey: "ads")
                 Flurry.logEvent("Ads Removal Restored")
             default:
                 println("IAP not setup")
@@ -166,7 +169,6 @@ class inAppPurchases: NSObject,SKProductsRequestDelegate, SKPaymentTransactionOb
                         Flurry.logEvent("1000 Coins Bought")
                     case "fbf.iap.remove_ads":
                         defaults.setInteger(1, forKey: "ads")
-                        //saveData()
                         self.appDelegate.adView.hidden = true
                         self.appDelegate.adView.removeFromSuperview()
                         Flurry.logEvent("Ad Removal Bought")

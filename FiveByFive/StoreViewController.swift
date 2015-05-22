@@ -123,6 +123,10 @@ class StoreViewController: UIViewController, ADBannerViewDelegate {
         super.didReceiveMemoryWarning()
         // Release any cached data, images, etc that aren't in use.
     }
+    @IBAction func RestoreBtn(sender: UIButton) {
+        print("Restore Button Pressed")
+        inAppPurchases.defaultHelper.RestorePurchase()
+    }
     
     override func prefersStatusBarHidden() -> Bool {
         return true
