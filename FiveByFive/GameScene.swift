@@ -113,7 +113,7 @@ class GameScene: SKScene {
         }
     }
 
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         for touch:AnyObject in touches {
             let location = (touch as! UITouch).locationInNode(self)
             let touched_node = self.nodeAtPoint(location)
@@ -269,21 +269,22 @@ class GameScene: SKScene {
     }
     func reportScore(identifier:NSString) {
         if GKLocalPlayer.localPlayer().authenticated == true{
-            var highScore = defaults.integerForKey("level")
-            var scoreReporter = GKScore(leaderboardIdentifier: identifier as String)
+            let highScore = defaults.integerForKey("level")
+            let scoreReporter = GKScore(leaderboardIdentifier: identifier as String)
             scoreReporter.value = Int64(highScore)
-            var scoreArray: [GKScore] = [scoreReporter]
-            println("report score \(scoreReporter)")
-            GKScore.reportScores(scoreArray, withCompletionHandler: {(error : NSError!) -> Void in
+            let scoreArray: [GKScore] = [scoreReporter]
+            print("report score \(scoreReporter)")
+            
+            GKScore.reportScores(scoreArray, withCompletionHandler: {(error : NSError?) -> Void in
                 if error != nil {
-                    print("error")
-                    NSLog(error.localizedDescription)
+                    print("error: ")
+                    NSLog(error!.localizedDescription)
                 }
             })
         }
     }
-    override func touchesMoved(touches: Set<NSObject>, withEvent event: UIEvent) {
-        let touch = touches.first as! UITouch
+    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        let touch = touches.first! as UITouch
         let position_in_scene = touch.locationInNode(self)
         let previous_position = touch.previousLocationInNode(self)
         if HUD_ON == true {
@@ -298,7 +299,7 @@ class GameScene: SKScene {
         }
         
     }
-    override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         //Save to grid
         if HUD_ON == true {
             let drag_position:CGPoint = draggingNode.position
@@ -306,7 +307,7 @@ class GameScene: SKScene {
             var min_index = 0
             
             for var i = 0; i < 25; i++ {
-                var dist = calcDistance(gridPositions[i].x, y1: gridPositions[i].y, x2: drag_position.x, y2: drag_position.y)
+                let dist = calcDistance(gridPositions[i].x, y1: gridPositions[i].y, x2: drag_position.x, y2: drag_position.y)
             
                 
                 if dist < min_dist {
@@ -505,7 +506,6 @@ class GameScene: SKScene {
         self.addChild(anim_node)
         
         let flyAction = SKAction.moveToY(self.frame.size.height, duration: 0.5)
-        let delete = SKAction.removeFromParent()
         let deleteAction = SKAction.runBlock({
             anim_node.removeAllActions()
             anim_node.removeFromParent()
@@ -517,7 +517,6 @@ class GameScene: SKScene {
     func bombAnim(node:SKSpriteNode) {
         let xPos = self.frame.size.width/2.5 + node.position.x
         let yPos = self.frame.size.height/2.5 + node.position.y
-        let bombNode = SKNode()
         
         let node1 = SKSpriteNode(texture: bomb_anim_text)
         node1.position = CGPointMake(xPos, yPos)
@@ -671,7 +670,6 @@ class GameScene: SKScene {
         let flyAction25 = SKAction.moveTo(CGPointMake(self.frame.size.width, 0), duration: 1.0)
         
         let deleteAction = SKAction.removeFromParent()
-        let waitAction = SKAction.waitForDuration(0.75)
         
         let node1Action = (SKAction.sequence([flyAction1,deleteAction]))
         let node2Action = (SKAction.sequence([flyAction2,deleteAction]))
@@ -1093,16 +1091,14 @@ class GameScene: SKScene {
 
     func createGrid() -> SKNode {
         let gridNode = SKNode()
-        var row_tot = 0
         var counter:Int = 0
-        var bombs = 0
         for var y = 0; y < 5; y++ {
             for var x = 0; x < 5; x++ {
                 let name = ("Tile"+String(counter))
                 let square = createSquare(x, y: y,in_name:name)
                 
                 var back_text: SKTexture?
-                var rand = Int(arc4random_uniform(101))
+                let rand = Int(arc4random_uniform(101))
                 var number:Int = 0
                 
                 let zero_val = 8 + Game_Level
@@ -1562,17 +1558,16 @@ class GameScene: SKScene {
                     self.runAction(soundsAction)
                 }
                 bombAnim(node)
-                let alertController = UIAlertController(title: "Free Coins", message:
-                    "Want a Second Chance for $0.99?", preferredStyle: UIAlertControllerStyle.ActionSheet)
-                
-                var dismissAction = UIAlertAction(title: "No Thanks.", style: UIAlertActionStyle.Default) {
+                let alertController = UIAlertController(title: "Free Coins", message: "Want a Second Chance for $0.99?", preferredStyle: UIAlertControllerStyle.ActionSheet)
+
+                let dismissAction = UIAlertAction(title: "No Thanks.", style: UIAlertActionStyle.Default) {
                     UIAlertAction in
                     counter = 0
                     self.touch_enabled = false
                     Flurry.logEvent("Second Chance Notification Dismissed")
                     self.GameOverScreen()
                 }
-                var stopAskingAction = UIAlertAction(title: "Don't Ask Again", style: UIAlertActionStyle.Default) {
+                let stopAskingAction = UIAlertAction(title: "Don't Ask Again", style: UIAlertActionStyle.Default) {
                     UIAlertAction in
                     save_life = 1
                     saveData()
@@ -1581,7 +1576,7 @@ class GameScene: SKScene {
                     self.GameOverScreen()
                     Flurry.logEvent("Removed Second Chance Notification")
                 }
-                var purchaseAction = UIAlertAction(title: "Yes Please!", style: UIAlertActionStyle.Default) {
+                let purchaseAction = UIAlertAction(title: "Yes Please!", style: UIAlertActionStyle.Default) {
                     UIAlertAction in
                     inAppPurchases.defaultHelper.saveLife()
                     
@@ -1742,17 +1737,18 @@ class GameScene: SKScene {
         achievement.showsCompletionBanner = true
         
         let achievements:NSArray = [achievement]
-        GKAchievement.reportAchievements([achievement], withCompletionHandler: { (error : NSError!) -> Void in
+        GKAchievement.reportAchievements(achievements as! [GKAchievement], withCompletionHandler: { (error : NSError?) -> Void in
             if error != nil {
-                print("error")
-                NSLog(error.localizedDescription)
+                print("error", terminator: "")
+                NSLog(error!.localizedDescription)
             }
-            print("Achievement Reported")
+            print("Achievement Reported", terminator: "")
         })
     }
     
     func updateAchievements() {
-        print("Achievements")
+        print("Achievements", terminator: "")
+        
         if Game_Level <= 1 {
             let progress_percent:Double  = Double((Game_Level * 100)/1)
             let achievement_identifier:String = "fbf.achiev.level1"

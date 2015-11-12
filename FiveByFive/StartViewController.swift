@@ -23,7 +23,7 @@ class StartViewController: UIViewController, GKGameCenterControllerDelegate, ADB
         super.viewDidLoad()
         getData()
         
-        let flags: NSCalendarUnit = .DayCalendarUnit | .MonthCalendarUnit | .YearCalendarUnit
+        let flags: NSCalendarUnit = [.Day, .Month, .Year]
         let date = NSDate()
         let components = NSCalendar.currentCalendar().components(flags, fromDate: date)
         
@@ -45,7 +45,7 @@ class StartViewController: UIViewController, GKGameCenterControllerDelegate, ADB
     
             }
         }
-        print("Ads On Value: " + String(defaults.integerForKey("ads")))
+        print("Ads On Value: " + String(defaults.integerForKey("ads")), terminator: "")
 
         if defaults.integerForKey("ads") == 0 {
             loadAds()
@@ -63,7 +63,8 @@ class StartViewController: UIViewController, GKGameCenterControllerDelegate, ADB
         saveData()
     }
     override func viewDidAppear(animated: Bool) {
-        print("Ads On Value: " + String(defaults.integerForKey("ads")))
+        print("Ads On Value: " + String(defaults.integerForKey("ads")), terminator: "")
+        
         if defaults.integerForKey("ads")  == 0 {
             loadAds()
         }
@@ -75,11 +76,11 @@ class StartViewController: UIViewController, GKGameCenterControllerDelegate, ADB
         return true
     }
     
-    override func supportedInterfaceOrientations() -> Int {
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
         if UIDevice.currentDevice().userInterfaceIdiom == .Phone {
-            return Int(UIInterfaceOrientationMask.AllButUpsideDown.rawValue)
+            return UIInterfaceOrientationMask(rawValue: UIInterfaceOrientationMask.AllButUpsideDown.rawValue)
         } else {
-            return Int(UIInterfaceOrientationMask.All.rawValue)
+            return UIInterfaceOrientationMask(rawValue: UIInterfaceOrientationMask.All.rawValue)
         }
     }
     
@@ -94,8 +95,8 @@ class StartViewController: UIViewController, GKGameCenterControllerDelegate, ADB
     }
 
     @IBAction func showLeaderboard(sender: UIButton) {
-        var vc = self.view?.window?.rootViewController
-        var gc = GKGameCenterViewController()
+        let vc = self.view?.window?.rootViewController
+        let gc = GKGameCenterViewController()
         gc.gameCenterDelegate = self
         gc.viewState = GKGameCenterViewControllerState.Leaderboards
         gc.viewState = GKGameCenterViewControllerState.Achievements
@@ -106,7 +107,7 @@ class StartViewController: UIViewController, GKGameCenterControllerDelegate, ADB
     }
     
     func setUIUserNotificationOptions() {
-        UIApplication.sharedApplication().registerUserNotificationSettings(UIUserNotificationSettings(forTypes: UIUserNotificationType.Badge | UIUserNotificationType.Sound | UIUserNotificationType.Alert, categories: nil))
+        UIApplication.sharedApplication().registerUserNotificationSettings(UIUserNotificationSettings(forTypes: [UIUserNotificationType.Badge, UIUserNotificationType.Sound, UIUserNotificationType.Alert], categories: nil))
     }
     
     func setupNofications() {
@@ -117,7 +118,7 @@ class StartViewController: UIViewController, GKGameCenterControllerDelegate, ADB
         DailyNotification.alertBody = "Come get your free daily coins!"
         // defines the daily time interval
         DailyNotification.repeatCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
-        DailyNotification.repeatInterval = .CalendarUnitDay
+        DailyNotification.repeatInterval = .Day
         // defines the notification alert button text
         DailyNotification.alertAction = "Play"
         // defines the default sound for your notification
@@ -132,45 +133,44 @@ class StartViewController: UIViewController, GKGameCenterControllerDelegate, ADB
     
     func authenticateLocalPlayer(){
         let localPlayer = GKLocalPlayer()
-        let viewController = UIViewController()
-        let error = NSError()
+        //let error = NSError()
         let leaderBoardIdentifier = NSString()
         localPlayer.authenticateHandler = {(viewController, error) -> Void in
             if (viewController != nil) {
-                self.presentViewController(viewController, animated: true, completion: nil)
+                self.presentViewController(viewController!, animated: true, completion: nil)
             } else if localPlayer.authenticated {
-                print("Authenticated")
-                GKNotificationBanner.showBannerWithTitle("Game Center", message: ("Welcome, " + String(format: localPlayer.displayName)) , completionHandler: {
+                print("Authenticated", terminator: "")
+                GKNotificationBanner.showBannerWithTitle("Game Center", message: ("Welcome, " + String(format: localPlayer.displayName!)) , completionHandler: {
                     gameCenterEnabled = true
                 })
                 localPlayer.loadDefaultLeaderboardIdentifierWithCompletionHandler{(viewController, error) -> Void in
                     if error != nil {
-                        print(error)
+                        print(error, terminator: "")
                     } else {
                         leaderBoardID = leaderBoardIdentifier
                     }
                 }
             } else {
                 gameCenterEnabled = false
-                print("Game Center Not Enabled")
+                print("Game Center Not Enabled", terminator: "")
             }
         }
     }
-    func gameCenterViewControllerDidFinish(gameCenterViewController: GKGameCenterViewController!) {
+    func gameCenterViewControllerDidFinish(gameCenterViewController: GKGameCenterViewController) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     
     func reportScore(identifier:NSString) {
         if GKLocalPlayer.localPlayer().authenticated == true{
-            var highScore = defaults.integerForKey("level")
-            var scoreReporter = GKScore(leaderboardIdentifier: identifier as String)
+            let highScore = defaults.integerForKey("level")
+            let scoreReporter = GKScore(leaderboardIdentifier: identifier as String)
             scoreReporter.value = Int64(highScore)
-            var scoreArray: [GKScore] = [scoreReporter]
-            println("report score \(scoreReporter)")
-            GKScore.reportScores(scoreArray, withCompletionHandler: {(error : NSError!) -> Void in
+            let scoreArray: [GKScore] = [scoreReporter]
+            print("report score \(scoreReporter)")
+            GKScore.reportScores(scoreArray, withCompletionHandler: {(error : NSError?) -> Void in
                 if error != nil {
-                    NSLog(error.localizedDescription)
+                    NSLog(error!.localizedDescription)
                 }
             })
         }
@@ -178,7 +178,7 @@ class StartViewController: UIViewController, GKGameCenterControllerDelegate, ADB
     func loadAds() {
         self.appDelegate.adView.removeFromSuperview()
         self.appDelegate.adView.delegate = nil
-        self.appDelegate.adView = ADBannerView(frame: CGRect.zeroRect)
+        self.appDelegate.adView = ADBannerView(frame: CGRect.zero)
         self.appDelegate.adView.center = CGPoint(x: view.bounds.size.width / 2, y: view.bounds.size.height - self.appDelegate.adView.frame.size.height / 2)
         self.appDelegate.adView.delegate = self
         self.appDelegate.adView.hidden = true
@@ -186,8 +186,9 @@ class StartViewController: UIViewController, GKGameCenterControllerDelegate, ADB
     }
     
     func bannerViewDidLoadAd(banner: ADBannerView!) {
-        print(defaults.integerForKey("ads"))
-        println("bannerViewDidLoadAd")
+        print(defaults.integerForKey("ads"), terminator: "")
+        
+        print("bannerViewDidLoadAd")
         if defaults.integerForKey("ads") == 0 {
             self.appDelegate.adView.hidden = false
         } else if defaults.integerForKey("ads") == 1 {
@@ -197,21 +198,21 @@ class StartViewController: UIViewController, GKGameCenterControllerDelegate, ADB
     }
     
     func bannerViewActionDidFinish(banner: ADBannerView!) {
-        println("bannerViewActionDidFinish")
+        print("bannerViewActionDidFinish")
     }
     
     func bannerView(banner: ADBannerView!, didFailToReceiveAdWithError error: NSError!) {
-        println("didFailToReceiveAdWithError")
+        print("didFailToReceiveAdWithError")
         self.appDelegate.adView.hidden = true
     }
     
 }
 extension NSDate {
-    var minute:  Int { return NSCalendar.currentCalendar().components(.CalendarUnitMinute,  fromDate: self).minute  }
-    var hour:  Int { return NSCalendar.currentCalendar().components(.CalendarUnitHour,  fromDate: self).hour  }
-    var day:   Int { return NSCalendar.currentCalendar().components(.CalendarUnitDay,   fromDate: self).day   }
-    var month: Int { return NSCalendar.currentCalendar().components(.CalendarUnitMonth, fromDate: self).month }
-    var year:  Int { return NSCalendar.currentCalendar().components(.CalendarUnitYear,  fromDate: self).year  }
+    var minute:  Int { return NSCalendar.currentCalendar().components(.Minute,  fromDate: self).minute  }
+    var hour:  Int { return NSCalendar.currentCalendar().components(.Hour,  fromDate: self).hour  }
+    var day:   Int { return NSCalendar.currentCalendar().components(.Day,   fromDate: self).day   }
+    var month: Int { return NSCalendar.currentCalendar().components(.Month, fromDate: self).month }
+    var year:  Int { return NSCalendar.currentCalendar().components(.Year,  fromDate: self).year  }
     var date12pm: NSDate {
         return  NSCalendar.currentCalendar().dateWithEra(1, year: year, month: month, day: day+1, hour: 12, minute: 0, second: 0, nanosecond: 0)!
     }

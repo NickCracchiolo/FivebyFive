@@ -67,7 +67,8 @@ class SettingsViewController: UIViewController, ADBannerViewDelegate {
         BackGesture.edges = .Left
         view.addGestureRecognizer(BackGesture)
         
-        print("Ads On Value: " + String(defaults.integerForKey("ads")))
+        print("Ads On Value: " + String(defaults.integerForKey("ads")), terminator: "")
+        
         if defaults.integerForKey("ads") == 0 {
             loadAds()
         } else if defaults.integerForKey("ads") == 1 {
@@ -78,7 +79,8 @@ class SettingsViewController: UIViewController, ADBannerViewDelegate {
     }
     
     override func viewDidAppear(animated: Bool) {
-        print("Ads On Value: " + String(defaults.integerForKey("ads")))
+        print("Ads On Value: " + String(defaults.integerForKey("ads")), terminator: "")
+        
         if defaults.integerForKey("ads") == 1 {
             self.appDelegate.adView.removeFromSuperview()
         }
@@ -90,22 +92,17 @@ class SettingsViewController: UIViewController, ADBannerViewDelegate {
     override func shouldAutorotate() -> Bool {
         return true
     }
-    override func supportedInterfaceOrientations() -> Int {
-        if UIDevice.currentDevice().userInterfaceIdiom == .Phone {
-            return Int(UIInterfaceOrientationMask.AllButUpsideDown.rawValue)
-        } else {
-            return Int(UIInterfaceOrientationMask.All.rawValue)
-        }
-    }
+
     func swipeBack(sender: UIScreenEdgePanGestureRecognizer) {
         navigationController?.popViewControllerAnimated(true)
     }
     func ResetAction() {
-        print("Reset Action")
+        print("Reset Action", terminator: "")
+        
         if ResetSwitchObject.on == true {
             tutorial = 0
             saveData()
-            print(tutorial)
+            print(tutorial, separator: "")
             ResetSwitchObject.setOn(true, animated: true)
             Flurry.logEvent("Reset Tutorial")
         }
@@ -161,7 +158,7 @@ class SettingsViewController: UIViewController, ADBannerViewDelegate {
     func loadAds() {
         self.appDelegate.adView.removeFromSuperview()
         self.appDelegate.adView.delegate = nil
-        self.appDelegate.adView = ADBannerView(frame: CGRect.zeroRect)
+        self.appDelegate.adView = ADBannerView(frame: CGRect.zero)
         self.appDelegate.adView.center = CGPoint(x: view.bounds.size.width / 2, y: view.bounds.size.height - self.appDelegate.adView.frame.size.height / 2)
         self.appDelegate.adView.delegate = self
         self.appDelegate.adView.hidden = true
@@ -169,7 +166,8 @@ class SettingsViewController: UIViewController, ADBannerViewDelegate {
     }
     
     func bannerViewDidLoadAd(banner: ADBannerView!) {
-        print(defaults.integerForKey("ads"))
+        print(defaults.integerForKey("ads"), terminator: "")
+        
         if defaults.integerForKey("ads") == 0 {
             self.appDelegate.adView.hidden = false
         } else if defaults.integerForKey("ads") == 1 {
@@ -179,11 +177,11 @@ class SettingsViewController: UIViewController, ADBannerViewDelegate {
     }
     
     func bannerViewActionDidFinish(banner: ADBannerView!) {
-        println("bannerViewActionDidFinish")
+        print("bannerViewActionDidFinish")
     }
     
     func bannerView(banner: ADBannerView!, didFailToReceiveAdWithError error: NSError!) {
-        println("didFailToReceiveAdWithError")
+        print("didFailToReceiveAdWithError")
         self.appDelegate.adView.hidden = true
     }
 }

@@ -13,8 +13,8 @@ import iAd
 extension SKNode {
     class func unarchiveFromFile(file : NSString) -> SKNode? {
         if let path = NSBundle.mainBundle().pathForResource(file as String, ofType: "sks") {
-            var sceneData = NSData(contentsOfFile: path, options: .DataReadingMappedIfSafe, error: nil)!
-            var archiver = NSKeyedUnarchiver(forReadingWithData: sceneData)
+            let sceneData = try! NSData(contentsOfFile: path, options: .DataReadingMappedIfSafe)
+            let archiver = NSKeyedUnarchiver(forReadingWithData: sceneData)
             
             archiver.setClass(self.classForKeyedUnarchiver(), forClassName: "SKScene")
             let scene = archiver.decodeObjectForKey(NSKeyedArchiveRootObjectKey) as! GameScene
@@ -31,7 +31,7 @@ class GameViewController: UIViewController, ADBannerViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("Ads On Value: " + String(defaults.integerForKey("ads")))
+        print("Ads On Value: " + String(defaults.integerForKey("ads")), terminator: "")
         if defaults.integerForKey("ads") == 0 {
             loadAds()
         } else if defaults.integerForKey("ads") == 1 {
@@ -55,7 +55,8 @@ class GameViewController: UIViewController, ADBannerViewDelegate {
         }
     }
     override func viewDidAppear(animated: Bool) {
-        print("Ads On Value: " + String(defaults.integerForKey("ads")))
+        print("Ads On Value: " + String(defaults.integerForKey("ads")), terminator: "")
+        
         if defaults.integerForKey("ads") == 1 {
             self.appDelegate.adView.removeFromSuperview()
         }
@@ -63,13 +64,7 @@ class GameViewController: UIViewController, ADBannerViewDelegate {
     override func shouldAutorotate() -> Bool {
         return true
     }
-    override func supportedInterfaceOrientations() -> Int {
-        if UIDevice.currentDevice().userInterfaceIdiom == .Phone {
-            return Int(UIInterfaceOrientationMask.AllButUpsideDown.rawValue)
-        } else {
-            return Int(UIInterfaceOrientationMask.All.rawValue)
-        }
-    }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -84,7 +79,7 @@ class GameViewController: UIViewController, ADBannerViewDelegate {
     func loadAds() {
         self.appDelegate.adView.removeFromSuperview()
         self.appDelegate.adView.delegate = nil
-        self.appDelegate.adView = ADBannerView(frame: CGRect.zeroRect)
+        self.appDelegate.adView = ADBannerView(frame: CGRect.zero)
         self.appDelegate.adView.center = CGPoint(x: view.bounds.size.width / 2, y: view.bounds.size.height - self.appDelegate.adView.frame.size.height / 2)
         self.appDelegate.adView.delegate = self
         self.appDelegate.adView.hidden = true
@@ -92,7 +87,7 @@ class GameViewController: UIViewController, ADBannerViewDelegate {
     }
     
     func bannerViewDidLoadAd(banner: ADBannerView!) {
-        print(defaults.integerForKey("ads"))
+        print((defaults.integerForKey("ads"), appeterminator: ""))
         if defaults.integerForKey("ads") == 0 {
             self.appDelegate.adView.hidden = false
         } else if defaults.integerForKey("ads") == 1 {
@@ -102,10 +97,10 @@ class GameViewController: UIViewController, ADBannerViewDelegate {
     }
     
     func bannerViewActionDidFinish(banner: ADBannerView!) {
-        println("bannerViewActionDidFinish")
+        print("bannerViewActionDidFinish")
     }
     
     func bannerView(banner: ADBannerView!, didFailToReceiveAdWithError error: NSError!) {
-        println("didFailToReceiveAdWithError")
+        print("didFailToReceiveAdWithError")
         self.appDelegate.adView.hidden = true
     }}

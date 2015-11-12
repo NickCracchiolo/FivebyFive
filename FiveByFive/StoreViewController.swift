@@ -30,7 +30,7 @@ class StoreViewController: UIViewController, ADBannerViewDelegate {
         BackGesture.edges = .Left
         view.addGestureRecognizer(BackGesture)
         
-        print("Ads On Value: " + String(defaults.integerForKey("ads")))
+        print("Ads On Value: " + String(defaults.integerForKey("ads")), terminator: "")
         if defaults.integerForKey("ads") == 0 {
             loadAds()
         } else if defaults.integerForKey("ads") == 1 {
@@ -40,7 +40,7 @@ class StoreViewController: UIViewController, ADBannerViewDelegate {
 
     }
     override func viewDidAppear(animated: Bool) {
-        print("Ads On Value: " + String(defaults.integerForKey("ads")))
+        print("Ads On Value: " + String(defaults.integerForKey("ads")), terminator: "")
 
         if defaults.integerForKey("ads") == 1 {
             self.appDelegate.adView.removeFromSuperview()
@@ -50,21 +50,14 @@ class StoreViewController: UIViewController, ADBannerViewDelegate {
         return true
     }
 
-    override func supportedInterfaceOrientations() -> Int {
-        if UIDevice.currentDevice().userInterfaceIdiom == .Phone {
-            return Int(UIInterfaceOrientationMask.AllButUpsideDown.rawValue)
-        } else {
-            return Int(UIInterfaceOrientationMask.All.rawValue)
-        }
-    }
     func swipeBack(sender: UIScreenEdgePanGestureRecognizer) {
         navigationController?.popViewControllerAnimated(true)
     }
-    @IBAction func BackButton(sender: UIButton) {
+    func BackButton(sender: UIButton) {
         navigationController?.popViewControllerAnimated(true)
     }
     
-    @IBAction func FreeCoinsBtn(sender: UIButton) {
+    func FreeCoinsBtn(sender: UIButton) {
         if freeCoins == 0 {
             let added_money = randomFreeCoins()
             if added_money == 25 {
@@ -82,7 +75,7 @@ class StoreViewController: UIViewController, ADBannerViewDelegate {
             }
             money += added_money
             freeCoins = 1
-            let flags: NSCalendarUnit = .DayCalendarUnit | .MonthCalendarUnit | .YearCalendarUnit
+            let flags: NSCalendarUnit = [NSCalendarUnit.Day, .Month, .Year]
             let date = NSDate()
             let components = NSCalendar.currentCalendar().components(flags, fromDate: date)
             if defaults.integerForKey("notif_on") == 0 {
@@ -124,7 +117,8 @@ class StoreViewController: UIViewController, ADBannerViewDelegate {
         // Release any cached data, images, etc that aren't in use.
     }
     @IBAction func RestoreBtn(sender: UIButton) {
-        print("Restore Button Pressed")
+        print("Restore Button Pressed", terminator: "")
+        
         inAppPurchases.defaultHelper.RestorePurchase()
     }
     
@@ -153,7 +147,7 @@ class StoreViewController: UIViewController, ADBannerViewDelegate {
     func loadAds() {
         self.appDelegate.adView.removeFromSuperview()
         self.appDelegate.adView.delegate = nil
-        self.appDelegate.adView = ADBannerView(frame: CGRect.zeroRect)
+        self.appDelegate.adView = ADBannerView(frame: CGRect.zero)
         self.appDelegate.adView.center = CGPoint(x: view.bounds.size.width / 2, y: view.bounds.size.height - self.appDelegate.adView.frame.size.height / 2)
         self.appDelegate.adView.delegate = self
         self.appDelegate.adView.hidden = true
@@ -161,7 +155,8 @@ class StoreViewController: UIViewController, ADBannerViewDelegate {
     }
     
     func bannerViewDidLoadAd(banner: ADBannerView!) {
-        print(defaults.integerForKey("ads"))
+        print(defaults.integerForKey("ads"), terminator: "")
+        
         if defaults.integerForKey("ads") == 0 {
             self.appDelegate.adView.hidden = false
         } else if defaults.integerForKey("ads") == 1 {
@@ -171,11 +166,11 @@ class StoreViewController: UIViewController, ADBannerViewDelegate {
     }
     
     func bannerViewActionDidFinish(banner: ADBannerView!) {
-        println("bannerViewActionDidFinish")
+        print("bannerViewActionDidFinish")
     }
     
     func bannerView(banner: ADBannerView!, didFailToReceiveAdWithError error: NSError!) {
-        println("didFailToReceiveAdWithError")
+        print("didFailToReceiveAdWithError")
         self.appDelegate.adView.hidden = true
     }
 }

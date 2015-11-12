@@ -30,13 +30,13 @@ class inAppPurchases: NSObject,SKProductsRequestDelegate, SKPaymentTransactionOb
     }
     func getProducts() {
         if(SKPaymentQueue.canMakePayments()) {
-            println("IAP is enabled, loading")
-            var productID:NSSet = NSSet(objects: "fbf.iap.add_money","fbf.iap.add_money500","fbf.iap.add_money1000","fbf.iap.remove_ads", "fbf.iap.save_life")
-            request = SKProductsRequest(productIdentifiers: productID as Set<NSObject>)
+            print("IAP is enabled, loading")
+            let productID:NSSet = NSSet(objects: "fbf.iap.add_money","fbf.iap.add_money500","fbf.iap.add_money1000","fbf.iap.remove_ads", "fbf.iap.save_life")
+            request = SKProductsRequest(productIdentifiers: productID as! Set<String>)
             request!.delegate = self
             request!.start()
         } else {
-            println("please enable IAPS")
+            print("please enable IAPS")
         }
 
     }
@@ -45,7 +45,7 @@ class inAppPurchases: NSObject,SKProductsRequestDelegate, SKPaymentTransactionOb
     }
     func saveLife() {
         for product in list {
-            var prodID = product.productIdentifier
+            let prodID = product.productIdentifier
             if(prodID == "fbf.iap.save_life") {
                 p = product
                 buyProduct(p)
@@ -55,7 +55,7 @@ class inAppPurchases: NSObject,SKProductsRequestDelegate, SKPaymentTransactionOb
     }
     func CoinsBtnOne() {
         for product in list {
-            var prodID = product.productIdentifier
+            let prodID = product.productIdentifier
             if(prodID == "fbf.iap.add_money") {
                 p = product
                 buyProduct(p)
@@ -66,7 +66,7 @@ class inAppPurchases: NSObject,SKProductsRequestDelegate, SKPaymentTransactionOb
     }
     func CoinsBtnFive() {
         for product in list {
-            var prodID = product.productIdentifier
+            let prodID = product.productIdentifier
             if(prodID == "fbf.iap.add_money500") {
                 p = product
                 buyProduct(p)
@@ -77,7 +77,7 @@ class inAppPurchases: NSObject,SKProductsRequestDelegate, SKPaymentTransactionOb
     
     func CoinsBtnThousand() {
         for product in list {
-            var prodID = product.productIdentifier
+            let prodID = product.productIdentifier
             if(prodID == "fbf.iap.add_money1000") {
                 p = product
                 buyProduct(p)
@@ -88,7 +88,7 @@ class inAppPurchases: NSObject,SKProductsRequestDelegate, SKPaymentTransactionOb
     
     func RemoveAds() {
         for product in list {
-            var prodID = product.productIdentifier
+            let prodID = product.productIdentifier
             if(prodID == "fbf.iap.remove_ads") {
                 p = product
                 buyProduct(p)
@@ -103,55 +103,54 @@ class inAppPurchases: NSObject,SKProductsRequestDelegate, SKPaymentTransactionOb
 
     func buyProduct(prod:SKProduct) {
         //println("buy " + prod.productIdentifier)
-        var pay = SKPayment(product: prod)
+        let pay = SKPayment(product: prod)
         SKPaymentQueue.defaultQueue().addTransactionObserver(self)
         SKPaymentQueue.defaultQueue().addPayment(pay as SKPayment)
     }
-    func productsRequest(request: SKProductsRequest!, didReceiveResponse response: SKProductsResponse!) {
-        println("product request")
-        var myProduct = response.products
+    func productsRequest(request: SKProductsRequest, didReceiveResponse response: SKProductsResponse) {
+        print("product request")
+        let myProduct = response.products
         
         for product in myProduct {
-            println("product added")
-            println(product.productIdentifier)
-            println(product.localizedTitle)
-            println(product.localizedDescription)
-            println(product.price)
+            print("product added")
+            print(product.productIdentifier)
+            print(product.localizedTitle)
+            print(product.localizedDescription)
+            print(product.price)
             
-            list.append(product as! SKProduct)
+            list.append(product as SKProduct)
         }
     }
-    func paymentQueueRestoreCompletedTransactionsFinished(queue: SKPaymentQueue!) {
-        println("transactions restored")
+    func paymentQueueRestoreCompletedTransactionsFinished(queue: SKPaymentQueue) {
+        print("transactions restored")
         
-        var purchasedItemIDS = []
         for transaction in queue.transactions {
-            var t: SKPaymentTransaction = transaction as! SKPaymentTransaction
+            let t: SKPaymentTransaction = transaction as SKPaymentTransaction
             
             let prodID = t.payment.productIdentifier as String
             
             switch prodID {
             case "fbf.iap.remove_ads":
-                println("remove ads")
+                print("remove ads")
                 defaults.setInteger(1, forKey: "ads")
                 Flurry.logEvent("Ads Removal Restored")
             default:
-                println("IAP not setup")
+                print("IAP not setup")
             }
         }
     }
-    func paymentQueue(queue: SKPaymentQueue!, updatedTransactions transactions: [AnyObject]!) {
-        println("add paymnet")
+    func paymentQueue(queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
+        print("add paymnet")
         
         for transaction:AnyObject in transactions {
-            var trans = transaction as! SKPaymentTransaction
-            println(trans.error)
+            let trans = transaction as! SKPaymentTransaction
+            print(trans.error)
             
             switch trans.transactionState {
                 
             case .Purchased:
-                println("buy, ok unlock iap here")
-                println(p.productIdentifier)
+                print("buy, ok unlock iap here")
+                print(p.productIdentifier)
                 
                 let prodID = p.productIdentifier as String
                 switch prodID {
@@ -175,35 +174,34 @@ class inAppPurchases: NSObject,SKProductsRequestDelegate, SKPaymentTransactionOb
                     case "fbf.iap.save_life":
                         Flurry.logEvent("Second Chance Bought")
                     default:
-                        println("IAP not setup")
+                        print("IAP not setup")
                 }
                 queue.finishTransaction(trans)
                 break;
             case .Deferred:
                 let alertController = UIAlertController(title: "Uh Oh", message:
-                    "Go get your parents to make this payment", preferredStyle: UIAlertControllerStyle.Alert)
+                        "Go into setting and enable In App Purchases", preferredStyle: UIAlertControllerStyle.Alert)
                 alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
-                
                 viewC.presentViewController(alertController, animated: true, completion: nil)
                 purchase_failed = true
                 break;
             case .Failed:
-                println("buy error")
+                print("buy error")
                 queue.finishTransaction(trans)
                 purchase_failed = true
                 break;
             default:
-                println("default")
+                print("default")
                 break;
                 
             }
         }
     }
     func finishTransaction(trans:SKPaymentTransaction) {
-        println("finish trans")
+        print("finish trans")
     }
-    func paymentQueue(queue: SKPaymentQueue!, removedTransactions transactions: [AnyObject]!) {
-        println("remove trans");
+    func paymentQueue(queue: SKPaymentQueue, removedTransactions transactions: [SKPaymentTransaction]) {
+        print("remove trans");
         //purchase_failed = true
     }
 
