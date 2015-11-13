@@ -16,6 +16,7 @@ class inAppPurchases: NSObject,SKProductsRequestDelegate, SKPaymentTransactionOb
     var p = SKProduct()
     var list = [SKProduct]()
     var viewC:UIViewController = UIViewController()
+    let defaults = NSUserDefaults.standardUserDefaults()
     
     class var defaultHelper : inAppPurchases {
         struct Static {
@@ -153,18 +154,16 @@ class inAppPurchases: NSObject,SKProductsRequestDelegate, SKPaymentTransactionOb
                 print(p.productIdentifier)
                 
                 let prodID = p.productIdentifier as String
+                var money = defaults.integerForKey(DefaultKeys.Money.description)
                 switch prodID {
                     case "fbf.iap.add_money":
                         money+=100
-                        saveData()
                         Flurry.logEvent("100 Coins Bought")
                     case "fbf.iap.add_money500":
                         money+=500
-                        saveData()
                         Flurry.logEvent("500 Coins Bought")
                     case "fbf.iap.add_money1000":
                         money+=1000
-                        saveData()
                         Flurry.logEvent("1000 Coins Bought")
                     case "fbf.iap.remove_ads":
                         defaults.setInteger(1, forKey: "ads")
@@ -183,18 +182,20 @@ class inAppPurchases: NSObject,SKProductsRequestDelegate, SKPaymentTransactionOb
                         "Go into setting and enable In App Purchases", preferredStyle: UIAlertControllerStyle.Alert)
                 alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
                 viewC.presentViewController(alertController, animated: true, completion: nil)
-                purchase_failed = true
+                defaults.setInteger(1, forKey: DefaultKeys.Purchased.description)
                 break;
             case .Failed:
                 print("buy error")
                 queue.finishTransaction(trans)
-                purchase_failed = true
+                defaults.setInteger(1, forKey: DefaultKeys.Purchased.description)
                 break;
             default:
                 print("default")
                 break;
                 
             }
+            defaults.synchronize()
+
         }
     }
     func finishTransaction(trans:SKPaymentTransaction) {
