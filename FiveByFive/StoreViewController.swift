@@ -13,38 +13,28 @@ import iAd
 class StoreViewController: UIViewController, ADBannerViewDelegate {
     @IBOutlet weak var MoneyLabel: UILabel!
     @IBOutlet var BackGesture: UIScreenEdgePanGestureRecognizer!
+    @IBOutlet weak var FreeButton: UIButton!
+
     var p = SKProduct()
     var list = [SKProduct]()
     var startVC = StartViewController()
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-    
-    @IBOutlet weak var FreeButton: UIButton!
+    let defaults = NSUserDefaults.standardUserDefaults()
     
     override func viewDidLoad() {
-        getData()
-        MoneyLabel.text = String(money)
+        MoneyLabel.text = String(defaults.integerForKey(DefaultKeys.Money.description))
         inAppPurchases.defaultHelper.setViewController(self)
         inAppPurchases.defaultHelper.getProducts()
-        BackGesture = UIScreenEdgePanGestureRecognizer(target: self,
-            action: "swipeBack:")
+        BackGesture = UIScreenEdgePanGestureRecognizer(target: self, action: "swipeBack:")
         BackGesture.edges = .Left
         view.addGestureRecognizer(BackGesture)
         
-        print("Ads On Value: " + String(defaults.integerForKey("ads")), terminator: "")
-        if defaults.integerForKey("ads") == 0 {
-            loadAds()
-        } else if defaults.integerForKey("ads") == 1 {
-            self.appDelegate.adView.removeFromSuperview()
-        }
+        self.checkAdsOn()
         Flurry.logEvent("Store Page View")
 
     }
     override func viewDidAppear(animated: Bool) {
-        print("Ads On Value: " + String(defaults.integerForKey("ads")), terminator: "")
-
-        if defaults.integerForKey("ads") == 1 {
-            self.appDelegate.adView.removeFromSuperview()
-        }
+        self.checkAdsOn()
     }
     override func shouldAutorotate() -> Bool {
         return true
@@ -58,7 +48,7 @@ class StoreViewController: UIViewController, ADBannerViewDelegate {
     }
     
     func FreeCoinsBtn(sender: UIButton) {
-        if freeCoins == 0 {
+        if defaults.integerForKey(DefaultKeys.FreeCoins.description) == 0 {
             let added_money = randomFreeCoins()
             if added_money == 25 {
                 let img = UIImage(named: "Store25.png")
@@ -73,8 +63,11 @@ class StoreViewController: UIViewController, ADBannerViewDelegate {
                 let img = UIImage(named: "Store200.png")
                 FreeButton.setImage(img, forState: UIControlState.Normal)
             }
+            var money = defaults.integerForKey(DefaultKeys.Money.description)
             money += added_money
-            freeCoins = 1
+            defaults.setInteger(money, forKey: DefaultKeys.Money.description)
+            defaults.setInteger(1, forKey: DefaultKeys.FreeCoins.description)
+            
             let flags: NSCalendarUnit = [NSCalendarUnit.Day, .Month, .Year]
             let date = NSDate()
             let components = NSCalendar.currentCalendar().components(flags, fromDate: date)
@@ -82,10 +75,11 @@ class StoreViewController: UIViewController, ADBannerViewDelegate {
                 UIApplication.sharedApplication().cancelAllLocalNotifications()
                 startVC.setupNofications()
             }
-            saved_year = components.year
-            saved_month = components.month
-            saved_day = components.day
-            saveData()
+            defaults.setInteger(components.year, forKey: DefaultKeys.Year.description)
+            defaults.setInteger(components.month, forKey: DefaultKeys.Month.description)
+            defaults.setInteger(components.day, forKey: DefaultKeys.Day.description)
+            defaults.synchronize()
+            
             MoneyLabel.text = String(money)
         } else {
             let alertController = UIAlertController(title: "Free Coins", message:
@@ -153,16 +147,19 @@ class StoreViewController: UIViewController, ADBannerViewDelegate {
         self.appDelegate.adView.hidden = true
         view.addSubview(self.appDelegate.adView)
     }
-    
-    func bannerViewDidLoadAd(banner: ADBannerView!) {
-        print(defaults.integerForKey("ads"), terminator: "")
+    func checkAdsOn() {
+        let ads = defaults.integerForKey(DefaultKeys.Ads.description)
+        print(ads, terminator: "")
         
-        if defaults.integerForKey("ads") == 0 {
+        if ads == 0 {
             self.appDelegate.adView.hidden = false
-        } else if defaults.integerForKey("ads") == 1 {
+        } else if ads == 1 {
             self.appDelegate.adView.hidden = true
             self.appDelegate.adView.removeFromSuperview()
         }
+    }
+    func bannerViewDidLoadAd(banner: ADBannerView!) {
+        self.checkAdsOn()
     }
     
     func bannerViewActionDidFinish(banner: ADBannerView!) {

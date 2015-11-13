@@ -19,30 +19,30 @@ class SettingsViewController: UIViewController, ADBannerViewDelegate {
     @IBOutlet weak var SaveLifeOutlet: UISwitch!
     
     
-    @IBOutlet var BackGesture: UIScreenEdgePanGestureRecognizer!
+    @IBOutlet weak var BackGesture: UIScreenEdgePanGestureRecognizer!
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    let defaults = NSUserDefaults.standardUserDefaults()
     
     override func viewDidLoad() {
-        getData()
         var notif_bool:Bool = true
         var sounds_bool:Bool = true
         var save_bool:Bool = true
         
-        if defaults.integerForKey("notif_bool") == 0 {
+        if defaults.integerForKey(DefaultKeys.Notifications.description) == 0 {
             notif_bool = true
-        } else if defaults.integerForKey("notif_bool") == 1 {
+        } else if defaults.integerForKey(DefaultKeys.Notifications.description) == 1 {
             notif_bool = false
         }
         
-        if defaults.integerForKey("sounds_bool") == 0 {
+        if defaults.integerForKey(DefaultKeys.Sound.description) == 0 {
             sounds_bool = true
-        } else if defaults.integerForKey("sounds_bool") == 1 {
+        } else if defaults.integerForKey(DefaultKeys.Sound.description) == 1 {
             sounds_bool = false
         }
         
-        if defaults.integerForKey("save_life") == 0 {
+        if defaults.integerForKey(DefaultKeys.Life.description) == 0 {
             save_bool = true
-        } else if defaults.integerForKey("save_life") == 1 {
+        } else if defaults.integerForKey(DefaultKeys.Life.description) == 1 {
             save_bool = false
         }
         
@@ -67,23 +67,14 @@ class SettingsViewController: UIViewController, ADBannerViewDelegate {
         BackGesture.edges = .Left
         view.addGestureRecognizer(BackGesture)
         
-        print("Ads On Value: " + String(defaults.integerForKey("ads")), terminator: "")
+        self.checkAdsOn()
         
-        if defaults.integerForKey("ads") == 0 {
-            loadAds()
-        } else if defaults.integerForKey("ads") == 1 {
-            self.appDelegate.adView.removeFromSuperview()
-        }
         Flurry.logEvent("Settings Page View")
 
     }
     
     override func viewDidAppear(animated: Bool) {
-        print("Ads On Value: " + String(defaults.integerForKey("ads")), terminator: "")
-        
-        if defaults.integerForKey("ads") == 1 {
-            self.appDelegate.adView.removeFromSuperview()
-        }
+        self.checkAdsOn()
     }
     @IBAction func SLBButton(sender: UIButton) {
         UIApplication.sharedApplication().openURL(NSURL(string: "https://itunes.apple.com/app/apple-store/id922641562?pt=68053800&ct=SLB%20from%20FBF&mt=8")!)
@@ -100,49 +91,45 @@ class SettingsViewController: UIViewController, ADBannerViewDelegate {
         print("Reset Action", terminator: "")
         
         if ResetSwitchObject.on == true {
-            tutorial = 0
-            saveData()
-            print(tutorial, separator: "")
+            defaults.setInteger(0, forKey: DefaultKeys.Tutorial.description)
+            defaults.synchronize()
             ResetSwitchObject.setOn(true, animated: true)
             Flurry.logEvent("Reset Tutorial")
         }
     }
     func NotificationAction() {
         if NotSwitchObject.on == true {
-            notifications_on = 0
-            saveData()
+            defaults.setInteger(0, forKey: DefaultKeys.Notifications.description)
             Flurry.logEvent("Notifications On")
             
         } else if NotSwitchObject.on == false {
-            notifications_on = 1
+            defaults.setInteger(1, forKey: DefaultKeys.Notifications.description)
             UIApplication.sharedApplication().cancelAllLocalNotifications()
-            saveData()
             Flurry.logEvent("Notifications Off")
         }
+        defaults.synchronize()
     }
     func SoundsAction() {
         if SoundsSwitchOutlet.on == true {
-            sounds_on = 0
-            saveData()
+            defaults.setInteger(0, forKey: DefaultKeys.Sound.description)
             Flurry.logEvent("Sounds On")
 
         } else if SoundsSwitchOutlet.on == false {
-            sounds_on = 1
-            saveData()
+            defaults.setInteger(1, forKey: DefaultKeys.Sound.description)
             Flurry.logEvent("Sounds Off")
         }
+        defaults.synchronize()
     }
     func SaveLifeAction() {
         if SaveLifeOutlet.on == true {
-            save_life = 0
-            saveData()
+            defaults.setInteger(0, forKey: DefaultKeys.Life.description)
             Flurry.logEvent("Second Chance Alert On")
             
         } else if SaveLifeOutlet.on == false {
-            save_life = 1
-            saveData()
+            defaults.setInteger(1, forKey: DefaultKeys.Life.description)
             Flurry.logEvent("Second Chance Alert Off")
         }
+        defaults.synchronize()
     }
     @IBAction func BackBtn(sender: UIButton) {
         navigationController?.popViewControllerAnimated(true)
@@ -164,16 +151,19 @@ class SettingsViewController: UIViewController, ADBannerViewDelegate {
         self.appDelegate.adView.hidden = true
         view.addSubview(self.appDelegate.adView)
     }
-    
-    func bannerViewDidLoadAd(banner: ADBannerView!) {
-        print(defaults.integerForKey("ads"), terminator: "")
+    func checkAdsOn() {
+        let ads = defaults.integerForKey(DefaultKeys.Ads.description)
+        print(ads, terminator: "")
         
-        if defaults.integerForKey("ads") == 0 {
+        if ads == 0 {
             self.appDelegate.adView.hidden = false
-        } else if defaults.integerForKey("ads") == 1 {
+        } else if ads == 1 {
             self.appDelegate.adView.hidden = true
             self.appDelegate.adView.removeFromSuperview()
         }
+    }
+    func bannerViewDidLoadAd(banner: ADBannerView!) {
+        self.checkAdsOn()
     }
     
     func bannerViewActionDidFinish(banner: ADBannerView!) {

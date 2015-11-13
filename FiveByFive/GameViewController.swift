@@ -28,15 +28,11 @@ extension SKNode {
 
 class GameViewController: UIViewController, ADBannerViewDelegate {
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    let defaults = NSUserDefaults.standardUserDefaults()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("Ads On Value: " + String(defaults.integerForKey("ads")), terminator: "")
-        if defaults.integerForKey("ads") == 0 {
-            loadAds()
-        } else if defaults.integerForKey("ads") == 1 {
-            self.appDelegate.adView.removeFromSuperview()
-        }
+        self.checkAdsOn()
         
         if let scene = GameScene.unarchiveFromFile("GameScene") as? GameScene {
             // Configure the view.
@@ -55,17 +51,12 @@ class GameViewController: UIViewController, ADBannerViewDelegate {
         }
     }
     override func viewDidAppear(animated: Bool) {
-        print("Ads On Value: " + String(defaults.integerForKey("ads")), terminator: "")
-        
-        if defaults.integerForKey("ads") == 1 {
-            self.appDelegate.adView.removeFromSuperview()
-        }
+        self.checkAdsOn()
     }
     override func shouldAutorotate() -> Bool {
         return true
     }
     
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Release any cached data, images, etc that aren't in use.
@@ -85,15 +76,19 @@ class GameViewController: UIViewController, ADBannerViewDelegate {
         self.appDelegate.adView.hidden = true
         view.addSubview(self.appDelegate.adView)
     }
-    
-    func bannerViewDidLoadAd(banner: ADBannerView!) {
-        print((defaults.integerForKey("ads"), appeterminator: ""))
-        if defaults.integerForKey("ads") == 0 {
+    func checkAdsOn() {
+        let ads = defaults.integerForKey(DefaultKeys.Ads.description)
+        print(ads, terminator: "")
+        
+        if ads == 0 {
             self.appDelegate.adView.hidden = false
-        } else if defaults.integerForKey("ads") == 1 {
+        } else if ads == 1 {
             self.appDelegate.adView.hidden = true
             self.appDelegate.adView.removeFromSuperview()
         }
+    }
+    func bannerViewDidLoadAd(banner: ADBannerView!) {
+        self.checkAdsOn()
     }
     
     func bannerViewActionDidFinish(banner: ADBannerView!) {

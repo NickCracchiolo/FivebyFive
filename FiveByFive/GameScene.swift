@@ -60,8 +60,8 @@ let fiveText:SKTexture = SKTexture(image: fiveText_UI)
 class GameScene: SKScene {
     weak var gViewController : GameViewController?
     var HUD_ON = false
-    var pull_overlay_gesture = UIScreenEdgePanGestureRecognizer()
-    var push_overlay_gesture = UIScreenEdgePanGestureRecognizer()
+    weak var pull_overlay_gesture = UIScreenEdgePanGestureRecognizer()
+    weak var push_overlay_gesture = UIScreenEdgePanGestureRecognizer()
     var draggingNode = SKSpriteNode()
     var draggedParent = SKNode()
     var draggingNode_number = 0
@@ -69,6 +69,7 @@ class GameScene: SKScene {
     var gridPositions = [CGPoint]()
     var clear:Bool = false
     var touch_enabled = true
+    let defaults = NSUserDefaults.standardUserDefaults()
     
     
     override func didMoveToView(view: SKView) {
@@ -76,13 +77,12 @@ class GameScene: SKScene {
         self.backgroundColor = backColor
         //Flurry add Playing Game event
         Flurry.logEvent("User Playing", timed: true)
-        getData()
         
         
         inAppPurchases.defaultHelper.setViewController(gameVC)
         inAppPurchases.defaultHelper.getProducts()
         
-        if tutorial == 0 {
+        if defaults.integerForKey(DefaultKeys.Tutorial.description) == 0 {
             tut_Point = 0
             setup()
             tutorialSetup()
@@ -91,13 +91,13 @@ class GameScene: SKScene {
         }
         pull_overlay_gesture = UIScreenEdgePanGestureRecognizer(target: self,
             action: "pullUpHUD:")
-        pull_overlay_gesture.edges = .Right
-        self.view!.addGestureRecognizer(pull_overlay_gesture)
+        pull_overlay_gesture!.edges = .Right
+        self.view!.addGestureRecognizer(pull_overlay_gesture!)
         
         push_overlay_gesture = UIScreenEdgePanGestureRecognizer(target: self,
             action: "removeHUD:")
-        push_overlay_gesture.edges = .Left
-        self.view!.addGestureRecognizer(push_overlay_gesture)
+        push_overlay_gesture!.edges = .Left
+        self.view!.addGestureRecognizer(push_overlay_gesture!)
         for var i = 0; i < 25; i++ {
             HUD_list.append(0)
         }
@@ -105,11 +105,11 @@ class GameScene: SKScene {
     
     override func update(currentTime: CFTimeInterval) {
         /* Called before each frame is rendered */
-        if purchase_failed == true {
+        if defaults.integerForKey(DefaultKeys.Purchased.description) == 1 {
             counter = 0
             touch_enabled = false
             GameOverScreen()
-            purchase_failed = false
+            defaults.setInteger(0, forKey: DefaultKeys.Purchased.description)
         }
     }
 
@@ -117,6 +117,7 @@ class GameScene: SKScene {
         for touch:AnyObject in touches {
             let location = (touch as! UITouch).locationInNode(self)
             let touched_node = self.nodeAtPoint(location)
+            var money = defaults.integerForKey(DefaultKeys.Money.description)
             if let node = self.nodeAtPoint(location).name {
             
                 if self.touch_enabled == true && HUD_ON == false {
@@ -182,6 +183,7 @@ class GameScene: SKScene {
                     if node == "nextButton" {
                         nextLevel()
                     }
+                    defaults.setInteger(money, forKey: DefaultKeys.Money.description)
                 } else if HUD_ON == true {
                     if touched_node.name == "Clear Button" {
                         draggedParent.removeAllChildren()
@@ -981,8 +983,7 @@ class GameScene: SKScene {
             self.runAction(tut4)
         } else if tut_Point == 4 {
             self.runAction(tut5)
-            tutorial = 1
-            saveData()
+            defaults.setInteger(1, forKey: DefaultKeys.Tutorial.description)
             hudNode.removeFromParent()
             hudNode = HUD()
             self.addChild(hudNode)
@@ -1038,7 +1039,7 @@ class GameScene: SKScene {
         high_level_lbl.zPosition = 3
         hudNode.addChild(high_level_lbl)
         
-        let highest_level_num = SKLabelNode(text: String(highestLevel))
+        let highest_level_num = SKLabelNode(text: String(DefaultKeys.Level.description))
         highest_level_num.position = CGPointMake(self.frame.size.width*0.47, self.frame.size.height*0.845)
         highest_level_num.fontColor = fontClr
         highest_level_num.fontSize = 25
@@ -1078,7 +1079,7 @@ class GameScene: SKScene {
         high_money_lbl.zPosition = 3
         hudNode.addChild(high_money_lbl)
         
-        let highest_money_num = SKLabelNode(text: String(money))
+        let highest_money_num = SKLabelNode(text: String(defaults.integerForKey(DefaultKeys.Money.description)))
         highest_money_num.position = CGPointMake(self.frame.size.width*0.67, self.frame.size.height*0.845)
         highest_money_num.fontColor = fontClr
         highest_money_num.fontSize = 25
@@ -1553,7 +1554,7 @@ class GameScene: SKScene {
     func checkForBomb(inout selected:Bool,num:Int,node:SKSpriteNode) {
         if selected ==  false {
             if num == 0 {
-                if sounds_on == 0 {
+                if defaults.integerForKey(DefaultKeys.Sound.description) == 1 {
                     let soundsAction = SKAction.playSoundFileNamed("explosion.wav", waitForCompletion: false)
                     self.runAction(soundsAction)
                 }
@@ -1569,8 +1570,7 @@ class GameScene: SKScene {
                 }
                 let stopAskingAction = UIAlertAction(title: "Don't Ask Again", style: UIAlertActionStyle.Default) {
                     UIAlertAction in
-                    save_life = 1
-                    saveData()
+                    self.defaults.setInteger(1, forKey: DefaultKeys.Life.description)
                     counter = 0
                     self.touch_enabled = false
                     self.GameOverScreen()
@@ -1584,16 +1584,16 @@ class GameScene: SKScene {
                 alertController.addAction(purchaseAction)
                 alertController.addAction(dismissAction)
                 alertController.addAction(stopAskingAction)
-                if save_life == 0 {
+                if defaults.integerForKey(DefaultKeys.Life.description) == 0 {
                     self.view?.window?.rootViewController?.presentViewController(alertController, animated: true, completion: nil)
 
-                } else if save_life == 1 {
+                } else if defaults.integerForKey(DefaultKeys.Life.description) == 1 {
                     counter = 0
                     touch_enabled = false
                     GameOverScreen()
                 }
             } else if num != 0 {
-                if sounds_on == 0 {
+                if defaults.integerForKey(DefaultKeys.Sound.description) == 0 {
                     let soundsAction = SKAction.playSoundFileNamed("woosh.wav", waitForCompletion: false)
                     self.runAction(soundsAction)
                 }
@@ -1640,8 +1640,10 @@ class GameScene: SKScene {
     }
 
     func nextLevel() {
-        if Game_Level > highestLevel {
-            highestLevel = Game_Level
+        var highest_level = defaults.integerForKey(DefaultKeys.Level.description)
+        if Game_Level > highest_level {
+            highest_level = Game_Level
+            defaults.setInteger(highest_level, forKey: DefaultKeys.Level.description)
         }
         Game_Level++
         updateAchievements()
@@ -1652,7 +1654,6 @@ class GameScene: SKScene {
         total_tiles = 0
         counter = 0
         current_coins += 5
-        saveData()
         setup()
     }
     func showBoard() {
@@ -1669,11 +1670,12 @@ class GameScene: SKScene {
     
     func newGame() {
         //Save data and add collected money
+        var money = defaults.integerForKey(DefaultKeys.Money.description)
         money += current_coins
-        if Game_Level > highestLevel {
-            highestLevel = Game_Level
+        if Game_Level > defaults.integerForKey(DefaultKeys.Level.description) {
+            defaults.setInteger(Game_Level, forKey: DefaultKeys.Level.description)
         }
-        saveData()
+        defaults.setInteger(money, forKey: DefaultKeys.Money.description)
         self.removeAllChildren()
         total_tiles = 0
         counter = 0
@@ -1685,7 +1687,6 @@ class GameScene: SKScene {
     }
     
     func setup() {
-        getData()
         self.addChild(draggedParent)
         if numbers_list.count != 0 {
             numbers_list = []

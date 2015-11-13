@@ -11,17 +11,49 @@ import UIKit
 import iAd
 import GameKit
 
-var gameCenterEnabled = false
-var leaderBoardID = NSString()
+enum DefaultKeys: CustomStringConvertible {
+    case FreeCoins
+    case Money
+    case Level
+    case Notifications
+    case Sound
+    case Tutorial
+    case Year
+    case Month
+    case Day
+    case Ads
+    case Life
+    case Purchased
+    
+    var description : String {
+        switch self {
+        case .FreeCoins: return "freeCoins"
+        case .Money: return "money"
+        case .Level: return "level"
+        case .Notifications: return "notif_bool"
+        case .Sound: return "sounds_bool"
+        case .Tutorial: return "tutorial"
+        case .Year: return "savedyear"
+        case .Month: return "savedmonth"
+        case .Day: return "savedday"
+        case .Ads: return "ads"
+        case .Life: return "save_life"
+        case .Purchased: return "purchase_bool"
+        }
+    }
+}
 
 class StartViewController: UIViewController, GKGameCenterControllerDelegate, ADBannerViewDelegate {
     
     let DailyNotification = UILocalNotification()
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    var leaderBoardID = NSString()
+    var gameCenterEnabled = false
+    let defaults = NSUserDefaults.standardUserDefaults()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        getData()
+        var free_coins = defaults.integerForKey("freeCoins")
         
         let flags: NSCalendarUnit = [.Day, .Month, .Year]
         let date = NSDate()
@@ -31,27 +63,28 @@ class StartViewController: UIViewController, GKGameCenterControllerDelegate, ADB
         let month = components.month
         let day = components.day
         
-        if freeCoins == 1 {
+        let saved_day = defaults.integerForKey(DefaultKeys.Day.description)
+        let saved_month = defaults.integerForKey(DefaultKeys.Month.description)
+        let saved_year = defaults.integerForKey(DefaultKeys.Year.description)
+        
+        if free_coins == 1 {
             if day > saved_day {
-                freeCoins = 0
+                free_coins = 0
             } else if day < saved_day {
                 if month > saved_month {
-                    freeCoins = 0
+                    free_coins = 0
                 } else if month < saved_month {
                     if year > saved_year {
-                        freeCoins = 0
+                        free_coins = 0
                     }
                 }
     
             }
         }
-        print("Ads On Value: " + String(defaults.integerForKey("ads")), terminator: "")
-
-        if defaults.integerForKey("ads") == 0 {
-            loadAds()
-        } else if defaults.integerForKey("ads") == 1 {
-            self.appDelegate.adView.removeFromSuperview()
-        }
+        defaults.setInteger(free_coins, forKey: DefaultKeys.FreeCoins.description)
+        defaults.synchronize()
+        
+        self.checkAdsOn()
         
         self.authenticateLocalPlayer()
         setUIUserNotificationOptions()
@@ -60,17 +93,9 @@ class StartViewController: UIViewController, GKGameCenterControllerDelegate, ADB
 //        if freeCoins == 1 {
 //            UIApplication.sharedApplication().cancelLocalNotification(DailyNotification)
 //        }
-        saveData()
     }
     override func viewDidAppear(animated: Bool) {
-        print("Ads On Value: " + String(defaults.integerForKey("ads")), terminator: "")
-        
-        if defaults.integerForKey("ads")  == 0 {
-            loadAds()
-        }
-        if defaults.integerForKey("ads") == 1 {
-            self.appDelegate.adView.removeFromSuperview()
-        }
+        self.checkAdsOn()
     }
     override func shouldAutorotate() -> Bool {
         return true
@@ -141,17 +166,17 @@ class StartViewController: UIViewController, GKGameCenterControllerDelegate, ADB
             } else if localPlayer.authenticated {
                 print("Authenticated", terminator: "")
                 GKNotificationBanner.showBannerWithTitle("Game Center", message: ("Welcome, " + String(format: localPlayer.displayName!)) , completionHandler: {
-                    gameCenterEnabled = true
+                    self.gameCenterEnabled = true
                 })
                 localPlayer.loadDefaultLeaderboardIdentifierWithCompletionHandler{(viewController, error) -> Void in
                     if error != nil {
                         print(error, terminator: "")
                     } else {
-                        leaderBoardID = leaderBoardIdentifier
+                        self.leaderBoardID = leaderBoardIdentifier
                     }
                 }
             } else {
-                gameCenterEnabled = false
+                self.gameCenterEnabled = false
                 print("Game Center Not Enabled", terminator: "")
             }
         }
@@ -184,17 +209,21 @@ class StartViewController: UIViewController, GKGameCenterControllerDelegate, ADB
         self.appDelegate.adView.hidden = true
         view.addSubview(self.appDelegate.adView)
     }
-    
-    func bannerViewDidLoadAd(banner: ADBannerView!) {
-        print(defaults.integerForKey("ads"), terminator: "")
+    func checkAdsOn() {
+        let ads = defaults.integerForKey(DefaultKeys.Ads.description)
+        print(ads, terminator: "")
         
-        print("bannerViewDidLoadAd")
-        if defaults.integerForKey("ads") == 0 {
+        if ads == 0 {
             self.appDelegate.adView.hidden = false
-        } else if defaults.integerForKey("ads") == 1 {
+        } else if ads == 1 {
             self.appDelegate.adView.hidden = true
             self.appDelegate.adView.removeFromSuperview()
         }
+    }
+    func bannerViewDidLoadAd(banner: ADBannerView!) {
+        print(defaults.integerForKey(DefaultKeys.Ads.description), terminator: "")
+        
+        self.checkAdsOn()
     }
     
     func bannerViewActionDidFinish(banner: ADBannerView!) {
