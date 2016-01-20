@@ -11,38 +11,6 @@ import UIKit
 import iAd
 import GameKit
 
-enum DefaultKeys: CustomStringConvertible {
-    case FreeCoins
-    case Money
-    case Level
-    case Notifications
-    case Sound
-    case Tutorial
-    case Year
-    case Month
-    case Day
-    case Ads
-    case Life
-    case Purchased
-    
-    var description : String {
-        switch self {
-        case .FreeCoins: return "freeCoins"
-        case .Money: return "money"
-        case .Level: return "level"
-        case .Notifications: return "notif_bool"
-        case .Sound: return "sounds_bool"
-        case .Tutorial: return "tutorial"
-        case .Year: return "savedyear"
-        case .Month: return "savedmonth"
-        case .Day: return "savedday"
-        case .Ads: return "ads"
-        case .Life: return "save_life"
-        case .Purchased: return "purchase_bool"
-        }
-    }
-}
-
 class StartViewController: UIViewController, GKGameCenterControllerDelegate, ADBannerViewDelegate {
     
     let DailyNotification = UILocalNotification()
@@ -53,7 +21,7 @@ class StartViewController: UIViewController, GKGameCenterControllerDelegate, ADB
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        var free_coins = defaults.integerForKey("freeCoins")
+        var free_coins = defaults.integerForKey(DefaultKeys.FreeCoins.description)
         
         let flags: NSCalendarUnit = [.Day, .Month, .Year]
         let date = NSDate()
@@ -188,7 +156,7 @@ class StartViewController: UIViewController, GKGameCenterControllerDelegate, ADB
     
     func reportScore(identifier:NSString) {
         if GKLocalPlayer.localPlayer().authenticated == true{
-            let highScore = defaults.integerForKey("level")
+            let highScore = defaults.integerForKey(DefaultKeys.Level.description)
             let scoreReporter = GKScore(leaderboardIdentifier: identifier as String)
             scoreReporter.value = Int64(highScore)
             let scoreArray: [GKScore] = [scoreReporter]

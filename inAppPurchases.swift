@@ -155,6 +155,7 @@ class inAppPurchases: NSObject,SKProductsRequestDelegate, SKPaymentTransactionOb
                 
                 let prodID = p.productIdentifier as String
                 var money = defaults.integerForKey(DefaultKeys.Money.description)
+                
                 switch prodID {
                     case "fbf.iap.add_money":
                         money+=100

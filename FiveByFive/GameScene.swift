@@ -70,11 +70,11 @@ class GameScene: SKScene {
     var clear:Bool = false
     var touch_enabled = true
     let defaults = NSUserDefaults.standardUserDefaults()
-    
+
     
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
-        self.backgroundColor = backColor
+        self.backgroundColor = Constants.AppColor.backColor
         //Flurry add Playing Game event
         Flurry.logEvent("User Playing", timed: true)
         
@@ -195,7 +195,7 @@ class GameScene: SKScene {
                     if touched_node.name == "bomb_draggable" {
                         let new_bomb = SKSpriteNode(texture: bombText)
                         new_bomb.position = CGPointMake(self.frame.size.width/2-150, self.frame.size.height*0.25)
-                        new_bomb.zPosition = OVERLAY_OBJZ
+                        new_bomb.zPosition = Constants.zPosition.OVERLAY_OBJZ
                         new_bomb.name = "new_bomb"
                         new_bomb.xScale = 0.75
                         new_bomb.yScale = 0.75
@@ -206,7 +206,7 @@ class GameScene: SKScene {
                     if touched_node.name == "one_draggable" {
                         let new_one = SKSpriteNode(imageNamed: "One.png")
                         new_one.position = CGPointMake(self.frame.size.width/2-90, self.frame.size.height*0.25)
-                        new_one.zPosition = OVERLAY_OBJZ
+                        new_one.zPosition = Constants.zPosition.OVERLAY_OBJZ
                         new_one.name = "new_one"
                         new_one.xScale = 0.75
                         new_one.yScale = 0.75
@@ -217,7 +217,7 @@ class GameScene: SKScene {
                     if touched_node.name == "two_draggable" {
                         let new_two = SKSpriteNode(imageNamed: "Two.png")
                         new_two.position = CGPointMake(self.frame.size.width/2-30, self.frame.size.height*0.25)
-                        new_two.zPosition = OVERLAY_OBJZ
+                        new_two.zPosition = Constants.zPosition.OVERLAY_OBJZ
                         new_two.name = "new_two"
                         new_two.xScale = 0.75
                         new_two.yScale = 0.75
@@ -228,7 +228,7 @@ class GameScene: SKScene {
                     if touched_node.name == "three_draggable" {
                         let new_three = SKSpriteNode(imageNamed: "Three.png")
                         new_three.position = CGPointMake(self.frame.size.width/2+30, self.frame.size.height*0.25)
-                        new_three.zPosition = OVERLAY_OBJZ
+                        new_three.zPosition = Constants.zPosition.OVERLAY_OBJZ
                         new_three.name = "new_three"
                         new_three.xScale = 0.75
                         new_three.yScale = 0.75
@@ -239,7 +239,7 @@ class GameScene: SKScene {
                     if touched_node.name == "four_draggable" {
                         let new_four = SKSpriteNode(imageNamed: "Four.png")
                         new_four.position = CGPointMake(self.frame.size.width/2+90, self.frame.size.height*0.25)
-                        new_four.zPosition = OVERLAY_OBJZ
+                        new_four.zPosition = Constants.zPosition.OVERLAY_OBJZ
                         new_four.name = "new_four"
                         new_four.xScale = 0.75
                         new_four.yScale = 0.75
@@ -250,7 +250,7 @@ class GameScene: SKScene {
                     if touched_node.name == "five_draggable" {
                         let new_five = SKSpriteNode(imageNamed: "Five.png")
                         new_five.position = CGPointMake(self.frame.size.width/2+150, self.frame.size.height*0.25)
-                        new_five.zPosition = OVERLAY_OBJZ
+                        new_five.zPosition = Constants.zPosition.OVERLAY_OBJZ
                         new_five.name = "new_five"
                         new_five.xScale = 0.75
                         new_five.yScale = 0.75
@@ -346,12 +346,12 @@ class GameScene: SKScene {
             overlay.alpha = 0.3
             overlay.strokeColor = SKColor.blackColor()
             overlay.position = CGPointMake(self.frame.size.width/2, 0)
-            overlay.zPosition = OVERLAYZ
+            overlay.zPosition = Constants.zPosition.OVERLAYZ
             overlayNode.addChild(overlay)
             
             let bomb_draggable = SKSpriteNode(texture: bombText)
             bomb_draggable.position = CGPointMake(self.frame.size.width/2, self.frame.size.height*0.25)
-            bomb_draggable.zPosition = OVERLAY_OBJZ
+            bomb_draggable.zPosition = Constants.zPosition.OVERLAY_OBJZ
             bomb_draggable.name = "bomb_draggable"
             bomb_draggable.xScale = 0.75
             bomb_draggable.yScale = 0.75
@@ -359,7 +359,7 @@ class GameScene: SKScene {
             
             let one_draggable = SKSpriteNode(imageNamed: "One.png")
             one_draggable.position = CGPointMake(self.frame.size.width/2, self.frame.size.height*0.25)
-            one_draggable.zPosition = OVERLAY_OBJZ
+            one_draggable.zPosition = Constants.zPosition.OVERLAY_OBJZ
             one_draggable.name = "one_draggable"
             one_draggable.xScale = 0.75
             one_draggable.yScale = 0.75
@@ -367,7 +367,7 @@ class GameScene: SKScene {
             
             let two_draggable = SKSpriteNode(imageNamed: "Two.png")
             two_draggable.position = CGPointMake(self.frame.size.width/2, self.frame.size.height*0.25)
-            two_draggable.zPosition = OVERLAY_OBJZ
+            two_draggable.zPosition = Constants.zPosition.OVERLAY_OBJZ
             two_draggable.name = "two_draggable"
             two_draggable.xScale = 0.75
             two_draggable.yScale = 0.75
@@ -375,7 +375,7 @@ class GameScene: SKScene {
             
             let three_draggable = SKSpriteNode(imageNamed: "Three.png")
             three_draggable.position = CGPointMake(self.frame.size.width/2, self.frame.size.height*0.25)
-            three_draggable.zPosition = OVERLAY_OBJZ
+            three_draggable.zPosition = Constants.zPosition.OVERLAY_OBJZ
             three_draggable.name = "three_draggable"
             three_draggable.xScale = 0.75
             three_draggable.yScale = 0.75
@@ -383,7 +383,7 @@ class GameScene: SKScene {
             
             let four_draggable = SKSpriteNode(imageNamed: "Four.png")
             four_draggable.position = CGPointMake(self.frame.size.width/2, self.frame.size.height*0.25)
-            four_draggable.zPosition = OVERLAY_OBJZ
+            four_draggable.zPosition = Constants.zPosition.OVERLAY_OBJZ
             four_draggable.name = "four_draggable"
             four_draggable.xScale = 0.75
             four_draggable.yScale = 0.75
@@ -391,7 +391,7 @@ class GameScene: SKScene {
             
             let five_draggable = SKSpriteNode(imageNamed: "Five.png")
             five_draggable.position = CGPointMake(self.frame.size.width/2, self.frame.size.height*0.25)
-            five_draggable.zPosition = OVERLAY_OBJZ
+            five_draggable.zPosition = Constants.zPosition.OVERLAY_OBJZ
             five_draggable.name = "five_draggable"
             five_draggable.xScale = 0.75
             five_draggable.yScale = 0.75
@@ -401,8 +401,8 @@ class GameScene: SKScene {
             clear_btn.name = "Clear Button"
             clear_btn.fontColor = SKColor.whiteColor()
             clear_btn.fontSize = 25
-            clear_btn.fontName = Game_Over_Font
-            clear_btn.zPosition = OVERLAY_OBJZ
+            clear_btn.fontName = Constants.FontName.Game_Over_Font
+            clear_btn.zPosition = Constants.zPosition.OVERLAY_OBJZ
             clear_btn.position = CGPointMake(self.frame.size.width/2, self.frame.size.height*0.25)
             overlayNode.addChild(clear_btn)
             
@@ -434,7 +434,7 @@ class GameScene: SKScene {
                     if HUD_list[counter] == 1 {
                         let new_one = SKSpriteNode(imageNamed: "One.png")
                         new_one.position = CGPointMake(self.frame.size.width/2.5 + CGFloat(55*x), self.frame.size.height/2.5 + CGFloat(55*(4-y)))
-                        new_one.zPosition = OVERLAY_OBJZ
+                        new_one.zPosition = Constants.zPosition.OVERLAY_OBJZ
                         new_one.name = "new_one"
                         new_one.xScale = 0.75
                         new_one.yScale = 0.75
@@ -443,7 +443,7 @@ class GameScene: SKScene {
                     } else if HUD_list[counter] == 2 {
                         let new_two = SKSpriteNode(imageNamed: "Two.png")
                         new_two.position = CGPointMake(self.frame.size.width/2.5 + CGFloat(55*x), self.frame.size.height/2.5 + CGFloat(55*(4-y)))
-                        new_two.zPosition = OVERLAY_OBJZ
+                        new_two.zPosition = Constants.zPosition.OVERLAY_OBJZ
                         new_two.name = "new_two"
                         new_two.xScale = 0.75
                         new_two.yScale = 0.75
@@ -452,7 +452,7 @@ class GameScene: SKScene {
                     } else if HUD_list[counter] == 3 {
                         let new_three = SKSpriteNode(imageNamed: "Three.png")
                         new_three.position = CGPointMake(self.frame.size.width/2.5 + CGFloat(55*x), self.frame.size.height/2.5 + CGFloat(55*(4-y)))
-                        new_three.zPosition = OVERLAY_OBJZ
+                        new_three.zPosition = Constants.zPosition.OVERLAY_OBJZ
                         new_three.name = "new_three"
                         new_three.xScale = 0.75
                         new_three.yScale = 0.75
@@ -461,7 +461,7 @@ class GameScene: SKScene {
                     } else if HUD_list[counter] == 4 {
                         let new_four = SKSpriteNode(imageNamed: "Four.png")
                         new_four.position = CGPointMake(self.frame.size.width/2.5 + CGFloat(55*x), self.frame.size.height/2.5 + CGFloat(55*(4-y)))
-                        new_four.zPosition = OVERLAY_OBJZ
+                        new_four.zPosition = Constants.zPosition.OVERLAY_OBJZ
                         new_four.name = "new_four"
                         new_four.xScale = 0.75
                         new_four.yScale = 0.75
@@ -469,7 +469,7 @@ class GameScene: SKScene {
                     } else if HUD_list[counter] == 5 {
                         let new_five = SKSpriteNode(imageNamed: "Five.png")
                         new_five.position = CGPointMake(self.frame.size.width/2.5 + CGFloat(55*x), self.frame.size.height/2.5 + CGFloat(55*(4-y)))
-                        new_five.zPosition = OVERLAY_OBJZ
+                        new_five.zPosition = Constants.zPosition.OVERLAY_OBJZ
                         new_five.name = "new_five"
                         new_five.xScale = 0.75
                         new_five.yScale = 0.75
@@ -477,7 +477,7 @@ class GameScene: SKScene {
                     } else if HUD_list[counter] == 6 {
                         let new_bomb = SKSpriteNode(texture: bombText)
                         new_bomb.position = CGPointMake(self.frame.size.width/2.5 + CGFloat(55*x), self.frame.size.height/2.5 + CGFloat(55*(4-y)))
-                        new_bomb.zPosition = OVERLAY_OBJZ
+                        new_bomb.zPosition = Constants.zPosition.OVERLAY_OBJZ
                         new_bomb.name = "new_bomb"
                         new_bomb.xScale = 0.75
                         new_bomb.yScale = 0.75
@@ -738,44 +738,44 @@ class GameScene: SKScene {
         let tut1 = SKAction.runBlock({
             let arrow = SKSpriteNode(imageNamed: "tutArrow.png")
             arrow.position = CGPointMake(width*0.34, height*0.26)
-            arrow.zPosition = tutorial_zPosition
+            arrow.zPosition = Constants.zPosition.tutorial_zPosition
             arrow.xScale = 0.75
             arrow.yScale = 0.75
             tutNode.addChild(arrow)
             
             let desc1 = SKLabelNode(text: "Shows the sum of the")
-            desc1.fontName = Game_Font
-            desc1.fontColor = blackColor
+            desc1.fontName = Constants.FontName.Game_Font
+            desc1.fontColor = Constants.FontColor.blackColor
             desc1.fontSize = 20
             desc1.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Left
             desc1.position = CGPointMake(width*0.4, height*0.26)
-            desc1.zPosition = tutorial_zPosition
+            desc1.zPosition = Constants.zPosition.tutorial_zPosition
             tutNode.addChild(desc1)
             
             let desc2 = SKLabelNode(text: "number behind each square")
-            desc2.fontName = Game_Font
-            desc2.fontColor = blackColor
+            desc2.fontName = Constants.FontName.Game_Font
+            desc2.fontColor = Constants.FontColor.blackColor
             desc2.fontSize = 20
             desc2.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Left
             desc2.position = CGPointMake(width*0.4, height*0.24)
-            desc2.zPosition = tutorial_zPosition
+            desc2.zPosition = Constants.zPosition.tutorial_zPosition
             tutNode.addChild(desc2)
             
             let desc3 = SKLabelNode(text: "in the row or column")
-            desc3.fontName = Game_Font
-            desc3.fontColor = blackColor
+            desc3.fontName = Constants.FontName.Game_Font
+            desc3.fontColor = Constants.FontColor.blackColor
             desc3.fontSize = 20
             desc3.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Left
             desc3.position = CGPointMake(width*0.4, height*0.22)
-            desc3.zPosition = tutorial_zPosition
+            desc3.zPosition = Constants.zPosition.tutorial_zPosition
             tutNode.addChild(desc3)
             
             let nextButton = SKLabelNode(text: "Next")
             nextButton.position = CGPointMake(width*0.6, height*0.13)
-            nextButton.fontName = Game_Over_Font
+            nextButton.fontName = Constants.FontName.Game_Over_Font
             nextButton.fontSize = 40
-            nextButton.fontColor = blackColor
-            nextButton.zPosition = tutorial_zPosition
+            nextButton.fontColor = Constants.FontColor.blackColor
+            nextButton.zPosition = Constants.zPosition.tutorial_zPosition
             nextButton.name = "Next Button"
             tutNode.addChild(nextButton)
             
@@ -785,44 +785,44 @@ class GameScene: SKScene {
         let tut2 = SKAction.runBlock({
             let arrow = SKSpriteNode(imageNamed: "tutArrow.png")
             arrow.position = CGPointMake(width*0.365, height*0.26)
-            arrow.zPosition = tutorial_zPosition
+            arrow.zPosition = Constants.zPosition.tutorial_zPosition
             arrow.xScale = 0.75
             arrow.yScale = 0.75
             tutNode.addChild(arrow)
             
             let desc1 = SKLabelNode(text: "Shows the sum of")
-            desc1.fontName = Game_Font
-            desc1.fontColor = blackColor
+            desc1.fontName = Constants.FontName.Game_Font
+            desc1.fontColor = Constants.FontColor.blackColor
             desc1.fontSize = 20
             desc1.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Left
             desc1.position = CGPointMake(width*0.4, height*0.26)
-            desc1.zPosition = tutorial_zPosition
+            desc1.zPosition = Constants.zPosition.tutorial_zPosition
             tutNode.addChild(desc1)
             
             let desc2 = SKLabelNode(text: "all the bombs in")
-            desc2.fontName = Game_Font
-            desc2.fontColor = blackColor
+            desc2.fontName = Constants.FontName.Game_Font
+            desc2.fontColor = Constants.FontColor.blackColor
             desc2.fontSize = 20
             desc2.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Left
             desc2.position = CGPointMake(width*0.4, height*0.24)
-            desc2.zPosition = tutorial_zPosition
+            desc2.zPosition = Constants.zPosition.tutorial_zPosition
             tutNode.addChild(desc2)
             
             let desc3 = SKLabelNode(text: "the row or column")
-            desc3.fontName = Game_Font
-            desc3.fontColor = blackColor
+            desc3.fontName = Constants.FontName.Game_Font
+            desc3.fontColor = Constants.FontColor.blackColor
             desc3.fontSize = 20
             desc3.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Left
             desc3.position = CGPointMake(width*0.4, height*0.22)
-            desc3.zPosition = tutorial_zPosition
+            desc3.zPosition = Constants.zPosition.tutorial_zPosition
             tutNode.addChild(desc3)
             
             let nextButton = SKLabelNode(text: "Next")
             nextButton.position = CGPointMake(width*0.6, height*0.13)
-            nextButton.fontName = Game_Over_Font
+            nextButton.fontName = Constants.FontName.Game_Over_Font
             nextButton.fontSize = 40
-            nextButton.fontColor = blackColor
-            nextButton.zPosition = tutorial_zPosition
+            nextButton.fontColor = Constants.FontColor.blackColor
+            nextButton.zPosition = Constants.zPosition.tutorial_zPosition
             nextButton.name = "Next Button"
             tutNode.addChild(nextButton)
             
@@ -832,54 +832,54 @@ class GameScene: SKScene {
         let tut3 = SKAction.runBlock({
             let arrow = SKSpriteNode(imageNamed: "tutArrow.png")
             arrow.position = CGPointMake(width*0.4, height*0.2)
-            arrow.zPosition = tutorial_zPosition
+            arrow.zPosition = Constants.zPosition.tutorial_zPosition
             arrow.xScale = 0.75
             arrow.yScale = 0.75
             tutNode.addChild(arrow)
             
             let desc1 = SKLabelNode(text: "For 25 coins you can")
-            desc1.fontName = Game_Font
-            desc1.fontColor = blackColor
+            desc1.fontName = Constants.FontName.Game_Font
+            desc1.fontColor = Constants.FontColor.blackColor
             desc1.fontSize = 20
             desc1.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Left
             desc1.position = CGPointMake(width*0.42, height*0.26)
-            desc1.zPosition = tutorial_zPosition
+            desc1.zPosition = Constants.zPosition.tutorial_zPosition
             tutNode.addChild(desc1)
             
             let desc2 = SKLabelNode(text: "reveal all the tiles")
-            desc2.fontName = Game_Font
-            desc2.fontColor = blackColor
+            desc2.fontName = Constants.FontName.Game_Font
+            desc2.fontColor = Constants.FontColor.blackColor
             desc2.fontSize = 20
             desc2.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Left
             desc2.position = CGPointMake(width*0.42, height*0.24)
-            desc2.zPosition = tutorial_zPosition
+            desc2.zPosition = Constants.zPosition.tutorial_zPosition
             tutNode.addChild(desc2)
             
             let desc3 = SKLabelNode(text: "in the specified row")
-            desc3.fontName = Game_Font
-            desc3.fontColor = blackColor
+            desc3.fontName = Constants.FontName.Game_Font
+            desc3.fontColor = Constants.FontColor.blackColor
             desc3.fontSize = 20
             desc3.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Left
             desc3.position = CGPointMake(width*0.42, height*0.22)
-            desc3.zPosition = tutorial_zPosition
+            desc3.zPosition = Constants.zPosition.tutorial_zPosition
             tutNode.addChild(desc3)
             
             let desc4 = SKLabelNode(text: "or column")
-            desc4.fontName = Game_Font
-            desc4.fontColor = blackColor
+            desc4.fontName = Constants.FontName.Game_Font
+            desc4.fontColor = Constants.FontColor.blackColor
             desc4.fontSize = 20
             desc4.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Left
             desc4.position = CGPointMake(width*0.42, height*0.20)
-            desc4.zPosition = tutorial_zPosition
+            desc4.zPosition = Constants.zPosition.tutorial_zPosition
             tutNode.addChild(desc4)
             
             let nextButton = SKLabelNode(text: "Next")
             nextButton.position = CGPointMake(width*0.6, height*0.13)
-            nextButton.fontName = Game_Over_Font
+            nextButton.fontName = Constants.FontName.Game_Over_Font
             nextButton.fontSize = 40
             desc1.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Left
-            nextButton.fontColor = blackColor
-            nextButton.zPosition = tutorial_zPosition
+            nextButton.fontColor = Constants.FontColor.blackColor
+            nextButton.zPosition = Constants.zPosition.tutorial_zPosition
             nextButton.name = "Next Button"
             tutNode.addChild(nextButton)
             
@@ -889,45 +889,45 @@ class GameScene: SKScene {
         let tut4 = SKAction.runBlock({
             let arrow = SKSpriteNode(imageNamed: "swipeArrow.png")
             arrow.position = CGPointMake(width*0.6, height*0.2)
-            arrow.zPosition = tutorial_zPosition
+            arrow.zPosition = Constants.zPosition.tutorial_zPosition
             arrow.xScale = 0.75
             arrow.yScale = 0.75
             tutNode.addChild(arrow)
             
             let desc1 = SKLabelNode(text: "Swipe from the right ")
-            desc1.fontName = Game_Font
-            desc1.fontColor = blackColor
+            desc1.fontName = Constants.FontName.Game_Font
+            desc1.fontColor = Constants.FontColor.blackColor
             desc1.fontSize = 20
             desc1.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Left
             desc1.position = CGPointMake(width*0.42, height*0.26)
-            desc1.zPosition = tutorial_zPosition
+            desc1.zPosition = Constants.zPosition.tutorial_zPosition
             tutNode.addChild(desc1)
             
             let desc2 = SKLabelNode(text: "to pull up the HUD ")
-            desc2.fontName = Game_Font
-            desc2.fontColor = blackColor
+            desc2.fontName = Constants.FontName.Game_Font
+            desc2.fontColor = Constants.FontColor.blackColor
             desc2.fontSize = 20
             desc2.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Left
             desc2.position = CGPointMake(width*0.42, height*0.24)
-            desc2.zPosition = tutorial_zPosition
+            desc2.zPosition = Constants.zPosition.tutorial_zPosition
             tutNode.addChild(desc2)
             
             let desc3 = SKLabelNode(text: "to plan out your grid")
-            desc3.fontName = Game_Font
-            desc3.fontColor = blackColor
+            desc3.fontName = Constants.FontName.Game_Font
+            desc3.fontColor = Constants.FontColor.blackColor
             desc3.fontSize = 20
             desc3.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Left
             desc3.position = CGPointMake(width*0.42, height*0.22)
-            desc3.zPosition = tutorial_zPosition
+            desc3.zPosition = Constants.zPosition.tutorial_zPosition
             tutNode.addChild(desc3)
             
             let nextButton = SKLabelNode(text: "Next")
             nextButton.position = CGPointMake(width*0.6, height*0.13)
-            nextButton.fontName = Game_Over_Font
+            nextButton.fontName = Constants.FontName.Game_Over_Font
             nextButton.fontSize = 40
             desc1.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Left
-            nextButton.fontColor = blackColor
-            nextButton.zPosition = tutorial_zPosition
+            nextButton.fontColor = Constants.FontColor.blackColor
+            nextButton.zPosition = Constants.zPosition.tutorial_zPosition
             nextButton.name = "Next Button"
             tutNode.addChild(nextButton)
             
@@ -937,36 +937,36 @@ class GameScene: SKScene {
         let tut5 = SKAction.runBlock({
             let arrow = SKSpriteNode(imageNamed: "swipeArrowLeft.png")
             arrow.position = CGPointMake(width*0.3, height*0.2)
-            arrow.zPosition = tutorial_zPosition
+            arrow.zPosition = Constants.zPosition.tutorial_zPosition
             arrow.xScale = 0.75
             arrow.yScale = 0.75
             tutNode.addChild(arrow)
             
             let desc1 = SKLabelNode(text: "Swipe from the left ")
-            desc1.fontName = Game_Font
-            desc1.fontColor = blackColor
+            desc1.fontName = Constants.FontName.Game_Font
+            desc1.fontColor = Constants.FontColor.blackColor
             desc1.fontSize = 20
             desc1.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Left
             desc1.position = CGPointMake(width*0.42, height*0.26)
-            desc1.zPosition = tutorial_zPosition
+            desc1.zPosition = Constants.zPosition.tutorial_zPosition
             tutNode.addChild(desc1)
             
             let desc2 = SKLabelNode(text: "to dismiss the HUD ")
-            desc2.fontName = Game_Font
-            desc2.fontColor = blackColor
+            desc2.fontName = Constants.FontName.Game_Font
+            desc2.fontColor = Constants.FontColor.blackColor
             desc2.fontSize = 20
             desc2.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Left
             desc2.position = CGPointMake(width*0.42, height*0.24)
-            desc2.zPosition = tutorial_zPosition
+            desc2.zPosition = Constants.zPosition.tutorial_zPosition
             tutNode.addChild(desc2)
             
             let nextButton = SKLabelNode(text: "Next")
             nextButton.position = CGPointMake(width*0.6, height*0.13)
-            nextButton.fontName = Game_Over_Font
+            nextButton.fontName = Constants.FontName.Game_Over_Font
             nextButton.fontSize = 40
             desc1.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Left
-            nextButton.fontColor = blackColor
-            nextButton.zPosition = tutorial_zPosition
+            nextButton.fontColor = Constants.FontColor.blackColor
+            nextButton.zPosition = Constants.zPosition.tutorial_zPosition
             nextButton.name = "Next Button"
             tutNode.addChild(nextButton)
             
@@ -996,8 +996,8 @@ class GameScene: SKScene {
         newGameButton.position = CGPointMake(self.frame.size.width/2, self.frame.size.height*0.2)
         newGameButton.zPosition = 50
         newGameButton.fontSize = 55
-        newGameButton.fontName = Game_Over_Font
-        newGameButton.fontColor = fontClr
+        newGameButton.fontName = Constants.FontName.Game_Over_Font
+        newGameButton.fontColor = Constants.FontColor.fontClr
         newGameButton.name = "New Game Button"
         gameOverNode.addChild(newGameButton)
         
@@ -1009,81 +1009,81 @@ class GameScene: SKScene {
         
         let level_lbl = SKLabelNode(text: "Level")
         level_lbl.position = CGPointMake(self.frame.size.width*0.4, self.frame.size.height*0.925)
-        level_lbl.fontColor = fontClr
+        level_lbl.fontColor = Constants.FontColor.fontClr
         level_lbl.fontSize = 35
-        level_lbl.fontName = HUD_Font
+        level_lbl.fontName = Constants.FontName.HUD_Font
         level_lbl.zPosition = 3
         hudNode.addChild(level_lbl)
         
         let current_level_lbl = SKLabelNode(text: "Current:")
         current_level_lbl.position = CGPointMake(self.frame.size.width*0.4, self.frame.size.height*0.88)
-        current_level_lbl.fontColor = fontClr
+        current_level_lbl.fontColor = Constants.FontColor.fontClr
         current_level_lbl.fontSize = 25
-        current_level_lbl.fontName = HUD_Font
+        current_level_lbl.fontName = Constants.FontName.HUD_Font
         current_level_lbl.zPosition = 3
         hudNode.addChild(current_level_lbl)
         
         let current_level_num = SKLabelNode(text: String(Game_Level))
         current_level_num.position = CGPointMake(self.frame.size.width*0.47, self.frame.size.height*0.88)
-        current_level_num.fontColor = fontClr
+        current_level_num.fontColor = Constants.FontColor.fontClr
         current_level_num.fontSize = 25
-        current_level_num.fontName = HUD_Font
+        current_level_num.fontName = Constants.FontName.HUD_Font
         current_level_num.zPosition = 3
         hudNode.addChild(current_level_num)
         
         let high_level_lbl = SKLabelNode(text: "Best:")
         high_level_lbl.position = CGPointMake(self.frame.size.width*0.38, self.frame.size.height*0.845)
-        high_level_lbl.fontColor = fontClr
+        high_level_lbl.fontColor = Constants.FontColor.fontClr
         high_level_lbl.fontSize = 25
-        high_level_lbl.fontName = HUD_Font
+        high_level_lbl.fontName = Constants.FontName.HUD_Font
         high_level_lbl.zPosition = 3
         hudNode.addChild(high_level_lbl)
         
         let highest_level_num = SKLabelNode(text: String(DefaultKeys.Level.description))
         highest_level_num.position = CGPointMake(self.frame.size.width*0.47, self.frame.size.height*0.845)
-        highest_level_num.fontColor = fontClr
+        highest_level_num.fontColor = Constants.FontColor.fontClr
         highest_level_num.fontSize = 25
-        highest_level_num.fontName = HUD_Font
+        highest_level_num.fontName = Constants.FontName.HUD_Font
         highest_level_num.zPosition = 3
         hudNode.addChild(highest_level_num)
         
         let money_lbl = SKLabelNode(text: "Money")
         money_lbl.position = CGPointMake(self.frame.size.width*0.58, self.frame.size.height*0.925)
-        money_lbl.fontColor = fontClr
+        money_lbl.fontColor = Constants.FontColor.fontClr
         money_lbl.fontSize = 35
-        money_lbl.fontName = HUD_Font
+        money_lbl.fontName = Constants.FontName.HUD_Font
         money_lbl.zPosition = 3
         hudNode.addChild(money_lbl)
         
         let current_money_lbl = SKLabelNode(text: "Current:")
         current_money_lbl.position = CGPointMake(self.frame.size.width*0.59, self.frame.size.height*0.88)
-        current_money_lbl.fontColor = fontClr
+        current_money_lbl.fontColor = Constants.FontColor.fontClr
         current_money_lbl.fontSize = 25
-        current_money_lbl.fontName = HUD_Font
+        current_money_lbl.fontName = Constants.FontName.HUD_Font
         current_money_lbl.zPosition = 3
         hudNode.addChild(current_money_lbl)
         
         let current_money_num = SKLabelNode(text: String(current_coins))
         current_money_num.position = CGPointMake(self.frame.size.width*0.67, self.frame.size.height*0.88)
-        current_money_num.fontColor = fontClr
+        current_money_num.fontColor = Constants.FontColor.fontClr
         current_money_num.fontSize = 25
-        current_money_num.fontName = HUD_Font
+        current_money_num.fontName = Constants.FontName.HUD_Font
         current_money_num.zPosition = 3
         hudNode.addChild(current_money_num)
         
         let high_money_lbl = SKLabelNode(text: "Total:")
         high_money_lbl.position = CGPointMake(self.frame.size.width*0.58, self.frame.size.height*0.845)
-        high_money_lbl.fontColor = fontClr
+        high_money_lbl.fontColor = Constants.FontColor.fontClr
         high_money_lbl.fontSize = 25
-        high_money_lbl.fontName = HUD_Font
+        high_money_lbl.fontName = Constants.FontName.HUD_Font
         high_money_lbl.zPosition = 3
         hudNode.addChild(high_money_lbl)
         
         let highest_money_num = SKLabelNode(text: String(defaults.integerForKey(DefaultKeys.Money.description)))
         highest_money_num.position = CGPointMake(self.frame.size.width*0.67, self.frame.size.height*0.845)
-        highest_money_num.fontColor = fontClr
+        highest_money_num.fontColor = Constants.FontColor.fontClr
         highest_money_num.fontSize = 25
-        highest_money_num.fontName = HUD_Font
+        highest_money_num.fontName = Constants.FontName.HUD_Font
         highest_money_num.zPosition = 3
         hudNode.addChild(highest_money_num)
         
@@ -1137,7 +1137,7 @@ class GameScene: SKScene {
                 let back_name = ("Back_Tile"+String(counter))
                 let back_square = SKSpriteNode(texture: back_text)
                 back_square.position = square.position
-                back_square.zPosition = grid_zPosition
+                back_square.zPosition = Constants.zPosition.grid_zPosition
                 back_square.hidden = true
                 back_square.name = back_name
                 
@@ -1290,80 +1290,80 @@ class GameScene: SKScene {
         
         let col1 = SKLabelNode(text: String(column_list[0]))
         col1.position = CGPointMake(self.frame.size.width*colX, self.frame.size.height*colY)
-        col1.fontSize = DispFontSize
-        col1.fontName = Game_Font
+        col1.fontSize = Constants.FontSize.DispFontSize
+        col1.fontName = Constants.FontName.Game_Font
         col1.fontColor = SKColor(red: 0, green: 0, blue: 0, alpha: 1.0)
         col1.zPosition = 5
         node.addChild(col1)
         
         let col2 = SKLabelNode(text: String(column_list[1]))
         col2.position = CGPointMake(self.frame.size.width*(colX + 0.055), self.frame.size.height*colY)
-        col2.fontSize = DispFontSize
-        col2.fontName = Game_Font
+        col2.fontSize = Constants.FontSize.DispFontSize
+        col2.fontName = Constants.FontName.Game_Font
         col2.fontColor = SKColor(red: 0, green: 0, blue: 0, alpha: 1.0)
         col2.zPosition = 5
         node.addChild(col2)
         
         let col3 = SKLabelNode(text: String(column_list[2]))
         col3.position = CGPointMake(self.frame.size.width*(colX + 0.105), self.frame.size.height*colY)
-        col3.fontSize = DispFontSize
-        col3.fontName = Game_Font
+        col3.fontSize = Constants.FontSize.DispFontSize
+        col3.fontName = Constants.FontName.Game_Font
         col3.fontColor = SKColor(red: 0, green: 0, blue: 0, alpha: 1.0)
         col3.zPosition = 5
         node.addChild(col3)
         
         let col4 = SKLabelNode(text: String(column_list[3]))
         col4.position = CGPointMake(self.frame.size.width*(colX + 0.16), self.frame.size.height*colY)
-        col4.fontSize = DispFontSize
-        col4.fontName = Game_Font
+        col4.fontSize = Constants.FontSize.DispFontSize
+        col4.fontName = Constants.FontName.Game_Font
         col4.fontColor = SKColor(red: 0, green: 0, blue: 0, alpha: 1.0)
         col4.zPosition = 5
         node.addChild(col4)
         
         let col5 = SKLabelNode(text: String(column_list[4]))
         col5.position = CGPointMake(self.frame.size.width*(colX + 0.215), self.frame.size.height*colY)
-        col5.fontSize = DispFontSize
-        col5.fontName = Game_Font
+        col5.fontSize = Constants.FontSize.DispFontSize
+        col5.fontName = Constants.FontName.Game_Font
         col5.fontColor = SKColor(red: 0, green: 0, blue: 0, alpha: 1.0)
         col5.zPosition = 5
         node.addChild(col5)
         
         let row1 = SKLabelNode(text: String(row_list[0]))
         row1.position = CGPointMake(self.frame.size.width*rowX, self.frame.size.height*(rowY + 0.29))
-        row1.fontSize = DispFontSize
-        row1.fontName = Game_Font
+        row1.fontSize = Constants.FontSize.DispFontSize
+        row1.fontName = Constants.FontName.Game_Font
         row1.fontColor = SKColor(red: 0, green: 0, blue: 0, alpha: 1.0)
         row1.zPosition = 5
         node.addChild(row1)
         
         let row2 = SKLabelNode(text: String(row_list[1]))
         row2.position = CGPointMake(self.frame.size.width*rowX, self.frame.size.height*(rowY + 0.215))
-        row2.fontSize = DispFontSize
-        row2.fontName = Game_Font
+        row2.fontSize = Constants.FontSize.DispFontSize
+        row2.fontName = Constants.FontName.Game_Font
         row2.fontColor = SKColor(red: 0, green: 0, blue: 0, alpha: 1.0)
         row2.zPosition = 5
         node.addChild(row2)
         
         let row3 = SKLabelNode(text: String(row_list[2]))
         row3.position = CGPointMake(self.frame.size.width*rowX, self.frame.size.height*(rowY + 0.15))
-        row3.fontSize = DispFontSize
-        row3.fontName = Game_Font
+        row3.fontSize = Constants.FontSize.DispFontSize
+        row3.fontName = Constants.FontName.Game_Font
         row3.fontColor = SKColor(red: 0, green: 0, blue: 0, alpha: 1.0)
         row3.zPosition = 5
         node.addChild(row3)
         
         let row4 = SKLabelNode(text: String(row_list[3]))
         row4.position = CGPointMake(self.frame.size.width*rowX, self.frame.size.height*(rowY + 0.075))
-        row4.fontSize = DispFontSize
-        row4.fontName = Game_Font
+        row4.fontSize = Constants.FontSize.DispFontSize
+        row4.fontName = Constants.FontName.Game_Font
         row4.fontColor = SKColor(red: 0, green: 0, blue: 0, alpha: 1.0)
         row4.zPosition = 5
         node.addChild(row4)
         
         let row5 = SKLabelNode(text: String(row_list[4]))
         row5.position = CGPointMake(self.frame.size.width*rowX, self.frame.size.height*rowY)
-        row5.fontSize = DispFontSize
-        row5.fontName = Game_Font
+        row5.fontSize = Constants.FontSize.DispFontSize
+        row5.fontName = Constants.FontName.Game_Font
         row5.fontColor = SKColor(red: 0, green: 0, blue: 0, alpha: 1.0)
         row5.zPosition = 5
         node.addChild(row5)
@@ -1380,80 +1380,80 @@ class GameScene: SKScene {
         
         let col1 = SKLabelNode(text: String(column_list[0]))
         col1.position = CGPointMake(self.frame.size.width*colX, self.frame.size.height*colY)
-        col1.fontSize = DispFontSize
-        col1.fontName = Game_Font
+        col1.fontSize = Constants.FontSize.DispFontSize
+        col1.fontName = Constants.FontName.Game_Font
         col1.fontColor = SKColor(red: 1, green: 0, blue: 0, alpha: 1.0)
         col1.zPosition = 5
         node.addChild(col1)
         
         let col2 = SKLabelNode(text: String(column_list[1]))
         col2.position = CGPointMake(self.frame.size.width*(colX+0.055), self.frame.size.height*colY)
-        col2.fontSize = DispFontSize
-        col2.fontName = Game_Font
+        col2.fontSize = Constants.FontSize.DispFontSize
+        col2.fontName = Constants.FontName.Game_Font
         col2.fontColor = SKColor(red: 1, green: 0, blue: 0, alpha: 1.0)
         col2.zPosition = 5
         node.addChild(col2)
         
         let col3 = SKLabelNode(text: String(column_list[2]))
         col3.position = CGPointMake(self.frame.size.width*(colX+0.105), self.frame.size.height*colY)
-        col3.fontSize = DispFontSize
-        col3.fontName = Game_Font
+        col3.fontSize = Constants.FontSize.DispFontSize
+        col3.fontName = Constants.FontName.Game_Font
         col3.fontColor = SKColor(red: 1, green: 0, blue: 0, alpha: 1.0)
         col3.zPosition = 5
         node.addChild(col3)
         
         let col4 = SKLabelNode(text: String(column_list[3]))
         col4.position = CGPointMake(self.frame.size.width*(colX+0.16), self.frame.size.height*colY)
-        col4.fontSize = DispFontSize
-        col4.fontName = Game_Font
+        col4.fontSize = Constants.FontSize.DispFontSize
+        col4.fontName = Constants.FontName.Game_Font
         col4.fontColor = SKColor(red: 1, green: 0, blue: 0, alpha: 1.0)
         col4.zPosition = 5
         node.addChild(col4)
         
         let col5 = SKLabelNode(text: String(column_list[4]))
         col5.position = CGPointMake(self.frame.size.width*(colX+0.215), self.frame.size.height*colY)
-        col5.fontSize = DispFontSize
-        col5.fontName = Game_Font
+        col5.fontSize = Constants.FontSize.DispFontSize
+        col5.fontName = Constants.FontName.Game_Font
         col5.fontColor = SKColor(red: 1, green: 0, blue: 0, alpha: 1.0)
         col5.zPosition = 5
         node.addChild(col5)
         
         let row1 = SKLabelNode(text: String(row_list[0]))
         row1.position = CGPointMake(self.frame.size.width*rowX, self.frame.size.height*(rowY+0.29))
-        row1.fontSize = DispFontSize
-        row1.fontName = Game_Font
+        row1.fontSize = Constants.FontSize.DispFontSize
+        row1.fontName = Constants.FontName.Game_Font
         row1.fontColor = SKColor(red: 1, green: 0, blue: 0, alpha: 1.0)
         row1.zPosition = 5
         node.addChild(row1)
         
         let row2 = SKLabelNode(text: String(row_list[1]))
         row2.position = CGPointMake(self.frame.size.width*rowX, self.frame.size.height*(rowY+0.215))
-        row2.fontSize = DispFontSize
-        row2.fontName = Game_Font
+        row2.fontSize = Constants.FontSize.DispFontSize
+        row2.fontName = Constants.FontName.Game_Font
         row2.fontColor = SKColor(red: 1, green: 0, blue: 0, alpha: 1.0)
         row2.zPosition = 5
         node.addChild(row2)
         
         let row3 = SKLabelNode(text: String(row_list[2]))
         row3.position = CGPointMake(self.frame.size.width*rowX, self.frame.size.height*(rowY+0.15))
-        row3.fontSize = DispFontSize
-        row3.fontName = Game_Font
+        row3.fontSize = Constants.FontSize.DispFontSize
+        row3.fontName = Constants.FontName.Game_Font
         row3.fontColor = SKColor(red: 1, green: 0, blue: 0, alpha: 1.0)
         row3.zPosition = 5
         node.addChild(row3)
         
         let row4 = SKLabelNode(text: String(row_list[3]))
         row4.position = CGPointMake(self.frame.size.width*rowX, self.frame.size.height*(rowY+0.075))
-        row4.fontSize = DispFontSize
-        row4.fontName = Game_Font
+        row4.fontSize = Constants.FontSize.DispFontSize
+        row4.fontName = Constants.FontName.Game_Font
         row4.fontColor = SKColor(red: 1, green: 0, blue: 0, alpha: 1.0)
         row4.zPosition = 5
         node.addChild(row4)
         
         let row5 = SKLabelNode(text: String(row_list[4]))
         row5.position = CGPointMake(self.frame.size.width*rowX, self.frame.size.height*rowY)
-        row5.fontSize = DispFontSize
-        row5.fontName = Game_Font
+        row5.fontSize = Constants.FontSize.DispFontSize
+        row5.fontName = Constants.FontName.Game_Font
         row5.fontColor = SKColor(red: 1, green: 0, blue: 0, alpha: 1.0)
         row5.zPosition = 5
         node.addChild(row5)
@@ -1630,8 +1630,8 @@ class GameScene: SKScene {
         let nextButton = SKLabelNode(text: "Next Level")
         nextButton.position = CGPointMake(self.frame.size.width/2, self.frame.size.height/5)
         nextButton.zPosition = 10
-        nextButton.fontName = Game_Over_Font
-        nextButton.fontColor = fontClr
+        nextButton.fontName = Constants.FontName.Game_Over_Font
+        nextButton.fontColor = Constants.FontColor.fontClr
         nextButton.fontSize = 60
         nextButton.name = "nextButton"
         node.addChild(nextButton)
