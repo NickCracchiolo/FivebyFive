@@ -27,12 +27,12 @@ extension SKNode {
 }
 
 class GameViewController: UIViewController, ADBannerViewDelegate {
-    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-    let defaults = NSUserDefaults.standardUserDefaults()
+    //let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    //let defaults = NSUserDefaults.standardUserDefaults()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.checkAdsOn()
+        //self.checkAdsOn()
         
         if let scene = GameScene.unarchiveFromFile("GameScene") as? GameScene {
             // Configure the view.
@@ -46,12 +46,11 @@ class GameViewController: UIViewController, ADBannerViewDelegate {
             /* Set the scale mode to scale to fit the window */
             scene.scaleMode = .AspectFill
             scene.gViewController = self
-            Flurry.logEvent("Game Page View")
             skView.presentScene(scene)
         }
     }
     override func viewDidAppear(animated: Bool) {
-        self.checkAdsOn()
+        //self.checkAdsOn()
     }
     override func shouldAutorotate() -> Bool {
         return true
@@ -65,7 +64,7 @@ class GameViewController: UIViewController, ADBannerViewDelegate {
     override func prefersStatusBarHidden() -> Bool {
         return true
     }
-    
+    /*
     //iAd Shared Banner
     func loadAds() {
         self.appDelegate.adView.removeFromSuperview()
@@ -99,3 +98,5 @@ class GameViewController: UIViewController, ADBannerViewDelegate {
         print("didFailToReceiveAdWithError")
         self.appDelegate.adView.hidden = true
     }}
+ */
+}

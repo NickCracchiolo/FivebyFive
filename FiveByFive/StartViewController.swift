@@ -15,14 +15,27 @@ class StartViewController: UIViewController, GKGameCenterControllerDelegate, ADB
     
     let DailyNotification = UILocalNotification()
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-    var leaderBoardID = NSString()
-    var gameCenterEnabled = false
     let defaults = NSUserDefaults.standardUserDefaults()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         var free_coins = defaults.integerForKey(DefaultKeys.FreeCoins.description)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(presentAuthenticationVC), name: Constants.Notifications.PRESENT_AUTH_VC, object: nil)
         
+        if let scene = StartScene(fileNamed: "StartScene") {
+            // Configure the view.
+            let skView = self.view as! SKView
+            skView.showsFPS = true
+            skView.showsNodeCount = true
+            
+            /* Sprite Kit applies additional optimizations to improve rendering performance */
+            skView.ignoresSiblingOrder = true
+            
+            /* Set the scale mode to scale to fit the window */
+            scene.scaleMode = .AspectFill
+            
+            skView.presentScene(scene)
+        }
         let flags: NSCalendarUnit = [.Day, .Month, .Year]
         let date = NSDate()
         let components = NSCalendar.currentCalendar().components(flags, fromDate: date)
@@ -52,9 +65,8 @@ class StartViewController: UIViewController, GKGameCenterControllerDelegate, ADB
         defaults.setInteger(free_coins, forKey: DefaultKeys.FreeCoins.description)
         defaults.synchronize()
         
-        self.checkAdsOn()
+        //self.checkAdsOn()
         
-        self.authenticateLocalPlayer()
         setUIUserNotificationOptions()
         
 
@@ -63,12 +75,15 @@ class StartViewController: UIViewController, GKGameCenterControllerDelegate, ADB
 //        }
     }
     override func viewDidAppear(animated: Bool) {
-        self.checkAdsOn()
+        //self.checkAdsOn()
     }
     override func shouldAutorotate() -> Bool {
         return true
     }
-    
+    func presentAuthenticationVC() {
+        let helper = GameKitHelper.sharedGameKitHelper
+        self.presentViewController(helper.authentication_vc!, animated: true, completion: nil)
+    }
     override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
         if UIDevice.currentDevice().userInterfaceIdiom == .Phone {
             return UIInterfaceOrientationMask(rawValue: UIInterfaceOrientationMask.AllButUpsideDown.rawValue)
@@ -81,13 +96,11 @@ class StartViewController: UIViewController, GKGameCenterControllerDelegate, ADB
         super.didReceiveMemoryWarning()
         // Release any cached data, images, etc that aren't in use.
     }
-
-    
-    override func prefersStatusBarHidden() -> Bool {
-        return true
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
 
-    @IBAction func showLeaderboard(sender: UIButton) {
+    func showLeaderboard(sender: UIButton) {
         let vc = self.view?.window?.rootViewController
         let gc = GKGameCenterViewController()
         gc.gameCenterDelegate = self
@@ -95,14 +108,12 @@ class StartViewController: UIViewController, GKGameCenterControllerDelegate, ADB
         gc.viewState = GKGameCenterViewControllerState.Achievements
         
         gc.leaderboardIdentifier = "leaderboard.highest_level"
-        Flurry.logEvent("Leaderboards Shown")
         vc?.presentViewController(gc, animated: true, completion: nil)
     }
     
     func setUIUserNotificationOptions() {
         UIApplication.sharedApplication().registerUserNotificationSettings(UIUserNotificationSettings(forTypes: [UIUserNotificationType.Badge, UIUserNotificationType.Sound, UIUserNotificationType.Alert], categories: nil))
     }
-    
     func setupNofications() {
         DailyNotification.timeZone = NSTimeZone.localTimeZone()
         // confirms the alert dialog box action
@@ -123,51 +134,10 @@ class StartViewController: UIViewController, GKGameCenterControllerDelegate, ADB
         // lets set it up
         UIApplication.sharedApplication().scheduleLocalNotification(DailyNotification)
     }
-    
-    func authenticateLocalPlayer(){
-        let localPlayer = GKLocalPlayer()
-        //let error = NSError()
-        let leaderBoardIdentifier = NSString()
-        localPlayer.authenticateHandler = {(viewController, error) -> Void in
-            if (viewController != nil) {
-                self.presentViewController(viewController!, animated: true, completion: nil)
-            } else if localPlayer.authenticated {
-                print("Authenticated", terminator: "")
-                GKNotificationBanner.showBannerWithTitle("Game Center", message: ("Welcome, " + String(format: localPlayer.displayName!)) , completionHandler: {
-                    self.gameCenterEnabled = true
-                })
-                localPlayer.loadDefaultLeaderboardIdentifierWithCompletionHandler{(viewController, error) -> Void in
-                    if error != nil {
-                        print(error, terminator: "")
-                    } else {
-                        self.leaderBoardID = leaderBoardIdentifier
-                    }
-                }
-            } else {
-                self.gameCenterEnabled = false
-                print("Game Center Not Enabled", terminator: "")
-            }
-        }
-    }
     func gameCenterViewControllerDidFinish(gameCenterViewController: GKGameCenterViewController) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
-    
-    
-    func reportScore(identifier:NSString) {
-        if GKLocalPlayer.localPlayer().authenticated == true{
-            let highScore = defaults.integerForKey(DefaultKeys.Level.description)
-            let scoreReporter = GKScore(leaderboardIdentifier: identifier as String)
-            scoreReporter.value = Int64(highScore)
-            let scoreArray: [GKScore] = [scoreReporter]
-            print("report score \(scoreReporter)")
-            GKScore.reportScores(scoreArray, withCompletionHandler: {(error : NSError?) -> Void in
-                if error != nil {
-                    NSLog(error!.localizedDescription)
-                }
-            })
-        }
-    }
+    /*
     func loadAds() {
         self.appDelegate.adView.removeFromSuperview()
         self.appDelegate.adView.delegate = nil
@@ -202,6 +172,7 @@ class StartViewController: UIViewController, GKGameCenterControllerDelegate, ADB
         print("didFailToReceiveAdWithError")
         self.appDelegate.adView.hidden = true
     }
+    */
     
 }
 extension NSDate {

@@ -48,29 +48,25 @@ class SettingsViewController: UIViewController, ADBannerViewDelegate {
         
         ResetSwitchObject.setOn(false, animated: true)
         ResetSwitchObject.transform = CGAffineTransformMakeScale(0.5, 0.5)
-        ResetSwitchObject.addTarget(self, action: Selector("ResetAction"), forControlEvents: UIControlEvents.ValueChanged)
+        ResetSwitchObject.addTarget(self, action: #selector(ResetAction), forControlEvents: UIControlEvents.ValueChanged)
         
         NotSwitchObject.setOn(notif_bool, animated: true)
         NotSwitchObject.transform = CGAffineTransformMakeScale(0.5, 0.5)
-        NotSwitchObject.addTarget(self, action: Selector("NotificationAction"), forControlEvents: UIControlEvents.ValueChanged)
+        NotSwitchObject.addTarget(self, action: #selector(NotificationAction), forControlEvents: UIControlEvents.ValueChanged)
         
         SoundsSwitchOutlet.setOn(sounds_bool, animated: true)
         SoundsSwitchOutlet.transform = CGAffineTransformMakeScale(0.5, 0.5)
-        SoundsSwitchOutlet.addTarget(self, action: Selector("SoundsAction"), forControlEvents: UIControlEvents.ValueChanged)
+        SoundsSwitchOutlet.addTarget(self, action: #selector(SoundsAction), forControlEvents: UIControlEvents.ValueChanged)
         
         SaveLifeOutlet.setOn(save_bool, animated: true)
         SaveLifeOutlet.transform = CGAffineTransformMakeScale(0.5, 0.5)
-        SaveLifeOutlet.addTarget(self, action: Selector("SaveLifeAction"), forControlEvents: UIControlEvents.ValueChanged)
+        SaveLifeOutlet.addTarget(self, action: #selector(SaveLifeAction), forControlEvents: UIControlEvents.ValueChanged)
         
-        BackGesture = UIScreenEdgePanGestureRecognizer(target: self,
-            action: "swipeBack:")
+        BackGesture = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(swipeBack))
         BackGesture.edges = .Left
         view.addGestureRecognizer(BackGesture)
         
         self.checkAdsOn()
-        
-        Flurry.logEvent("Settings Page View")
-
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -78,7 +74,6 @@ class SettingsViewController: UIViewController, ADBannerViewDelegate {
     }
     @IBAction func SLBButton(sender: UIButton) {
         UIApplication.sharedApplication().openURL(NSURL(string: "https://itunes.apple.com/app/apple-store/id922641562?pt=68053800&ct=SLB%20from%20FBF&mt=8")!)
-        Flurry.logEvent("Stoplight Buggies Link Clicked")
     }
     override func shouldAutorotate() -> Bool {
         return true
@@ -88,46 +83,39 @@ class SettingsViewController: UIViewController, ADBannerViewDelegate {
         navigationController?.popViewControllerAnimated(true)
     }
     func ResetAction() {
-        print("Reset Action", terminator: "")
+        print("Reset Action")
         
         if ResetSwitchObject.on == true {
             defaults.setInteger(0, forKey: DefaultKeys.Tutorial.description)
             defaults.synchronize()
             ResetSwitchObject.setOn(true, animated: true)
-            Flurry.logEvent("Reset Tutorial")
         }
     }
     func NotificationAction() {
         if NotSwitchObject.on == true {
             defaults.setInteger(0, forKey: DefaultKeys.Notifications.description)
-            Flurry.logEvent("Notifications On")
             
         } else if NotSwitchObject.on == false {
             defaults.setInteger(1, forKey: DefaultKeys.Notifications.description)
             UIApplication.sharedApplication().cancelAllLocalNotifications()
-            Flurry.logEvent("Notifications Off")
         }
         defaults.synchronize()
     }
     func SoundsAction() {
         if SoundsSwitchOutlet.on == true {
             defaults.setInteger(0, forKey: DefaultKeys.Sound.description)
-            Flurry.logEvent("Sounds On")
 
         } else if SoundsSwitchOutlet.on == false {
             defaults.setInteger(1, forKey: DefaultKeys.Sound.description)
-            Flurry.logEvent("Sounds Off")
         }
         defaults.synchronize()
     }
     func SaveLifeAction() {
         if SaveLifeOutlet.on == true {
             defaults.setInteger(0, forKey: DefaultKeys.Life.description)
-            Flurry.logEvent("Second Chance Alert On")
             
         } else if SaveLifeOutlet.on == false {
             defaults.setInteger(1, forKey: DefaultKeys.Life.description)
-            Flurry.logEvent("Second Chance Alert Off")
         }
         defaults.synchronize()
     }
@@ -153,7 +141,7 @@ class SettingsViewController: UIViewController, ADBannerViewDelegate {
     }
     func checkAdsOn() {
         let ads = defaults.integerForKey(DefaultKeys.Ads.description)
-        print(ads, terminator: "")
+        print(ads)
         
         if ads == 0 {
             self.appDelegate.adView.hidden = false

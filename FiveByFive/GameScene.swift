@@ -75,9 +75,6 @@ class GameScene: SKScene {
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
         self.backgroundColor = Constants.AppColor.backColor
-        //Flurry add Playing Game event
-        Flurry.logEvent("User Playing", timed: true)
-        
         
         inAppPurchases.defaultHelper.setViewController(gameVC)
         inAppPurchases.defaultHelper.getProducts()
@@ -90,16 +87,17 @@ class GameScene: SKScene {
             setup()
         }
         pull_overlay_gesture = UIScreenEdgePanGestureRecognizer(target: self,
-            action: "pullUpHUD:")
+            action: #selector(pullUpHUD))
         pull_overlay_gesture!.edges = .Right
         self.view!.addGestureRecognizer(pull_overlay_gesture!)
         
         push_overlay_gesture = UIScreenEdgePanGestureRecognizer(target: self,
-            action: "removeHUD:")
+            action: #selector(removeHUD))
         push_overlay_gesture!.edges = .Left
         self.view!.addGestureRecognizer(push_overlay_gesture!)
-        for var i = 0; i < 25; i++ {
-            HUD_list.append(0)
+        
+        for i in 0 ..< 25 {
+            HUD_list.append(i)
         }
     }
     
@@ -121,7 +119,7 @@ class GameScene: SKScene {
             if let node = self.nodeAtPoint(location).name {
             
                 if self.touch_enabled == true && HUD_ON == false {
-                    for var i = 0; i < 25; i++ {
+                    for i in 0 ..< 25 {
                         let name = "Tile" + String(i)
                         if node == name {
                             textChange(i)
@@ -129,7 +127,7 @@ class GameScene: SKScene {
                             break
                         }
                     }
-                    for var i = 0; i < 5; i++ {
+                    for i in 0 ..< 5 {
                         let nameVal = i+1
                         let name = "Col" + String(nameVal) + "Unlock"
                         if node == name {
@@ -146,12 +144,11 @@ class GameScene: SKScene {
                                 hudNode.removeFromParent()
                                 hudNode = HUD()
                                 self.addChild(hudNode)
-                                Flurry.logEvent("Unlocked Row or Column")
                             }
                             break
                         }
                     }
-                    for var i = 0; i < 5; i++ {
+                    for i in 0 ..< 5 {
                         let nameVal = i+1
                         let name = "Row" + String(nameVal) + "Unlock"
                         if node == name {
@@ -169,7 +166,6 @@ class GameScene: SKScene {
                                 hudNode.removeFromParent()
                                 hudNode = HUD()
                                 self.addChild(hudNode)
-                                Flurry.logEvent("Unlocked Row or Column")
                             }
                             break
                         }
@@ -177,7 +173,7 @@ class GameScene: SKScene {
                     if node == "Next Button" {
                         tutNode.removeAllChildren()
                         tutNode.removeFromParent()
-                        tut_Point++
+                        tut_Point += 1
                         tutorialSetup()
                     }
                     if node == "nextButton" {
@@ -188,7 +184,7 @@ class GameScene: SKScene {
                     if touched_node.name == "Clear Button" {
                         draggedParent.removeAllChildren()
                         self.clear = true
-                        for var i = 0; i < 25; i++ {
+                        for i in 0 ..< 25{
                             HUD_list[i] = 0
                         }
                     }
@@ -308,7 +304,7 @@ class GameScene: SKScene {
             var min_dist = calcDistance(gridPositions[0].x, y1: gridPositions[0].y, x2: drag_position.x, y2: drag_position.y)
             var min_index = 0
             
-            for var i = 0; i < 25; i++ {
+            for i in 0 ..< 25 {
                 let dist = calcDistance(gridPositions[i].x, y1: gridPositions[i].y, x2: drag_position.x, y2: drag_position.y)
             
                 
@@ -429,8 +425,8 @@ class GameScene: SKScene {
             self.runAction(dragHUD)
             
             var counter = 0
-            for var y = 0; y < 5; y++ {
-                for var x = 0; x < 5; x++ {
+            for y in 0 ..< 5 {
+                for x in 0 ..< 5 {
                     if HUD_list[counter] == 1 {
                         let new_one = SKSpriteNode(imageNamed: "One.png")
                         new_one.position = CGPointMake(self.frame.size.width/2.5 + CGFloat(55*x), self.frame.size.height/2.5 + CGFloat(55*(4-y)))
@@ -483,7 +479,7 @@ class GameScene: SKScene {
                         new_bomb.yScale = 0.75
                         overlayNode.addChild(new_bomb)
                     } 
-                    counter++
+                    counter += 1
                 }
             }
             HUD_ON = true
@@ -1093,8 +1089,8 @@ class GameScene: SKScene {
     func createGrid() -> SKNode {
         let gridNode = SKNode()
         var counter:Int = 0
-        for var y = 0; y < 5; y++ {
-            for var x = 0; x < 5; x++ {
+        for y in 0 ..< 5 {
+            for x in 0 ..< 5 {
                 let name = ("Tile"+String(counter))
                 let square = createSquare(x, y: y,in_name:name)
                 
@@ -1150,7 +1146,7 @@ class GameScene: SKScene {
                 gridNode.addChild(square)
                 gridNode.addChild(back_square)
                 
-                counter++
+                counter += 1
             }
         }
         return gridNode
@@ -1160,7 +1156,7 @@ class GameScene: SKScene {
         var count:Int = 0
         for num in input_list {
             if num != 0 {
-                count++
+                count += 1
             }
         }
         return count
@@ -1180,84 +1176,29 @@ class GameScene: SKScene {
     
     func getRowBombs(input_list: [Int]) -> [Int] {
         var bomb_list = [Int]()
-        var bombs = 0
-        for var i:Int = 0; i < 5; i++ {
-            if input_list[i] == 0 {
-                bombs++
+        for j in 0.stride(to: 20, by: 5) {
+            var bombs = 0
+            for i in j ..< 5{
+                if input_list[i] == 0 {
+                    bombs += 1
+                }
             }
+            bomb_list.append(bombs)
         }
-        bomb_list.append(bombs)
-        bombs = 0
-        for var i:Int = 5; i < 10; i++ {
-            if input_list[i] == 0 {
-                bombs++
-            }
-        }
-        bomb_list.append(bombs)
-        bombs = 0
-        for var i:Int = 10; i < 15; i++ {
-            if input_list[i] == 0 {
-                bombs++
-            }
-        }
-        bomb_list.append(bombs)
-        bombs = 0
-        for var i:Int = 15; i < 20; i++ {
-            if input_list[i] == 0 {
-                bombs++
-            }
-        }
-        bomb_list.append(bombs)
-        bombs = 0
-        for var i:Int = 20; i < 25; i++ {
-            if input_list[i] == 0 {
-                bombs++
-            }
-        }
-        bomb_list.append(bombs)
-        bombs = 0
         return bomb_list
     }
     
     func getColBombs(input_list: [Int]) -> [Int] {
         var bomb_list = [Int]()
-        var bombs = 0
-        for var i:Int = 0; i < 25; i += 5 {
-            if input_list[i] == 0 {
-                bombs++
+        for j in 0 ..< 5 {
+            var bombs = 0
+            for i in j.stride(to: 25, by: 5) {
+                if input_list[i] == 0 {
+                    bombs += 1
+                }
             }
+            bomb_list.append(bombs)
         }
-        bomb_list.append(bombs)
-        bombs = 0
-        for var i:Int = 1; i < 25; i += 5 {
-            if input_list[i] == 0 {
-                bombs++
-            }
-        }
-        bomb_list.append(bombs)
-        bombs = 0
-        for var i:Int = 2; i < 25; i += 5 {
-            if input_list[i] == 0 {
-                bombs++
-            }
-        }
-        bomb_list.append(bombs)
-        bombs = 0
-        for var i:Int = 3; i < 25; i += 5 {
-            if input_list[i] == 0 {
-                bombs++
-            }
-        }
-        bomb_list.append(bombs)
-        bombs = 0
-        for var i:Int = 4; i < 25; i += 5 {
-            if input_list[i] == 0 {
-                bombs++
-            }
-        }
-        bomb_list.append(bombs)
-        bombs = 0
-        
         return bomb_list
     }
     
@@ -1565,7 +1506,6 @@ class GameScene: SKScene {
                     UIAlertAction in
                     counter = 0
                     self.touch_enabled = false
-                    Flurry.logEvent("Second Chance Notification Dismissed")
                     self.GameOverScreen()
                 }
                 let stopAskingAction = UIAlertAction(title: "Don't Ask Again", style: UIAlertActionStyle.Default) {
@@ -1574,7 +1514,6 @@ class GameScene: SKScene {
                     counter = 0
                     self.touch_enabled = false
                     self.GameOverScreen()
-                    Flurry.logEvent("Removed Second Chance Notification")
                 }
                 let purchaseAction = UIAlertAction(title: "Yes Please!", style: UIAlertActionStyle.Default) {
                     UIAlertAction in
@@ -1598,7 +1537,7 @@ class GameScene: SKScene {
                     self.runAction(soundsAction)
                 }
                 flipAnim(node)
-                counter++
+                counter += 1
                 checkCounter()
                 selected = true
 
@@ -1607,10 +1546,10 @@ class GameScene: SKScene {
     }
     
     func checkPurchase(numbers:[Int],inout bools:[Bool]) {
-        for var i = 0; i < 5; i++ {
+        for i in 0 ..< 5 {
             if numbers[i] != 0 {
                 if bools[i] == false {
-                    counter++
+                    counter += 1
                     checkCounter()
                     bools[i] = true
                 }
@@ -1645,7 +1584,7 @@ class GameScene: SKScene {
             highest_level = Game_Level
             defaults.setInteger(highest_level, forKey: DefaultKeys.Level.description)
         }
-        Game_Level++
+        Game_Level += 1
         updateAchievements()
         self.removeAllChildren()
         labelNode.removeAllChildren()
@@ -1657,7 +1596,7 @@ class GameScene: SKScene {
         setup()
     }
     func showBoard() {
-        for var i = 0; i < 25; i++ {
+        for i in 0 ..< 25 {
             textChange(i)
             if numbers_list[i] != 0 {
                 if boolList[i] == false {
@@ -1681,8 +1620,6 @@ class GameScene: SKScene {
         counter = 0
         Game_Level = 1
         current_coins = 0
-        Flurry.endTimedEvent("User Playing", withParameters:nil)
-        Flurry.logEvent("Level Made In Session", withParameters:["Level":Game_Level])
         self.gViewController?.navigationController?.popViewControllerAnimated(true)
     }
     
@@ -1727,7 +1664,7 @@ class GameScene: SKScene {
         boolList = []
         topTiles = []
         backTiles = []
-        for var i = 0; i < 25; i++ {
+        for i in 0 ..< 25 {
             HUD_list[i] = 0
         }
         gridPositions = []

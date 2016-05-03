@@ -25,12 +25,11 @@ class StoreViewController: UIViewController, ADBannerViewDelegate {
         MoneyLabel.text = String(defaults.integerForKey(DefaultKeys.Money.description))
         inAppPurchases.defaultHelper.setViewController(self)
         inAppPurchases.defaultHelper.getProducts()
-        BackGesture = UIScreenEdgePanGestureRecognizer(target: self, action: "swipeBack:")
+        BackGesture = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(swipeBack))
         BackGesture.edges = .Left
         view.addGestureRecognizer(BackGesture)
         
         self.checkAdsOn()
-        Flurry.logEvent("Store Page View")
 
     }
     override func viewDidAppear(animated: Bool) {
@@ -85,7 +84,6 @@ class StoreViewController: UIViewController, ADBannerViewDelegate {
             let alertController = UIAlertController(title: "Free Coins", message:
                 "Already got your coins, try again later", preferredStyle: UIAlertControllerStyle.Alert)
             alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
-            Flurry.logEvent("Tried to get Free Coins but already did")
             self.presentViewController(alertController, animated: true, completion: nil)
         }
     }
@@ -134,7 +132,6 @@ class StoreViewController: UIViewController, ADBannerViewDelegate {
         } else {
             value = 25
         }
-        Flurry.logEvent("Got Free Coins", withParameters: ["Free Coins":value])
         return value
     }
 
@@ -149,7 +146,7 @@ class StoreViewController: UIViewController, ADBannerViewDelegate {
     }
     func checkAdsOn() {
         let ads = defaults.integerForKey(DefaultKeys.Ads.description)
-        print(ads, terminator: "")
+        print(ads)
         
         if ads == 0 {
             self.appDelegate.adView.hidden = false

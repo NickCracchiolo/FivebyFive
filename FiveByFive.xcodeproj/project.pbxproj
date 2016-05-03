@@ -45,7 +45,8 @@
 		5645B6BB1AD6168800BBA989 /* GreenTwo.png in Resources */ = {isa = PBXBuildFile; fileRef = 5645B6B21AD6168800BBA989 /* GreenTwo.png */; };
 		5645B6BC1AD6168800BBA989 /* GreenTwox2.png in Resources */ = {isa = PBXBuildFile; fileRef = 5645B6B31AD6168800BBA989 /* GreenTwox2.png */; };
 		5645B6BD1AD6168800BBA989 /* GreenTwox3.png in Resources */ = {isa = PBXBuildFile; fileRef = 5645B6B41AD6168800BBA989 /* GreenTwox3.png */; };
-		565B9BEC1ACC75900059D250 /* GlobalVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565B9BEB1ACC75900059D250 /* GlobalVariables.swift */; };
+		56581C9D1CD86B03009BF7B0 /* GameData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56581C9C1CD86B03009BF7B0 /* GameData.swift */; };
+		565B9BEC1ACC75900059D250 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565B9BEB1ACC75900059D250 /* Constants.swift */; };
 		565B9BF11ACDDB280059D250 /* YellowSquare.png in Resources */ = {isa = PBXBuildFile; fileRef = 565B9BF01ACDDB280059D250 /* YellowSquare.png */; };
 		565B9BF31ACDE22A0059D250 /* YellowOne.png in Resources */ = {isa = PBXBuildFile; fileRef = 565B9BF21ACDE22A0059D250 /* YellowOne.png */; };
 		565B9BF71ACDE2340059D250 /* YellowTwo.png in Resources */ = {isa = PBXBuildFile; fileRef = 565B9BF51ACDE2340059D250 /* YellowTwo.png */; };
@@ -70,15 +71,14 @@
 		565B9C2D1AD115ED0059D250 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 565B9C2C1AD115ED0059D250 /* GameKit.framework */; };
 		565B9C301AD1E6230059D250 /* tutArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 565B9C2F1AD1E6230059D250 /* tutArrow.png */; };
 		565B9C321AD206550059D250 /* PurchaseButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 565B9C311AD206550059D250 /* PurchaseButton.png */; };
+		5680778C1CD90CF300976969 /* GameKitHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5680778B1CD90CF300976969 /* GameKitHelper.swift */; };
+		5680778E1CD919E100976969 /* StartScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5680778D1CD919E100976969 /* StartScene.swift */; };
 		56949E161AD7A246001784B3 /* AppIcon57.png in Resources */ = {isa = PBXBuildFile; fileRef = 56949E151AD7A246001784B3 /* AppIcon57.png */; };
-		56949E7C1ADB1B19001784B3 /* FiveByFive WatchKit App.app in Resources */ = {isa = PBXBuildFile; fileRef = 56949E7B1ADB1B19001784B3 /* FiveByFive WatchKit App.app */; };
 		56AE45551AC8A9C10061F9B7 /* BlueOne.png in Resources */ = {isa = PBXBuildFile; fileRef = 56AE45541AC8A9C10061F9B7 /* BlueOne.png */; };
 		56B172B91AC1D55F004575DD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B172B81AC1D55F004575DD /* AppDelegate.swift */; };
 		56B172BB1AC1D55F004575DD /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 56B172BA1AC1D55F004575DD /* GameScene.sks */; };
 		56B172BF1AC1D55F004575DD /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B172BE1AC1D55F004575DD /* GameViewController.swift */; };
-		56B172C21AC1D55F004575DD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56B172C01AC1D55F004575DD /* Main.storyboard */; };
 		56B172C41AC1D55F004575DD /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56B172C31AC1D55F004575DD /* Images.xcassets */; };
-		56B172D31AC1D55F004575DD /* FiveByFiveTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B172D21AC1D55F004575DD /* FiveByFiveTests.swift */; };
 		56B172E61AC1D864004575DD /* BlueSquare.png in Resources */ = {isa = PBXBuildFile; fileRef = 56B172DE1AC1D864004575DD /* BlueSquare.png */; };
 		56B172E71AC1D864004575DD /* BlueThree.png in Resources */ = {isa = PBXBuildFile; fileRef = 56B172DF1AC1D864004575DD /* BlueThree.png */; };
 		56B172E81AC1D864004575DD /* BlueTwo.png in Resources */ = {isa = PBXBuildFile; fileRef = 56B172E01AC1D864004575DD /* BlueTwo.png */; };
@@ -86,6 +86,8 @@
 		56B172EA1AC1D864004575DD /* RedSquare.png in Resources */ = {isa = PBXBuildFile; fileRef = 56B172E21AC1D864004575DD /* RedSquare.png */; };
 		56B172EB1AC1D864004575DD /* RedThree.png in Resources */ = {isa = PBXBuildFile; fileRef = 56B172E31AC1D864004575DD /* RedThree.png */; };
 		56B172EC1AC1D864004575DD /* RedTwo.png in Resources */ = {isa = PBXBuildFile; fileRef = 56B172E41AC1D864004575DD /* RedTwo.png */; };
+		56CE197A1CD7E333000E015B /* Tile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CE19791CD7E333000E015B /* Tile.swift */; };
+		56CE197C1CD83DE5000E015B /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CE197B1CD83DE5000E015B /* Grid.swift */; };
 		56DD3FCC1AF29DA800CC2C80 /* GreenFivex2.png in Resources */ = {isa = PBXBuildFile; fileRef = 56DD3FC61AF29DA800CC2C80 /* GreenFivex2.png */; };
 		56DD3FCD1AF29DA800CC2C80 /* GreenFivex3.png in Resources */ = {isa = PBXBuildFile; fileRef = 56DD3FC71AF29DA800CC2C80 /* GreenFivex3.png */; };
 		56DD3FCE1AF29DA800CC2C80 /* GreenFour.png in Resources */ = {isa = PBXBuildFile; fileRef = 56DD3FC81AF29DA800CC2C80 /* GreenFour.png */; };
@@ -94,25 +96,8 @@
 		56DD3FD41AF2AA6A00CC2C80 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56DD3FD31AF2AA6A00CC2C80 /* Social.framework */; };
 		56EBDE291AF8462900E7FDE1 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56EBDE281AF8462900E7FDE1 /* Security.framework */; };
 		56EBDE311AF853B300E7FDE1 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56EBDE2F1AF8526300E7FDE1 /* SystemConfiguration.framework */; };
-		56EBDE341AF8551F00E7FDE1 /* libFlurry_6.3.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 56EBDE331AF8551F00E7FDE1 /* libFlurry_6.3.0.a */; };
+		56FBE69B1CD884E900AD1A81 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56FBE6991CD884E900AD1A81 /* Main.storyboard */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		56949E7D1ADB1B19001784B3 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 56B172AB1AC1D55F004575DD /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 56949E7A1ADB1B19001784B3;
-			remoteInfo = "FiveByFive WatchKit App";
-		};
-		56B172CD1AC1D55F004575DD /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 56B172AB1AC1D55F004575DD /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 56B172B21AC1D55F004575DD;
-			remoteInfo = FiveByFive;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		5606FDE21AF9865900124DAF /* GreenFive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GreenFive.png; sourceTree = "<group>"; };
@@ -152,7 +137,8 @@
 		5645B6B21AD6168800BBA989 /* GreenTwo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GreenTwo.png; sourceTree = "<group>"; };
 		5645B6B31AD6168800BBA989 /* GreenTwox2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GreenTwox2.png; sourceTree = "<group>"; };
 		5645B6B41AD6168800BBA989 /* GreenTwox3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GreenTwox3.png; sourceTree = "<group>"; };
-		565B9BEB1ACC75900059D250 /* GlobalVariables.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalVariables.swift; sourceTree = "<group>"; };
+		56581C9C1CD86B03009BF7B0 /* GameData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameData.swift; sourceTree = "<group>"; };
+		565B9BEB1ACC75900059D250 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		565B9BF01ACDDB280059D250 /* YellowSquare.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = YellowSquare.png; sourceTree = "<group>"; };
 		565B9BF21ACDE22A0059D250 /* YellowOne.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = YellowOne.png; sourceTree = "<group>"; };
 		565B9BF51ACDE2340059D250 /* YellowTwo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = YellowTwo.png; sourceTree = "<group>"; };
@@ -178,18 +164,16 @@
 		565B9C2F1AD1E6230059D250 /* tutArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tutArrow.png; sourceTree = "<group>"; };
 		565B9C311AD206550059D250 /* PurchaseButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PurchaseButton.png; sourceTree = "<group>"; };
 		565B9C331AD209FD0059D250 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		5680778B1CD90CF300976969 /* GameKitHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameKitHelper.swift; sourceTree = "<group>"; };
+		5680778D1CD919E100976969 /* StartScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartScene.swift; sourceTree = "<group>"; };
 		56949E151AD7A246001784B3 /* AppIcon57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppIcon57.png; sourceTree = "<group>"; };
-		56949E711ADB1B18001784B3 /* FiveByFive WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "FiveByFive WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
-		56949E7B1ADB1B19001784B3 /* FiveByFive WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "FiveByFive WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		56AE45541AC8A9C10061F9B7 /* BlueOne.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BlueOne.png; sourceTree = "<group>"; };
 		56B172B31AC1D55F004575DD /* FiveByFive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FiveByFive.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		56B172B71AC1D55F004575DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		56B172B81AC1D55F004575DD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		56B172BA1AC1D55F004575DD /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		56B172BE1AC1D55F004575DD /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
-		56B172C11AC1D55F004575DD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		56B172C31AC1D55F004575DD /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		56B172CC1AC1D55F004575DD /* FiveByFiveTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FiveByFiveTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		56B172D11AC1D55F004575DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		56B172D21AC1D55F004575DD /* FiveByFiveTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiveByFiveTests.swift; sourceTree = "<group>"; };
 		56B172DE1AC1D864004575DD /* BlueSquare.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BlueSquare.png; sourceTree = "<group>"; };
@@ -199,6 +183,8 @@
 		56B172E21AC1D864004575DD /* RedSquare.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RedSquare.png; sourceTree = "<group>"; };
 		56B172E31AC1D864004575DD /* RedThree.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RedThree.png; sourceTree = "<group>"; };
 		56B172E41AC1D864004575DD /* RedTwo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RedTwo.png; sourceTree = "<group>"; };
+		56CE19791CD7E333000E015B /* Tile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tile.swift; sourceTree = "<group>"; };
+		56CE197B1CD83DE5000E015B /* Grid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
 		56DD3FC61AF29DA800CC2C80 /* GreenFivex2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GreenFivex2.png; sourceTree = "<group>"; };
 		56DD3FC71AF29DA800CC2C80 /* GreenFivex3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GreenFivex3.png; sourceTree = "<group>"; };
 		56DD3FC81AF29DA800CC2C80 /* GreenFour.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GreenFour.png; sourceTree = "<group>"; };
@@ -206,20 +192,11 @@
 		56DD3FCA1AF29DA800CC2C80 /* GreenFourx3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GreenFourx3.png; sourceTree = "<group>"; };
 		56DD3FD31AF2AA6A00CC2C80 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		56EBDE281AF8462900E7FDE1 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		56EBDE2D1AF8481000E7FDE1 /* FivebyFive-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FivebyFive-Bridging-Header.h"; sourceTree = "<group>"; };
 		56EBDE2F1AF8526300E7FDE1 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		56EBDE321AF8551F00E7FDE1 /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
-		56EBDE331AF8551F00E7FDE1 /* libFlurry_6.3.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry_6.3.0.a; sourceTree = "<group>"; };
+		56FBE69A1CD884E900AD1A81 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		56949E6E1ADB1B18001784B3 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		56B172B01AC1D55F004575DD /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -227,17 +204,9 @@
 				5606FDF51AFC56FC00124DAF /* iAd.framework in Frameworks */,
 				5606FE251B03FDBB00124DAF /* StoreKit.framework in Frameworks */,
 				56EBDE311AF853B300E7FDE1 /* SystemConfiguration.framework in Frameworks */,
-				56EBDE341AF8551F00E7FDE1 /* libFlurry_6.3.0.a in Frameworks */,
 				56EBDE291AF8462900E7FDE1 /* Security.framework in Frameworks */,
 				56DD3FD41AF2AA6A00CC2C80 /* Social.framework in Frameworks */,
 				565B9C2D1AD115ED0059D250 /* GameKit.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		56B172C91AC1D55F004575DD /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -277,6 +246,24 @@
 				5606FE141B01BCB000124DAF /* StoreRemoveAds.png */,
 			);
 			name = "Store Icons";
+			sourceTree = "<group>";
+		};
+		56321D871CD7CE4A0033357C /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				5606FE261B041DED00124DAF /* inAppPurchases.swift */,
+				56581C9C1CD86B03009BF7B0 /* GameData.swift */,
+				5680778B1CD90CF300976969 /* GameKitHelper.swift */,
+			);
+			name = Shared;
+			sourceTree = "<group>";
+		};
+		56321D881CD7CE5C0033357C /* SceneAssets */ = {
+			isa = PBXGroup;
+			children = (
+				56B172BA1AC1D55F004575DD /* GameScene.sks */,
+			);
+			name = SceneAssets;
 			sourceTree = "<group>";
 		};
 		565B9BEF1ACDDB040059D250 /* Yellow */ = {
@@ -372,9 +359,6 @@
 			isa = PBXGroup;
 			children = (
 				56B172B31AC1D55F004575DD /* FiveByFive.app */,
-				56B172CC1AC1D55F004575DD /* FiveByFiveTests.xctest */,
-				56949E711ADB1B18001784B3 /* FiveByFive WatchKit Extension.appex */,
-				56949E7B1ADB1B19001784B3 /* FiveByFive WatchKit App.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -383,21 +367,21 @@
 			isa = PBXGroup;
 			children = (
 				56B172DC1AC1D856004575DD /* Sprites */,
-				56B172C01AC1D55F004575DD /* Main.storyboard */,
-				565B9BEB1ACC75900059D250 /* GlobalVariables.swift */,
-				5606FE261B041DED00124DAF /* inAppPurchases.swift */,
 				56B172B81AC1D55F004575DD /* AppDelegate.swift */,
+				56321D871CD7CE4A0033357C /* Shared */,
+				565B9BEB1ACC75900059D250 /* Constants.swift */,
 				5606FDE41AF9A9F500124DAF /* StartViewController.swift */,
 				56B172BE1AC1D55F004575DD /* GameViewController.swift */,
+				5680778D1CD919E100976969 /* StartScene.swift */,
 				5606FE281B045BC600124DAF /* GameScene.swift */,
-				56B172BA1AC1D55F004575DD /* GameScene.sks */,
 				5606FDEC1AF9BDDB00124DAF /* StoreViewController.swift */,
 				5606FDEE1AFACA9500124DAF /* SettingsViewController.swift */,
-				56EBDE2D1AF8481000E7FDE1 /* FivebyFive-Bridging-Header.h */,
-				56EBDE321AF8551F00E7FDE1 /* Flurry.h */,
-				56EBDE331AF8551F00E7FDE1 /* libFlurry_6.3.0.a */,
+				56CE197B1CD83DE5000E015B /* Grid.swift */,
+				56CE19791CD7E333000E015B /* Tile.swift */,
+				56321D881CD7CE5C0033357C /* SceneAssets */,
 				56B172C31AC1D55F004575DD /* Images.xcassets */,
 				56B172B61AC1D55F004575DD /* Supporting Files */,
+				56FBE6991CD884E900AD1A81 /* Main.storyboard */,
 			);
 			path = FiveByFive;
 			sourceTree = "<group>";
@@ -484,39 +468,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		56949E701ADB1B18001784B3 /* FiveByFive WatchKit Extension */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 56949E8D1ADB1B19001784B3 /* Build configuration list for PBXNativeTarget "FiveByFive WatchKit Extension" */;
-			buildPhases = (
-				56949E6D1ADB1B18001784B3 /* Sources */,
-				56949E6E1ADB1B18001784B3 /* Frameworks */,
-				56949E6F1ADB1B18001784B3 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				56949E7E1ADB1B19001784B3 /* PBXTargetDependency */,
-			);
-			name = "FiveByFive WatchKit Extension";
-			productName = "FiveByFive WatchKit Extension";
-			productReference = 56949E711ADB1B18001784B3 /* FiveByFive WatchKit Extension.appex */;
-			productType = "com.apple.product-type.watchkit-extension";
-		};
-		56949E7A1ADB1B19001784B3 /* FiveByFive WatchKit App */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 56949E8A1ADB1B19001784B3 /* Build configuration list for PBXNativeTarget "FiveByFive WatchKit App" */;
-			buildPhases = (
-				56949E791ADB1B19001784B3 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "FiveByFive WatchKit App";
-			productName = "FiveByFive WatchKit App";
-			productReference = 56949E7B1ADB1B19001784B3 /* FiveByFive WatchKit App.app */;
-			productType = "com.apple.product-type.application.watchapp";
-		};
 		56B172B21AC1D55F004575DD /* FiveByFive */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 56B172D61AC1D55F004575DD /* Build configuration list for PBXNativeTarget "FiveByFive" */;
@@ -535,24 +486,6 @@
 			productReference = 56B172B31AC1D55F004575DD /* FiveByFive.app */;
 			productType = "com.apple.product-type.application";
 		};
-		56B172CB1AC1D55F004575DD /* FiveByFiveTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 56B172D91AC1D55F004575DD /* Build configuration list for PBXNativeTarget "FiveByFiveTests" */;
-			buildPhases = (
-				56B172C81AC1D55F004575DD /* Sources */,
-				56B172C91AC1D55F004575DD /* Frameworks */,
-				56B172CA1AC1D55F004575DD /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				56B172CE1AC1D55F004575DD /* PBXTargetDependency */,
-			);
-			name = FiveByFiveTests;
-			productName = FiveByFiveTests;
-			productReference = 56B172CC1AC1D55F004575DD /* FiveByFiveTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -563,13 +496,6 @@
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Nick Cracchiolo";
 				TargetAttributes = {
-					56949E701ADB1B18001784B3 = {
-						CreatedOnToolsVersion = 6.3;
-						DevelopmentTeam = 77TV63F6JF;
-					};
-					56949E7A1ADB1B19001784B3 = {
-						CreatedOnToolsVersion = 6.3;
-					};
 					56B172B21AC1D55F004575DD = {
 						CreatedOnToolsVersion = 6.2;
 						DevelopmentTeam = 77TV63F6JF;
@@ -581,10 +507,6 @@
 								enabled = 1;
 							};
 						};
-					};
-					56B172CB1AC1D55F004575DD = {
-						CreatedOnToolsVersion = 6.2;
-						TestTargetID = 56B172B21AC1D55F004575DD;
 					};
 				};
 			};
@@ -602,29 +524,11 @@
 			projectRoot = "";
 			targets = (
 				56B172B21AC1D55F004575DD /* FiveByFive */,
-				56B172CB1AC1D55F004575DD /* FiveByFiveTests */,
-				56949E701ADB1B18001784B3 /* FiveByFive WatchKit Extension */,
-				56949E7A1ADB1B19001784B3 /* FiveByFive WatchKit App */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		56949E6F1ADB1B18001784B3 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				56949E7C1ADB1B19001784B3 /* FiveByFive WatchKit App.app in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		56949E791ADB1B19001784B3 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		56B172B11AC1D55F004575DD /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -635,6 +539,7 @@
 				5606FE191B01BCB000124DAF /* Store500.png in Resources */,
 				565B9C291AD0F6080059D250 /* BombSquare.png in Resources */,
 				5606FDFA1AFE7F5B00124DAF /* 100Coins.png in Resources */,
+				56FBE69B1CD884E900AD1A81 /* Main.storyboard in Resources */,
 				565B9BFB1ACF13890059D250 /* YellowThree.png in Resources */,
 				56B172C41AC1D55F004575DD /* Images.xcassets in Resources */,
 				56B172E71AC1D864004575DD /* BlueThree.png in Resources */,
@@ -668,7 +573,6 @@
 				565B9C181AD0BA570059D250 /* AppIcon114.png in Resources */,
 				56DD3FCD1AF29DA800CC2C80 /* GreenFivex3.png in Resources */,
 				565B9C161AD0BA570059D250 /* AppIcon58.png in Resources */,
-				56B172C21AC1D55F004575DD /* Main.storyboard in Resources */,
 				5606FE151B01BCB000124DAF /* Store25.png in Resources */,
 				5606FE1B1B01BCB000124DAF /* StoreFree.png in Resources */,
 				565B9C1E1AD0BCD10059D250 /* Impact_Label_Reversed.ttf in Resources */,
@@ -703,13 +607,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		56B172CA1AC1D55F004575DD /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
@@ -729,13 +626,6 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		56949E6D1ADB1B18001784B3 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		56B172AF1AC1D55F004575DD /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -743,42 +633,26 @@
 				5606FDED1AF9BDDB00124DAF /* StoreViewController.swift in Sources */,
 				5606FDE51AF9A9F500124DAF /* StartViewController.swift in Sources */,
 				5606FE291B045BC600124DAF /* GameScene.swift in Sources */,
+				56CE197C1CD83DE5000E015B /* Grid.swift in Sources */,
+				5680778C1CD90CF300976969 /* GameKitHelper.swift in Sources */,
+				56581C9D1CD86B03009BF7B0 /* GameData.swift in Sources */,
 				56B172BF1AC1D55F004575DD /* GameViewController.swift in Sources */,
-				565B9BEC1ACC75900059D250 /* GlobalVariables.swift in Sources */,
+				565B9BEC1ACC75900059D250 /* Constants.swift in Sources */,
+				5680778E1CD919E100976969 /* StartScene.swift in Sources */,
 				5606FE271B041DED00124DAF /* inAppPurchases.swift in Sources */,
+				56CE197A1CD7E333000E015B /* Tile.swift in Sources */,
 				56B172B91AC1D55F004575DD /* AppDelegate.swift in Sources */,
 				5606FDEF1AFACA9500124DAF /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		56B172C81AC1D55F004575DD /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				56B172D31AC1D55F004575DD /* FiveByFiveTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXTargetDependency section */
-		56949E7E1ADB1B19001784B3 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 56949E7A1ADB1B19001784B3 /* FiveByFive WatchKit App */;
-			targetProxy = 56949E7D1ADB1B19001784B3 /* PBXContainerItemProxy */;
-		};
-		56B172CE1AC1D55F004575DD /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 56B172B21AC1D55F004575DD /* FiveByFive */;
-			targetProxy = 56B172CD1AC1D55F004575DD /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
 /* Begin PBXVariantGroup section */
-		56B172C01AC1D55F004575DD /* Main.storyboard */ = {
+		56FBE6991CD884E900AD1A81 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				56B172C11AC1D55F004575DD /* Base */,
+				56FBE69A1CD884E900AD1A81 /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -786,76 +660,6 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		56949E8B1ADB1B19001784B3 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				IBSC_MODULE = FiveByFive_WatchKit_Extension;
-				INFOPLIST_FILE = "FiveByFive WatchKit App/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = 4;
-				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
-			};
-			name = Debug;
-		};
-		56949E8C1ADB1B19001784B3 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_NO_COMMON_BLOCKS = YES;
-				IBSC_MODULE = FiveByFive_WatchKit_Extension;
-				INFOPLIST_FILE = "FiveByFive WatchKit App/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = 4;
-				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
-			};
-			name = Release;
-		};
-		56949E8E1ADB1B19001784B3 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "FiveByFive WatchKit Extension/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_NAME = "${TARGET_NAME}";
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
-		56949E8F1ADB1B19001784B3 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "FiveByFive WatchKit Extension/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_NAME = "${TARGET_NAME}";
-				SKIP_INSTALL = YES;
-			};
-			name = Release;
-		};
 		56B172D41AC1D55F004575DD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -940,7 +744,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-2";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
@@ -954,7 +757,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.njc.game.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "5920bf72-8f14-4be6-8cb0-f0f6f8c08214";
-				SWIFT_OBJC_BRIDGING_HEADER = "./FiveByFive/FivebyFive-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "arm64 armv7 armv7s armv6";
 			};
@@ -964,7 +767,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-2";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
@@ -978,69 +780,15 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.njc.game.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "5920bf72-8f14-4be6-8cb0-f0f6f8c08214";
-				SWIFT_OBJC_BRIDGING_HEADER = "./FiveByFive/FivebyFive-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "arm64 armv7 armv7s armv6";
-			};
-			name = Release;
-		};
-		56B172DA1AC1D55F004575DD /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = FiveByFiveTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.njc.game.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FiveByFive.app/FiveByFive";
-			};
-			name = Debug;
-		};
-		56B172DB1AC1D55F004575DD /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = FiveByFiveTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.njc.game.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FiveByFive.app/FiveByFive";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		56949E8A1ADB1B19001784B3 /* Build configuration list for PBXNativeTarget "FiveByFive WatchKit App" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				56949E8B1ADB1B19001784B3 /* Debug */,
-				56949E8C1ADB1B19001784B3 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		56949E8D1ADB1B19001784B3 /* Build configuration list for PBXNativeTarget "FiveByFive WatchKit Extension" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				56949E8E1ADB1B19001784B3 /* Debug */,
-				56949E8F1ADB1B19001784B3 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		56B172AE1AC1D55F004575DD /* Build configuration list for PBXProject "FiveByFive" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1055,15 +803,6 @@
 			buildConfigurations = (
 				56B172D71AC1D55F004575DD /* Debug */,
 				56B172D81AC1D55F004575DD /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		56B172D91AC1D55F004575DD /* Build configuration list for PBXNativeTarget "FiveByFiveTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				56B172DA1AC1D55F004575DD /* Debug */,
-				56B172DB1AC1D55F004575DD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

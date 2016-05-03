@@ -17,16 +17,9 @@ class inAppPurchases: NSObject,SKProductsRequestDelegate, SKPaymentTransactionOb
     var list = [SKProduct]()
     var viewC:UIViewController = UIViewController()
     let defaults = NSUserDefaults.standardUserDefaults()
-    
-    class var defaultHelper : inAppPurchases {
-        struct Static {
-            static let instance : inAppPurchases = inAppPurchases()
-        }
-        
-        return Static.instance
-    }
-    
-    override init() {
+    static let defaultHelper:inAppPurchases = inAppPurchases()
+
+    private override init() {
         super.init()
     }
     func getProducts() {
@@ -134,7 +127,6 @@ class inAppPurchases: NSObject,SKProductsRequestDelegate, SKPaymentTransactionOb
             case "fbf.iap.remove_ads":
                 print("remove ads")
                 defaults.setInteger(1, forKey: "ads")
-                Flurry.logEvent("Ads Removal Restored")
             default:
                 print("IAP not setup")
             }
@@ -159,20 +151,16 @@ class inAppPurchases: NSObject,SKProductsRequestDelegate, SKPaymentTransactionOb
                 switch prodID {
                     case "fbf.iap.add_money":
                         money+=100
-                        Flurry.logEvent("100 Coins Bought")
                     case "fbf.iap.add_money500":
                         money+=500
-                        Flurry.logEvent("500 Coins Bought")
                     case "fbf.iap.add_money1000":
                         money+=1000
-                        Flurry.logEvent("1000 Coins Bought")
                     case "fbf.iap.remove_ads":
                         defaults.setInteger(1, forKey: "ads")
                         self.appDelegate.adView.hidden = true
                         self.appDelegate.adView.removeFromSuperview()
-                        Flurry.logEvent("Ad Removal Bought")
                     case "fbf.iap.save_life":
-                        Flurry.logEvent("Second Chance Bought")
+                        break
                     default:
                         print("IAP not setup")
                 }
