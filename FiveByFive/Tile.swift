@@ -23,10 +23,12 @@ class Tile: SKSpriteNode {
     private var flipped = false
     
     init(withValue:Int) {
-        let texture = SKTexture(imageNamed: "YellowSquare.png")
+        let texture = SKTexture(imageNamed: "redTile")
         self.value = withValue
-        super.init(texture: texture, color: UIColor.whiteColor(), size: texture.size())
+        super.init(texture: texture, color: UIColor.whiteColor(), size: CGSizeMake(55, 55))
         self.anchorPoint = CGPointMake(0, 0)
+        //print("Texture Size: ",texture.size())
+        self.userInteractionEnabled = true
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -42,7 +44,7 @@ class Tile: SKSpriteNode {
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         if flipped == false {
-            
+            flip()
         }
     }
     func valueForTile() -> Int {
@@ -55,46 +57,22 @@ class Tile: SKSpriteNode {
     }
     
     func flip() {
+        self.zPosition = 1
         pushAnimation()
         if value == 0 {
             if NSUserDefaults.standardUserDefaults().integerForKey(DefaultKeys.Sound.description) == 1 {
-                let sound_action = SKAction.playSoundFileNamed("explosion.wav", waitForCompletion: false)
-                self.runAction(sound_action)
+                //let sound_action = SKAction.playSoundFileNamed("explosion.wav", waitForCompletion: false)
+                //self.runAction(sound_action)
             }
             bombAnimation()
+            NSNotificationCenter.defaultCenter().postNotificationName(Constants.Notifications.BOMB_SELECTED, object: nil)
         }
-    }
-    private func showSaveLifeAlert() {
-        let alert_controller = UIAlertController(title: "Free Coins", message: "Want a Second Chance for $0.99?", preferredStyle: UIAlertControllerStyle.ActionSheet)
-        
-        let dismiss_action = UIAlertAction(title: "No Thanks.", style: UIAlertActionStyle.Default) {
-            UIAlertAction in
-            //counter = 0
-            //self.touch_enabled = false
-            //self.GameOverScreen()
-        }
-        let stop_asking_action = UIAlertAction(title: "Don't Ask Again", style: UIAlertActionStyle.Default) {
-            UIAlertAction in
-            //self.defaults.setInteger(1, forKey: DefaultKeys.Life.description)
-            //counter = 0
-            //self.touch_enabled = false
-            //self.GameOverScreen()
-        }
-        let purchase_action = UIAlertAction(title: "Yes Please!", style: UIAlertActionStyle.Default) {
-            UIAlertAction in
-            inAppPurchases.defaultHelper.saveLife()
-            
-        }
-        alert_controller.addAction(purchase_action)
-        alert_controller.addAction(dismiss_action)
-        alert_controller.addAction(stop_asking_action)
-        self.scene?.view?.window?.rootViewController?.presentViewController(alert_controller, animated: true, completion: nil)
-
     }
     
     private func pushAnimation() {
         if !self.flipped {
-            let push = SKAction.animateWithTextures([/*textures*/], timePerFrame:0.1 )
+            let textures:[SKTexture] = [backTexture]
+            let push = SKAction.animateWithTextures(textures, timePerFrame:0.1 )
             self.runAction(push)
             self.flipped = true
         }
@@ -111,19 +89,19 @@ class Tile: SKSpriteNode {
             return SKTexture(imageNamed: "BombSquare.png")
         case 1:
             //One Tile
-            return SKTexture(imageNamed: "GreenOne.png")
+            return SKTexture(imageNamed: "blueOne")
         case 2:
             //Two Tile
-            return SKTexture(imageNamed: "GreenTwo.png")
+            return SKTexture(imageNamed: "blueTwo")
         case 3:
             //Three Tile
-            return SKTexture(imageNamed: "GreenThree.png")
+            return SKTexture(imageNamed: "blueThree")
         case 4:
             //Four Tile
-            return SKTexture(imageNamed: "GreenFour.png")
+            return SKTexture(imageNamed: "blueFour")
         case 5:
             //Five Tile
-            return SKTexture(imageNamed: "GreenFive.png")
+            return SKTexture(imageNamed: "blueFive")
         default:
             return SKTexture(imageNamed: "BombSquare.png")
         }

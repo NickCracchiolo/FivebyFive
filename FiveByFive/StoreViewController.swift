@@ -23,8 +23,8 @@ class StoreViewController: UIViewController, ADBannerViewDelegate {
     
     override func viewDidLoad() {
         MoneyLabel.text = String(defaults.integerForKey(DefaultKeys.Money.description))
-        inAppPurchases.defaultHelper.setViewController(self)
-        inAppPurchases.defaultHelper.getProducts()
+        IAP.sharedIAP.setViewController(self)
+        IAP.sharedIAP.getProducts()
         BackGesture = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(swipeBack))
         BackGesture.edges = .Left
         view.addGestureRecognizer(BackGesture)
@@ -90,19 +90,19 @@ class StoreViewController: UIViewController, ADBannerViewDelegate {
     
     
     @IBAction func CoinsBtnOne(sender: UIButton) {
-        inAppPurchases.defaultHelper.CoinsBtnOne()
+        IAP.sharedIAP.CoinsBtnOne()
 
     }
     @IBAction func CoinsBtnFive(sender: UIButton) {
-        inAppPurchases.defaultHelper.CoinsBtnFive()
+        IAP.sharedIAP.CoinsBtnFive()
     }
     
     @IBAction func CoinsBtnThousand(sender: UIButton) {
-        inAppPurchases.defaultHelper.CoinsBtnThousand()
+        IAP.sharedIAP.CoinsBtnThousand()
     }
     
     @IBAction func RemoveAds(sender: UIButton) {
-        inAppPurchases.defaultHelper.RemoveAds()
+        IAP.sharedIAP.RemoveAds()
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -111,7 +111,7 @@ class StoreViewController: UIViewController, ADBannerViewDelegate {
     @IBAction func RestoreBtn(sender: UIButton) {
         print("Restore Button Pressed", terminator: "")
         
-        inAppPurchases.defaultHelper.RestorePurchase()
+        IAP.sharedIAP.RestorePurchase()
     }
     
     override func prefersStatusBarHidden() -> Bool {

@@ -11,7 +11,7 @@ import GameKit
 class GameKitHelper: NSObject, GKGameCenterControllerDelegate {
     //Singleton One Liner
     static let sharedGameKitHelper = GameKitHelper()
-    var authentication_vc:UIViewController?
+    var authenticationVC:UIViewController?
     private var gamecenter_enabled:Bool = true
     
     //private initalizer for singleton sake
@@ -36,7 +36,7 @@ class GameKitHelper: NSObject, GKGameCenterControllerDelegate {
             } else if (GKLocalPlayer.localPlayer().authenticated) {
                 self.gamecenter_enabled = true
                 print("Game Center Player Authenticated")
-                GKNotificationBanner.showBannerWithTitle("Logged into Game Center", message: "Welcome " + localPlayer.displayName!, duration: 2.0, completionHandler: nil)
+                //GKNotificationBanner.showBannerWithTitle("Logged into Game Center", message: "Welcome " + localPlayer.displayName!, duration: 2.0, completionHandler: nil)
                 NSNotificationCenter.defaultCenter().postNotificationName(Constants.Notifications.PLAYER_AUTH, object: nil)
             } else {
                 self.gamecenter_enabled = false
@@ -48,7 +48,7 @@ class GameKitHelper: NSObject, GKGameCenterControllerDelegate {
     
     func setAuthenticationViewController(withVC:UIViewController?) {
         if (withVC != nil) {
-            self.authentication_vc = withVC!
+            self.authenticationVC = withVC!
             let default_center = NSNotificationCenter()
             default_center.postNotificationName(Constants.Notifications.PRESENT_AUTH_VC, object: self)
         }
@@ -70,5 +70,13 @@ class GameKitHelper: NSObject, GKGameCenterControllerDelegate {
                 }
             })
         }
+    }
+    func showLeaderboard(withName:String) -> GKGameCenterViewController {
+        let gc = GKGameCenterViewController()
+        gc.gameCenterDelegate = self
+        gc.viewState = GKGameCenterViewControllerState.Leaderboards
+        gc.viewState = GKGameCenterViewControllerState.Achievements
+        gc.leaderboardIdentifier = withName
+        return gc
     }
 }

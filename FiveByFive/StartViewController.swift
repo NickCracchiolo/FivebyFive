@@ -19,8 +19,8 @@ class StartViewController: UIViewController, GKGameCenterControllerDelegate, ADB
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        var free_coins = defaults.integerForKey(DefaultKeys.FreeCoins.description)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(presentAuthenticationVC), name: Constants.Notifications.PRESENT_AUTH_VC, object: nil)
+        setUpDailyNotifications()
         
         if let scene = StartScene(fileNamed: "StartScene") {
             // Configure the view.
@@ -32,10 +32,29 @@ class StartViewController: UIViewController, GKGameCenterControllerDelegate, ADB
             skView.ignoresSiblingOrder = true
             
             /* Set the scale mode to scale to fit the window */
-            scene.scaleMode = .AspectFill
+            scene.scaleMode = .ResizeFill
             
             skView.presentScene(scene)
         }
+        
+        //self.checkAdsOn()
+        
+        setUIUserNotificationOptions()
+        
+
+//        if freeCoins == 1 {
+//            UIApplication.sharedApplication().cancelLocalNotification(DailyNotification)
+//        }
+    }
+    override func viewDidAppear(animated: Bool) {
+        //self.checkAdsOn()
+    }
+    override func shouldAutorotate() -> Bool {
+        return true
+    }
+    private func setUpDailyNotifications() {
+        var free_coins = defaults.integerForKey(DefaultKeys.FreeCoins.description)
+
         let flags: NSCalendarUnit = [.Day, .Month, .Year]
         let date = NSDate()
         let components = NSCalendar.currentCalendar().components(flags, fromDate: date)
@@ -59,30 +78,15 @@ class StartViewController: UIViewController, GKGameCenterControllerDelegate, ADB
                         free_coins = 0
                     }
                 }
-    
+                
             }
         }
         defaults.setInteger(free_coins, forKey: DefaultKeys.FreeCoins.description)
         defaults.synchronize()
-        
-        //self.checkAdsOn()
-        
-        setUIUserNotificationOptions()
-        
-
-//        if freeCoins == 1 {
-//            UIApplication.sharedApplication().cancelLocalNotification(DailyNotification)
-//        }
-    }
-    override func viewDidAppear(animated: Bool) {
-        //self.checkAdsOn()
-    }
-    override func shouldAutorotate() -> Bool {
-        return true
     }
     func presentAuthenticationVC() {
         let helper = GameKitHelper.sharedGameKitHelper
-        self.presentViewController(helper.authentication_vc!, animated: true, completion: nil)
+        self.presentViewController(helper.authenticationVC!, animated: true, completion: nil)
     }
     override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
         if UIDevice.currentDevice().userInterfaceIdiom == .Phone {
@@ -100,15 +104,8 @@ class StartViewController: UIViewController, GKGameCenterControllerDelegate, ADB
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
 
-    func showLeaderboard(sender: UIButton) {
-        let vc = self.view?.window?.rootViewController
-        let gc = GKGameCenterViewController()
-        gc.gameCenterDelegate = self
-        gc.viewState = GKGameCenterViewControllerState.Leaderboards
-        gc.viewState = GKGameCenterViewControllerState.Achievements
-        
-        gc.leaderboardIdentifier = "leaderboard.highest_level"
-        vc?.presentViewController(gc, animated: true, completion: nil)
+    func showLeaderboard() {
+        self.presentViewController(GameKitHelper.sharedGameKitHelper.showLeaderboard("leaderboards.highest_score"), animated: true, completion: nil)
     }
     
     func setUIUserNotificationOptions() {

@@ -18,7 +18,7 @@ var current_coins = 0
 var tut_Point = 0
 
 //View Controller Variable
-let gameVC = GameViewController()
+//let gameVC = GameViewController()
 let startController = StartViewController()
 
 //NODES
@@ -58,7 +58,7 @@ let fiveText:SKTexture = SKTexture(image: fiveText_UI)
 
 
 class GameScene: SKScene {
-    weak var gViewController : GameViewController?
+    //weak var gViewController : GameViewController?
     var HUD_ON = false
     weak var pull_overlay_gesture = UIScreenEdgePanGestureRecognizer()
     weak var push_overlay_gesture = UIScreenEdgePanGestureRecognizer()
@@ -76,8 +76,8 @@ class GameScene: SKScene {
         /* Setup your scene here */
         self.backgroundColor = Constants.AppColor.backColor
         
-        inAppPurchases.defaultHelper.setViewController(gameVC)
-        inAppPurchases.defaultHelper.getProducts()
+        //inAppPurchases.defaultHelper.setViewController(gameVC)
+        IAP.sharedIAP.getProducts()
         
         if defaults.integerForKey(DefaultKeys.Tutorial.description) == 0 {
             tut_Point = 0
@@ -1517,7 +1517,7 @@ class GameScene: SKScene {
                 }
                 let purchaseAction = UIAlertAction(title: "Yes Please!", style: UIAlertActionStyle.Default) {
                     UIAlertAction in
-                    inAppPurchases.defaultHelper.saveLife()
+                    IAP.sharedIAP.saveLife()
                     
                 }
                 alertController.addAction(purchaseAction)
@@ -1620,7 +1620,7 @@ class GameScene: SKScene {
         counter = 0
         Game_Level = 1
         current_coins = 0
-        self.gViewController?.navigationController?.popViewControllerAnimated(true)
+        //self.gViewController?.navigationController?.popViewControllerAnimated(true)
     }
     
     func setup() {

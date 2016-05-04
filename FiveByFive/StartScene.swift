@@ -10,18 +10,53 @@ import SpriteKit
 
 class StartScene: SKScene {
     override func didMoveToView(view: SKView) {
-        <#code#>
+        setupScene()
     }
     override func update(currentTime: NSTimeInterval) {
-        <#code#>
+        
     }
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        <#code#>
+        for touch:AnyObject in touches {
+            let location = (touch as! UITouch).locationInNode(self)
+            let node = self.nodeAtPoint(location)
+            if node.name == "Start Button" {
+                self.view?.presentScene(PlayScene(size: self.size))
+            } else if node.name == "Leaderbaords Button" {
+                NSNotificationCenter.defaultCenter().postNotificationName(Constants.Notifications.PRESENT_LEADERBOARDS, object: nil)
+            } else if node.name == "Store Button" {
+                self.view?.presentScene(StoreScene(size: self.size))
+            } else if node.name == "Settings Button" {
+                self.view?.presentScene(SettingsScene(size: self.size))
+            }
+        }
     }
     private func setupScene() {
+        let height = self.frame.size.height
         let title_label = SKLabelNode(text: "Five by Five")
-        title_label.position = CGPointMake(CGRectGetMidX(self.frame), self.frame.size.height*0.75)
+        title_label.position = CGPointMake(CGRectGetMidX(self.frame), height*0.75)
         title_label.fontName = Constants.FontName.Title_Font
         title_label.fontSize = Constants.FontSize.DispFontSize
+        title_label.fontColor = Constants.FontColor.titleClr
+        self.addChild(title_label)
+        
+        let start_button = SKSpriteNode(imageNamed: "playButton")
+        start_button.position = CGPointMake(CGRectGetMidX(self.frame), height*0.6)
+        start_button.name = "Start Button"
+        self.addChild(start_button)
+        
+        let leader_button = SKSpriteNode(imageNamed: "playButton")
+        leader_button.position = CGPointMake(CGRectGetMidX(self.frame), height*0.45)
+        leader_button.name = "Leaderboards Button"
+        self.addChild(leader_button)
+        
+        let store_button = SKSpriteNode(imageNamed: "storeButton")
+        store_button.position = CGPointMake(CGRectGetMidX(self.frame), height*0.3)
+        store_button.name = "Store Button"
+        self.addChild(store_button)
+         
+        let settings_button = SKSpriteNode(imageNamed: "settingsButton")
+        settings_button.position = CGPointMake(CGRectGetMidX(self.frame), height*0.15)
+        settings_button.name = "Settings Button"
+        self.addChild(settings_button)
     }
 }

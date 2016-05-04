@@ -37,6 +37,11 @@ struct Constants {
     struct Notifications {
         static let PLAYER_AUTH = "authenticated_player"
         static let PRESENT_AUTH_VC = "present_authentication_view"
+        static let BOMB_SELECTED = "bomb_selected"
+        static let PRESENT_LEADERBOARDS = "present_leaderboard_vc"
+    }
+    struct Leaderboards {
+        static let highScore = "leaderboards.highest_score"
     }
 }
 
