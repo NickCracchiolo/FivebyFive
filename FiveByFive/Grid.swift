@@ -25,7 +25,7 @@ class Grid: SKNode {
     var maxNumberedTiles:Int = 0
     
     override init() {
-        self.level = 0
+        self.level = 1
         super.init()
         createGrid()
         self.userInteractionEnabled = true
@@ -132,20 +132,24 @@ class Grid: SKNode {
     private func createLabel(forValues:[Int],withName:String,offset:CGFloat,direction:Direction,color:UIColor) {
         var counter = 0
         for val in forValues.reverse() {
-            let label = SKLabelNode(text: String(val))
+            let label = SKLabelNode(text: "Level: " + String(val))
             label.fontSize = 20
             label.fontColor = color
             label.fontName = Constants.FontName.Game_Font
-            if direction == Direction.Up {
-                label.position = CGPointMake(-20, CGFloat(counter)*50+offset)
-            } else if direction == Direction.Down {
-                label.position = CGPointMake(-20, -CGFloat(counter)*50-offset)
-            } else if direction == Direction.Right {
-                label.position = CGPointMake(CGFloat(counter)*50+offset, -20)
-            } else if direction == Direction.Left {
-                label.position = CGPointMake(-CGFloat(counter)*50-offset, -20)
-            }
             label.name = withName+String(counter)
+
+            switch direction {
+            case .Up:
+                label.position = CGPointMake(-20-offset, CGFloat(counter)*50+25)
+            case .Down:
+                label.position = CGPointMake(-20-offset, -CGFloat(counter)*50-25)
+            case .Right:
+                label.position = CGPointMake(CGFloat(counter)*50+25, -20-offset)
+            case .Left:
+                label.position = CGPointMake(-CGFloat(counter)*50-25, -20-offset)
+
+            }
+            
             self.addChild(label)
             counter += 1;
         }
