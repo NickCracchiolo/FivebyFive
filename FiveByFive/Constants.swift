@@ -14,9 +14,8 @@ struct Constants {
         static let backColor = UIColor(red: 61/255, green: 83/255, blue: 178/255, alpha: 1.0)
     }
     struct FontColor {
-        static let titleClr = SKColor(red: 225/255, green: 205/255, blue: 58/255, alpha: 1.0)
+        static let titleClr = SKColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1.0)
         static let fontClr = SKColor(red: 225/255, green: 225/255, blue: 225/255, alpha: 1.0)
-        static let blackColor = SKColor(red: 0, green: 0, blue: 0, alpha: 1.0)
     }
     struct FontName {
         static let Game_Font = "Impact Label Reversed"
@@ -26,6 +25,7 @@ struct Constants {
     }
     struct FontSize {
         static let DispFontSize:CGFloat = 30
+        static let Title:CGFloat = 45
     }
     struct zPosition {
         static let tutorial_zPosition:CGFloat = 50

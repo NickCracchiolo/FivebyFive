@@ -21,9 +21,15 @@ class PurchaseItem:SKSpriteNode {
         super.init(texture: texture, color: UIColor.whiteColor(), size: texture.size())
     }
     required init?(coder aDecoder: NSCoder) {
+        self.purchaseID = aDecoder.decodeObjectForKey("purchaseID") as! String
+        self.coinAmount = aDecoder.decodeIntegerForKey("coinAmount")
+        self.purchasePrice = aDecoder.decodeFloatForKey("purchasePoint")
         super.init(coder: aDecoder)
     }
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        inAppPurchases.defaultHelper
+        //IAP.sharedIAP
+    }
+    func purchaseItem() -> Int {
+        return self.coinAmount
     }
 }

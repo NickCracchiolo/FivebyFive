@@ -8,7 +8,7 @@
 
 import GameKit
 
-class GameKitHelper: NSObject, GKGameCenterControllerDelegate {
+class GameKitHelper: NSObject {
     //Singleton One Liner
     static let sharedGameKitHelper = GameKitHelper()
     var authenticationVC:UIViewController?
@@ -53,9 +53,6 @@ class GameKitHelper: NSObject, GKGameCenterControllerDelegate {
             default_center.postNotificationName(Constants.Notifications.PRESENT_AUTH_VC, object: self)
         }
     }
-    func gameCenterViewControllerDidFinish(gameCenterViewController: GKGameCenterViewController) {
-          //self.view.dismissViewControllerAnimated(true, completion: nil)
-    }
     func reportScore(score:Int) {
         let identifier = "leaderboard.highest_level"
         if GKLocalPlayer.localPlayer().authenticated == true{
@@ -70,13 +67,5 @@ class GameKitHelper: NSObject, GKGameCenterControllerDelegate {
                 }
             })
         }
-    }
-    func showLeaderboard(withName:String) -> GKGameCenterViewController {
-        let gc = GKGameCenterViewController()
-        gc.gameCenterDelegate = self
-        gc.viewState = GKGameCenterViewControllerState.Leaderboards
-        gc.viewState = GKGameCenterViewControllerState.Achievements
-        gc.leaderboardIdentifier = withName
-        return gc
     }
 }

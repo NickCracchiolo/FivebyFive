@@ -14,12 +14,11 @@ import GameKit
 class StartViewController: UIViewController, GKGameCenterControllerDelegate, ADBannerViewDelegate {
     
     let DailyNotification = UILocalNotification()
-    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-    let defaults = NSUserDefaults.standardUserDefaults()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(presentAuthenticationVC), name: Constants.Notifications.PRESENT_AUTH_VC, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(showLeaderboard), name: Constants.Notifications.PRESENT_LEADERBOARDS, object: nil)
         setUpDailyNotifications()
         
         if let scene = StartScene(fileNamed: "StartScene") {
@@ -53,6 +52,7 @@ class StartViewController: UIViewController, GKGameCenterControllerDelegate, ADB
         return true
     }
     private func setUpDailyNotifications() {
+        let defaults = NSUserDefaults.standardUserDefaults()
         var free_coins = defaults.integerForKey(DefaultKeys.FreeCoins.description)
 
         let flags: NSCalendarUnit = [.Day, .Month, .Year]
@@ -105,7 +105,13 @@ class StartViewController: UIViewController, GKGameCenterControllerDelegate, ADB
     }
 
     func showLeaderboard() {
-        self.presentViewController(GameKitHelper.sharedGameKitHelper.showLeaderboard("leaderboards.highest_score"), animated: true, completion: nil)
+        print("Present Leaderboard")
+        let gc = GKGameCenterViewController()
+        gc.gameCenterDelegate = self
+        gc.viewState = GKGameCenterViewControllerState.Leaderboards
+        gc.viewState = GKGameCenterViewControllerState.Achievements
+        gc.leaderboardIdentifier = "leaderboards.highest_score"
+        self.presentViewController(gc, animated: true, completion: nil)
     }
     
     func setUIUserNotificationOptions() {

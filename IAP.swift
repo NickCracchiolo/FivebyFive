@@ -157,8 +157,8 @@ class IAP: NSObject,SKProductsRequestDelegate, SKPaymentTransactionObserver, SKR
                         money+=1000
                     case "fbf.iap.remove_ads":
                         defaults.setInteger(1, forKey: "ads")
-                        self.appDelegate.adView.hidden = true
-                        self.appDelegate.adView.removeFromSuperview()
+                        //self.appDelegate.adView.hidden = true
+                        //self.appDelegate.adView.removeFromSuperview()
                     case "fbf.iap.save_life":
                         break
                     default:

@@ -5,7 +5,7 @@
 //  Created by Nicholas Cracchiolo on 5/6/15.
 //  Copyright (c) 2015 Nick Cracchiolo. All rights reserved.
 //
-
+/*
 import Foundation
 import UIKit
 import iAd
@@ -163,3 +163,4 @@ class SettingsViewController: UIViewController, ADBannerViewDelegate {
         self.appDelegate.adView.hidden = true
     }
 }
+ */

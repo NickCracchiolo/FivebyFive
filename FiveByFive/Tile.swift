@@ -56,7 +56,7 @@ class Tile: SKSpriteNode {
         return self.flipped
     }
     
-    func flip() {
+    func flip() -> Int {
         self.zPosition = 1
         pushAnimation()
         if value == 0 {
@@ -66,14 +66,22 @@ class Tile: SKSpriteNode {
             }
             bombAnimation()
             NSNotificationCenter.defaultCenter().postNotificationName(Constants.Notifications.BOMB_SELECTED, object: nil)
+        } else {
+            let grid = self.parent as! Grid
+            grid.calculateCurrentColValues()
+            grid.calculateCurrentRowValues()
+            grid.totalTilesFlipped += 1;
         }
+        return self.value
     }
     
     private func pushAnimation() {
         if !self.flipped {
-            let textures:[SKTexture] = [backTexture]
-            let push = SKAction.animateWithTextures(textures, timePerFrame:0.1 )
+            let textures:[SKTexture] = [SKTexture(imageNamed:"redTile2"),SKTexture(imageNamed:"redTile3"),SKTexture(imageNamed:"redTile4"),
+                                        SKTexture(imageNamed:"redTile5"),backTexture]
+            let push = SKAction.animateWithTextures(textures, timePerFrame:0.01)
             self.runAction(push)
+            self.size = CGSizeMake(50,50)
             self.flipped = true
         }
     }

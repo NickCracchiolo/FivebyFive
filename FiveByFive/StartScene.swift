@@ -10,6 +10,8 @@ import SpriteKit
 
 class StartScene: SKScene {
     override func didMoveToView(view: SKView) {
+        //self.backgroundColor = UIColor(red: 16/255, green: 151/255, blue: 255/255, alpha: 1.0)
+        self.backgroundColor = UIColor.whiteColor()
         setupScene()
     }
     override func update(currentTime: NSTimeInterval) {
@@ -21,7 +23,7 @@ class StartScene: SKScene {
             let node = self.nodeAtPoint(location)
             if node.name == "Start Button" {
                 self.view?.presentScene(PlayScene(size: self.size))
-            } else if node.name == "Leaderbaords Button" {
+            } else if node.name == "Leaderboards Button" {
                 NSNotificationCenter.defaultCenter().postNotificationName(Constants.Notifications.PRESENT_LEADERBOARDS, object: nil)
             } else if node.name == "Store Button" {
                 self.view?.presentScene(StoreScene(size: self.size))
@@ -32,11 +34,17 @@ class StartScene: SKScene {
     }
     private func setupScene() {
         let height = self.frame.size.height
+        /*
         let title_label = SKLabelNode(text: "Five by Five")
         title_label.position = CGPointMake(CGRectGetMidX(self.frame), height*0.75)
         title_label.fontName = Constants.FontName.Title_Font
-        title_label.fontSize = Constants.FontSize.DispFontSize
+        title_label.fontSize = Constants.FontSize.Title
         title_label.fontColor = Constants.FontColor.titleClr
+        self.addChild(title_label)
+        */
+        let title_label = SKSpriteNode(imageNamed: "titleImage")
+        title_label.position = CGPointMake(CGRectGetMidX(self.frame), height*0.8)
+        title_label.name = "Title"
         self.addChild(title_label)
         
         let start_button = SKSpriteNode(imageNamed: "playButton")
@@ -44,7 +52,7 @@ class StartScene: SKScene {
         start_button.name = "Start Button"
         self.addChild(start_button)
         
-        let leader_button = SKSpriteNode(imageNamed: "playButton")
+        let leader_button = SKSpriteNode(imageNamed: "leaderboardsButton")
         leader_button.position = CGPointMake(CGRectGetMidX(self.frame), height*0.45)
         leader_button.name = "Leaderboards Button"
         self.addChild(leader_button)

@@ -13,26 +13,34 @@ class PlayScene: SKScene {
     
     override func didMoveToView(view: SKView) {
         self.userInteractionEnabled = true
+        self.backgroundColor = UIColor.whiteColor()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(endGame), name: Constants.Notifications.BOMB_SELECTED, object: nil)
         
         setupScene()
     }
     override func update(currentTime: NSTimeInterval) {
-        
+        if (grid.hasWon()) {
+            nextLevel()
+        }
     }
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        print("Touched in PlayScene")
         if (grid.hasWon()) {
             nextLevel()
         }
     }
     func endGame() {
+        //play bomb animation (inside tile)
+        //tile notifies this scene which calls this function. Notifies the user of the game ending,
+        //level, if they got a high score, and then presents the main screen
+        
         //GameKitHelper.sharedGameKitHelper.reportScore(grid.currentLevel())
         self.view?.presentScene(StartScene(size: self.size))
     }
     private func nextLevel() {
         let label = self.childNodeWithName("Level Label") as! SKLabelNode
-        label.text = String(grid.currentLevel())
         grid.createGridForNextLevel()
+        label.text = String(grid.currentLevel())
     }
     func showSaveLifeAlert() {
         let alert_controller = UIAlertController(title: "Free Coins", message: "Want a Second Chance for $0.99?", preferredStyle: UIAlertControllerStyle.ActionSheet)
@@ -52,7 +60,7 @@ class PlayScene: SKScene {
         }
         let purchase_action = UIAlertAction(title: "Yes Please!", style: UIAlertActionStyle.Default) {
             UIAlertAction in
-            inAppPurchases.defaultHelper.saveLife()
+            //inAppPurchases.defaultHelper.saveLife()
             
         }
         alert_controller.addAction(purchase_action)
@@ -66,6 +74,7 @@ class PlayScene: SKScene {
         level_label.fontColor = UIColor.blackColor()
         level_label.fontSize = Constants.FontSize.DispFontSize
         level_label.fontName = Constants.FontName.Game_Font
+        level_label.name = "Level Label"
         self.addChild(level_label)
         
         self.grid.position = CGPointMake(CGRectGetMidX(self.frame) - 125, CGRectGetMidY(self.frame) - 125)
