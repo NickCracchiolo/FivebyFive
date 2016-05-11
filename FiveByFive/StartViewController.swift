@@ -24,8 +24,8 @@ class StartViewController: UIViewController, GKGameCenterControllerDelegate, ADB
         if let scene = StartScene(fileNamed: "StartScene") {
             // Configure the view.
             let skView = self.view as! SKView
-            skView.showsFPS = true
-            skView.showsNodeCount = true
+            skView.showsFPS = false
+            skView.showsNodeCount = false
             
             /* Sprite Kit applies additional optimizations to improve rendering performance */
             skView.ignoresSiblingOrder = true
@@ -140,42 +140,6 @@ class StartViewController: UIViewController, GKGameCenterControllerDelegate, ADB
     func gameCenterViewControllerDidFinish(gameCenterViewController: GKGameCenterViewController) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
-    /*
-    func loadAds() {
-        self.appDelegate.adView.removeFromSuperview()
-        self.appDelegate.adView.delegate = nil
-        self.appDelegate.adView = ADBannerView(frame: CGRect.zero)
-        self.appDelegate.adView.center = CGPoint(x: view.bounds.size.width / 2, y: view.bounds.size.height - self.appDelegate.adView.frame.size.height / 2)
-        self.appDelegate.adView.delegate = self
-        self.appDelegate.adView.hidden = true
-        view.addSubview(self.appDelegate.adView)
-    }
-    func checkAdsOn() {
-        let ads = defaults.integerForKey(DefaultKeys.Ads.description)
-        print(ads, terminator: "")
-        
-        if ads == 0 {
-            self.appDelegate.adView.hidden = false
-        } else if ads == 1 {
-            self.appDelegate.adView.hidden = true
-            self.appDelegate.adView.removeFromSuperview()
-        }
-    }
-    func bannerViewDidLoadAd(banner: ADBannerView!) {
-        print(defaults.integerForKey(DefaultKeys.Ads.description), terminator: "")
-        
-        self.checkAdsOn()
-    }
-    
-    func bannerViewActionDidFinish(banner: ADBannerView!) {
-        print("bannerViewActionDidFinish")
-    }
-    
-    func bannerView(banner: ADBannerView!, didFailToReceiveAdWithError error: NSError!) {
-        print("didFailToReceiveAdWithError")
-        self.appDelegate.adView.hidden = true
-    }
-    */
     
 }
 extension NSDate {
