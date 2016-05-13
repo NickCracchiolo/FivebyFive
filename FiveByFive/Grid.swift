@@ -55,29 +55,6 @@ class Grid: SKNode {
         self.currentColValues = [0,0,0,0,0]
         createGrid()
     }
-    /* Tile handles its own flip based on override touchBegan
-    func flipTile(atIndex:Int) {
-        let tile = tiles[atIndex]
-        if tile.isFlipped() {
-            let value = tiles[atIndex].flip()
-            let col = 4-atIndex%5
-            let row = 4-atIndex/5
-            
-            currentColValues[col] = currentColValues[col] + value
-            currentRowValues[row] = currentRowValues[row] + value
-            self.totalTilesFlipped += 1
-            
-            let colName = "ColLabel" + String(col)
-            let colLabel = self.childNodeWithName(colName) as! SKLabelNode
-            colLabel.text = String(Int(colLabel.text!)! + value)
-
-            let rowName = "RowLabel" + String(row)
-            let rowLabel = self.childNodeWithName(rowName) as! SKLabelNode
-            rowLabel.text = String(Int(rowLabel.text!)! + value)
-            
-        }
-    }
-    */
     func flipRow(atIndex:Int) {
         for y in atIndex.stride(to: 25, by: 5) {
             var total:Int = 0
@@ -132,7 +109,7 @@ class Grid: SKNode {
     private func createLabel(forValues:[Int],withName:String,offset:CGFloat,direction:Direction,color:UIColor) {
         var counter = 0
         for val in forValues.reverse() {
-            let label = SKLabelNode(text: "Level: " + String(val))
+            let label = SKLabelNode(text: String(val))
             label.fontSize = 20
             label.fontColor = color
             label.fontName = Constants.FontName.Game_Font

@@ -9,18 +9,12 @@
 import SpriteKit
 
 class StoreScene:SKScene {
-    //var currentIndex = 0
-    //var purchases:[PurchaseItem] = []
     var wheel:Wheel = Wheel()
     
     override func didMoveToView(view: SKView) {
         self.backgroundColor = UIColor.whiteColor()
         setupGestures()
         setupScene()
-        let plist = Plist(name: "PurchasesList")
-        //let dict = plist!.getValuesInPlist()!
-        //setupPurchaseItems()
-        //print("count: ",self.purchases.count)
     }
     override func update(currentTime: NSTimeInterval) {
         
@@ -40,22 +34,12 @@ class StoreScene:SKScene {
     }
     func swipeRight() {
         self.wheel.moveRight()
-        /*
-        if currentIndex > 0 {
-            currentIndex -= 1
-            adjustWheel()
-        }
-         */
     }
     func swipeLeft() {
         self.wheel.moveLeft()
-//        if currentIndex < purchases.count {
-//            currentIndex += 1
-//            adjustWheel()
-//        }
     }
     private func setupScene() {
-        //setupPurchaseItems()
+        getPurchaseItems()
         
         let back_button = SKSpriteNode(imageNamed: "")
         back_button.position = CGPointMake(CGRectGetMinX(self.frame), CGRectGetMaxY(self.frame)-back_button.frame.size.height)

@@ -18,4 +18,7 @@ class SettingsScene:SKScene {
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         
     }
+    private func setupScene() {
+        let soundsSwitch = 
+    }
 }
