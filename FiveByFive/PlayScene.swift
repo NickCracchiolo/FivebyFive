@@ -8,10 +8,12 @@
 
 import SpriteKit
 
-class PlayScene: SKScene {
+class PlayScene: SKScene, GameDataProtocol {
     var grid:Grid = Grid()
+    var gameData = GameData()
     
     override func didMoveToView(view: SKView) {
+        gameData = loadInstance()
         self.userInteractionEnabled = true
         self.backgroundColor = UIColor.whiteColor()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(endGame), name: Constants.Notifications.BOMB_SELECTED, object: nil)
@@ -24,23 +26,32 @@ class PlayScene: SKScene {
         }
     }
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        print("Touched in PlayScene")
-        if (grid.hasWon()) {
-            nextLevel()
+        for touch:AnyObject in touches {
+            let location = (touch as! UITouch).locationInNode(self)
+            let node = self.nodeAtPoint(location)
+            if node.name == "End Game Button" {
+                endGame()
+            }
         }
     }
     func endGame() {
-        //play bomb animation (inside tile)
-        //tile notifies this scene which calls this function. Notifies the user of the game ending,
-        //level, if they got a high score, and then presents the main screen
         
-        //GameKitHelper.sharedGameKitHelper.reportScore(grid.currentLevel())
-        self.view?.presentScene(StartScene(size: self.size))
+        gameData.addLevel(grid.currentLevel())
+        saveGame()
+        let scene:GameOverScene = GameOverScene(size: self.size)
+        scene.currentLevel = grid.currentLevel()
+        scene.highscore = gotHighScore()
+        self.view?.presentScene(scene)
+    }
+    private func saveLife() {
+        if gameData.getLives() > 0 {
+            
+        }
     }
     private func nextLevel() {
         let label = self.childNodeWithName("Level Label") as! SKLabelNode
         grid.createGridForNextLevel()
-        label.text = String(grid.currentLevel())
+        label.text = "Level: " + String(grid.currentLevel())
     }
     func showSaveLifeAlert() {
         let alert_controller = UIAlertController(title: "Free Coins", message: "Want a Second Chance for $0.99?", preferredStyle: UIAlertControllerStyle.ActionSheet)
@@ -79,5 +90,28 @@ class PlayScene: SKScene {
         
         self.grid.position = CGPointMake(CGRectGetMidX(self.frame) - 125, CGRectGetMidY(self.frame) - 125)
         self.addChild(grid)
+        
+        let endGameBtn = SKSpriteNode(imageNamed: "playButton")
+        endGameBtn.position = CGPointMake(CGRectGetMidX(self.frame), self.frame.size.height*0.2)
+        endGameBtn.name = "End Game Button"
+        self.addChild(endGameBtn)
+    }
+    private func gotHighScore() -> Bool {
+        return gameData.getHighestLevel() < grid.currentLevel()
+    }
+    // MARK: Game Data Protocol
+    func saveGame() {
+        let encodedData = NSKeyedArchiver.archiveRootObject(gameData, toFile: GameData.archiveURL.path!)
+        if !encodedData {
+            print("Save Failed")
+        }
+    }
+    func loadInstance() -> GameData {
+        let data = NSKeyedUnarchiver.unarchiveObjectWithFile(GameData.archiveURL.path!) as? GameData
+        if data == nil {
+            print("Data could not be loaded properly")
+            return GameData()
+        }
+        return data!
     }
 }

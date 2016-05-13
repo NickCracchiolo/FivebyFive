@@ -31,6 +31,7 @@ struct Plist {
     
     init?(name:String) {
         self.name = name
+        /*
         let fileManager = NSFileManager.defaultManager()
         guard let source = sourcePath else {
             return nil
@@ -49,6 +50,7 @@ struct Plist {
                 return nil
             }
         }
+        */
     }
     func getValuesInPlist() -> NSDictionary? {
         let fileManager = NSFileManager.defaultManager()
