@@ -13,16 +13,17 @@
 		5606FDF11AFB282900124DAF /* woosh.wav in Resources */ = {isa = PBXBuildFile; fileRef = 5606FDF01AFB282900124DAF /* woosh.wav */; };
 		5606FDF51AFC56FC00124DAF /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5606FDF41AFC56FC00124DAF /* iAd.framework */; };
 		5606FE251B03FDBB00124DAF /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 565B9C331AD209FD0059D250 /* StoreKit.framework */; };
-		5606FE271B041DED00124DAF /* IAP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5606FE261B041DED00124DAF /* IAP.swift */; };
 		5624C8271CDA880D001CBD3C /* StoreScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5624C8261CDA880D001CBD3C /* StoreScene.swift */; };
 		5624C8291CDA881E001CBD3C /* SettingsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5624C8281CDA881E001CBD3C /* SettingsScene.swift */; };
-		5624C82B1CDA883E001CBD3C /* NCSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5624C82A1CDA883E001CBD3C /* NCSwitch.swift */; };
+		5624C82B1CDA883E001CBD3C /* FFSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5624C82A1CDA883E001CBD3C /* FFSwitch.swift */; };
 		5624C82D1CDA8F78001CBD3C /* SettingsScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5624C82C1CDA8F78001CBD3C /* SettingsScene.sks */; };
 		5624C82F1CDA8F8B001CBD3C /* StoreScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5624C82E1CDA8F8B001CBD3C /* StoreScene.sks */; };
 		5624C8311CDA9EC8001CBD3C /* PurchaseItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5624C8301CDA9EC8001CBD3C /* PurchaseItem.swift */; };
 		5624C8331CDAAC78001CBD3C /* PurchasesList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5624C8321CDAAC78001CBD3C /* PurchasesList.plist */; };
 		5624C8351CDAD45F001CBD3C /* Plist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5624C8341CDAD45F001CBD3C /* Plist.swift */; };
 		5624C8371CDAE516001CBD3C /* Test.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5624C8361CDAE516001CBD3C /* Test.plist */; };
+		5628971C1CE6493F005CCE5F /* FFButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5628971B1CE6493F005CCE5F /* FFButton.swift */; };
+		5628971E1CE65768005CCE5F /* IAP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5628971D1CE65768005CCE5F /* IAP.swift */; };
 		56581C9D1CD86B03009BF7B0 /* GameData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56581C9C1CD86B03009BF7B0 /* GameData.swift */; };
 		565B9BEC1ACC75900059D250 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565B9BEB1ACC75900059D250 /* Constants.swift */; };
 		565B9C1E1AD0BCD10059D250 /* Impact_Label_Reversed.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 565B9C1D1AD0BCD10059D250 /* Impact_Label_Reversed.ttf */; };
@@ -42,7 +43,6 @@
 		56CE197A1CD7E333000E015B /* Tile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CE19791CD7E333000E015B /* Tile.swift */; };
 		56CE197C1CD83DE5000E015B /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CE197B1CD83DE5000E015B /* Grid.swift */; };
 		56D71CC81CDD0C8C0097F1F0 /* Wheel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D71CC71CDD0C8C0097F1F0 /* Wheel.swift */; };
-		56D71CCC1CDD0F680097F1F0 /* FbfButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D71CCB1CDD0F680097F1F0 /* FbfButton.swift */; };
 		56DD3FD41AF2AA6A00CC2C80 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56DD3FD31AF2AA6A00CC2C80 /* Social.framework */; };
 		56EBDE291AF8462900E7FDE1 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56EBDE281AF8462900E7FDE1 /* Security.framework */; };
 		56EBDE311AF853B300E7FDE1 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56EBDE2F1AF8526300E7FDE1 /* SystemConfiguration.framework */; };
@@ -55,16 +55,17 @@
 		5606FDEE1AFACA9500124DAF /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		5606FDF01AFB282900124DAF /* woosh.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = woosh.wav; sourceTree = "<group>"; };
 		5606FDF41AFC56FC00124DAF /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
-		5606FE261B041DED00124DAF /* IAP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IAP.swift; path = ../IAP.swift; sourceTree = "<group>"; };
 		5624C8261CDA880D001CBD3C /* StoreScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreScene.swift; sourceTree = "<group>"; };
 		5624C8281CDA881E001CBD3C /* SettingsScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsScene.swift; sourceTree = "<group>"; };
-		5624C82A1CDA883E001CBD3C /* NCSwitch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NCSwitch.swift; sourceTree = "<group>"; };
+		5624C82A1CDA883E001CBD3C /* FFSwitch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FFSwitch.swift; sourceTree = "<group>"; };
 		5624C82C1CDA8F78001CBD3C /* SettingsScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = SettingsScene.sks; sourceTree = "<group>"; };
 		5624C82E1CDA8F8B001CBD3C /* StoreScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = StoreScene.sks; sourceTree = "<group>"; };
 		5624C8301CDA9EC8001CBD3C /* PurchaseItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PurchaseItem.swift; sourceTree = "<group>"; };
 		5624C8321CDAAC78001CBD3C /* PurchasesList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PurchasesList.plist; sourceTree = "<group>"; };
 		5624C8341CDAD45F001CBD3C /* Plist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Plist.swift; sourceTree = "<group>"; };
 		5624C8361CDAE516001CBD3C /* Test.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Test.plist; sourceTree = "<group>"; };
+		5628971B1CE6493F005CCE5F /* FFButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FFButton.swift; sourceTree = "<group>"; };
+		5628971D1CE65768005CCE5F /* IAP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IAP.swift; sourceTree = "<group>"; };
 		56581C9C1CD86B03009BF7B0 /* GameData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameData.swift; sourceTree = "<group>"; };
 		565B9BEB1ACC75900059D250 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		565B9C1D1AD0BCD10059D250 /* Impact_Label_Reversed.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Impact_Label_Reversed.ttf; sourceTree = "<group>"; };
@@ -89,7 +90,6 @@
 		56CE19791CD7E333000E015B /* Tile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tile.swift; sourceTree = "<group>"; };
 		56CE197B1CD83DE5000E015B /* Grid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
 		56D71CC71CDD0C8C0097F1F0 /* Wheel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Wheel.swift; sourceTree = "<group>"; };
-		56D71CCB1CDD0F680097F1F0 /* FbfButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FbfButton.swift; sourceTree = "<group>"; };
 		56DD3FD31AF2AA6A00CC2C80 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		56EBDE281AF8462900E7FDE1 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		56EBDE2F1AF8526300E7FDE1 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -117,9 +117,9 @@
 			isa = PBXGroup;
 			children = (
 				565B9BEB1ACC75900059D250 /* Constants.swift */,
-				5606FE261B041DED00124DAF /* IAP.swift */,
 				56581C9C1CD86B03009BF7B0 /* GameData.swift */,
 				5680778B1CD90CF300976969 /* GameKitHelper.swift */,
+				5628971D1CE65768005CCE5F /* IAP.swift */,
 			);
 			name = Shared;
 			sourceTree = "<group>";
@@ -231,10 +231,10 @@
 				56D71CC71CDD0C8C0097F1F0 /* Wheel.swift */,
 				56CE197B1CD83DE5000E015B /* Grid.swift */,
 				56CE19791CD7E333000E015B /* Tile.swift */,
-				5624C82A1CDA883E001CBD3C /* NCSwitch.swift */,
+				5624C82A1CDA883E001CBD3C /* FFSwitch.swift */,
 				5624C8301CDA9EC8001CBD3C /* PurchaseItem.swift */,
 				5624C8341CDAD45F001CBD3C /* Plist.swift */,
-				56D71CCB1CDD0F680097F1F0 /* FbfButton.swift */,
+				5628971B1CE6493F005CCE5F /* FFButton.swift */,
 			);
 			name = Objects;
 			sourceTree = "<group>";
@@ -359,9 +359,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				56D71CCC1CDD0F680097F1F0 /* FbfButton.swift in Sources */,
 				5606FDED1AF9BDDB00124DAF /* StoreViewController.swift in Sources */,
-				5624C82B1CDA883E001CBD3C /* NCSwitch.swift in Sources */,
+				5628971C1CE6493F005CCE5F /* FFButton.swift in Sources */,
+				5624C82B1CDA883E001CBD3C /* FFSwitch.swift in Sources */,
 				56B8D7951CD94B9E00CE21B8 /* PlayScene.swift in Sources */,
 				5606FDE51AF9A9F500124DAF /* StartViewController.swift in Sources */,
 				56B8D78F1CD941B100CE21B8 /* GameOverScene.swift in Sources */,
@@ -371,10 +371,10 @@
 				5624C8271CDA880D001CBD3C /* StoreScene.swift in Sources */,
 				565B9BEC1ACC75900059D250 /* Constants.swift in Sources */,
 				5680778E1CD919E100976969 /* StartScene.swift in Sources */,
-				5606FE271B041DED00124DAF /* IAP.swift in Sources */,
 				56CE197A1CD7E333000E015B /* Tile.swift in Sources */,
 				5624C8291CDA881E001CBD3C /* SettingsScene.swift in Sources */,
 				5624C8351CDAD45F001CBD3C /* Plist.swift in Sources */,
+				5628971E1CE65768005CCE5F /* IAP.swift in Sources */,
 				56B172B91AC1D55F004575DD /* AppDelegate.swift in Sources */,
 				5606FDEF1AFACA9500124DAF /* SettingsViewController.swift in Sources */,
 				56D71CC81CDD0C8C0097F1F0 /* Wheel.swift in Sources */,
