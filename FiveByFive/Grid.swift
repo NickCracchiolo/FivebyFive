@@ -55,6 +55,15 @@ class Grid: SKNode {
         self.currentColValues = [0,0,0,0,0]
         createGrid()
     }
+    
+    func showAllTiles() {
+        for tile in tiles {
+            if !tile.isFlipped() {
+                tile.flipWithoutConsequence()
+            }
+        }
+    }
+    
     func flipRow(atIndex:Int) {
         for y in atIndex.stride(to: 25, by: 5) {
             var total:Int = 0
@@ -77,6 +86,7 @@ class Grid: SKNode {
             index += 1
         }
     }
+    
     func currentLevel() -> Int {
         return self.level
     }

@@ -56,9 +56,8 @@ class GameKitHelper: NSObject {
     func reportScore(score:Int) {
         let identifier = "leaderboard.highest_level"
         if GKLocalPlayer.localPlayer().authenticated == true{
-            let highScore = NSUserDefaults.standardUserDefaults().integerForKey(DefaultKeys.Level.description)
             let scoreReporter = GKScore(leaderboardIdentifier: identifier as String)
-            scoreReporter.value = Int64(highScore)
+            scoreReporter.value = Int64(score)
             let scoreArray: [GKScore] = [scoreReporter]
             print("report score \(scoreReporter)")
             GKScore.reportScores(scoreArray, withCompletionHandler: {(error : NSError?) -> Void in
@@ -67,5 +66,18 @@ class GameKitHelper: NSObject {
                 }
             })
         }
+    }
+    func getHighScore() -> Int {
+        var score:Int64 = 1
+        let leaderboard = GKLeaderboard()
+        leaderboard.identifier = "leaderboard.highest_level"
+        leaderboard.loadScoresWithCompletionHandler({ (scores:[GKScore]?, error:NSError?) -> Void in
+            if error != nil {
+                print("Error Loading Scores: ",error?.localizedDescription)
+            } else {
+                score = leaderboard.localPlayerScore!.value
+            }
+        })
+        return Int(score)
     }
 }

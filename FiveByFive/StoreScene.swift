@@ -8,11 +8,12 @@
 
 import SpriteKit
 
-class StoreScene:SKScene {
-    var wheel:Wheel = Wheel()
+class StoreScene:SKScene, GameDataProtocol {
+    var wheel:FFWheel = FFWheel()
+    var gameData = GameData()
     
     override func didMoveToView(view: SKView) {
-        self.backgroundColor = UIColor.whiteColor()
+        gameData = loadInstance()
         setupGestures()
         setupScene()
     }
@@ -32,30 +33,37 @@ class StoreScene:SKScene {
             }
         }
     }
-    func swipeRight() {
-        self.wheel.moveRight()
-    }
-    func swipeLeft() {
-        self.wheel.moveLeft()
-    }
+    
+    // MARK: Scene Setup
     private func setupScene() {
-        getPurchaseItems()
+        self.backgroundColor = UIColor.whiteColor()
+        let scale = self.frame.size.width/414.0
         
-        let back_button = SKSpriteNode(imageNamed: "")
-        back_button.position = CGPointMake(CGRectGetMinX(self.frame), CGRectGetMaxY(self.frame)-back_button.frame.size.height)
-        self.addChild(back_button)
+        wheel = FFWheel(withNodes: getPurchaseItems())
+        wheel.setScale(scale)
+        self.addChild(wheel)
         
-        let purchase_button = SKSpriteNode(imageNamed: "playButton")
-        purchase_button.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame) - 150)
-        self.addChild(purchase_button)
+        let backButton = SKSpriteNode(imageNamed: "backButton")
+        backButton.setScale(scale)
+        backButton.position = CGPointMake(CGRectGetMinX(self.frame)+backButton.frame.size.width, CGRectGetMaxY(self.frame)-backButton.frame.size.height)
+        backButton.name = "Back Button"
+        self.addChild(backButton)
         
-        let coins_label = SKLabelNode(text: String(NSUserDefaults.standardUserDefaults().integerForKey(DefaultKeys.Money.description)))
-        coins_label.position = CGPointMake(CGRectGetMidX(self.frame), self.frame.size.height*0.75)
-        coins_label.fontName = Constants.FontName.Title_Font
-        coins_label.fontSize = Constants.FontSize.Title
-        coins_label.fontColor = UIColor.blackColor()
-        self.addChild(coins_label)
+        let purchaseButton = SKSpriteNode(imageNamed: "playButton")
+        purchaseButton.setScale(scale)
+        purchaseButton.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame) - 150)
+        self.addChild(purchaseButton)
+        
+        let coinsLabel = SKLabelNode(text: String(NSUserDefaults.standardUserDefaults().integerForKey(DefaultKeys.Money.description)))
+        coinsLabel.setScale(scale)
+        coinsLabel.position = CGPointMake(CGRectGetMidX(self.frame), self.frame.size.height*0.75)
+        coinsLabel.fontName = Constants.FontName.Title_Font
+        coinsLabel.fontSize = Constants.FontSize.Title
+        coinsLabel.fontColor = UIColor.blackColor()
+        self.addChild(coinsLabel)
     }
+    
+    // MARK: Gesture Setup
     private func setupGestures() {
         let swipe_right = UISwipeGestureRecognizer(target: self, action: #selector(swipeRight))
         swipe_right.direction = UISwipeGestureRecognizerDirection.Right
@@ -65,6 +73,14 @@ class StoreScene:SKScene {
         swipe_left.direction = UISwipeGestureRecognizerDirection.Left
         self.view?.addGestureRecognizer(swipe_left)
     }
+    func swipeRight() {
+        self.wheel.moveRight()
+    }
+    func swipeLeft() {
+        self.wheel.moveLeft()
+    }
+    
+    // MARK Purchase Items from Plist
     private func getPurchaseItems() -> [SKSpriteNode] {
         var purchases:[SKSpriteNode] = []
         if let plist = Plist(name: "PurchasesList") {
@@ -86,5 +102,21 @@ class StoreScene:SKScene {
             print("Unable to get Plist")
         }
         return purchases
+    }
+    
+    // MARK: Game Data Protocol
+    func saveGame() {
+        let encodedData = NSKeyedArchiver.archiveRootObject(gameData, toFile: GameData.archiveURL.path!)
+        if !encodedData {
+            print("Save Failed")
+        }
+    }
+    func loadInstance() -> GameData {
+        let data = NSKeyedUnarchiver.unarchiveObjectWithFile(GameData.archiveURL.path!) as? GameData
+        if data == nil {
+            print("Data could not be loaded properly")
+            return GameData()
+        }
+        return data!
     }
 }

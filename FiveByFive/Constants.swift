@@ -10,13 +10,8 @@ import Foundation
 import SpriteKit
 
 struct Constants {
-    struct AppColor {
-        static let backColor = UIColor(red: 61/255, green: 83/255, blue: 178/255, alpha: 1.0)
-    }
-    struct FontColor {
-        static let titleClr = SKColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1.0)
-        static let fontClr = SKColor(red: 225/255, green: 225/255, blue: 225/255, alpha: 1.0)
-    }
+    static let googleInterstitialAdsID = ""
+
     struct FontName {
         static let Game_Font = "Impact Label Reversed"
         static let HUD_Font = "Impact Label Reversed"
@@ -24,21 +19,15 @@ struct Constants {
         static let Game_Over_Font = "Impact Label"
     }
     struct FontSize {
-        static let DispFontSize:CGFloat = 30
+        static let DispFontSize:CGFloat = 20
         static let Title:CGFloat = 45
-    }
-    struct zPosition {
-        static let tutorial_zPosition:CGFloat = 50
-        static let grid_zPosition:CGFloat = 2
-        static let OVERLAYZ:CGFloat = 50
-        static let OVERLAY_OBJZ:CGFloat = 51
-        static let BOMB_zPOSITION:CGFloat = 3
     }
     struct Notifications {
         static let PLAYER_AUTH = "authenticated_player"
         static let PRESENT_AUTH_VC = "present_authentication_view"
         static let BOMB_SELECTED = "bomb_selected"
         static let PRESENT_LEADERBOARDS = "present_leaderboard_vc"
+        static let PRESENT_INTERSTITIAL = "present_interstitial_ad"
     }
     struct Leaderboards {
         static let highScore = "leaderboards.highest_score"
@@ -46,33 +35,30 @@ struct Constants {
 }
 
 enum DefaultKeys: CustomStringConvertible  {
-    case FreeCoins
     case Money
-    case Level
     case Notifications
     case Sound
     case Tutorial
-    case Year
-    case Month
-    case Day
-    case Ads
     case Life
     case Purchased
+    case Migrate
     
     var description : String {
         switch self {
-        case .FreeCoins: return "freeCoins"
-        case .Money: return "money"
-        case .Level: return "level"
-        case .Notifications: return "notif_bool"
-        case .Sound: return "sounds_bool"
-        case .Tutorial: return "tutorial"
-        case .Year: return "savedyear"
-        case .Month: return "savedmonth"
-        case .Day: return "savedday"
-        case .Ads: return "ads"
-        case .Life: return "save_life"
-        case .Purchased: return "purchase_bool"
+        case .Money:
+            return "money"
+        case .Notifications:
+            return "notif_bool"
+        case .Sound:
+            return "sounds_bool"
+        case .Tutorial:
+            return "tutorial"
+        case .Life:
+            return "save_life"
+        case .Purchased:
+            return "purchase_bool"
+        case .Migrate:
+            return "migration"
         }
     }
 }

@@ -32,13 +32,14 @@ class FFButton: SKSpriteNode {
         label.horizontalAlignmentMode = .Center
         label.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)-10)
         label.zPosition = 1
+        label.userInteractionEnabled = true
         self.addChild(label)
     }
     private func modifyFontSize(withLabel:SKLabelNode) -> CGFloat {
         let buttonWidth = self.frame.size.width-10
         let labelWidth = withLabel.frame.size.width
         if (labelWidth > buttonWidth) {
-            let buttonHeight = self.frame.size.height + 20
+            let buttonHeight = self.frame.size.height + 100
             let labelHeight = withLabel.frame.size.height
             return min((buttonWidth/labelWidth),(buttonHeight/labelHeight))
         }

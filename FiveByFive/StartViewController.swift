@@ -6,21 +6,25 @@
 //  Copyright (c) 2015 Nick Cracchiolo. All rights reserved.
 //
 
-import Foundation
 import UIKit
-import iAd
+import GoogleMobileAds
 import GameKit
 
-class StartViewController: UIViewController, GKGameCenterControllerDelegate, ADBannerViewDelegate {
+class StartViewController: UIViewController, GKGameCenterControllerDelegate, GADInterstitialDelegate {
     
-    let DailyNotification = UILocalNotification()
-
+    var videoInterstitial:GADInterstitial!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(presentAuthenticationVC), name: Constants.Notifications.PRESENT_AUTH_VC, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(showLeaderboard), name: Constants.Notifications.PRESENT_LEADERBOARDS, object: nil)
-        setUpDailyNotifications()
         
+        setupGoogleInterstitialAds()
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(presentAuthenticationVC),
+                                                         name: Constants.Notifications.PRESENT_AUTH_VC, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(showLeaderboard),
+                                                         name: Constants.Notifications.PRESENT_LEADERBOARDS, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(presentGoogleInterstitial),
+                                                         name: Constants.Notifications.PRESENT_INTERSTITIAL, object: nil)
+
         if let scene = StartScene(fileNamed: "StartScene") {
             // Configure the view.
             let skView = self.view as! SKView
@@ -35,55 +39,45 @@ class StartViewController: UIViewController, GKGameCenterControllerDelegate, ADB
             
             skView.presentScene(scene)
         }
-        
-        //self.checkAdsOn()
-        
-        setUIUserNotificationOptions()
-        
-
-//        if freeCoins == 1 {
-//            UIApplication.sharedApplication().cancelLocalNotification(DailyNotification)
-//        }
     }
     override func viewDidAppear(animated: Bool) {
-        //self.checkAdsOn()
+
     }
     override func shouldAutorotate() -> Bool {
         return true
     }
-    private func setUpDailyNotifications() {
-        let defaults = NSUserDefaults.standardUserDefaults()
-        var free_coins = defaults.integerForKey(DefaultKeys.FreeCoins.description)
+    // MARK: AdMob Functions
+    private func setupGoogleInterstitialAds() {
+        videoInterstitial = createAndLoadInterstitial()
 
-        let flags: NSCalendarUnit = [.Day, .Month, .Year]
-        let date = NSDate()
-        let components = NSCalendar.currentCalendar().components(flags, fromDate: date)
-        
-        let year = components.year
-        let month = components.month
-        let day = components.day
-        
-        let saved_day = defaults.integerForKey(DefaultKeys.Day.description)
-        let saved_month = defaults.integerForKey(DefaultKeys.Month.description)
-        let saved_year = defaults.integerForKey(DefaultKeys.Year.description)
-        
-        if free_coins == 1 {
-            if day > saved_day {
-                free_coins = 0
-            } else if day < saved_day {
-                if month > saved_month {
-                    free_coins = 0
-                } else if month < saved_month {
-                    if year > saved_year {
-                        free_coins = 0
-                    }
-                }
-                
-            }
-        }
-        defaults.setInteger(free_coins, forKey: DefaultKeys.FreeCoins.description)
-        defaults.synchronize()
     }
+    private func createAndLoadInterstitial() -> GADInterstitial {
+        let interstitial = GADInterstitial(adUnitID: Constants.googleInterstitialAdsID)
+        interstitial.delegate = self
+        let request = GADRequest()
+        request.testDevices = ["f5cab6107619930570354d4c8c838ee5",kGADSimulatorID]
+        interstitial.loadRequest(request)
+        return interstitial
+    }
+    func presentGoogleInterstitial() {
+        if videoInterstitial.isReady {
+            videoInterstitial.presentFromRootViewController(self)
+        }
+    }
+    func interstitialWillLeaveApplication(ad: GADInterstitial!) {
+        if let scene:StartScene = StartScene(fileNamed: "StartScene") {
+            scene.addCoinsFromAd(20)
+        }
+        videoInterstitial = createAndLoadInterstitial()
+    }
+    func interstitialDidDismissScreen(ad: GADInterstitial!) {
+        if let scene:StartScene = StartScene(fileNamed: "StartScene") {
+            scene.addCoinsFromAd(20)
+        }
+        videoInterstitial = createAndLoadInterstitial()
+    }
+    
+    // MARK: Game Center Helper
     func presentAuthenticationVC() {
         let helper = GameKitHelper.sharedGameKitHelper
         self.presentViewController(helper.authenticationVC!, animated: true, completion: nil)
@@ -98,6 +92,7 @@ class StartViewController: UIViewController, GKGameCenterControllerDelegate, ADB
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+        print("Memory Warning coming from Start View Controller")
         // Release any cached data, images, etc that aren't in use.
     }
     deinit {
@@ -112,30 +107,6 @@ class StartViewController: UIViewController, GKGameCenterControllerDelegate, ADB
         gc.viewState = GKGameCenterViewControllerState.Achievements
         gc.leaderboardIdentifier = "leaderboards.highest_score"
         self.presentViewController(gc, animated: true, completion: nil)
-    }
-    
-    func setUIUserNotificationOptions() {
-        UIApplication.sharedApplication().registerUserNotificationSettings(UIUserNotificationSettings(forTypes: [UIUserNotificationType.Badge, UIUserNotificationType.Sound, UIUserNotificationType.Alert], categories: nil))
-    }
-    func setupNofications() {
-        DailyNotification.timeZone = NSTimeZone.localTimeZone()
-        // confirms the alert dialog box action
-        DailyNotification.hasAction = true
-        // defines the notification alert body text
-        DailyNotification.alertBody = "Come get your free daily coins!"
-        // defines the daily time interval
-        DailyNotification.repeatCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
-        DailyNotification.repeatInterval = .Day
-        // defines the notification alert button text
-        DailyNotification.alertAction = "Play"
-        // defines the default sound for your notification
-        DailyNotification.soundName = UILocalNotificationDefaultSoundName
-        // increments the badge counter
-        DailyNotification.applicationIconBadgeNumber = UIApplication.sharedApplication().applicationIconBadgeNumber + 1
-        // defines your firedate tomorrow at 12am ( note: extension NSDate tomorrowAt12am at the bottom )
-        DailyNotification.fireDate = NSDate().date12pm
-        // lets set it up
-        UIApplication.sharedApplication().scheduleLocalNotification(DailyNotification)
     }
     func gameCenterViewControllerDidFinish(gameCenterViewController: GKGameCenterViewController) {
         self.dismissViewControllerAnimated(true, completion: nil)

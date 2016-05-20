@@ -61,11 +61,10 @@ class Tile: SKSpriteNode {
         pushAnimation()
         if value == 0 {
             if NSUserDefaults.standardUserDefaults().integerForKey(DefaultKeys.Sound.description) == 1 {
-                //let sound_action = SKAction.playSoundFileNamed("explosion.wav", waitForCompletion: false)
-                //self.runAction(sound_action)
+                let sound_action = SKAction.playSoundFileNamed("explosion.wav", waitForCompletion: false)
+                self.runAction(sound_action)
             }
             bombAnimation()
-            NSNotificationCenter.defaultCenter().postNotificationName(Constants.Notifications.BOMB_SELECTED, object: nil)
         } else {
             let grid = self.parent as! Grid
             grid.calculateCurrentColValues()
@@ -73,6 +72,13 @@ class Tile: SKSpriteNode {
             grid.totalTilesFlipped += 1;
         }
         return self.value
+    }
+    func flipWithoutConsequence() {
+        self.zPosition = 1
+        pushAnimation()
+        let grid = self.parent as! Grid
+        grid.calculateCurrentColValues()
+        grid.calculateCurrentRowValues()
     }
     
     private func pushAnimation() {
@@ -88,6 +94,12 @@ class Tile: SKSpriteNode {
     
     private func bombAnimation() {
         //Create Texture Sheet and call Animate with textures
+        //let textures:[SKTexture] = []
+        //let animate = SKAction.animateWithTextures(textures, timePerFrame: 0.1)
+        //self.runAction(animate, completion: {
+        //    NSNotificationCenter.defaultCenter().postNotificationName(Constants.Notifications.BOMB_SELECTED, object: nil)
+        //})
+        NSNotificationCenter.defaultCenter().postNotificationName(Constants.Notifications.BOMB_SELECTED, object: nil)
     }
     
     private func backTextureFrom(value:Int) -> SKTexture {

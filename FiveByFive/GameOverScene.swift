@@ -12,10 +12,15 @@ class GameOverScene: SKScene, GameDataProtocol {
     var gameData = GameData()
     var currentLevel = 0
     var highscore:Bool = false
+    var grid = Grid()
     
     override func didMoveToView(view: SKView) {
         gameData = loadInstance()
+        print(highscore)
         setupScene()
+        grid.position = CGPointMake(CGRectGetMidX(self.frame) - 125, CGRectGetMidY(self.frame) - 125)
+        grid.addChild(self)
+        grid.showAllTiles()
     }
     override func update(currentTime: NSTimeInterval) {
         
@@ -32,43 +37,58 @@ class GameOverScene: SKScene, GameDataProtocol {
             }
         }
     }
+    
+    // MARK: Scene Setup
     private func setupScene() {
         self.backgroundColor = UIColor.whiteColor()
+        let scale = self.frame.size.width/414.0
         
         let gameOverLabel = SKLabelNode(text: "Game Over")
         gameOverLabel.fontSize = Constants.FontSize.Title
         gameOverLabel.fontColor = UIColor.blackColor()
         gameOverLabel.fontName = Constants.FontName.Game_Font
-        gameOverLabel.position = CGPointMake(CGRectGetMidX(self.frame), self.frame.size.height*0.75)
+        gameOverLabel.setScale(scale)
+        gameOverLabel.position = CGPointMake(CGRectGetMidX(self.frame), self.frame.size.height*0.85)
         self.addChild(gameOverLabel)
         
         highScoreDisplay()
         
-        let leaderButton = FFButton(text: "Leaderboards")
+        let leaderButton = FFButton(text: "Rankings")
+        leaderButton.setScale(scale)
         leaderButton.position = CGPointMake(CGRectGetMidX(self.frame), self.frame.size.height*0.5)
         leaderButton.name = "Leaderboard Button"
         self.addChild(leaderButton)
         
         
-        let mainButton = FFButton(text:"Main Menu")
+        let mainButton = FFButton(text:"Home")
+        mainButton.setScale(scale)
         mainButton.position = CGPointMake(CGRectGetMidX(self.frame), self.frame.size.height*0.3)
         mainButton.name = "Main Menu Button"
         self.addChild(mainButton)
         
     }
     private func highScoreDisplay() {
-        let levelLabel = SKLabelNode(fontNamed: Constants.FontName.Game_Font)
+        let scale = self.frame.size.width/414.0
+        
+        //let levelLabel = SKLabelNode(fontNamed: Constants.FontName.Game_Font)
+        let levelLabel = FFLabel(bounds: CGSizeMake(self.frame.size.width, 200))
         levelLabel.fontSize = Constants.FontSize.DispFontSize
+        levelLabel.setScale(scale)
         levelLabel.fontColor = UIColor.blackColor()
-        levelLabel.position = CGPointMake(CGRectGetMidX(self.frame), self.frame.size.height*0.6)
+        levelLabel.horizontalAlignmentMode = .Center
+        levelLabel.hidden = false
+        levelLabel.zPosition = 1
+        levelLabel.position = CGPointMake(CGRectGetMidX(self.frame), self.frame.size.height*0.7)
 
-        if highscore {
-            levelLabel.text = "You only made it to \n Level: " + String(currentLevel)
+        if !highscore {
+            levelLabel.text = "You only made it to Level : " + String(currentLevel)
         } else {
-            levelLabel.text = "You Reached Your Highest \n Level Yet of " + String(currentLevel)
+            levelLabel.text = "You Reached Your Highest Level Yet of " + String(currentLevel)
         }
         self.addChild(levelLabel)
     }
+    
+    // MARK: Game Data Protocol
     func saveGame() {
         let encodedData = NSKeyedArchiver.archiveRootObject(gameData, toFile: GameData.archiveURL.path!)
         if !encodedData {

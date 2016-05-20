@@ -15,7 +15,7 @@ protocol GameDataProtocol {
 
 class GameData: NSObject, NSCoding {
     // MARK: Singleton
-    //static let sharedGameData = loadInstance(GameData())
+    //static let sharedGameData = GameData()
     
     // MARK: Archiving Paths
     static let documentsDirectory = NSFileManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first!
@@ -54,8 +54,8 @@ class GameData: NSObject, NSCoding {
         aCoder.encodeObject(self.levels, forKey: GameKeys.levels)
         aCoder.encodeInteger(self.lives, forKey: GameKeys.lives)
         aCoder.encodeBool(self.adsOn, forKey: GameKeys.ads)
+        aCoder.encodeInteger(self.coins, forKey: GameKeys.coins)
     }
-    
     // MARK: Property Specific Methods
     func getHighestLevel() -> Int {
         return self.highestLevel
@@ -71,14 +71,26 @@ class GameData: NSObject, NSCoding {
         self.levels.append(num)
         self.levels.sortInPlace()
     }
-    func currentCoins() -> Int {
-        return coins
+    func removeCoins(value:Int) {
+        if (coins-value) > 0 {
+            coins -= value
+        }
+    }
+    func addCoins(value:Int) {
+        coins += value
+    }
+    func useLife() {
+        if (lives > 0) {
+            lives -= 1
+        }
     }
     
+    // MARK: Print Helper
     func printData() {
         print("Highest Level: ",self.highestLevel)
         print("levels: ", self.levels)
         print("adsOn: ",self.adsOn)
         print("lives: ", self.lives)
+        print("coins: ",self.coins)
     }
 }
