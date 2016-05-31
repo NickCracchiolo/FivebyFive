@@ -31,7 +31,7 @@ extension Character {
         return false
     }
 }
-
+//Extension for FFLabel class to help parse string into words
 extension String {
     //Returns an array of all the words in the String
     func words() -> [String] {

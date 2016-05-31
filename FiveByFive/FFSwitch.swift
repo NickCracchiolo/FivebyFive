@@ -26,15 +26,31 @@ class FFSwitch:SKSpriteNode {
         fatalError("init(coder:) has not been implemented")
     }
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        if switchOn {
+            turnOff()
+        } else {
+            turnOn()
+        }
+        updateSwitchValue()
         animate()
     }
     func isOn() -> Bool {
         return switchOn
     }
-    func turnOff() {
+    func valueForSwitch() -> Int {
+        if switchOn {
+            return 1
+        } else {
+            return 0
+        }
+    }
+    func saveSwitchValue() {
+        NSUserDefaults.standardUserDefaults().synchronize()
+    }
+    private func turnOff() {
         switchOn = false
     }
-    func turnOn() {
+    private func turnOn() {
         switchOn = true
     }
     private func setInitalSwitchValue() -> Bool {
@@ -45,30 +61,22 @@ class FFSwitch:SKSpriteNode {
             return false
         }
     }
-    func updateSwitchValue() {
+    private func updateSwitchValue() {
         let defaults = NSUserDefaults.standardUserDefaults()
         defaults.setInteger(valueForSwitch(), forKey: key)
     }
-    func valueForSwitch() -> Int {
-        if switchOn {
-            return 1
-        } else {
-            return 0
-        }
-    }
+    
     private func animate() {
         if switchOn {
             let textures:[SKTexture] = [SKTexture(imageNamed:"redTile5"),SKTexture(imageNamed:"redTile4"),SKTexture(imageNamed:"redTile3"),
                                         SKTexture(imageNamed:"redTile2"),SKTexture(imageNamed:"redTile")]
             let turn_off = SKAction.animateWithTextures(textures, timePerFrame: 0.02)
             self.runAction(turn_off)
-            self.switchOn = false
         } else {
             let textures:[SKTexture] = [SKTexture(imageNamed:"redTile2"),SKTexture(imageNamed:"redTile3"),SKTexture(imageNamed:"redTile4"),
                                         SKTexture(imageNamed:"redTile5"),SKTexture(imageNamed:"blueOne")]
             let turn_on = SKAction.animateWithTextures(textures, timePerFrame: 0.02)
             self.runAction(turn_on)
-            self.switchOn = true
         }
     }
 }

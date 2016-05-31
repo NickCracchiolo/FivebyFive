@@ -27,7 +27,6 @@ class Tile: SKSpriteNode {
         self.value = withValue
         super.init(texture: texture, color: UIColor.whiteColor(), size: CGSizeMake(55, 55))
         self.anchorPoint = CGPointMake(0, 0)
-        //print("Texture Size: ",texture.size())
         self.userInteractionEnabled = true
     }
     
@@ -60,15 +59,15 @@ class Tile: SKSpriteNode {
         self.zPosition = 1
         pushAnimation()
         if value == 0 {
-            if NSUserDefaults.standardUserDefaults().integerForKey(DefaultKeys.Sound.description) == 1 {
-                let sound_action = SKAction.playSoundFileNamed("explosion.wav", waitForCompletion: false)
+            if NSUserDefaults.standardUserDefaults().integerForKey(DefaultKeys.Sound.description) == 0 {
+                let sound_action = SKAction.playSoundFileNamed("Blast.mp3", waitForCompletion: false)
                 self.runAction(sound_action)
             }
             bombAnimation()
         } else {
             let grid = self.parent as! Grid
-            grid.calculateCurrentColValues()
-            grid.calculateCurrentRowValues()
+            //grid.calculateCurrentColValues()
+            //grid.calculateCurrentRowValues()
             grid.totalTilesFlipped += 1;
         }
         return self.value
@@ -76,9 +75,9 @@ class Tile: SKSpriteNode {
     func flipWithoutConsequence() {
         self.zPosition = 1
         pushAnimation()
-        let grid = self.parent as! Grid
-        grid.calculateCurrentColValues()
-        grid.calculateCurrentRowValues()
+        //let grid = self.parent as! Grid
+        //grid.calculateCurrentColValues()
+        //grid.calculateCurrentRowValues()
     }
     
     private func pushAnimation() {
@@ -106,7 +105,7 @@ class Tile: SKSpriteNode {
         switch value {
         case 0:
             //Bomb
-            return SKTexture(imageNamed: "BombSquare.png")
+            return SKTexture(imageNamed: "bombTile")
         case 1:
             //One Tile
             return SKTexture(imageNamed: "blueOne")
@@ -123,7 +122,7 @@ class Tile: SKSpriteNode {
             //Five Tile
             return SKTexture(imageNamed: "blueFive")
         default:
-            return SKTexture(imageNamed: "BombSquare.png")
+            return SKTexture(imageNamed: "bombTile")
         }
     }
 }

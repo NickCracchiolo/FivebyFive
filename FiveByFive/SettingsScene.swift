@@ -27,7 +27,6 @@ class SettingsScene:SKScene {
     override func willMoveFromView(view: SKView) {
         //Only sync when leaving view as to reduce calls to sync
         NSUserDefaults.standardUserDefaults().synchronize()
-        print("Sync")
     }
     
     // MARK: Scene Setup
@@ -47,12 +46,12 @@ class SettingsScene:SKScene {
         let backButton = SKSpriteNode(imageNamed: "backButton")
         backButton.setScale(scale)
         backButton.name = "Back Button"
-        backButton.position = CGPointMake(CGRectGetMinX(self.frame)+backButton.frame.size.width, CGRectGetMaxY(self.frame)-backButton.frame.size.height)
+        backButton.position = CGPointMake(CGRectGetMinX(self.frame)+backButton.frame.size.width, self.frame.size.height*0.85+backButton.frame.size.height/2)
         self.addChild(backButton)
         
         addLabelAndSwitch("Sounds", defaultsKey: DefaultKeys.Sound.description, height: 0.6)
-        addLabelAndSwitch("Tutorial", defaultsKey: DefaultKeys.Tutorial.description, height: 0.5)
-        addLabelAndSwitch("Notifications", defaultsKey: DefaultKeys.Notifications.description, height: 0.4)
+        addLabelAndSwitch("Tutorial", defaultsKey: DefaultKeys.Tutorial.description, height: 0.45)
+        addLabelAndSwitch("Notifications", defaultsKey: DefaultKeys.Notifications.description, height: 0.3)
         
     }
     private func addLabelAndSwitch(withName:String, defaultsKey:String,height:CGFloat) {
@@ -68,7 +67,6 @@ class SettingsScene:SKScene {
         
         let labelSwitch = FFSwitch(withName: withName, keyForDefaultsItem: defaultsKey)
         labelSwitch.position = CGPointMake(self.frame.size.width*0.75, self.frame.size.height*height)
-        //labelSwitch.turnOff()
         self.addChild(labelSwitch)
     }
     

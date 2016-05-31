@@ -7,20 +7,16 @@
 //
 
 import SpriteKit
+import GoogleMobileAds
 
 class StartScene: SKScene, GameDataProtocol {
     var gameData:GameData = GameData()
     
     override func didMoveToView(view: SKView) {
         gameData = loadInstance()
-        gameData.printData()
         setupScene()
         //NSUserDefaults.standardUserDefaults().setInteger(1, forKey: DefaultKeys.Tutorial.description)
         //NSUserDefaults.standardUserDefaults().synchronize()
-    }
-    
-    override func update(currentTime: NSTimeInterval) {
-        
     }
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         for touch:AnyObject in touches {
@@ -29,10 +25,8 @@ class StartScene: SKScene, GameDataProtocol {
             
             if node.name == "Start Button" {
                 let defaults = NSUserDefaults.standardUserDefaults()
-                if (defaults.integerForKey(DefaultKeys.Tutorial.description) == 1) {
-                    //Turn Tutorial off for next play
-                    print("Tutorial == 1")
-                    defaults.setInteger(0, forKey: DefaultKeys.Tutorial.description)
+                if (defaults.integerForKey(DefaultKeys.Tutorial.description) == 0) {
+                    defaults.setInteger(1, forKey: DefaultKeys.Tutorial.description)
                     defaults.synchronize()
                     self.view?.presentScene(TutorialScene(size: self.size))
                 } else {
@@ -45,7 +39,8 @@ class StartScene: SKScene, GameDataProtocol {
             } else if node.name == "Settings Button" {
                 self.view?.presentScene(SettingsScene(size: self.size))
             } else if node.name == "Ad Button" {
-                saveGame()
+                saveGame(gameData)
+                gameData.printData()
                 NSNotificationCenter.defaultCenter().postNotificationName(Constants.Notifications.PRESENT_INTERSTITIAL, object: nil)
             }
         }
@@ -64,30 +59,59 @@ class StartScene: SKScene, GameDataProtocol {
         titleLabel.name = "Title"
         self.addChild(titleLabel)
         
-        let startButton = FFButton(text: "Game Time")
+        /*
+        let startButton = FFButton(text: "Play", name:"Start Button")
+        startButton.setScale(scale)
+        startButton.position = CGPointMake(CGRectGetMidX(self.frame), height*0.6)
+        self.addChild(startButton)
+        
+        let leaderButton = FFButton(text: "Rankings", name:"Leaderboards Button")
+        leaderButton.setScale(scale)
+        leaderButton.position = CGPointMake(CGRectGetMidX(self.frame), height*0.45)
+        self.addChild(leaderButton)
+        
+        let storeButton = FFButton(text: "Market",name:"Store Button")
+        storeButton.setScale(scale)
+        storeButton.position = CGPointMake(CGRectGetMidX(self.frame), height*0.3)
+        self.addChild(storeButton)
+        
+        let adButton = FFButton(text: "Ad", name:"Ad Button")
+        adButton.setScale(scale)
+        adButton.position = CGPointMake(CGRectGetMidX(self.frame), height*0.15)
+        self.addChild(adButton)
+        */
+        let startButton = SKSpriteNode(imageNamed: "playButton")
         startButton.setScale(scale)
         startButton.position = CGPointMake(CGRectGetMidX(self.frame), height*0.6)
         startButton.name = "Start Button"
         self.addChild(startButton)
         
-        let leaderButton = FFButton(text: "Rankings")
+        let leaderButton = SKSpriteNode(imageNamed: "leaderboardsButton")
         leaderButton.setScale(scale)
         leaderButton.position = CGPointMake(CGRectGetMidX(self.frame), height*0.45)
         leaderButton.name = "Leaderboards Button"
         self.addChild(leaderButton)
         
-        let storeButton = FFButton(text: "Market")
+        let storeButton = SKSpriteNode(imageNamed: "storeButton")
         storeButton.setScale(scale)
         storeButton.position = CGPointMake(CGRectGetMidX(self.frame), height*0.3)
         storeButton.name = "Store Button"
         self.addChild(storeButton)
         
-        let adButton = FFButton(text: "Ad For Coins?")
+        let adButton = SKSpriteNode(imageNamed: "adButton")
         adButton.setScale(scale)
         adButton.position = CGPointMake(CGRectGetMidX(self.frame), height*0.15)
         adButton.name = "Ad Button"
         self.addChild(adButton)
-         
+        
+        let adLabel = SKLabelNode(text: "Watch a video ad for 25 coins")
+        adLabel.fontName = Constants.FontName.Game_Font
+        adLabel.fontSize = Constants.FontSize.DispFontSize
+        adLabel.fontColor = UIColor.blackColor()
+        adLabel.setScale(scale)
+        adLabel.position = CGPointMake(CGRectGetMidX(self.frame), height*0.075)
+        self.addChild(adLabel)
+        
         let settingsButton = SKSpriteNode(imageNamed:"settingsButton")
         settingsButton.setScale(scale)
         settingsButton.position = CGPointMake(CGRectGetMaxX(self.frame)-35, CGRectGetMaxY(self.frame)-50)
@@ -97,16 +121,14 @@ class StartScene: SKScene, GameDataProtocol {
     
     // MARK: Google Ads Infrastructure
     func addCoinsFromAd(value:Int) {
-        print("Before: ",gameData.printData())
         gameData.addCoins(value)
-        print("Coins Added")
-        saveGame()
-        print("After: ", gameData.printData())
+        gameData.printData()
+        saveGame(gameData)
     }
     
     // MARK: Game Data Protocol
-    func saveGame() {
-        let encodedData = NSKeyedArchiver.archiveRootObject(gameData, toFile: GameData.archiveURL.path!)
+    func saveGame(withData:GameData) {
+        let encodedData = NSKeyedArchiver.archiveRootObject(withData, toFile: GameData.archiveURL.path!)
         if !encodedData {
             print("Save Failed")
         }

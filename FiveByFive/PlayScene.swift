@@ -28,27 +28,57 @@ class PlayScene: SKScene, GameDataProtocol {
         }
     }
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        /*
-        for touch:AnyObject in touches {
-            let location = (touch as! UITouch).locationInNode(self)
-            let node = self.nodeAtPoint(location)
-        }
-        */
-    }
-    
     // MARK: Scene Setup
     private func setupScene() {
         self.backgroundColor = UIColor.whiteColor()
         let scale = self.frame.size.width/414.0
         
-        let level_label = SKLabelNode(text: "Level: " + String(self.grid.currentLevel()))
-        level_label.position = CGPointMake(CGRectGetMidX(self.frame), self.frame.size.height*0.75)
-        level_label.fontColor = UIColor.blackColor()
-        level_label.fontSize = Constants.FontSize.DispFontSize
-        level_label.fontName = Constants.FontName.Game_Font
-        level_label.name = "Level Label"
-        self.addChild(level_label)
+        let highLevelLabel = SKLabelNode(text: "Highest Level: " + String(gameData.getHighestLevel()))
+        highLevelLabel.setScale(scale)
+        highLevelLabel.position = CGPointMake(CGRectGetMidX(self.frame), self.frame.size.height*0.85)
+        highLevelLabel.fontColor = UIColor.blackColor()
+        highLevelLabel.fontSize = Constants.FontSize.DispFontSize
+        highLevelLabel.fontName = Constants.FontName.Game_Font
+        highLevelLabel.name = "Highest Level Label"
+        self.addChild(highLevelLabel)
+        
+        let levelLabel = SKLabelNode(text: "Current Level: " + String(self.grid.currentLevel()))
+        levelLabel.setScale(scale)
+        levelLabel.position = CGPointMake(CGRectGetMidX(self.frame), self.frame.size.height*0.80)
+        levelLabel.fontColor = UIColor.blackColor()
+        levelLabel.fontSize = Constants.FontSize.DispFontSize
+        levelLabel.fontName = Constants.FontName.Game_Font
+        levelLabel.name = "Level Label"
+        self.addChild(levelLabel)
+        
+        let coinsLabel = SKLabelNode(text: String(gameData.getCoins()))
+        coinsLabel.setScale(scale)
+        coinsLabel.horizontalAlignmentMode = .Left
+        coinsLabel.position = CGPointMake(CGRectGetMidX(self.frame)-coinsLabel.frame.size.width/1.5, self.frame.size.height*0.15)
+        coinsLabel.fontColor = UIColor.blackColor()
+        coinsLabel.fontSize = Constants.FontSize.DispFontSize
+        coinsLabel.fontName = Constants.FontName.Game_Font
+        coinsLabel.name = "Coins Label"
+        self.addChild(coinsLabel)
+        
+        let coinsIcon = SKSpriteNode(imageNamed: "thousandCoins")
+        coinsIcon.setScale(0.25*scale)
+        coinsIcon.position = CGPointMake(CGRectGetMidX(self.frame)+coinsIcon.frame.size.width, coinsLabel.position.y+coinsIcon.frame.size.height/2)
+        self.addChild(coinsIcon)
+        
+        let lifeLabel = SKLabelNode(text: String(gameData.getLives()))
+        lifeLabel.setScale(scale)
+        lifeLabel.position = CGPointMake(CGRectGetMidX(self.frame)-lifeLabel.frame.size.width, self.frame.size.height*0.1)
+        lifeLabel.fontColor = UIColor.blackColor()
+        lifeLabel.fontSize = Constants.FontSize.DispFontSize
+        lifeLabel.fontName = Constants.FontName.Game_Font
+        lifeLabel.name = "Life Label"
+        self.addChild(lifeLabel)
+        
+        let lifeIcon = SKSpriteNode(imageNamed: "lifeIcon")
+        lifeIcon.setScale(0.25*scale)
+        lifeIcon.position = CGPointMake(lifeLabel.position.x+1.5*lifeIcon.frame.size.width, lifeLabel.position.y+lifeIcon.frame.size.height/2)
+        self.addChild(lifeIcon)
         
         grid.setScale(scale)
         let offset = 125*scale
@@ -58,21 +88,27 @@ class PlayScene: SKScene, GameDataProtocol {
     
     // MARK: Next Level
     private func nextLevel() {
-        let label = self.childNodeWithName("Level Label") as! SKLabelNode
-        grid.createGridForNextLevel()
-        label.text = "Level: " + String(grid.currentLevel())
-        gameData.addCoins(coinsForLevel())
+        updateLabels()
+        FIRAnalytics.logEventWithName(kFIREventLevelUp, parameters: [kFIRParameterLevel:grid.currentLevel() as NSNumber])
     }
     private func coinsForLevel() -> Int {
-        return 20*(grid.currentLevel() - 1)
+        return 10
     }
-    
+    private func updateLabels() {
+        let label:SKLabelNode = self.childNodeWithName("Level Label") as! SKLabelNode
+        grid.createGridForNextLevel()
+        label.text = "Current Level: " + String(grid.currentLevel())
+        gameData.addCoins(coinsForLevel())
+        let coinsLabel:SKLabelNode = self.childNodeWithName("Coins Label") as! SKLabelNode
+        coinsLabel.text =  String(gameData.getCoins())
+        let lifeLabel = self.childNodeWithName("Life Label") as! SKLabelNode
+        lifeLabel.text = String(gameData.getLives())
+    }
     // MARK: End Game methods and helpers
     func endGame() {
-        print("End Game")
         self.checkMigration()
         gameData.addLevel(grid.currentLevel())
-        saveGame()
+        saveGame(self.gameData)
         let scene:GameOverScene = GameOverScene(size: self.size)
         scene.currentLevel = grid.currentLevel()
         scene.highscore = gotHighScore()
@@ -85,8 +121,6 @@ class PlayScene: SKScene, GameDataProtocol {
     func saveLife() {
         if gameData.getLives() > 0 {
             showSaveLifeAlert()
-            print("Lives > 0")
-            //endGame()
         } else {
             endGame()
         }
@@ -102,8 +136,8 @@ class PlayScene: SKScene, GameDataProtocol {
             UIAlertAction in
             //inAppPurchases.defaultHelper.saveLife()
             self.gameData.useLife()
-            self.saveGame()
-            
+            self.saveGame(self.gameData)
+            FIRAnalytics.logEventWithName("Save Life Used", parameters: nil)
         }
         alert_controller.addAction(purchase_action)
         alert_controller.addAction(dismiss_action)
@@ -111,8 +145,6 @@ class PlayScene: SKScene, GameDataProtocol {
     }
 
     private func gotHighScore() -> Bool {
-        let str = String(gameData.getHighestLevel()) + " < " + String(grid.currentLevel())
-        print(str)
         return gameData.getHighestLevel() < grid.currentLevel()
     }
     
@@ -125,9 +157,8 @@ class PlayScene: SKScene, GameDataProtocol {
                 gameData.addCoins(coins)
                 defaults.setInteger(0, forKey: DefaultKeys.Money.description)
                 let highscore = GameKitHelper.sharedGameKitHelper.getHighScore()
-                print("Highscore: ",highscore)
                 gameData.addLevel(highscore)
-                saveGame()
+                saveGame(self.gameData)
                 defaults.setInteger(1, forKey: DefaultKeys.Migrate.description)
                 defaults.synchronize()
             }
@@ -135,8 +166,8 @@ class PlayScene: SKScene, GameDataProtocol {
     }
     
     // MARK: Game Data Protocol
-    func saveGame() {
-        let encodedData = NSKeyedArchiver.archiveRootObject(gameData, toFile: GameData.archiveURL.path!)
+    func saveGame(withData:GameData) {
+        let encodedData = NSKeyedArchiver.archiveRootObject(withData, toFile: GameData.archiveURL.path!)
         if !encodedData {
             print("Save Failed")
         }

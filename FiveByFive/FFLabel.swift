@@ -9,6 +9,8 @@
 import SpriteKit
 
 class FFLabel: SKNode {
+    /* POSITIONING IS A LITTLE WEIRD BUT LINE WRAPPING WORKS*/
+    
     var bounds:CGSize
     var newLineOn:Bool
     var text:String = "" {
@@ -27,7 +29,6 @@ class FFLabel: SKNode {
         self.bounds = bounds
         self.newLineOn = false
         super.init()
-        drawBounds()
     }
     
     init(text:String,bounds:CGSize) {
@@ -35,7 +36,6 @@ class FFLabel: SKNode {
         self.newLineOn = false
         self.text = text
         super.init()
-        drawBounds()
         
     }
     init(text:String, bounds:CGSize, useNewLine:Bool) {
@@ -43,7 +43,6 @@ class FFLabel: SKNode {
         self.newLineOn = useNewLine
         self.text = text
         super.init()
-        drawBounds()
     }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

@@ -9,12 +9,12 @@
 import Foundation
 
 protocol GameDataProtocol {
-    func saveGame()
+    func saveGame(withData:GameData)
     func loadInstance() -> GameData
 }
 
 class GameData: NSObject, NSCoding {
-    // MARK: Singleton
+    // MARK: Singleton (NO LONGER IN USE)
     //static let sharedGameData = GameData()
     
     // MARK: Archiving Paths
@@ -63,6 +63,9 @@ class GameData: NSObject, NSCoding {
     func getLives() -> Int {
         return self.lives
     }
+    func getCoins() -> Int {
+        return self.coins
+    }
     func addLevel(num:Int) {
         if num > self.highestLevel {
             print("New Highscore set")
@@ -78,6 +81,9 @@ class GameData: NSObject, NSCoding {
     }
     func addCoins(value:Int) {
         coins += value
+    }
+    func addLife() {
+        lives += 1
     }
     func useLife() {
         if (lives > 0) {

@@ -9,22 +9,32 @@
 import UIKit
 import GoogleMobileAds
 import GameKit
+import FirebaseAnalytics
 
-class StartViewController: UIViewController, GKGameCenterControllerDelegate, GADInterstitialDelegate {
+class StartViewController: UIViewController, GKGameCenterControllerDelegate, GADRewardBasedVideoAdDelegate,GameDataProtocol /*GADInterstitialDelegate,*/ {
+    static let adWatchReward = 25
     
-    var videoInterstitial:GADInterstitial!
+    //var videoInterstitial:GADInterstitial!
+    var rewardedInterstitial:GADRewardBasedVideoAd!
+    var interstitialLoading:Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupGoogleInterstitialAds()
+        GADRewardBasedVideoAd.sharedInstance().delegate = self
+        if !self.interstitialLoading && !GADRewardBasedVideoAd.sharedInstance().ready {
+            requestRewardedVideo()
+        }
+        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(presentAuthenticationVC),
                                                          name: Constants.Notifications.PRESENT_AUTH_VC, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(showLeaderboard),
                                                          name: Constants.Notifications.PRESENT_LEADERBOARDS, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(presentGoogleInterstitial),
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(presentRewardedInterstitial),
                                                          name: Constants.Notifications.PRESENT_INTERSTITIAL, object: nil)
-
+    }
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
         if let scene = StartScene(fileNamed: "StartScene") {
             // Configure the view.
             let skView = self.view as! SKView
@@ -33,48 +43,102 @@ class StartViewController: UIViewController, GKGameCenterControllerDelegate, GAD
             
             /* Sprite Kit applies additional optimizations to improve rendering performance */
             skView.ignoresSiblingOrder = true
-            
+            scene.size = skView.bounds.size
             /* Set the scale mode to scale to fit the window */
-            scene.scaleMode = .ResizeFill
+            let os = NSProcessInfo().operatingSystemVersion
+            switch (os.majorVersion, os.minorVersion, os.patchVersion) {
+            case (8, 0, _):
+                print("iOS >= 8.0.0, < 8.1.0")
+                scene.scaleMode = .Fill
+            case (8, _, _):
+                print("iOS >= 8.1.0, < 9.0")
+                scene.scaleMode = .AspectFill
+            case (9, _, _):
+                print("iOS >= 9.0.0")
+                scene.scaleMode = .ResizeFill
+            default:
+                // this code will have already crashed on iOS 7, so >= iOS 10.0
+                scene.scaleMode = .ResizeFill
+                print("iOS >= 10.0.0")
+            }
             
             skView.presentScene(scene)
         }
+        
     }
-    override func viewDidAppear(animated: Bool) {
-
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        let skView = self.view as! SKView
+        skView.presentScene(nil)
     }
     override func shouldAutorotate() -> Bool {
         return true
     }
-    // MARK: AdMob Functions
-    private func setupGoogleInterstitialAds() {
-        videoInterstitial = createAndLoadInterstitial()
-
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Release any cached data, images, etc that aren't in use.
     }
-    private func createAndLoadInterstitial() -> GADInterstitial {
-        let interstitial = GADInterstitial(adUnitID: Constants.googleInterstitialAdsID)
-        interstitial.delegate = self
-        let request = GADRequest()
-        request.testDevices = ["f5cab6107619930570354d4c8c838ee5",kGADSimulatorID]
-        interstitial.loadRequest(request)
-        return interstitial
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
-    func presentGoogleInterstitial() {
-        if videoInterstitial.isReady {
-            videoInterstitial.presentFromRootViewController(self)
+    // MARK: AdMob Rewarded Interstitial
+    func presentRewardedInterstitial() {
+        if GADRewardBasedVideoAd.sharedInstance().ready {
+            
+            GADRewardBasedVideoAd.sharedInstance().presentFromRootViewController(self)
+        } else {
+            let alert = UIAlertController(title: "Video Not Ready", message: "Please try again later.", preferredStyle: UIAlertControllerStyle.Alert)
+            let dismissAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default) {
+                UIAlertAction in
+                print("Alert View Dismissed")
+            }
+            alert.addAction(dismissAction)
+            self.presentViewController(alert, animated: true, completion: nil)
         }
     }
-    func interstitialWillLeaveApplication(ad: GADInterstitial!) {
-        if let scene:StartScene = StartScene(fileNamed: "StartScene") {
-            scene.addCoinsFromAd(20)
-        }
-        videoInterstitial = createAndLoadInterstitial()
+    func requestRewardedVideo() {
+        self.interstitialLoading = true
+        let request:GADRequest = GADRequest()
+        //request.testDevices = ["f5cab6107619930570354d4c8c838ee5",kGADSimulatorID]
+        GADRewardBasedVideoAd.sharedInstance().loadRequest(request, withAdUnitID: Constants.rewardedInterstitialAdsID)
+        print("Loading Video Ad")
     }
-    func interstitialDidDismissScreen(ad: GADInterstitial!) {
-        if let scene:StartScene = StartScene(fileNamed: "StartScene") {
-            scene.addCoinsFromAd(20)
-        }
-        videoInterstitial = createAndLoadInterstitial()
+    func rewardBasedVideoAdDidReceiveAd(rewardBasedVideoAd: GADRewardBasedVideoAd!) {
+        self.interstitialLoading = false
+        print("Reward video ad is recieved")
+    }
+    func rewardBasedVideoAdDidOpen(rewardBasedVideoAd: GADRewardBasedVideoAd!) {
+        FIRAnalytics.logEventWithName("Video Ad Watched", parameters: nil)
+        print("Reward Video opened")
+    }
+    func rewardBasedVideoAdDidStartPlaying(rewardBasedVideoAd: GADRewardBasedVideoAd!) {
+        print("Reward Video started playing")
+    }
+    func rewardBasedVideoAdDidClose(rewardBasedVideoAd: GADRewardBasedVideoAd!) {
+        print("Reward Video closed")
+        requestRewardedVideo()
+    }
+    func rewardBasedVideoAd(rewardBasedVideoAd: GADRewardBasedVideoAd!, didRewardUserWithReward reward: GADAdReward!) {
+        //ERROR HERE
+//        if let scene:StartScene = StartScene(fileNamed: "StartScene") {
+//            scene.addCoinsFromAd(reward.amount.integerValue)
+//            print("User Rewarded")
+//            scene.gameData.printData()
+//            FIRAnalytics.logEventWithName("Video_Ad_Watched", parameters: nil)
+//        }
+        //requestRewardedVideo()
+        let gameData = loadInstance()
+        gameData.addCoins(reward.amount.integerValue)
+        saveGame(gameData)
+        FIRAnalytics.logEventWithName("Video_Ad_Watched", parameters: nil)
+    }
+    func rewardBasedVideoAdWillLeaveApplication(rewardBasedVideoAd: GADRewardBasedVideoAd!) {
+        print("Reward Video will leave application")
+    }
+    func rewardBasedVideoAd(rewardBasedVideoAd: GADRewardBasedVideoAd!, didFailToLoadWithError error: NSError!) {
+        self.interstitialLoading = false
+        print("Reward Video failed to load")
+        //requestRewardedVideo()
     }
     
     // MARK: Game Center Helper
@@ -90,17 +154,7 @@ class StartViewController: UIViewController, GKGameCenterControllerDelegate, GAD
         }
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        print("Memory Warning coming from Start View Controller")
-        // Release any cached data, images, etc that aren't in use.
-    }
-    deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
-    }
-
     func showLeaderboard() {
-        print("Present Leaderboard")
         let gc = GKGameCenterViewController()
         gc.gameCenterDelegate = self
         gc.viewState = GKGameCenterViewControllerState.Leaderboards
@@ -111,15 +165,20 @@ class StartViewController: UIViewController, GKGameCenterControllerDelegate, GAD
     func gameCenterViewControllerDidFinish(gameCenterViewController: GKGameCenterViewController) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
+    // MARK: Game Data Protocol
+    func saveGame(withData:GameData) {
+        let encodedData = NSKeyedArchiver.archiveRootObject(withData, toFile: GameData.archiveURL.path!)
+        if !encodedData {
+            print("Save Failed")
+        }
+    }
     
-}
-extension NSDate {
-    var minute:  Int { return NSCalendar.currentCalendar().components(.Minute,  fromDate: self).minute  }
-    var hour:  Int { return NSCalendar.currentCalendar().components(.Hour,  fromDate: self).hour  }
-    var day:   Int { return NSCalendar.currentCalendar().components(.Day,   fromDate: self).day   }
-    var month: Int { return NSCalendar.currentCalendar().components(.Month, fromDate: self).month }
-    var year:  Int { return NSCalendar.currentCalendar().components(.Year,  fromDate: self).year  }
-    var date12pm: NSDate {
-        return  NSCalendar.currentCalendar().dateWithEra(1, year: year, month: month, day: day+1, hour: 12, minute: 0, second: 0, nanosecond: 0)!
+    func loadInstance() -> GameData {
+        let data = NSKeyedUnarchiver.unarchiveObjectWithFile(GameData.archiveURL.path!) as? GameData
+        if data == nil {
+            print("Data could not be loaded properly")
+            return GameData()
+        }
+        return data!
     }
 }

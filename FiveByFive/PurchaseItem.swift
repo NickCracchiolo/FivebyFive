@@ -7,29 +7,24 @@
 //
 
 import SpriteKit
+import StoreKit
 
 class PurchaseItem:SKSpriteNode {
     let purchaseID:String
-    let coinAmount:Int
+    let value:String
     let purchasePrice:Float
     
-    init(amountOfCoins:Int, forAPriceOf:Float, withID:String, withImage:String) {
+    init(value:String, forAPriceOf:Float, withID:String, withImage:String) {
         self.purchaseID = withID
-        self.coinAmount = amountOfCoins
+        self.value = value
         self.purchasePrice = forAPriceOf
         let texture = SKTexture(imageNamed: withImage)
-        super.init(texture: texture, color: UIColor.whiteColor(), size: texture.size())
+        super.init(texture: texture, color: UIColor.whiteColor(), size: CGSizeMake(100, 100))
     }
     required init?(coder aDecoder: NSCoder) {
         self.purchaseID = aDecoder.decodeObjectForKey("purchaseID") as! String
-        self.coinAmount = aDecoder.decodeIntegerForKey("coinAmount")
+        self.value = aDecoder.decodeObjectForKey("value") as! String
         self.purchasePrice = aDecoder.decodeFloatForKey("purchasePoint")
         super.init(coder: aDecoder)
-    }
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        //IAP.sharedIAP
-    }
-    func purchaseItem() -> Int {
-        return self.coinAmount
     }
 }

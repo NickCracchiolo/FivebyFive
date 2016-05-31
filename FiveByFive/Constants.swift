@@ -11,9 +11,11 @@ import SpriteKit
 
 struct Constants {
     static let googleInterstitialAdsID = ""
+    static let rewardedInterstitialAdsID = ""
 
     struct FontName {
         static let Game_Font = "Impact Label Reversed"
+        static let Bolded_Font = "Impact Label"
         static let HUD_Font = "Impact Label Reversed"
         static let Title_Font = "Impact Label Reversed"
         static let Game_Over_Font = "Impact Label"
@@ -32,6 +34,13 @@ struct Constants {
     struct Leaderboards {
         static let highScore = "leaderboards.highest_score"
     }
+}
+struct ProductIDs {
+    static let onehundredCoins = "fbf.iap.add_money"
+    static let fiveHundredcoins = "fbf.iap.add_money500"
+    static let onethousandCoins = "fbf.iap.add_money1000"
+    static let removeAds = "fbf.iap.remove_ads"
+    static let saveLife = "fbf.iap.save_life"
 }
 
 enum DefaultKeys: CustomStringConvertible  {

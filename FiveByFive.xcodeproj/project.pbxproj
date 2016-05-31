@@ -19,7 +19,6 @@
 		5624C8331CDAAC78001CBD3C /* PurchasesList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5624C8321CDAAC78001CBD3C /* PurchasesList.plist */; };
 		5624C8351CDAD45F001CBD3C /* Plist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5624C8341CDAD45F001CBD3C /* Plist.swift */; };
 		5628971C1CE6493F005CCE5F /* FFButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5628971B1CE6493F005CCE5F /* FFButton.swift */; };
-		5628971E1CE65768005CCE5F /* IAP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5628971D1CE65768005CCE5F /* IAP.swift */; };
 		564F71D51CE91527001B441B /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 564F71D41CE91527001B441B /* AdSupport.framework */; };
 		564F71D71CE91531001B441B /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 564F71D61CE91531001B441B /* AudioToolbox.framework */; };
 		564F71D91CE91538001B441B /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 564F71D81CE91538001B441B /* AVFoundation.framework */; };
@@ -39,9 +38,12 @@
 		566C1D951CECEC50000AADFA /* TypeExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566C1D941CECEC50000AADFA /* TypeExtensions.swift */; };
 		5680778C1CD90CF300976969 /* GameKitHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5680778B1CD90CF300976969 /* GameKitHelper.swift */; };
 		5680778E1CD919E100976969 /* StartScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5680778D1CD919E100976969 /* StartScene.swift */; };
-		5697B4FE1CEA771D002C251B /* FFAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5697B4FD1CEA771D002C251B /* FFAlertView.swift */; };
 		5699B9171CD9705700A33748 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5699B9161CD9705700A33748 /* LaunchScreen.storyboard */; };
 		56A64B841CED1ED40062913B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 56A64B831CED1ED40062913B /* GoogleService-Info.plist */; };
+		56A64B931CF41A080062913B /* libAdapterUnity.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 56A64B921CF41A080062913B /* libAdapterUnity.a */; };
+		56A64B961CF41A4A0062913B /* UnityAds.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 56A64B941CF41A4A0062913B /* UnityAds.bundle */; };
+		56A64B971CF41A4A0062913B /* UnityAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56A64B951CF41A4A0062913B /* UnityAds.framework */; };
+		56A64BCF1CF903220062913B /* Blast.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 56A64BCE1CF903220062913B /* Blast.mp3 */; };
 		56B172B91AC1D55F004575DD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B172B81AC1D55F004575DD /* AppDelegate.swift */; };
 		56B172BB1AC1D55F004575DD /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 56B172BA1AC1D55F004575DD /* GameScene.sks */; };
 		56B172C41AC1D55F004575DD /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56B172C31AC1D55F004575DD /* Images.xcassets */; };
@@ -75,7 +77,6 @@
 		5624C8321CDAAC78001CBD3C /* PurchasesList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PurchasesList.plist; sourceTree = "<group>"; };
 		5624C8341CDAD45F001CBD3C /* Plist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Plist.swift; sourceTree = "<group>"; };
 		5628971B1CE6493F005CCE5F /* FFButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FFButton.swift; sourceTree = "<group>"; };
-		5628971D1CE65768005CCE5F /* IAP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IAP.swift; sourceTree = "<group>"; };
 		564F71D41CE91527001B441B /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		564F71D61CE91531001B441B /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		564F71D81CE91538001B441B /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -97,9 +98,12 @@
 		566C1D941CECEC50000AADFA /* TypeExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypeExtensions.swift; sourceTree = "<group>"; };
 		5680778B1CD90CF300976969 /* GameKitHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameKitHelper.swift; sourceTree = "<group>"; };
 		5680778D1CD919E100976969 /* StartScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartScene.swift; sourceTree = "<group>"; };
-		5697B4FD1CEA771D002C251B /* FFAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FFAlertView.swift; sourceTree = "<group>"; };
 		5699B9161CD9705700A33748 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		56A64B831CED1ED40062913B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		56A64B921CF41A080062913B /* libAdapterUnity.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libAdapterUnity.a; sourceTree = "<group>"; };
+		56A64B941CF41A4A0062913B /* UnityAds.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = UnityAds.bundle; sourceTree = "<group>"; };
+		56A64B951CF41A4A0062913B /* UnityAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UnityAds.framework; sourceTree = "<group>"; };
+		56A64BCE1CF903220062913B /* Blast.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Blast.mp3; sourceTree = "<group>"; };
 		56B172B31AC1D55F004575DD /* FiveByFive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FiveByFive.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		56B172B71AC1D55F004575DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		56B172B81AC1D55F004575DD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -135,6 +139,7 @@
 				564F71E11CE9155F001B441B /* EventKit.framework in Frameworks */,
 				564F71DF1CE91557001B441B /* CoreTelephony.framework in Frameworks */,
 				564F71DD1CE9154C001B441B /* CoreMedia.framework in Frameworks */,
+				56A64B931CF41A080062913B /* libAdapterUnity.a in Frameworks */,
 				564F71DB1CE91542001B441B /* CoreGraphics.framework in Frameworks */,
 				564F71D91CE91538001B441B /* AVFoundation.framework in Frameworks */,
 				564F71D71CE91531001B441B /* AudioToolbox.framework in Frameworks */,
@@ -145,6 +150,7 @@
 				56EBDE291AF8462900E7FDE1 /* Security.framework in Frameworks */,
 				56DD3FD41AF2AA6A00CC2C80 /* Social.framework in Frameworks */,
 				734AC60ECC01664576A9D75C /* Pods_FiveByFive.framework in Frameworks */,
+				56A64B971CF41A4A0062913B /* UnityAds.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -166,7 +172,6 @@
 				565B9BEB1ACC75900059D250 /* Constants.swift */,
 				56581C9C1CD86B03009BF7B0 /* GameData.swift */,
 				5680778B1CD90CF300976969 /* GameKitHelper.swift */,
-				5628971D1CE65768005CCE5F /* IAP.swift */,
 				566C1D941CECEC50000AADFA /* TypeExtensions.swift */,
 			);
 			name = Shared;
@@ -191,23 +196,17 @@
 				56D71CC71CDD0C8C0097F1F0 /* FFWheel.swift */,
 				5624C82A1CDA883E001CBD3C /* FFSwitch.swift */,
 				5628971B1CE6493F005CCE5F /* FFButton.swift */,
-				5697B4FD1CEA771D002C251B /* FFAlertView.swift */,
 				566C1D8F1CEB83A3000AADFA /* FFLabel.swift */,
 			);
 			name = "UI Elements";
 			sourceTree = "<group>";
 		};
-		566C1D911CEBE9AB000AADFA /* Tutorial Scenes */ = {
-			isa = PBXGroup;
-			children = (
-				566C1D921CEBE9BC000AADFA /* TutorialScene.swift */,
-			);
-			name = "Tutorial Scenes";
-			sourceTree = "<group>";
-		};
 		5699B9151CD96BC000A33748 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				56A64B941CF41A4A0062913B /* UnityAds.bundle */,
+				56A64B951CF41A4A0062913B /* UnityAds.framework */,
+				56A64B921CF41A080062913B /* libAdapterUnity.a */,
 				564F71E81CE916D7001B441B /* GoogleMobileAds.framework */,
 				564F71E61CE9158A001B441B /* MediaPlayer.framework */,
 				564F71E41CE91579001B441B /* MessageUI.framework */,
@@ -261,6 +260,7 @@
 				56321D881CD7CE5C0033357C /* SceneAssets */,
 				56B172C31AC1D55F004575DD /* Images.xcassets */,
 				5699B9161CD9705700A33748 /* LaunchScreen.storyboard */,
+				5624C8321CDAAC78001CBD3C /* PurchasesList.plist */,
 				56B172B61AC1D55F004575DD /* Supporting Files */,
 				5699B9151CD96BC000A33748 /* Frameworks */,
 			);
@@ -270,8 +270,8 @@
 		56B172B61AC1D55F004575DD /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				56A64BCE1CF903220062913B /* Blast.mp3 */,
 				56A64B831CED1ED40062913B /* GoogleService-Info.plist */,
-				5624C8321CDAAC78001CBD3C /* PurchasesList.plist */,
 				5606FDF01AFB282900124DAF /* woosh.wav */,
 				565B9C2A1AD10A4A0059D250 /* Impact_Label.ttf */,
 				565B9C1D1AD0BCD10059D250 /* Impact_Label_Reversed.ttf */,
@@ -312,7 +312,7 @@
 			isa = PBXGroup;
 			children = (
 				5680778D1CD919E100976969 /* StartScene.swift */,
-				566C1D911CEBE9AB000AADFA /* Tutorial Scenes */,
+				566C1D921CEBE9BC000AADFA /* TutorialScene.swift */,
 				56B8D7941CD94B9E00CE21B8 /* PlayScene.swift */,
 				56B8D78E1CD941B100CE21B8 /* GameOverScene.swift */,
 				5624C8261CDA880D001CBD3C /* StoreScene.swift */,
@@ -409,9 +409,11 @@
 				56B8D7971CD95E9300CE21B8 /* PlayScene.sks in Resources */,
 				5699B9171CD9705700A33748 /* LaunchScreen.storyboard in Resources */,
 				5624C82F1CDA8F8B001CBD3C /* StoreScene.sks in Resources */,
+				56A64B961CF41A4A0062913B /* UnityAds.bundle in Resources */,
 				565B9C1E1AD0BCD10059D250 /* Impact_Label_Reversed.ttf in Resources */,
 				5624C8331CDAAC78001CBD3C /* PurchasesList.plist in Resources */,
 				565B9C2B1AD10A4A0059D250 /* Impact_Label.ttf in Resources */,
+				56A64BCF1CF903220062913B /* Blast.mp3 in Resources */,
 				5624C82D1CDA8F78001CBD3C /* SettingsScene.sks in Resources */,
 				56B8D7931CD941FA00CE21B8 /* GameOverScene.sks in Resources */,
 			);
@@ -502,8 +504,6 @@
 				56CE197A1CD7E333000E015B /* Tile.swift in Sources */,
 				5624C8291CDA881E001CBD3C /* SettingsScene.swift in Sources */,
 				5624C8351CDAD45F001CBD3C /* Plist.swift in Sources */,
-				5628971E1CE65768005CCE5F /* IAP.swift in Sources */,
-				5697B4FE1CEA771D002C251B /* FFAlertView.swift in Sources */,
 				56B172B91AC1D55F004575DD /* AppDelegate.swift in Sources */,
 				56D71CC81CDD0C8C0097F1F0 /* FFWheel.swift in Sources */,
 				5624C8311CDA9EC8001CBD3C /* PurchaseItem.swift in Sources */,

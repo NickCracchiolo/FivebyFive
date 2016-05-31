@@ -11,18 +11,17 @@ import SpriteKit
 class FFButton: SKSpriteNode {
     let text:String
     
-    init(text:String) {
+    init(text:String,name:String) {
         self.text = text
         let texture = SKTexture(imageNamed: "redButton")
         super.init(texture: texture, color: UIColor.whiteColor(), size: CGSizeMake(104, 54))
         self.zPosition = 0
+        self.name = name
         addLabel()
     }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    // TODO: FIX HEIGHT ISSUE WITH font size adjusted labels
     private func addLabel() {
         let label = SKLabelNode(text: self.text)
         label.fontName = Constants.FontName.Game_Font
@@ -30,9 +29,9 @@ class FFButton: SKSpriteNode {
         label.fontSize *= modifyFontSize(label)
         label.fontColor = UIColor.whiteColor()
         label.horizontalAlignmentMode = .Center
-        label.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)-10)
+        label.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)-5)
         label.zPosition = 1
-        label.userInteractionEnabled = true
+        label.userInteractionEnabled = false
         self.addChild(label)
     }
     private func modifyFontSize(withLabel:SKLabelNode) -> CGFloat {

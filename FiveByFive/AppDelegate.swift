@@ -5,7 +5,7 @@
 //  Created by Nicholas Cracchiolo on 3/24/15.
 //  Copyright (c) 2015 Nick Cracchiolo. All rights reserved.
 //
-
+import Foundation
 import UIKit
 import Firebase
 
@@ -16,6 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         FIRApp.configure()
+        FIRAnalytics.logEventWithName(kFIREventAppOpen, parameters: nil)
         UIApplication.sharedApplication().applicationIconBadgeNumber = 0
         GameKitHelper.sharedGameKitHelper.authenticateLocalPlayer()
         return true
@@ -38,6 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        FIRAnalytics.logEventWithName(kFIREventAppOpen, parameters: nil)
     }
 
     func applicationWillTerminate(application: UIApplication) {
