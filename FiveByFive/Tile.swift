@@ -19,31 +19,31 @@ enum TileValue: Int {
 
 class Tile: SKSpriteNode {
     private let value:Int
-    lazy var backTexture:SKTexture = self.backTextureFrom(self.value)
+	lazy var backTexture:SKTexture = self.backTextureFrom(value: self.value)
     private var flipped = false
     
     init(withValue:Int) {
         let texture = SKTexture(imageNamed: "redTile")
         self.value = withValue
-        super.init(texture: texture, color: UIColor.whiteColor(), size: CGSizeMake(55, 55))
-        self.anchorPoint = CGPointMake(0, 0)
-        self.userInteractionEnabled = true
+		super.init(texture: texture, color: UIColor.white, size: CGSize(width: 55, height:55))
+		self.anchorPoint = CGPoint(x: 0, y:0)
+        self.isUserInteractionEnabled = true
     }
     
     required init?(coder aDecoder: NSCoder) {
-        self.value = aDecoder.decodeIntegerForKey("value")
+		self.value = aDecoder.decodeInteger(forKey: "value")
         super.init(coder: aDecoder)
     }
     
-    override func encodeWithCoder(aCoder: NSCoder) {
-        aCoder.encodeInteger(self.value, forKey: "value")
-        aCoder.encodeObject(self.backTexture, forKey: "back_texture")
-        super.encodeWithCoder(aCoder)
+    override func encode(with aCoder: NSCoder) {
+		aCoder.encode(self.value, forKey: "value")
+		aCoder.encode(self.backTexture, forKey: "back_texture")
+        super.encode(with: aCoder)
     }
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if flipped == false {
-            flip()
+            let _ = flip()
         }
     }
     func valueForTile() -> Int {
@@ -59,9 +59,9 @@ class Tile: SKSpriteNode {
         self.zPosition = 1
         pushAnimation()
         if value == 0 {
-            if NSUserDefaults.standardUserDefaults().integerForKey(DefaultKeys.Sound.description) == 0 {
+			if UserDefaults.standard.integer(forKey: DefaultKeys.sound.description) == 0 {
                 let sound_action = SKAction.playSoundFileNamed("Blast.mp3", waitForCompletion: false)
-                self.runAction(sound_action)
+				self.run(sound_action)
             }
             bombAnimation()
         } else {
@@ -84,9 +84,9 @@ class Tile: SKSpriteNode {
         if !self.flipped {
             let textures:[SKTexture] = [SKTexture(imageNamed:"redTile2"),SKTexture(imageNamed:"redTile3"),SKTexture(imageNamed:"redTile4"),
                                         SKTexture(imageNamed:"redTile5"),backTexture]
-            let push = SKAction.animateWithTextures(textures, timePerFrame:0.01)
-            self.runAction(push)
-            self.size = CGSizeMake(50,50)
+			let push = SKAction.animate(with: textures, timePerFrame:0.01)
+			self.run(push)
+			self.size = CGSize(width: 50, height: 50)
             self.flipped = true
         }
     }
@@ -98,7 +98,7 @@ class Tile: SKSpriteNode {
         //self.runAction(animate, completion: {
         //    NSNotificationCenter.defaultCenter().postNotificationName(Constants.Notifications.BOMB_SELECTED, object: nil)
         //})
-        NSNotificationCenter.defaultCenter().postNotificationName(Constants.Notifications.BOMB_SELECTED, object: nil)
+		NotificationCenter.default.post(name: NSNotification.Name(rawValue: Constants.Notifications.BOMB_SELECTED), object: nil)
     }
     
     private func backTextureFrom(value:Int) -> SKTexture {

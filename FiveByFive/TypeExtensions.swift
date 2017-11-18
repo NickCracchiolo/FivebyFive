@@ -37,7 +37,7 @@ extension String {
     func words() -> [String] {
         var words:[String] = []
         var word = ""
-        for c in self.characters {
+        for c in self {
             if c.isPunctuation() || c.isSpace() {
                 if word != "" {
                     words.append(word)

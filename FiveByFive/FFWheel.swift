@@ -26,7 +26,7 @@ class FFWheel: SKNode {
         self.objects = withNodes
         super.init()
         for node in self.objects {
-            node.hidden = true
+            node.isHidden = true
             self.addChild(node)
         }
         adjustWheel()
@@ -44,9 +44,9 @@ class FFWheel: SKNode {
         }
         priceLabel = SKLabelNode(text: str)
         priceLabel.fontSize = Constants.FontSize.DispFontSize
-        priceLabel.fontColor = UIColor.blackColor()
+        priceLabel.fontColor = UIColor.black
         priceLabel.fontName = Constants.FontName.Game_Font
-        priceLabel.position = CGPointMake(0, -100)
+		priceLabel.position = CGPoint(x: 0, y: -100)
         self.addChild(priceLabel)
         
     }
@@ -83,32 +83,32 @@ class FFWheel: SKNode {
     private func adjustWheel() {
 
         if currentIndex > 1 {
-            objects[currentIndex-2].hidden = true
+            objects[currentIndex-2].isHidden = true
         }
         if currentIndex < objects.count-2 {
-            objects[currentIndex+2].hidden = true
+            objects[currentIndex+2].isHidden = true
         }
         
         if currentIndex > 0 {
             
             let previousItem:SKSpriteNode = objects[currentIndex-1]
-            previousItem.position = CGPointMake(-previousItem.frame.size.width*0.8, 0)
-            previousItem.hidden = false
+			previousItem.position = CGPoint(x: -previousItem.frame.size.width*0.8, y: 0)
+            previousItem.isHidden = false
             previousItem.setScale(0.7)
             previousItem.alpha = 0.5
             previousItem.zPosition = 1
         }
         let currentItem:SKSpriteNode = objects[currentIndex]
         currentItem.setScale(1.0)
-        currentItem.hidden = false
+        currentItem.isHidden = false
         currentItem.alpha = 0.95
         currentItem.zPosition = 3
-        currentItem.position = CGPointMake(0, 0)
+		currentItem.position = CGPoint(x: 0, y: 0)
         
         if currentIndex < objects.count-1 {
             let nextItem:SKSpriteNode = objects[currentIndex+1]
-            nextItem.position = CGPointMake(nextItem.frame.size.width*0.8, 0)
-            nextItem.hidden = false
+			nextItem.position = CGPoint(x: nextItem.frame.size.width*0.8, y: 0)
+            nextItem.isHidden = false
             nextItem.setScale(0.7)
             nextItem.alpha = 0.5
             nextItem.zPosition = 1

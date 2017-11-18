@@ -21,9 +21,9 @@ class FFLabel: SKNode {
     }
     var fontSize:CGFloat = 30
     var fontName:String = Constants.FontName.Game_Font
-    var fontColor:UIColor = UIColor.blackColor()
-    var horizontalAlignmentMode:SKLabelHorizontalAlignmentMode = .Left
-    var verticalAlignmentMode:SKLabelVerticalAlignmentMode = .Baseline
+    var fontColor:UIColor = UIColor.black
+    var horizontalAlignmentMode:SKLabelHorizontalAlignmentMode = .left
+    var verticalAlignmentMode:SKLabelVerticalAlignmentMode = .baseline
     
     init(bounds:CGSize) {
         self.bounds = bounds
@@ -53,12 +53,12 @@ class FFLabel: SKNode {
         let label = SKLabelNode(text: self.text)
         let labelWidth = label.frame.size.width
         var str = ""
-        var initalPosition = CGPointMake(0,0)
+		var initalPosition = CGPoint(x: 0, y:0)
         if (labelWidth > frameWidth) {
             for word in text.words() {
                 let tempString = str + word + " "
-                if checkLength(tempString) {
-                    createSubLabel(str, belowHeight: initalPosition.y)
+				if checkLength(str: tempString) {
+					createSubLabel(text: str, belowHeight: initalPosition.y)
                     initalPosition.y = initalPosition.y - label.frame.size.height
                     str = word
                 } else {
@@ -66,7 +66,7 @@ class FFLabel: SKNode {
                 }
             }
         } else {
-            createSingleLineLabel(initalPosition)
+			createSingleLineLabel(atPosition: initalPosition)
         }
     }
     //Returns true if length is >= the bounds set in init
@@ -90,7 +90,7 @@ class FFLabel: SKNode {
     }
     private func createSubLabel(text:String, belowHeight:CGFloat) {
         let subLabel = SKLabelNode(text: text)
-        subLabel.position = CGPointMake(0/*-CGRectGetMidX(self.frame)*/, belowHeight - subLabel.frame.size.height)
+		subLabel.position = CGPoint(x: 0/*-self.frame.midX*/, y: belowHeight - subLabel.frame.size.height)
         subLabel.fontName = self.fontName
         subLabel.fontSize = self.fontSize
         subLabel.fontColor = self.fontColor
@@ -101,11 +101,11 @@ class FFLabel: SKNode {
     }
     //Debugging method to check positioning and node's bounds
     private func drawBounds() {
-        let rect =  SKShapeNode(rectOfSize: self.bounds)
-        rect.position = CGPointMake(0, 0)
+        let rect =  SKShapeNode(rectOf: self.bounds)
+		rect.position = CGPoint(x: 0, y: 0)
         rect.lineWidth = 2
-        rect.strokeColor = UIColor.blackColor()
-        rect.fillColor = UIColor.blueColor()
+        rect.strokeColor = UIColor.black
+        rect.fillColor = UIColor.blue
         rect.zPosition = 0
         self.addChild(rect)
         print("Debugging Rect Added")

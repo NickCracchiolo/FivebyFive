@@ -8,20 +8,19 @@
 
 import SpriteKit
 import StoreKit
-import FirebaseAnalytics
 
-class StoreScene:SKScene, GameDataProtocol,SKProductsRequestDelegate, SKPaymentTransactionObserver {
+class StoreScene:SKScene, SKProductsRequestDelegate, SKPaymentTransactionObserver {
     var wheel:FFWheel = FFWheel()
-    var gameData = GameData()
+	var gameData:GameData?
     var p = SKProduct()
     var productsList = [SKProduct]()
     var activityIndicator:UIActivityIndicatorView!
     
-    override func didMoveToView(view: SKView) {
+	override func didMove(to view: SKView) {
         gameData = loadInstance()
         setupGestures()
         setupScene()
-        SKPaymentQueue.defaultQueue().addTransactionObserver(self)
+		SKPaymentQueue.default().add(self)
         getProducts()
         
 //        activityIndicator = UIActivityIndicatorView()
@@ -32,67 +31,74 @@ class StoreScene:SKScene, GameDataProtocol,SKProductsRequestDelegate, SKPaymentT
 //        print("About to add activity indicator")
 //        self.scene!.view!.addSubview(activityIndicator)
     }
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        for touch:AnyObject in touches {
-            let location = (touch as! UITouch).locationInNode(self)
-            let node = self.nodeAtPoint(location)
-            if node.name == "Purchase Button" {
-                if SKPaymentQueue.defaultQueue().transactions.count <= 1 {
-                    let item = wheel.currentObject() as! PurchaseItem
-                    purchaseProduct(item.purchaseID)
-                }
-            }
-            if node.name == "Back Button" {
-                self.view?.presentScene(StartScene(size: self.size))
-            }
-        }
-    }
+	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+		for touch:AnyObject in touches {
+			let location = (touch as! UITouch).location(in: self)
+			let node = self.atPoint(location)
+			if node.name == "Purchase Button" {
+				if SKPaymentQueue.default().transactions.count <= 1 {
+					let item = wheel.currentObject() as! PurchaseItem
+					purchaseProduct(withID: item.purchaseID)
+				}
+			}
+			if node.name == "Back Button" {
+				let scene = StartScene(size: self.size)
+				scene.gameData = self.gameData
+				self.view?.presentScene(scene)
+			}
+		}
+	}
     
     // MARK: Scene Setup
     private func setupScene() {
-        self.backgroundColor = UIColor.whiteColor()
+        self.backgroundColor = UIColor.white
         let scale = self.frame.size.width/414.0
         
         let storeLabel = SKLabelNode(text: "Store")
         storeLabel.setScale(scale)
         storeLabel.fontName = Constants.FontName.Game_Font
         storeLabel.fontSize = Constants.FontSize.Title
-        storeLabel.fontColor = UIColor.blackColor()
-        storeLabel.position = CGPointMake(CGRectGetMidX(self.frame), self.frame.size.height*0.85)
+        storeLabel.fontColor = UIColor.black
+		storeLabel.position = CGPoint(x: self.frame.midX, y: self.frame.size.height*0.85)
         self.addChild(storeLabel)
         
         wheel = FFWheel(withNodes: getPurchaseItems())
         wheel.setScale(scale)
-        wheel.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame))
+		wheel.position = CGPoint(x: self.frame.midX, y: self.frame.midY)
         self.addChild(wheel)
         
         let backButton = SKSpriteNode(imageNamed: "backButton")
         backButton.setScale(scale)
-        backButton.position = CGPointMake(CGRectGetMinX(self.frame)+backButton.frame.size.width, self.frame.size.height*0.85+backButton.frame.size.height/2)
+		backButton.position = CGPoint(x: self.frame.minX+backButton.frame.size.width, y: self.frame.size.height*0.85+backButton.frame.size.height/2)
         backButton.name = "Back Button"
         self.addChild(backButton)
         
         let purchaseButton = SKSpriteNode(imageNamed: "purchaseButton")
         purchaseButton.setScale(scale)
-        purchaseButton.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame) - 200)
+		purchaseButton.position = CGPoint(x: self.frame.midX, y: self.frame.midY - 200)
         purchaseButton.name = "Purchase Button"
         self.addChild(purchaseButton)
-        
-        let coinsLabel = SKLabelNode(text: "Your Coins: " + String(gameData.getCoins()))
+		var coins = 0
+		var lives = 0
+		if let data = gameData {
+			coins = data.getCoins()
+			lives = data.getLives()
+		}
+        let coinsLabel = SKLabelNode(text: "Your Coins: " + String(coins))
         coinsLabel.setScale(scale)
-        coinsLabel.position = CGPointMake(CGRectGetMidX(self.frame), self.frame.size.height*0.65)
+		coinsLabel.position = CGPoint(x: self.frame.midX, y: self.frame.size.height*0.65)
         coinsLabel.fontName = Constants.FontName.Title_Font
         coinsLabel.fontSize = Constants.FontSize.DispFontSize
-        coinsLabel.fontColor = UIColor.blackColor()
+        coinsLabel.fontColor = UIColor.black
         coinsLabel.name = "Coins Label"
         self.addChild(coinsLabel)
         
-        let livesLabel = SKLabelNode(text: "Your Lives: " + String(gameData.getLives()))
+        let livesLabel = SKLabelNode(text: "Your Lives: " + String(lives))
         livesLabel.setScale(scale)
-        livesLabel.position = CGPointMake(CGRectGetMidX(self.frame), self.frame.size.height*0.7)
+		livesLabel.position = CGPoint(x: self.frame.midX, y: self.frame.size.height*0.7)
         livesLabel.fontName = Constants.FontName.Title_Font
         livesLabel.fontSize = Constants.FontSize.DispFontSize
-        livesLabel.fontColor = UIColor.blackColor()
+        livesLabel.fontColor = UIColor.black
         livesLabel.name = "Lives Label"
         self.addChild(livesLabel)
     }
@@ -100,30 +106,30 @@ class StoreScene:SKScene, GameDataProtocol,SKProductsRequestDelegate, SKPaymentT
     // MARK: Gesture Setup
     private func setupGestures() {
         let swipeRightGesture = UISwipeGestureRecognizer(target: self, action: #selector(swipeRight))
-        swipeRightGesture.direction = UISwipeGestureRecognizerDirection.Right
+        swipeRightGesture.direction = UISwipeGestureRecognizerDirection.right
         self.view?.addGestureRecognizer(swipeRightGesture)
         
         let swipeLeftGesture = UISwipeGestureRecognizer(target: self, action: #selector(swipeLeft))
-        swipeLeftGesture.direction = UISwipeGestureRecognizerDirection.Left
+        swipeLeftGesture.direction = UISwipeGestureRecognizerDirection.left
         self.view?.addGestureRecognizer(swipeLeftGesture)
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         tapGesture.numberOfTapsRequired = 1
         //self.view?.addGestureRecognizer(tapGesture)
     }
-    func handleTap(sender:UITapGestureRecognizer) {
-        if sender.state == .Ended {
-            if sender.locationInView(self.view).x > CGRectGetMidX(self.frame) {
+    @objc func handleTap(sender:UITapGestureRecognizer) {
+		if sender.state == .ended {
+			if sender.location(in: self.view).x > self.frame.midX {
                 swipeLeft()
-            } else if sender.locationInView(self.view).x <= CGRectGetMidX(self.frame) {
+			} else if sender.location(in: self.view).x <= self.frame.midX {
                 swipeRight()
             }
         }
     }
-    func swipeRight() {
+    @objc func swipeRight() {
         self.wheel.moveRight()
     }
-    func swipeLeft() {
+    @objc func swipeLeft() {
         self.wheel.moveLeft()
     }
     // MARK Purchase Items from Plist
@@ -133,36 +139,20 @@ class StoreScene:SKScene, GameDataProtocol,SKProductsRequestDelegate, SKPaymentT
             let dict = plist.getValuesInPlist()!
             for (key,value) in dict {
                 let subDict = value as! NSDictionary
-                let value = subDict["coins"] as! String
+                let value = subDict["coins"] as! Int
                 let cost  = subDict["cost"]  as! Float
                 let image = subDict["image"] as! String
                 let productID = subDict["purchaseID"] as! String
-                let item = PurchaseItem(value: value, forAPriceOf: cost, withID: productID, withImage: image)
+				let item = PurchaseItem(value: String(describing: value), forAPriceOf: cost, withID: productID, withImage: image)
                 purchases.append(item)
                 item.name = key as? String
-                item.hidden = true
+                item.isHidden = true
                 item.zPosition = 0
             }
         } else {
             print("Unable to get Plist")
         }
-        return purchases.reverse()
-    }
-    
-    // MARK: Game Data Protocol
-    func saveGame(withData:GameData) {
-        let encodedData = NSKeyedArchiver.archiveRootObject(gameData, toFile: GameData.archiveURL.path!)
-        if !encodedData {
-            print("Save Failed")
-        }
-    }
-    func loadInstance() -> GameData {
-        let data = NSKeyedUnarchiver.unarchiveObjectWithFile(GameData.archiveURL.path!) as? GameData
-        if data == nil {
-            print("Data could not be loaded properly")
-            return GameData()
-        }
-        return data!
+        return purchases.reversed()
     }
     
     //--------------------------------------------------------
@@ -181,67 +171,69 @@ class StoreScene:SKScene, GameDataProtocol,SKProductsRequestDelegate, SKPaymentT
             
         } else {
             print("please enable IAPS")
-            let alert_controller = UIAlertController(title: "Enable In App Purchases", message: "please enable in app purchase in the iOS settings app", preferredStyle: UIAlertControllerStyle.Alert)
+            let alert_controller = UIAlertController(title: "Enable In App Purchases", message: "please enable in app purchase in the iOS settings app", preferredStyle: UIAlertControllerStyle.alert)
             
-            let dismiss_action = UIAlertAction(title: "No Thanks.", style: UIAlertActionStyle.Default) {
+            let dismiss_action = UIAlertAction(title: "No Thanks.", style: UIAlertActionStyle.default) {
                 UIAlertAction in
             }
             alert_controller.addAction(dismiss_action)
-            self.scene?.view?.window?.rootViewController?.presentViewController(alert_controller, animated: true, completion: nil)
+			self.scene?.view?.window?.rootViewController?.present(alert_controller, animated: true, completion: nil)
         }
         
     }
     func RestorePurchase() {
-        SKPaymentQueue.defaultQueue().addTransactionObserver(self)
-        SKPaymentQueue.defaultQueue().restoreCompletedTransactions()
+		SKPaymentQueue.default().add(self)
+        SKPaymentQueue.default().restoreCompletedTransactions()
     }
     func purchaseProduct(withID:String) {
         for product in productsList {
             if(withID == product.productIdentifier) {
                 if withID == ProductIDs.saveLife {
-                    if gameData.getCoins() >= 200 {
+                    if let data = self.gameData, data.getCoins() >= 200 {
                         purchaseLifeForCoins()
                     } else {
                         p = product
-                        buyProduct(p)
+						buyProduct(prod: p)
                         break
                     }
                 } else {
                     p = product
-                    buyProduct(p)
+					buyProduct(prod: p)
                     break
                 }
             }
         }
     }
     private func purchaseLifeForCoins() {
-        let alertController = UIAlertController(title: "Life for 200 Coins", message: "Would you like to purchase a life for 200 coins", preferredStyle: UIAlertControllerStyle.ActionSheet)
+        let alertController = UIAlertController(title: "Life for 200 Coins", message: "Would you like to purchase a life for 200 coins", preferredStyle: UIAlertControllerStyle.actionSheet)
         
-        let purchaseAction = UIAlertAction(title: "Yes Please!", style: UIAlertActionStyle.Default) {
+        let purchaseAction = UIAlertAction(title: "Yes Please!", style: UIAlertActionStyle.default) {
             UIAlertAction in
-            self.gameData.removeCoins(200)
-            self.gameData.addLife()
-            self.saveGame(self.gameData)
-            let coinsLabel = self.childNodeWithName("Coins Label") as! SKLabelNode
-            coinsLabel.text = "Your Coins: " + String(self.gameData.getCoins())
-            let livesLabel = self.childNodeWithName("Lives Label") as! SKLabelNode
-            livesLabel.text = "Your Lives: " + String(self.gameData.getLives())
-            FIRAnalytics.logEventWithName(kFIREventSpendVirtualCurrency, parameters: nil)
+			guard let data = self.gameData else {
+				return
+			}
+			data.removeCoins(value: 200)
+            data.addLife()
+			self.saveGame(withData: data)
+			let coinsLabel = self.childNode(withName: "Coins Label") as! SKLabelNode
+			coinsLabel.text = "Your Coins: " + String(data.getCoins())
+			let livesLabel = self.childNode(withName: "Lives Label") as! SKLabelNode
+            livesLabel.text = "Your Lives: " + String(data.getLives())
         }
-        let dismissAction = UIAlertAction(title: "No Thanks.", style: UIAlertActionStyle.Default) {
+        let dismissAction = UIAlertAction(title: "No Thanks.", style: UIAlertActionStyle.default) {
             UIAlertAction in
-            FIRAnalytics.logEventWithName("Save_Life_Purchase_Canceled", parameters: nil)
         }
         alertController.addAction(purchaseAction)
         alertController.addAction(dismissAction)
-        self.scene?.view?.window?.rootViewController?.presentViewController(alertController, animated: true, completion: nil)
+		self.scene?.view?.window?.rootViewController?.present(alertController, animated: true, completion: nil)
     }
     func buyProduct(prod:SKProduct) {
         //println("buy " + prod.productIdentifier)
         let pay = SKPayment(product: prod)
-        SKPaymentQueue.defaultQueue().addPayment(pay as SKPayment)
+		SKPaymentQueue.default().add(pay as SKPayment)
     }
-    func productsRequest(request: SKProductsRequest, didReceiveResponse response: SKProductsResponse) {
+	
+	func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
         print("product request")
         let myProduct = response.products
         
@@ -255,7 +247,7 @@ class StoreScene:SKScene, GameDataProtocol,SKProductsRequestDelegate, SKPaymentT
             productsList.append(product as SKProduct)
         }
     }
-    func paymentQueueRestoreCompletedTransactionsFinished(queue: SKPaymentQueue) {
+	func paymentQueueRestoreCompletedTransactionsFinished(_ queue: SKPaymentQueue) {
         print("transactions restored")
         
         for transaction in queue.transactions {
@@ -266,63 +258,62 @@ class StoreScene:SKScene, GameDataProtocol,SKProductsRequestDelegate, SKPaymentT
             switch prodID {
             case ProductIDs.removeAds:
                 print("remove ads")
-                NSUserDefaults.standardUserDefaults().setInteger(1, forKey: "ads")
+				UserDefaults.standard.set(1, forKey: "ads")
             default:
                 print("IAP not setup")
             }
         }
     }
     
-    func paymentQueue(queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
+	func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
         print("add paymnet")
         
         //activityIndicator.startAnimating()
-        self.userInteractionEnabled = false
+		self.isUserInteractionEnabled = false
+		guard let data = self.gameData else {
+			return
+		}
         for transaction:AnyObject in transactions {
-            
+			
             if let trans:SKPaymentTransaction = transaction as? SKPaymentTransaction{
                 switch trans.transactionState {
-                case .Purchased:
+				case .purchased:
                     let prodID = p.productIdentifier as String
                     
                     switch prodID {
                     case ProductIDs.onehundredCoins:
-                        gameData.addCoins(100)
-                        FIRAnalytics.logEventWithName("100_Coins_Purchased", parameters: nil)
+						data.addCoins(value: 100)
                     case ProductIDs.fiveHundredcoins:
-                        gameData.addCoins(500)
-                        FIRAnalytics.logEventWithName("500_Coins_Purchased", parameters: nil)
+						data.addCoins(value: 500)
                     case ProductIDs.onethousandCoins:
-                        gameData.addCoins(1000)
-                        FIRAnalytics.logEventWithName("1000_Coins_Purchased", parameters: nil)
+						data.addCoins(value: 1000)
                     case ProductIDs.removeAds:
                         //defaults.setInteger(1, forKey: "ads")
                         //self.appDelegate.adView.hidden = true
                         //self.appDelegate.adView.removeFromSuperview()
                         break
                     case ProductIDs.saveLife:
-                        gameData.addLife()
-                        FIRAnalytics.logEventWithName("Save_Life_Purchased", parameters: nil)
+                        data.addLife()
                         break
                     default:
                         print("IAP not setup")
                     }
-                    saveGame(self.gameData)
+					saveGame(withData: data)
                     print("Product Purchased");
-                    let coinsLabel = self.childNodeWithName("Coins Label") as! SKLabelNode
-                    coinsLabel.text = "Your Coins: " + String(self.gameData.getCoins())
-                    let livesLabel = self.childNodeWithName("Lives Label") as! SKLabelNode
-                    livesLabel.text = "Your Lives: " + String(self.gameData.getLives())
+					let coinsLabel = self.childNode(withName: "Coins Label") as! SKLabelNode
+                    coinsLabel.text = "Your Coins: " + String(data.getCoins())
+					let livesLabel = self.childNode(withName: "Lives Label") as! SKLabelNode
+					livesLabel.text = "Your Lives: " + String(data.getLives())
                     //self.activityIndicator.stopAnimating()
-                    self.userInteractionEnabled = true
-                    SKPaymentQueue.defaultQueue().finishTransaction(trans)
+					self.isUserInteractionEnabled = true
+					SKPaymentQueue.default().finishTransaction(trans)
                     break;
-                case .Failed:
+				case .failed:
                     print("Purchased Failed");
-                    SKPaymentQueue.defaultQueue().finishTransaction(trans)
+					SKPaymentQueue.default().finishTransaction(trans)
                     break;
-                case .Restored:
-                    SKPaymentQueue.defaultQueue().restoreCompletedTransactions()
+				case .restored:
+					SKPaymentQueue.default().restoreCompletedTransactions()
                 default:
                     break;
                 }
@@ -332,16 +323,18 @@ class StoreScene:SKScene, GameDataProtocol,SKProductsRequestDelegate, SKPaymentT
     
     func finishTransaction(trans:SKPaymentTransaction) {
         print("finish trans")
-        print(trans.error?.localizedDescription)
+		if let e = trans.error {
+        	print(e.localizedDescription)
+		}
         //activityIndicator.stopAnimating()
-        self.userInteractionEnabled = true
+        self.isUserInteractionEnabled = true
     }
-    func paymentQueue(queue: SKPaymentQueue, removedTransactions transactions: [SKPaymentTransaction]) {
+	func paymentQueue(_ queue: SKPaymentQueue, removedTransactions transactions: [SKPaymentTransaction]) {
         print("remove trans");
         //purchase_failed = true
         //if activityIndicator.isAnimating() {
         //    activityIndicator.stopAnimating()
         //}
-        self.userInteractionEnabled = true
+        self.isUserInteractionEnabled = true
     }
 }

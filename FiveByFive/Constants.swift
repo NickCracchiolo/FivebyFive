@@ -35,39 +35,3 @@ struct Constants {
         static let highScore = "leaderboards.highest_score"
     }
 }
-struct ProductIDs {
-    static let onehundredCoins = "fbf.iap.add_money"
-    static let fiveHundredcoins = "fbf.iap.add_money500"
-    static let onethousandCoins = "fbf.iap.add_money1000"
-    static let removeAds = "fbf.iap.remove_ads"
-    static let saveLife = "fbf.iap.save_life"
-}
-
-enum DefaultKeys: CustomStringConvertible  {
-    case Money
-    case Notifications
-    case Sound
-    case Tutorial
-    case Life
-    case Purchased
-    case Migrate
-    
-    var description : String {
-        switch self {
-        case .Money:
-            return "money"
-        case .Notifications:
-            return "notif_bool"
-        case .Sound:
-            return "sounds_bool"
-        case .Tutorial:
-            return "tutorial"
-        case .Life:
-            return "save_life"
-        case .Purchased:
-            return "purchase_bool"
-        case .Migrate:
-            return "migration"
-        }
-    }
-}
