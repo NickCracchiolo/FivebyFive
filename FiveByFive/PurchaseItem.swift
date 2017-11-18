@@ -19,12 +19,12 @@ class PurchaseItem:SKSpriteNode {
         self.value = value
         self.purchasePrice = forAPriceOf
         let texture = SKTexture(imageNamed: withImage)
-        super.init(texture: texture, color: UIColor.whiteColor(), size: CGSizeMake(100, 100))
+		super.init(texture: texture, color: UIColor.white, size: CGSize(width: 100, height: 100))
     }
     required init?(coder aDecoder: NSCoder) {
-        self.purchaseID = aDecoder.decodeObjectForKey("purchaseID") as! String
-        self.value = aDecoder.decodeObjectForKey("value") as! String
-        self.purchasePrice = aDecoder.decodeFloatForKey("purchasePoint")
+		self.purchaseID = aDecoder.decodeObject(forKey: "purchaseID") as! String
+		self.value = aDecoder.decodeObject(forKey: "value") as! String
+		self.purchasePrice = aDecoder.decodeFloat(forKey: "purchasePoint")
         super.init(coder: aDecoder)
     }
 }

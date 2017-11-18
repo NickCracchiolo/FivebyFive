@@ -14,7 +14,7 @@ class FFButton: SKSpriteNode {
     init(text:String,name:String) {
         self.text = text
         let texture = SKTexture(imageNamed: "redButton")
-        super.init(texture: texture, color: UIColor.whiteColor(), size: CGSizeMake(104, 54))
+		super.init(texture: texture, color: UIColor.white, size: CGSize.init(width: 104, height: 54))
         self.zPosition = 0
         self.name = name
         addLabel()
@@ -26,12 +26,12 @@ class FFButton: SKSpriteNode {
         let label = SKLabelNode(text: self.text)
         label.fontName = Constants.FontName.Game_Font
         label.fontSize = Constants.FontSize.DispFontSize
-        label.fontSize *= modifyFontSize(label)
-        label.fontColor = UIColor.whiteColor()
-        label.horizontalAlignmentMode = .Center
-        label.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)-5)
+		label.fontSize *= modifyFontSize(withLabel: label)
+        label.fontColor = UIColor.white
+        label.horizontalAlignmentMode = .center
+		label.position = CGPoint(x:self.frame.midX, y:self.frame.midY - 5)
         label.zPosition = 1
-        label.userInteractionEnabled = false
+        label.isUserInteractionEnabled = false
         self.addChild(label)
     }
     private func modifyFontSize(withLabel:SKLabelNode) -> CGFloat {

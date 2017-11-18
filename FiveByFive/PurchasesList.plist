@@ -7,7 +7,7 @@
 		<key>purchaseID</key>
 		<string>fbf.iap.add_money</string>
 		<key>image</key>
-		<string>Store100.png</string>
+		<string>hundredCoins</string>
 		<key>cost</key>
 		<real>0.99</real>
 		<key>coins</key>
@@ -18,7 +18,7 @@
 		<key>purchaseID</key>
 		<string>fbf.iap.add_money500</string>
 		<key>image</key>
-		<string>Store100.png</string>
+		<string>fiveHundredCoins</string>
 		<key>cost</key>
 		<real>3.99</real>
 		<key>coins</key>
@@ -29,29 +29,18 @@
 		<key>purchaseID</key>
 		<string>fbf.iap.add_money1000</string>
 		<key>image</key>
-		<string>Store100.png</string>
+		<string>thousandCoins</string>
 		<key>cost</key>
 		<real>6.99</real>
 		<key>coins</key>
 		<integer>1000</integer>
-	</dict>
-	<key>RemoveAds</key>
-	<dict>
-		<key>purchaseID</key>
-		<string>fbf.iap.remove_ads</string>
-		<key>image</key>
-		<string>Store100.png</string>
-		<key>cost</key>
-		<real>4.99</real>
-		<key>coins</key>
-		<integer>0</integer>
 	</dict>
 	<key>SaveLife</key>
 	<dict>
 		<key>purchaseID</key>
 		<string>fbf.iap.save_life</string>
 		<key>image</key>
-		<string>Store100.png</string>
+		<string>lifeIcon</string>
 		<key>cost</key>
 		<real>0.99</real>
 		<key>coins</key>

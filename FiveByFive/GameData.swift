@@ -7,19 +7,36 @@
 //
 
 import Foundation
+import SpriteKit
 
 protocol GameDataProtocol {
     func saveGame(withData:GameData)
     func loadInstance() -> GameData
 }
 
+extension SKScene {
+	func saveGame(withData:GameData) {
+		let encodedData = NSKeyedArchiver.archiveRootObject(withData, toFile: GameData.archiveURL.path)
+		if !encodedData {
+			print("Save Failed")
+		}
+	}
+	
+	func loadInstance() -> GameData {
+		if let data = NSKeyedUnarchiver.unarchiveObject(withFile: GameData.archiveURL.path) as? GameData {
+			return data
+		} else {
+			print("Data could not be loaded properly")
+			return GameData()
+		}
+	}
+}
+
 class GameData: NSObject, NSCoding {
-    // MARK: Singleton (NO LONGER IN USE)
-    //static let sharedGameData = GameData()
-    
     // MARK: Archiving Paths
-    static let documentsDirectory = NSFileManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first!
-    static let archiveURL = documentsDirectory.URLByAppendingPathComponent("gamedata")
+	static var documentsDirectory = FileManager().urls(for: .documentDirectory, in: .userDomainMask).first!
+    //static let archiveURL = documentsDirectory.URLByAppendingPathComponent("gamedata")
+	static let archiveURL = documentsDirectory.appendingPathComponent("gamedata")
     
     // MARK: GameKeys
     struct GameKeys {
@@ -42,19 +59,19 @@ class GameData: NSObject, NSCoding {
     }
     required convenience init?(coder aDecoder: NSCoder) {
         self.init()
-        self.highestLevel = aDecoder.decodeIntegerForKey(GameKeys.highestLevel)
-        self.levels = aDecoder.decodeObjectForKey(GameKeys.levels) as! [Int]
-        self.adsOn = aDecoder.decodeBoolForKey(GameKeys.ads)
-        self.lives = aDecoder.decodeIntegerForKey(GameKeys.lives)
-        self.coins = aDecoder.decodeIntegerForKey(GameKeys.coins)
+		self.highestLevel = aDecoder.decodeInteger(forKey: GameKeys.highestLevel)
+		self.levels = aDecoder.decodeObject(forKey: GameKeys.levels) as! [Int]
+		self.adsOn = aDecoder.decodeBool(forKey: GameKeys.ads)
+		self.lives = aDecoder.decodeInteger(forKey: GameKeys.lives)
+		self.coins = aDecoder.decodeInteger(forKey: GameKeys.coins)
 
     }
-    func encodeWithCoder(aCoder: NSCoder) {
-        aCoder.encodeInteger(self.highestLevel, forKey: GameKeys.highestLevel)
-        aCoder.encodeObject(self.levels, forKey: GameKeys.levels)
-        aCoder.encodeInteger(self.lives, forKey: GameKeys.lives)
-        aCoder.encodeBool(self.adsOn, forKey: GameKeys.ads)
-        aCoder.encodeInteger(self.coins, forKey: GameKeys.coins)
+    func encode(with aCoder: NSCoder) {
+		aCoder.encode(self.highestLevel, forKey: GameKeys.highestLevel)
+		aCoder.encode(self.levels, forKey: GameKeys.levels)
+		aCoder.encode(self.lives, forKey: GameKeys.lives)
+		aCoder.encode(self.adsOn, forKey: GameKeys.ads)
+		aCoder.encode(self.coins, forKey: GameKeys.coins)
     }
     // MARK: Property Specific Methods
     func getHighestLevel() -> Int {
@@ -72,7 +89,7 @@ class GameData: NSObject, NSCoding {
             self.highestLevel = num
         }
         self.levels.append(num)
-        self.levels.sortInPlace()
+		self.levels.sort()
     }
     func removeCoins(value:Int) {
         if (coins-value) > 0 {

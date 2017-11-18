@@ -19,16 +19,8 @@
 		5624C8331CDAAC78001CBD3C /* PurchasesList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5624C8321CDAAC78001CBD3C /* PurchasesList.plist */; };
 		5624C8351CDAD45F001CBD3C /* Plist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5624C8341CDAD45F001CBD3C /* Plist.swift */; };
 		5628971C1CE6493F005CCE5F /* FFButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5628971B1CE6493F005CCE5F /* FFButton.swift */; };
-		564F71D51CE91527001B441B /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 564F71D41CE91527001B441B /* AdSupport.framework */; };
-		564F71D71CE91531001B441B /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 564F71D61CE91531001B441B /* AudioToolbox.framework */; };
-		564F71D91CE91538001B441B /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 564F71D81CE91538001B441B /* AVFoundation.framework */; };
-		564F71DB1CE91542001B441B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 564F71DA1CE91542001B441B /* CoreGraphics.framework */; };
-		564F71DD1CE9154C001B441B /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 564F71DC1CE9154C001B441B /* CoreMedia.framework */; };
-		564F71DF1CE91557001B441B /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 564F71DE1CE91557001B441B /* CoreTelephony.framework */; };
-		564F71E11CE9155F001B441B /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 564F71E01CE9155F001B441B /* EventKit.framework */; };
-		564F71E31CE91568001B441B /* EventKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 564F71E21CE91568001B441B /* EventKitUI.framework */; };
-		564F71E51CE91579001B441B /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 564F71E41CE91579001B441B /* MessageUI.framework */; };
-		564F71E71CE9158A001B441B /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 564F71E61CE9158A001B441B /* MediaPlayer.framework */; };
+		564C0C5A1FC0C8EC00D98F9C /* ProductIDs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564C0C591FC0C8EC00D98F9C /* ProductIDs.swift */; };
+		564C0C5C1FC0C91300D98F9C /* DefaultKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564C0C5B1FC0C91300D98F9C /* DefaultKeys.swift */; };
 		56581C9D1CD86B03009BF7B0 /* GameData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56581C9C1CD86B03009BF7B0 /* GameData.swift */; };
 		565B9BEC1ACC75900059D250 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565B9BEB1ACC75900059D250 /* Constants.swift */; };
 		565B9C1E1AD0BCD10059D250 /* Impact_Label_Reversed.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 565B9C1D1AD0BCD10059D250 /* Impact_Label_Reversed.ttf */; };
@@ -39,10 +31,6 @@
 		5680778C1CD90CF300976969 /* GameKitHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5680778B1CD90CF300976969 /* GameKitHelper.swift */; };
 		5680778E1CD919E100976969 /* StartScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5680778D1CD919E100976969 /* StartScene.swift */; };
 		5699B9171CD9705700A33748 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5699B9161CD9705700A33748 /* LaunchScreen.storyboard */; };
-		56A64B841CED1ED40062913B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 56A64B831CED1ED40062913B /* GoogleService-Info.plist */; };
-		56A64B931CF41A080062913B /* libAdapterUnity.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 56A64B921CF41A080062913B /* libAdapterUnity.a */; };
-		56A64B961CF41A4A0062913B /* UnityAds.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 56A64B941CF41A4A0062913B /* UnityAds.bundle */; };
-		56A64B971CF41A4A0062913B /* UnityAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56A64B951CF41A4A0062913B /* UnityAds.framework */; };
 		56A64BCF1CF903220062913B /* Blast.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 56A64BCE1CF903220062913B /* Blast.mp3 */; };
 		56B172B91AC1D55F004575DD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B172B81AC1D55F004575DD /* AppDelegate.swift */; };
 		56B172BB1AC1D55F004575DD /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 56B172BA1AC1D55F004575DD /* GameScene.sks */; };
@@ -56,18 +44,12 @@
 		56CE197A1CD7E333000E015B /* Tile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CE19791CD7E333000E015B /* Tile.swift */; };
 		56CE197C1CD83DE5000E015B /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CE197B1CD83DE5000E015B /* Grid.swift */; };
 		56D71CC81CDD0C8C0097F1F0 /* FFWheel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D71CC71CDD0C8C0097F1F0 /* FFWheel.swift */; };
-		56DD3FD41AF2AA6A00CC2C80 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56DD3FD31AF2AA6A00CC2C80 /* Social.framework */; };
-		56EBDE291AF8462900E7FDE1 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56EBDE281AF8462900E7FDE1 /* Security.framework */; };
-		56EBDE311AF853B300E7FDE1 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56EBDE2F1AF8526300E7FDE1 /* SystemConfiguration.framework */; };
 		56FBE69B1CD884E900AD1A81 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56FBE6991CD884E900AD1A81 /* Main.storyboard */; };
-		734AC60ECC01664576A9D75C /* Pods_FiveByFive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5361AF5C52F4FF76A37F0C5B /* Pods_FiveByFive.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		5361AF5C52F4FF76A37F0C5B /* Pods_FiveByFive.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FiveByFive.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5606FDE41AF9A9F500124DAF /* StartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		5606FDF01AFB282900124DAF /* woosh.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = woosh.wav; sourceTree = "<group>"; };
-		5606FDF41AFC56FC00124DAF /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		5624C8261CDA880D001CBD3C /* StoreScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreScene.swift; sourceTree = "<group>"; };
 		5624C8281CDA881E001CBD3C /* SettingsScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsScene.swift; sourceTree = "<group>"; };
 		5624C82A1CDA883E001CBD3C /* FFSwitch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FFSwitch.swift; sourceTree = "<group>"; };
@@ -77,17 +59,8 @@
 		5624C8321CDAAC78001CBD3C /* PurchasesList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PurchasesList.plist; sourceTree = "<group>"; };
 		5624C8341CDAD45F001CBD3C /* Plist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Plist.swift; sourceTree = "<group>"; };
 		5628971B1CE6493F005CCE5F /* FFButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FFButton.swift; sourceTree = "<group>"; };
-		564F71D41CE91527001B441B /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
-		564F71D61CE91531001B441B /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
-		564F71D81CE91538001B441B /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		564F71DA1CE91542001B441B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		564F71DC1CE9154C001B441B /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
-		564F71DE1CE91557001B441B /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
-		564F71E01CE9155F001B441B /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
-		564F71E21CE91568001B441B /* EventKitUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKitUI.framework; path = System/Library/Frameworks/EventKitUI.framework; sourceTree = SDKROOT; };
-		564F71E41CE91579001B441B /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
-		564F71E61CE9158A001B441B /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
-		564F71E81CE916D7001B441B /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMobileAds.framework; sourceTree = "<group>"; };
+		564C0C591FC0C8EC00D98F9C /* ProductIDs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductIDs.swift; sourceTree = "<group>"; };
+		564C0C5B1FC0C91300D98F9C /* DefaultKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultKeys.swift; sourceTree = "<group>"; };
 		56581C9C1CD86B03009BF7B0 /* GameData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameData.swift; sourceTree = "<group>"; };
 		565B9BEB1ACC75900059D250 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		565B9C1D1AD0BCD10059D250 /* Impact_Label_Reversed.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Impact_Label_Reversed.ttf; sourceTree = "<group>"; };
@@ -99,10 +72,6 @@
 		5680778B1CD90CF300976969 /* GameKitHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameKitHelper.swift; sourceTree = "<group>"; };
 		5680778D1CD919E100976969 /* StartScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartScene.swift; sourceTree = "<group>"; };
 		5699B9161CD9705700A33748 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
-		56A64B831CED1ED40062913B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		56A64B921CF41A080062913B /* libAdapterUnity.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libAdapterUnity.a; sourceTree = "<group>"; };
-		56A64B941CF41A4A0062913B /* UnityAds.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = UnityAds.bundle; sourceTree = "<group>"; };
-		56A64B951CF41A4A0062913B /* UnityAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UnityAds.framework; sourceTree = "<group>"; };
 		56A64BCE1CF903220062913B /* Blast.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Blast.mp3; sourceTree = "<group>"; };
 		56B172B31AC1D55F004575DD /* FiveByFive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FiveByFive.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		56B172B71AC1D55F004575DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -120,12 +89,7 @@
 		56CE19791CD7E333000E015B /* Tile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tile.swift; sourceTree = "<group>"; };
 		56CE197B1CD83DE5000E015B /* Grid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
 		56D71CC71CDD0C8C0097F1F0 /* FFWheel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FFWheel.swift; sourceTree = "<group>"; };
-		56DD3FD31AF2AA6A00CC2C80 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
-		56EBDE281AF8462900E7FDE1 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		56EBDE2F1AF8526300E7FDE1 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		56FBE69A1CD884E900AD1A81 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		F54A9D4AB8680B9B9ECDFC84 /* Pods-FiveByFive.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FiveByFive.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FiveByFive/Pods-FiveByFive.debug.xcconfig"; sourceTree = "<group>"; };
-		FE1593CACED6853351AA1309 /* Pods-FiveByFive.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FiveByFive.release.xcconfig"; path = "Pods/Target Support Files/Pods-FiveByFive/Pods-FiveByFive.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,39 +97,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				564F71E71CE9158A001B441B /* MediaPlayer.framework in Frameworks */,
-				564F71E51CE91579001B441B /* MessageUI.framework in Frameworks */,
-				564F71E31CE91568001B441B /* EventKitUI.framework in Frameworks */,
-				564F71E11CE9155F001B441B /* EventKit.framework in Frameworks */,
-				564F71DF1CE91557001B441B /* CoreTelephony.framework in Frameworks */,
-				564F71DD1CE9154C001B441B /* CoreMedia.framework in Frameworks */,
-				56A64B931CF41A080062913B /* libAdapterUnity.a in Frameworks */,
-				564F71DB1CE91542001B441B /* CoreGraphics.framework in Frameworks */,
-				564F71D91CE91538001B441B /* AVFoundation.framework in Frameworks */,
-				564F71D71CE91531001B441B /* AudioToolbox.framework in Frameworks */,
-				564F71D51CE91527001B441B /* AdSupport.framework in Frameworks */,
 				5606FE251B03FDBB00124DAF /* StoreKit.framework in Frameworks */,
-				56EBDE311AF853B300E7FDE1 /* SystemConfiguration.framework in Frameworks */,
 				56B8D7991CD9631500CE21B8 /* GameKit.framework in Frameworks */,
-				56EBDE291AF8462900E7FDE1 /* Security.framework in Frameworks */,
-				56DD3FD41AF2AA6A00CC2C80 /* Social.framework in Frameworks */,
-				734AC60ECC01664576A9D75C /* Pods_FiveByFive.framework in Frameworks */,
-				56A64B971CF41A4A0062913B /* UnityAds.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		036A0CA8F94F91A222467080 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				F54A9D4AB8680B9B9ECDFC84 /* Pods-FiveByFive.debug.xcconfig */,
-				FE1593CACED6853351AA1309 /* Pods-FiveByFive.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		56321D871CD7CE4A0033357C /* Shared */ = {
 			isa = PBXGroup;
 			children = (
@@ -173,6 +112,8 @@
 				56581C9C1CD86B03009BF7B0 /* GameData.swift */,
 				5680778B1CD90CF300976969 /* GameKitHelper.swift */,
 				566C1D941CECEC50000AADFA /* TypeExtensions.swift */,
+				564C0C591FC0C8EC00D98F9C /* ProductIDs.swift */,
+				564C0C5B1FC0C91300D98F9C /* DefaultKeys.swift */,
 			);
 			name = Shared;
 			sourceTree = "<group>";
@@ -204,24 +145,6 @@
 		5699B9151CD96BC000A33748 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				56A64B941CF41A4A0062913B /* UnityAds.bundle */,
-				56A64B951CF41A4A0062913B /* UnityAds.framework */,
-				56A64B921CF41A080062913B /* libAdapterUnity.a */,
-				564F71E81CE916D7001B441B /* GoogleMobileAds.framework */,
-				564F71E61CE9158A001B441B /* MediaPlayer.framework */,
-				564F71E41CE91579001B441B /* MessageUI.framework */,
-				564F71E21CE91568001B441B /* EventKitUI.framework */,
-				564F71E01CE9155F001B441B /* EventKit.framework */,
-				564F71DE1CE91557001B441B /* CoreTelephony.framework */,
-				564F71DC1CE9154C001B441B /* CoreMedia.framework */,
-				564F71DA1CE91542001B441B /* CoreGraphics.framework */,
-				564F71D81CE91538001B441B /* AVFoundation.framework */,
-				564F71D61CE91531001B441B /* AudioToolbox.framework */,
-				564F71D41CE91527001B441B /* AdSupport.framework */,
-				5606FDF41AFC56FC00124DAF /* iAd.framework */,
-				56EBDE2F1AF8526300E7FDE1 /* SystemConfiguration.framework */,
-				56EBDE281AF8462900E7FDE1 /* Security.framework */,
-				56DD3FD31AF2AA6A00CC2C80 /* Social.framework */,
 				565B9C331AD209FD0059D250 /* StoreKit.framework */,
 				56B8D7981CD9631500CE21B8 /* GameKit.framework */,
 			);
@@ -234,8 +157,6 @@
 				56B172B51AC1D55F004575DD /* FiveByFive */,
 				56B172CF1AC1D55F004575DD /* FiveByFiveTests */,
 				56B172B41AC1D55F004575DD /* Products */,
-				036A0CA8F94F91A222467080 /* Pods */,
-				E87E96E828DA65CDE83A48F4 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -271,7 +192,6 @@
 			isa = PBXGroup;
 			children = (
 				56A64BCE1CF903220062913B /* Blast.mp3 */,
-				56A64B831CED1ED40062913B /* GoogleService-Info.plist */,
 				5606FDF01AFB282900124DAF /* woosh.wav */,
 				565B9C2A1AD10A4A0059D250 /* Impact_Label.ttf */,
 				565B9C1D1AD0BCD10059D250 /* Impact_Label_Reversed.ttf */,
@@ -321,14 +241,6 @@
 			name = Scenes;
 			sourceTree = "<group>";
 		};
-		E87E96E828DA65CDE83A48F4 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				5361AF5C52F4FF76A37F0C5B /* Pods_FiveByFive.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -336,13 +248,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 56B172D61AC1D55F004575DD /* Build configuration list for PBXNativeTarget "FiveByFive" */;
 			buildPhases = (
-				380ABDFA625D772E93F41923 /* 📦 Check Pods Manifest.lock */,
 				56B172AF1AC1D55F004575DD /* Sources */,
 				56B172B01AC1D55F004575DD /* Frameworks */,
 				56B172B11AC1D55F004575DD /* Resources */,
 				56B172EF1AC1E888004575DD /* ShellScript */,
-				7724DDBF6980A8C692858F86 /* 📦 Embed Pods Frameworks */,
-				FBD82380BB70621E7FAEF49E /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -360,12 +269,14 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0910;
 				ORGANIZATIONNAME = "Nick Cracchiolo";
 				TargetAttributes = {
 					56B172B21AC1D55F004575DD = {
 						CreatedOnToolsVersion = 6.2;
 						DevelopmentTeam = 77TV63F6JF;
+						LastSwiftMigration = "";
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.GameCenter = {
 								enabled = 1;
@@ -402,14 +313,12 @@
 			files = (
 				56FBE69B1CD884E900AD1A81 /* Main.storyboard in Resources */,
 				56B172C41AC1D55F004575DD /* Images.xcassets in Resources */,
-				56A64B841CED1ED40062913B /* GoogleService-Info.plist in Resources */,
 				56B8D7911CD941ED00CE21B8 /* StartScene.sks in Resources */,
 				56B172BB1AC1D55F004575DD /* GameScene.sks in Resources */,
 				5606FDF11AFB282900124DAF /* woosh.wav in Resources */,
 				56B8D7971CD95E9300CE21B8 /* PlayScene.sks in Resources */,
 				5699B9171CD9705700A33748 /* LaunchScreen.storyboard in Resources */,
 				5624C82F1CDA8F8B001CBD3C /* StoreScene.sks in Resources */,
-				56A64B961CF41A4A0062913B /* UnityAds.bundle in Resources */,
 				565B9C1E1AD0BCD10059D250 /* Impact_Label_Reversed.ttf in Resources */,
 				5624C8331CDAAC78001CBD3C /* PurchasesList.plist in Resources */,
 				565B9C2B1AD10A4A0059D250 /* Impact_Label.ttf in Resources */,
@@ -422,21 +331,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		380ABDFA625D772E93F41923 /* 📦 Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "📦 Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
 		56B172EF1AC1E888004575DD /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -450,36 +344,6 @@
 			shellPath = /bin/bash;
 			shellScript = "#!/bin/bash\nbuildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"$INFOPLIST_FILE\"";
 		};
-		7724DDBF6980A8C692858F86 /* 📦 Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "📦 Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FiveByFive/Pods-FiveByFive-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		FBD82380BB70621E7FAEF49E /* 📦 Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "📦 Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FiveByFive/Pods-FiveByFive-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -492,6 +356,7 @@
 				56B8D7951CD94B9E00CE21B8 /* PlayScene.swift in Sources */,
 				5606FDE51AF9A9F500124DAF /* StartViewController.swift in Sources */,
 				56B8D78F1CD941B100CE21B8 /* GameOverScene.swift in Sources */,
+				564C0C5A1FC0C8EC00D98F9C /* ProductIDs.swift in Sources */,
 				56CE197C1CD83DE5000E015B /* Grid.swift in Sources */,
 				5680778C1CD90CF300976969 /* GameKitHelper.swift in Sources */,
 				56581C9D1CD86B03009BF7B0 /* GameData.swift in Sources */,
@@ -503,6 +368,7 @@
 				5680778E1CD919E100976969 /* StartScene.swift in Sources */,
 				56CE197A1CD7E333000E015B /* Tile.swift in Sources */,
 				5624C8291CDA881E001CBD3C /* SettingsScene.swift in Sources */,
+				564C0C5C1FC0C91300D98F9C /* DefaultKeys.swift in Sources */,
 				5624C8351CDAD45F001CBD3C /* Plist.swift in Sources */,
 				56B172B91AC1D55F004575DD /* AppDelegate.swift in Sources */,
 				56D71CC81CDD0C8C0097F1F0 /* FFWheel.swift in Sources */,
@@ -532,13 +398,21 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -547,6 +421,7 @@
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -576,13 +451,21 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -590,6 +473,7 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -599,6 +483,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -606,18 +491,19 @@
 		};
 		56B172D71AC1D55F004575DD /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F54A9D4AB8680B9B9ECDFC84 /* Pods-FiveByFive.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/FiveByFive",
 				);
 				INFOPLIST_FILE = FiveByFive/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -625,8 +511,11 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.njc.game.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "3832e442-e8ba-44e7-91a6-ccd66b898d78";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "arm64 armv7 armv7s armv6";
 			};
@@ -634,18 +523,19 @@
 		};
 		56B172D81AC1D55F004575DD /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FE1593CACED6853351AA1309 /* Pods-FiveByFive.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/FiveByFive",
 				);
 				INFOPLIST_FILE = FiveByFive/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -653,8 +543,11 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.njc.game.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "3832e442-e8ba-44e7-91a6-ccd66b898d78";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "arm64 armv7 armv7s armv6";
 			};

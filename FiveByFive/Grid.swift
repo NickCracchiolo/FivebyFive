@@ -25,16 +25,11 @@ class Grid: SKNode {
         self.level = 1
         super.init()
         createGrid()
-        self.userInteractionEnabled = true
+		self.isUserInteractionEnabled = true
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        print("Touch in Grid")
-        //calculateMaxColValues()
-        //calculateMaxRowValues()
     }
     func hasWon() -> Bool {
         if (self.totalTilesFlipped == self.maxNumberedTiles) {
@@ -64,7 +59,7 @@ class Grid: SKNode {
     }
     
     func flipRow(atIndex:Int) {
-        for y in atIndex.stride(to: 25, by: 5) {
+		for y in stride(from: atIndex, to: 25, by: 5) {
             var total:Int = 0
             for x in y...y+5 {
                 let value = tiles[x].flip()
@@ -78,7 +73,7 @@ class Grid: SKNode {
         var index = 0
         for x in 0...4 {
             var total = 0
-            for y in x.stride(to: x+25, by: 5) {
+			for y in stride(from: x, to: x+25, by: 5) {
                 total += tiles[y].valueForTile()
             }
             columnValues[index] = total
@@ -96,8 +91,8 @@ class Grid: SKNode {
             for column in indexes {
                 let randNum = createRandomValue()
                 let tile = Tile(withValue: randNum)
-                tile.position = CGPointMake(CGFloat(column)*50,
-                                            CGFloat(row)*50)
+				tile.position = CGPoint(x: CGFloat(column)*50,
+										y: CGFloat(row)*50)
                 tile.zPosition = 2
                 tile.name = "Tile-" + String(row) + "-" + String(column)
                 self.addChild(tile)
@@ -107,32 +102,18 @@ class Grid: SKNode {
         }
         calculateMaxRowValues()
         calculateMaxColValues()
-        //showRowAndColumnValues()
-        //showRowAndColumnBombs()
         showRowAndColBombsWithMax()
     }
-    /* NOT BEING USED
-    private func showRowAndColumnValues() {
-        createLabel(columnValues, withName: "MaxColLabel", offset: 35, side: .Bottom, color: UIColor.redColor())
-        createLabel(currentColValues, withName: "ColLabel", offset: 10, side: .Bottom, color: UIColor.blackColor())
-        createLabel(rowValues, withName: "MaxRowLabel", offset: 10, side: .Left, color: UIColor.redColor())
-        createLabel(currentRowValues, withName: "RowLabel", offset: 35, side: .Left, color: UIColor.blackColor())
-    }
-    private func showRowAndColumnBombs() {
-        createLabel(columnBombs, withName: "ColLabel", offset: 10, side: .Bottom, color: UIColor.blackColor())
-        createLabel(rowBombs, withName: "MaxRowLabel", offset: 10, side: .Left, color: UIColor.blackColor())
-    }
-    */
     private func showRowAndColBombsWithMax() {
-        createLabel(columnValues, withName: "MaxColLabel", offset: 20, side: .Top, color: UIColor.blackColor())
-        createLabel(columnBombs, withName: "ColBombLabel", offset: 10, side: .Bottom, color: UIColor.redColor())
-        createLabel(rowValues, withName: "MaxRowLabel", offset: 20, side: .Right, color: UIColor.blackColor())
-        createLabel(rowBombs, withName: "RowBombLabel", offset: 10, side: .Left, color: UIColor.redColor())
+		createLabel(forValues: columnValues, withName: "MaxColLabel", offset: 20, side: Side.Top, color: UIColor.black)
+		createLabel(forValues: columnBombs, withName: "ColBombLabel", offset: 10, side: .Bottom, color: UIColor.red)
+        createLabel(forValues: rowValues, withName: "MaxRowLabel", offset: 20, side: .Right, color: UIColor.black)
+        createLabel(forValues: rowBombs, withName: "RowBombLabel", offset: 10, side: .Left, color: UIColor.red)
     }
     
     private func createLabel(forValues:[Int],withName:String,offset:CGFloat,side:Side,color:UIColor) {
         var counter = 0
-        for val in forValues.reverse() {
+		for val in forValues.reversed() {
             let label = SKLabelNode(text: String(val))
             label.fontSize = 20
             label.fontColor = color
@@ -141,13 +122,13 @@ class Grid: SKNode {
 
             switch side {
             case .Left:
-                label.position = CGPointMake(-20-offset, CGFloat(counter)*50+25)
+				label.position = CGPoint(x: -20-offset, y: CGFloat(counter)*50+25)
             case .Right:
-                label.position = CGPointMake(250+offset, CGFloat(counter)*50+25)
+				label.position = CGPoint(x: 250+offset, y: CGFloat(counter)*50+25)
             case .Bottom:
-                label.position = CGPointMake(CGFloat(counter)*50+25, -20-offset)
+				label.position = CGPoint(x: CGFloat(counter)*50+25, y: -20-offset)
             case .Top:
-                label.position = CGPointMake(CGFloat(counter)*50+25, 250+offset)
+				label.position = CGPoint(x: CGFloat(counter)*50+25, y: 250+offset)
 
             }
             
@@ -160,14 +141,14 @@ class Grid: SKNode {
         var index = 4
         for x in 0...4 {
             var total = 0
-            for y in x.stride(to: x+24, by: 5) {
+			for y in stride(from: x, to: x+24, by: 5) {
                 if tiles[y].isFlipped() {
                     total += tiles[y].valueForTile()
                 }
             }
             currentColValues[index] = total
             let colName = "ColLabel" + String(index)
-            let colLabel = self.childNodeWithName(colName) as! SKLabelNode
+			let colLabel = self.childNode(withName: colName) as! SKLabelNode
             colLabel.text = String(currentColValues[index])
             index -= 1
         }
@@ -180,7 +161,7 @@ class Grid: SKNode {
         for x in 0...4 {
             var total = 0
             var bombs = 0
-            for y in x.stride(to: x+24, by: 5) {
+			for y in stride(from: x, to: x+24, by: 5) {
                 let value = tiles[y].valueForTile()
                 total += value
                 if value == 0 {
@@ -195,7 +176,7 @@ class Grid: SKNode {
     
     func calculateCurrentRowValues() {
         var index = 4
-        for y in 0.stride(to: 24, by: 5) {
+		for y in stride(from: 0, to: 24, by: 5) {
             var total = 0
             for x in y...y+4 {
                 if tiles[x].isFlipped() {
@@ -204,7 +185,7 @@ class Grid: SKNode {
             }
             currentRowValues[index] = total
             let rowName = "RowLabel" + String(index)
-            let rowLabel = self.childNodeWithName(rowName) as! SKLabelNode
+			let rowLabel = self.childNode(withName: rowName) as! SKLabelNode
             rowLabel.text = String(currentRowValues[index])
             index -= 1
         }
@@ -213,7 +194,7 @@ class Grid: SKNode {
     private func calculateMaxRowValues() {
         rowValues = []
         rowBombs = []
-        for y in 0.stride(to: 24, by: 5) {
+		for y in stride(from: 0, to: 24, by: 5) {
             var total = 0
             var bombs = 0
             for x in y...y+4 {

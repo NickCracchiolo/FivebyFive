@@ -16,16 +16,16 @@ class FFSwitch:SKSpriteNode {
     init(withName:String,keyForDefaultsItem:String) {
         let texture = SKTexture(imageNamed: "redTile")
         self.key = keyForDefaultsItem
-        super.init(texture: texture, color: UIColor.whiteColor(), size: texture.size())
+        super.init(texture: texture, color: UIColor.white, size: texture.size())
         self.name = withName
-        self.userInteractionEnabled = true
+		self.isUserInteractionEnabled = true
         switchOn = setInitalSwitchValue()
         animate()
     }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if switchOn {
             turnOff()
         } else {
@@ -45,7 +45,7 @@ class FFSwitch:SKSpriteNode {
         }
     }
     func saveSwitchValue() {
-        NSUserDefaults.standardUserDefaults().synchronize()
+        UserDefaults.standard.synchronize()
     }
     private func turnOff() {
         switchOn = false
@@ -54,7 +54,7 @@ class FFSwitch:SKSpriteNode {
         switchOn = true
     }
     private func setInitalSwitchValue() -> Bool {
-        let num = NSUserDefaults.standardUserDefaults().integerForKey(key)
+		let num = UserDefaults.standard.integer(forKey: key)
         if num == 1 {
             return true
         } else {
@@ -62,21 +62,21 @@ class FFSwitch:SKSpriteNode {
         }
     }
     private func updateSwitchValue() {
-        let defaults = NSUserDefaults.standardUserDefaults()
-        defaults.setInteger(valueForSwitch(), forKey: key)
+        let defaults = UserDefaults.standard
+		defaults.set(valueForSwitch(), forKey: key)
     }
     
     private func animate() {
         if switchOn {
             let textures:[SKTexture] = [SKTexture(imageNamed:"redTile5"),SKTexture(imageNamed:"redTile4"),SKTexture(imageNamed:"redTile3"),
                                         SKTexture(imageNamed:"redTile2"),SKTexture(imageNamed:"redTile")]
-            let turn_off = SKAction.animateWithTextures(textures, timePerFrame: 0.02)
-            self.runAction(turn_off)
+			let turn_off = SKAction.animate(with: textures, timePerFrame: 0.02)
+			self.run(turn_off)
         } else {
             let textures:[SKTexture] = [SKTexture(imageNamed:"redTile2"),SKTexture(imageNamed:"redTile3"),SKTexture(imageNamed:"redTile4"),
                                         SKTexture(imageNamed:"redTile5"),SKTexture(imageNamed:"blueOne")]
-            let turn_on = SKAction.animateWithTextures(textures, timePerFrame: 0.02)
-            self.runAction(turn_on)
+			let turn_on = SKAction.animate(with: textures, timePerFrame: 0.02)
+			self.run(turn_on)
         }
     }
 }
